@@ -1,0 +1,2 @@
+class MaxUncertaintyQuerier:
+    pass

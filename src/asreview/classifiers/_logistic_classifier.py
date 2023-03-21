@@ -1,0 +1,2 @@
+class LogisticClassifier:
+    pass

@@ -1,0 +1,2 @@
+class EmbeddingIdfExtractor:
+    pass
