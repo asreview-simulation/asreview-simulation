@@ -1,0 +1,2 @@
+class BaseEntrypoint:
+    pass

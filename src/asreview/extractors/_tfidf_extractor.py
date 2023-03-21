@@ -1,0 +1,2 @@
+class TfidfExtractor:
+    pass
