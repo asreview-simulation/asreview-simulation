@@ -1,15 +1,3 @@
-should exist:
+# A fresh take on ASReview's API
 
-- asreview
-- asreview.classifiers
-- asreview.balancers
-- asreview.queriers
-- asreview.extractors
-- asreview.Project
-- asreview.SomeException
-
-
-should not exist:
-
-- asreview._exceptions
-- asreview._project
+See `test/test_api.py` for the complete programming interface.
