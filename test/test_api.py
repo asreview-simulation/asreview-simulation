@@ -9,6 +9,7 @@ def test_api():
         asreview.balancers,
         asreview.classifiers,
         asreview.entrypoints,
+        asreview.exceptions,
         asreview.extractors,
         asreview.projects,
         asreview.queriers,
@@ -39,6 +40,8 @@ def test_api():
         asreview.entrypoints.LabEntrypoint,
         asreview.entrypoints.SimulateEntrypoint,
         asreview.entrypoints.StateInspectEntrypoint,
+        asreview.exceptions.ASReviewProjectExistsError,
+        asreview.exceptions.ASReviewProjectNotFoundError,
         asreview.extractors.BaseExtractor,
         asreview.extractors.Doc2VecExtractor,
         asreview.extractors.EmbeddingIdfExtractor,
@@ -62,8 +65,6 @@ def test_api():
         asreview.queriers.MixedQuerier,
         asreview.queriers.RandomQuerier,
         asreview.queriers.UncertaintyQuerier,
-        asreview.ASReviewProjectExistsError,
-        asreview.ASReviewProjectNotFoundError,
         asreview.BaseModel,
         asreview.Data
     ]
