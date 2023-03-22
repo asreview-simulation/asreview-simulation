@@ -1,0 +1,2 @@
+class TSVWriter:
+    pass

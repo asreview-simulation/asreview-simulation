@@ -1,5 +1,6 @@
 from ._base_classifier import BaseClassifier
 from ._naive_bayes_classifier import NaiveBayesClassifier
+from ._list_classifiers import list_classifiers
 from ._logistic_classifier import LogisticClassifier
 from ._lstm_base_classifier import LstmBaseClassifier
 from ._lstm_pool_classifier import LstmPoolClassifier
@@ -10,6 +11,7 @@ from ._svm_classifier import SVMClassifier
 
 del _base_classifier
 del _naive_bayes_classifier
+del _list_classifiers
 del _logistic_classifier
 del _lstm_base_classifier
 del _lstm_pool_classifier

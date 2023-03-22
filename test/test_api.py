@@ -10,7 +10,11 @@ def test_api():
         asreview.classifiers,
         asreview.entrypoints,
         asreview.extractors,
-        asreview.queriers
+        asreview.projects,
+        asreview.queriers,
+        asreview.readers,
+        asreview.writers,
+        asreview.config
     ]
     for m in modules:
         assert inspect.ismodule(m)
@@ -41,6 +45,15 @@ def test_api():
         asreview.extractors.EmbeddingLstmExtractor,
         asreview.extractors.SbertExtractor,
         asreview.extractors.TfidfExtractor,
+        asreview.projects.Project,
+        asreview.readers.CSVReader,
+        asreview.readers.RISReader,
+        asreview.readers.TSVReader,
+        asreview.readers.XLSReader,
+        asreview.writers.CSVWriter,
+        asreview.writers.RISWriter,
+        asreview.writers.TSVWriter,
+        asreview.writers.XLSWriter,
         asreview.queriers.BaseQuerier,
         asreview.queriers.ClusterQuerier,
         asreview.queriers.MaxQuerier,
@@ -49,8 +62,24 @@ def test_api():
         asreview.queriers.MixedQuerier,
         asreview.queriers.RandomQuerier,
         asreview.queriers.UncertaintyQuerier,
-        asreview.SomeException,
-        asreview.Project
+        asreview.ASReviewProjectExistsError,
+        asreview.ASReviewProjectNotFoundError,
+        asreview.BaseModel,
+        asreview.Data
     ]
     for cls in classes:
         assert inspect.isclass(cls)
+
+    # functions
+    functions = [
+        asreview.balancers.list_balancers,
+        asreview.classifiers.list_classifiers,
+        asreview.entrypoints.list_entrypoints,
+        asreview.extractors.list_extractors,
+        asreview.projects.list_projects,
+        asreview.readers.list_readers,
+        asreview.writers.list_writers,
+        asreview.queriers.list_queriers
+    ]
+    for fun in functions:
+        assert inspect.isfunction(fun)
