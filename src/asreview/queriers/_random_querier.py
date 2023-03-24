@@ -1,2 +1,2 @@
 class RandomQuerier:
-    pass
+    name = 'random'

@@ -1,2 +1,2 @@
 class UncertaintyQuerier:
-    pass
+    name = 'uncertainty'

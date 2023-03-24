@@ -1,2 +1,2 @@
 class TSVWriter:
-    pass
+    name = 'tsv-writer'

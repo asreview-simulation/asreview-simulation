@@ -1,2 +1,2 @@
 class SVMClassifier:
-    pass
+    name = 'svm'

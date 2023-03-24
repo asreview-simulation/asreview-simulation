@@ -1,2 +1,2 @@
 class UndersampleBalancer:
-    pass
+    name = 'undersample'

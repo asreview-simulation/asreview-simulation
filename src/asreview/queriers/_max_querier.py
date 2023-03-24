@@ -1,2 +1,2 @@
 class MaxQuerier:
-    pass
+    name = 'max'

@@ -1,2 +1,2 @@
 class AlgorithmsEntrypoint:
-    pass
+    name = 'algorithms'

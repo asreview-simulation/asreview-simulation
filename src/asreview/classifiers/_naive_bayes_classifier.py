@@ -1,2 +1,2 @@
 class NaiveBayesClassifier:
-    pass
+    name = 'nb'

@@ -1,2 +1,2 @@
 class LstmPoolClassifier:
-    pass
+    name = 'lstmpool'

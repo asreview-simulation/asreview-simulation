@@ -1,2 +1,2 @@
 class EmbeddingLstmExtractor:
-    pass
+    name = 'embedding-lstm'

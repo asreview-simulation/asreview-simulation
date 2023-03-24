@@ -1,2 +1,2 @@
 class CSVWriter:
-    pass
+    name = 'csv-writer'

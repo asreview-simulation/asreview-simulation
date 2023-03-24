@@ -1,2 +1,2 @@
 class XLSWriter:
-    pass
+    name = 'xls-writer'

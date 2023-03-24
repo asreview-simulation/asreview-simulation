@@ -1,2 +1,2 @@
 class SbertExtractor:
-    pass
+    name = 'sbert'

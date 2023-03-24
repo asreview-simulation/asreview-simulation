@@ -1,2 +1,2 @@
 class DoubleBalancer:
-    pass
+    name = 'double'

@@ -1,2 +1,2 @@
 class TSVReader:
-    pass
+    name = 'tsv-reader'

@@ -1,2 +1,2 @@
 class CSVReader:
-    pass
+    name = 'csv-reader'

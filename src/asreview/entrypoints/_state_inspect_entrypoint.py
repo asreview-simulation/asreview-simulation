@@ -1,2 +1,2 @@
 class StateInspectEntrypoint:
-    pass
+    name = 'state_inspect'

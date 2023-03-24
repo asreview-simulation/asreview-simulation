@@ -1,2 +1,2 @@
 class LabEntrypoint:
-    pass
+    name = 'lab'

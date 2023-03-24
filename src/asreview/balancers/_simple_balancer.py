@@ -1,2 +1,2 @@
 class SimpleBalancer:
-    pass
+    name = 'simple'

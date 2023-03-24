@@ -1,2 +1,2 @@
 class RISReader:
-    pass
+    name = 'ris-reader'

@@ -1,2 +1,2 @@
 class XLSReader:
-    pass
+    name = 'xls-reader'

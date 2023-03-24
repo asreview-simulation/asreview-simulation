@@ -1,2 +1,2 @@
 class LogisticClassifier:
-    pass
+    name = 'logistic'

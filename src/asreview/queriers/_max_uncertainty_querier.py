@@ -1,2 +1,2 @@
 class MaxUncertaintyQuerier:
-    pass
+    name = 'max-uncertainty'

@@ -1,2 +1,2 @@
 class MixedQuerier:
-    pass
+    name = 'mixed'

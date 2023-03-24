@@ -1,2 +1,2 @@
 class MaxRandomQuerier:
-    pass
+    name = 'max-random'

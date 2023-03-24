@@ -1,2 +1,2 @@
 class TfidfExtractor:
-    pass
+    name = 'tfidf'

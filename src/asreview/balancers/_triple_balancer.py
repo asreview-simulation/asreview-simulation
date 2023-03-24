@@ -1,2 +1,2 @@
 class TripleBalancer:
-    pass
+    name = 'triple'

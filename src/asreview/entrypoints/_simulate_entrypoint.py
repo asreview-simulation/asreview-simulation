@@ -1,2 +1,2 @@
 class SimulateEntrypoint:
-    pass
+    name = 'simulate'

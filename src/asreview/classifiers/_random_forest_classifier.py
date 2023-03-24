@@ -1,2 +1,2 @@
 class RandomForestClassifier:
-    pass
+    name = 'rf'

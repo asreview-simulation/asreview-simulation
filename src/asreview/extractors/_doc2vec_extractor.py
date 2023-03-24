@@ -1,2 +1,2 @@
 class Doc2VecExtractor:
-    pass
+    name = 'doc2vec'

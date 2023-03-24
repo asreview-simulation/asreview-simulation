@@ -1,2 +1,2 @@
 class RISWriter:
-    pass
+    name = 'ris-writer'

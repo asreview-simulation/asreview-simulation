@@ -1,2 +1,2 @@
 class NN2LayerClassifier:
-    pass
+    name = 'nn2layer'

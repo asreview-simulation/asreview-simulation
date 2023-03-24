@@ -1,2 +1,2 @@
 class ClusterQuerier:
-    pass
+    name = 'cluster'
