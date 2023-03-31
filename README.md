@@ -110,3 +110,45 @@ setuptools.finalize_distribution_options
     EntryPoint(name='keywords', value='setuptools.dist:Distribution._finalize_setup_keywords', group='setuptools.finalize_distribution_options')
     EntryPoint(name='parent_finalize', value='setuptools.dist:_Distribution.finalize_options', group='setuptools.finalize_distribution_options')
 ```
+
+## Extending `asreviewlib`
+
+The list_ functions from `asreviewlib` can be extended in a few predefined ways using plugins:
+
+1. new balancers
+2. new classifiers
+3. new extractors
+4. new queriers
+5. new readers
+6. new writers
+
+```shell
+python3 -m venv venv
+source venv/bin/activate
+pip install --editable ./asreviewlib
+python3
+>>> import asreviewlib
+>>> for k, v in asreviewlib.list_classifiers().items(): print(v)
+... 
+<class 'asreviewlib.classifiers._logistic_classifier.LogisticClassifier'>
+<class 'asreviewlib.classifiers._lstm_base_classifier.LstmBaseClassifier'>
+<class 'asreviewlib.classifiers._lstm_pool_classifier.LstmPoolClassifier'>
+<class 'asreviewlib.classifiers._naive_bayes_classifier.NaiveBayesClassifier'>
+<class 'asreviewlib.classifiers._nn_2_layer_classifier.NN2LayerClassifier'>
+<class 'asreviewlib.classifiers._random_forest_classifier.RandomForestClassifier'>
+<class 'asreviewlib.classifiers._svm_classifier.SvmClassifier'>
+Ctrl-D
+pip install --editable ./asreviewlib-plugin-classifier
+python3
+>>> import asreviewlib
+>>> for k, v in asreviewlib.list_classifiers().items(): print(v)
+... 
+<class 'asreviewlib.classifiers._logistic_classifier.LogisticClassifier'>
+<class 'asreviewlib.classifiers._lstm_base_classifier.LstmBaseClassifier'>
+<class 'asreviewlib.classifiers._lstm_pool_classifier.LstmPoolClassifier'>
+<class 'asreviewlib.classifiers._naive_bayes_classifier.NaiveBayesClassifier'>
+<class 'asreviewlib.classifiers._nn_2_layer_classifier.NN2LayerClassifier'>
+<class 'asreviewlib.classifiers._random_forest_classifier.RandomForestClassifier'>
+<class 'asreviewlib.classifiers._svm_classifier.SvmClassifier'>
+<class 'asreviewlib_plugin_classifier._new_classifier.NewClassifier'>
+```
