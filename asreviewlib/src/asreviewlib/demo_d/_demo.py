@@ -1,7 +1,7 @@
 # this file is just a demonstration of private v public module files
-# compare with demo.py
+# compare with demo_f.py
 import sys
 
 
 def fun():
-    print(f"module demo/_demo.py imports built-in module 'sys': {sys}")
+    print(f"module {__name__} imports built-in module 'sys': {sys}")
