@@ -1,0 +1,2 @@
+class NewClassifier:
+    name = 'new'
