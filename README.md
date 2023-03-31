@@ -1,6 +1,6 @@
 # A fresh take on ASReview's API
 
-See `test/test_api.py` for the complete programming interface.
+See `asreviewlib/test/test_api.py` for the complete programming interface.
 
 ## Avoiding unintentional reexports with private module pattern
 
