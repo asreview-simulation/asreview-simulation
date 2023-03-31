@@ -9,7 +9,6 @@ from . import readers
 from . import writers
 from ._base_model import BaseModel
 from ._data import Data
-from . import config
 
 
 del _base_model
