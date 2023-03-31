@@ -113,7 +113,7 @@ setuptools.finalize_distribution_options
 
 ## Extending `asreviewlib`
 
-The list_ functions from `asreviewlib` can be extended in a few predefined ways using plugins:
+The `list_*` functions from `asreviewlib` can be extended in a few predefined ways using plugins:
 
 1. `list_balancers` looks for balancers added by entrypoint group `'balancers'`
 2. `list_classifiers` looks for classifiers added by entrypoint group `'classifiers'`
