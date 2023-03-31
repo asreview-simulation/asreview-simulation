@@ -1,2 +1,0 @@
-class SimulateEntrypoint:
-    name = 'simulate'

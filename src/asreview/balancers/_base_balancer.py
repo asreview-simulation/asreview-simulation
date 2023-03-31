@@ -1,2 +1,0 @@
-class BaseBalancer:
-    pass

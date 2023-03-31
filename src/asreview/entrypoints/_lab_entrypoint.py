@@ -1,2 +1,0 @@
-class LabEntrypoint:
-    name = 'lab'

@@ -1,0 +1,2 @@
+class SvmClassifier:
+    name = 'svm'

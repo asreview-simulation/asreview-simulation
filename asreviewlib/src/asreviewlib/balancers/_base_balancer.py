@@ -1,0 +1,2 @@
+class BaseBalancer:
+    name = 'base'

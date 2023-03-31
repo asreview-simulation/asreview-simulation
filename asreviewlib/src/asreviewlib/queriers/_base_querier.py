@@ -1,0 +1,2 @@
+class BaseQuerier:
+    name = 'base'

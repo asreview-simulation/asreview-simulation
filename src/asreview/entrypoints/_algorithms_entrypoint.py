@@ -1,2 +1,0 @@
-class AlgorithmsEntrypoint:
-    name = 'algorithms'
