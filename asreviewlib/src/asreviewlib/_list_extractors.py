@@ -3,14 +3,19 @@ from .extractors import EmbeddingIdfExtractor
 from .extractors import EmbeddingLstmExtractor
 from .extractors import SbertExtractor
 from .extractors import TfidfExtractor
+from importlib.metadata import entry_points as entrypoints
 
 
 def list_extractors():
-    extractors = [
+    my_extractors = {e.name: e for e in [
         Doc2VecExtractor,
         EmbeddingIdfExtractor,
         EmbeddingLstmExtractor,
         SbertExtractor,
         TfidfExtractor
-    ]
-    return {e.name: e for e in extractors}
+    ]}
+    other_extractors = {e.name: e.load() for e in entrypoints(group="extractors")}
+    rv = dict()
+    rv.update(my_extractors)
+    rv.update(other_extractors)
+    return rv

@@ -5,10 +5,11 @@ from .queriers import MaxUncertaintyQuerier
 from .queriers import MixedQuerier
 from .queriers import RandomQuerier
 from .queriers import UncertaintyQuerier
+from importlib.metadata import entry_points as entrypoints
 
 
 def list_queriers():
-    queriers = [
+    my_queriers = {q.name: q for q in [
         ClusterQuerier,
         MaxQuerier,
         MaxRandomQuerier,
@@ -16,5 +17,9 @@ def list_queriers():
         MixedQuerier,
         RandomQuerier,
         UncertaintyQuerier
-    ]
-    return {q.name: q for q in queriers}
+    ]}
+    other_queriers = {e.name: e.load() for e in entrypoints(group="queriers")}
+    rv = dict()
+    rv.update(my_queriers)
+    rv.update(other_queriers)
+    return rv

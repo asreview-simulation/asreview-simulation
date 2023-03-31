@@ -5,10 +5,11 @@ from .classifiers import NaiveBayesClassifier
 from .classifiers import NN2LayerClassifier
 from .classifiers import RandomForestClassifier
 from .classifiers import SvmClassifier
+from importlib.metadata import entry_points as entrypoints
 
 
 def list_classifiers():
-    classifiers = [
+    my_classifiers = {c.name: c for c in [
         LogisticClassifier,
         LstmBaseClassifier,
         LstmPoolClassifier,
@@ -16,5 +17,9 @@ def list_classifiers():
         NN2LayerClassifier,
         RandomForestClassifier,
         SvmClassifier
-    ]
-    return {c.name: c for c in classifiers}
+    ]}
+    other_classifiers = {e.name: e.load() for e in entrypoints(group="classifiers")}
+    rv = dict()
+    rv.update(my_classifiers)
+    rv.update(other_classifiers)
+    return rv
