@@ -9,14 +9,14 @@ from . import state
 from . import writers
 from ._base_model import BaseModel
 from ._data import Data
-from ._project import Project
 from ._list_balancers import list_balancers
 from ._list_classifiers import list_classifiers
 from ._list_extractors import list_extractors
-from ._list_readers import list_readers
-from ._list_writers import list_writers
 from ._list_projects import list_projects
 from ._list_queriers import list_queriers
+from ._list_readers import list_readers
+from ._list_writers import list_writers
+from ._project import Project
 
 
 del _base_model
