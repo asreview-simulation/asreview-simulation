@@ -116,11 +116,11 @@ setuptools.finalize_distribution_options
 The list_ functions from `asreviewlib` can be extended in a few predefined ways using plugins:
 
 1. `list_balancers` looks for balancers added by entrypoint group `'balancers'`
-2. `list_classifiers` looks for balancers added by entrypoint group `'classifiers'`
-3. `list_extractors` looks for balancers added by entrypoint group `'extractors'`
-4. `list_queriers` looks for balancers added by entrypoint group `'queriers'`
-5. `list_readers` looks for balancers added by entrypoint group `'readers'`
-6. `list_writers` looks for balancers added by entrypoint group `'writers'`
+2. `list_classifiers` looks for classifiers added by entrypoint group `'classifiers'`
+3. `list_extractors` looks for extractors added by entrypoint group `'extractors'`
+4. `list_queriers` looks for queriers added by entrypoint group `'queriers'`
+5. `list_readers` looks for readers added by entrypoint group `'readers'`
+6. `list_writers` looks for writers added by entrypoint group `'writers'`
 
 ```shell
 python3 -m venv venv
