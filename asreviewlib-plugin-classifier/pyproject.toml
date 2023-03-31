@@ -7,6 +7,9 @@ name = "asreviewlib-plugin-newclassifier"
 version = "0.1.0-alpha0"
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = [
+    "asreviewlib == 0.1.0-a0"
+]
 
 [project.entry-points."classifiers"]
 new = "asreviewlib_plugin_classifier:NewClassifier"
