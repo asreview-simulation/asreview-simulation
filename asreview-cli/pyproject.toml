@@ -8,9 +8,11 @@ version = "0.1.0-alpha0"
 readme = "README.md"
 requires-python = ">=3.7"
 
-
 [project.optional-dependencies]
 test = ["pytest"]
+
+[project.scripts]
+asreview-cli = "cli:cli"
 
 [tool.setuptools.packages.find]
 where = ["src"]
