@@ -1,6 +1,6 @@
 # A fresh take on ASReview's project layout
 
-## asreviewlib API
+## `asreviewlib` API
 
 ```text
 # See `asreviewlib/test/test_api.py` for the complete programming interface.
@@ -152,4 +152,98 @@ python3
 <class 'asreviewlib.classifiers._random_forest_classifier.RandomForestClassifier'>
 <class 'asreviewlib.classifiers._svm_classifier.SvmClassifier'>
 <class 'asreviewlib_plugin_classifier._new_classifier.NewClassifier'>
+```
+
+## `asreview-cli`
+
+```shell
+$ asreview-cli --help
+Usage: asreview-cli [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  b-double        Use double balancer
+  b-simple        Use simple balancer
+  b-triple        Use triple balancer
+  b-undersample   Use undersample balancer
+  c-nb            Use Naive Bayes classifier
+  c-rf            Use Random Forest classifier
+  print-settings  Print settings
+  simulate        Run simulation and exit; terminates parsing
+
+$ asreview-cli print-settings | jq .                                                                                              
+{
+  "balancer": {
+    "model": "double",
+    "params": {
+      "a": 2.155,
+      "alpha": 0.94,
+      "b": 0.789,
+      "beta": 1
+    }
+  },
+  "classifier": {
+    "model": "nb",
+    "params": {
+      "alpha": 3.822
+    }
+  },
+  "extractor": {
+    "model": "tfidf",
+    "params": {
+      "n_gram_max": 1,
+      "stop_words": "english"
+    }
+  },
+  "querier": {
+    "model": "max",
+    "params": {}
+  }
+}
+$ asreview-cli b-triple --help
+Usage: asreview-cli b-triple [OPTIONS]
+
+  Use triple balancer
+
+Options:
+  -a FLOAT          hyperparameter 'a'.
+  -alpha FLOAT      hyperparameter 'alpha'.
+  -b FLOAT          hyperparameter 'b'.
+  -beta FLOAT       hyperparameter 'beta'.
+  -c FLOAT          hyperparameter 'c'.
+  -gamma FLOAT      hyperparameter 'gamma'.
+  -shuffle BOOLEAN  hyperparameter 'shuffle'.
+  --help            Show this message and exit.
+$ asreview-cli b-undersample -ratio 0.5 c-rf -class_weight 1.0001 print-settings | jq .
+{
+  "balancer": {
+    "model": "undersample",
+    "params": {
+      "ratio": 0.5
+    }
+  },
+  "classifier": {
+    "model": "rf",
+    "params": {
+      "n_estimators": 100,
+      "max_features": 10,
+      "class_weight": 1.0001
+    }
+  },
+  "extractor": {
+    "model": "tfidf",
+    "params": {
+      "n_gram_max": 1,
+      "stop_words": "english"
+    }
+  },
+  "querier": {
+    "model": "max",
+    "params": {}
+  }
+}
+
+
 ```
