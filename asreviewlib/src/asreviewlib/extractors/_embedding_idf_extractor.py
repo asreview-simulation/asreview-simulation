@@ -1,2 +1,2 @@
 class EmbeddingIdfExtractor:
-    name = 'embedding-tfidf'
+    name = 'embedding-idf'

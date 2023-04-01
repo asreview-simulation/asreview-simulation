@@ -1,19 +1,17 @@
-from ._double import double
-from ._simple import simple
-from ._triple import triple
-from ._undersample import undersample
+from ._cluster_querier import cluster_querier
+from ._max_querier import max_querier
+from ._mixed_querier import mixed_querier
 
 
-del _double
-del _simple
-del _triple
-del _undersample
+del _cluster_querier
+del _max_querier
+del _mixed_querier
+
 
 __all__ = [
-    "double",
-    "simple",
-    "triple",
-    "undersample"
+    "cluster_querier",
+    "max_querier",
+    "mixed_querier"
 ]
 
 for _item in dir():
