@@ -179,7 +179,7 @@ Commands:
 Print the default settings:
 
 ```shell
-$ asreview-cli print-settings | jq .                                                                                              
+$ asreview-cli print-settings | jq .
 {
   "balancer": {
     "model": "double",
