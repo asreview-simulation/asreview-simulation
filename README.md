@@ -156,6 +156,8 @@ python3
 
 ## `asreview-cli`
 
+Print the help:
+
 ```shell
 $ asreview-cli --help
 Usage: asreview-cli [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
@@ -172,7 +174,11 @@ Commands:
   c-rf            Use Random Forest classifier
   print-settings  Print settings
   simulate        Run simulation and exit; terminates parsing
+```
 
+Print the default settings:
+
+```shell
 $ asreview-cli print-settings | jq .                                                                                              
 {
   "balancer": {
@@ -202,6 +208,11 @@ $ asreview-cli print-settings | jq .
     "params": {}
   }
 }
+```
+
+Print the help for a subcommand, e.g. for triple balancer:
+
+```shell
 $ asreview-cli b-triple --help
 Usage: asreview-cli b-triple [OPTIONS]
 
@@ -216,6 +227,11 @@ Options:
   -gamma FLOAT      hyperparameter 'gamma'.
   -shuffle BOOLEAN  hyperparameter 'shuffle'.
   --help            Show this message and exit.
+```
+
+Change the settings by chaining subcommands and printing them at the end:
+
+```shell
 $ asreview-cli b-undersample -ratio 0.5 c-rf -class_weight 1.0001 print-settings | jq .
 {
   "balancer": {
@@ -244,6 +260,4 @@ $ asreview-cli b-undersample -ratio 0.5 c-rf -class_weight 1.0001 print-settings
     "params": {}
   }
 }
-
-
 ```
