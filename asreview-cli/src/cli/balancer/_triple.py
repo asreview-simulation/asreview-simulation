@@ -1,7 +1,7 @@
 import click
 
 
-@click.command()
+@click.command(name="b-triple", help="Use triple balancer")
 @click.option("-a", "a", type=float, help="hyperparameter 'a'.")
 @click.option("-alpha", "alpha", type=float, help="hyperparameter 'alpha'.")
 @click.option("-b", "b", type=float, help="hyperparameter 'b'.")
@@ -11,7 +11,7 @@ import click
 @click.option("-shuffle", "shuffle", type=bool, help="hyperparameter 'shuffle'.")
 @click.pass_obj
 def triple(obj, a, alpha, b, beta, c, gamma, shuffle):
-    assert obj.balancer.model is None, "Attempted reassignment of triple balancer"
+    assert obj.provided.balancer is False, "Attempted reassignment of triple balancer"
     obj.balancer.model = "triple"
     obj.balancer.params = {
         "a": a,
@@ -22,3 +22,4 @@ def triple(obj, a, alpha, b, beta, c, gamma, shuffle):
         "gamma": gamma,
         "shuffle": shuffle
     }
+    obj.provided.balancer = True

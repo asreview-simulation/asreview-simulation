@@ -1,11 +1,24 @@
 from dataclasses import dataclass
-from ._model import Model
+
+
+@dataclass
+class Model:
+    model: str
+    params: dict
+
+
+@dataclass
+class Provided:
+    balancer: bool = False
+    classifier: bool = False
+    extractor: bool = False
+    querier: bool = False
 
 
 @dataclass
 class State:
-    balancer: Model = Model()
-    classifier: Model = Model()
-    extractor: Model = Model()
-    querier: Model = Model()
-
+    provided: Provided = Provided()
+    balancer: Model = Model("double", {"a": 2.155, "alpha": 0.94, "b": 0.789, "beta": 1.0})
+    classifier: Model = Model("nb", {"alpha": 3.822})
+    extractor: Model = Model("tfidf", {"n_gram_max": 1, "stop_words": "english"})
+    querier: Model = Model("max", {})
