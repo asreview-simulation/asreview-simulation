@@ -159,7 +159,7 @@ python3
 Print the help:
 
 ```shell
-$ asreview-cli --help                                                                                                                                           
+$ asreview-cli --help
 Usage: asreview-cli [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
   Example usage:
@@ -247,7 +247,7 @@ $ asreview-cli print-settings --pretty
 Print the help for a subcommand, e.g. for triple balancer:
 
 ```shell
-$ asreview-cli b-triple --help                                                                                                                                  
+$ asreview-cli b-triple --help
 Usage: asreview-cli b-triple [OPTIONS]
 
   Use triple balancer
@@ -268,7 +268,7 @@ Options:
 Change the settings by chaining subcommands and printing them at the end:
 
 ```shell
-$ asreview-cli b-undersample --ratio 0.5 c-rf --class_weight 1.0001 print-settings --pretty                                                                     
+$ asreview-cli b-undersample --ratio 0.5 c-rf --class_weight 1.0001 print-settings --pretty
 {
     "balancer": {
         "model": "undersample",
