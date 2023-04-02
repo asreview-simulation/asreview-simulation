@@ -1,5 +1,5 @@
 from .balancers import DoubleBalancer
-from .balancers import SimpleBalancer
+from .balancers import NoBalancer
 from .balancers import TripleBalancer
 from .balancers import UndersampleBalancer
 from importlib.metadata import entry_points as entrypoints
@@ -8,7 +8,7 @@ from importlib.metadata import entry_points as entrypoints
 def list_balancers():
     my_balancers = {b.name: b for b in [
         DoubleBalancer,
-        SimpleBalancer,
+        NoBalancer,
         TripleBalancer,
         UndersampleBalancer
     ]}

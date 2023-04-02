@@ -1,20 +1,17 @@
 import click
-from asreviewlib.balancers import UndersampleBalancer
+from asreviewlib.balancers import NoBalancer
 
 
-name = UndersampleBalancer.name
+name = NoBalancer.name
 
 
-@click.command(name=f"b-{name}", help="Use undersample balancer")
+@click.command(name=f"b-{name}", help="Use no balancer")
 @click.option("-f", "--force", "force", is_flag=True, help="Force setting the balancer configura" +
               "tion, even if that means overwriting a previous configuration.")
-@click.option("--ratio", "ratio", default=1.0, type=click.FLOAT, help="hyperparameter 'ratio'.")
 @click.pass_obj
-def undersample_balancer(obj, ratio, force):
+def no_balancer(obj, force):
     if not force:
         assert obj.provided.balancer is False, "Attempted reassignment of balancer"
     obj.balancer.model = name
-    obj.balancer.params = {
-        "ratio": ratio
-    }
+    obj.balancer.params = {}
     obj.provided.balancer = True

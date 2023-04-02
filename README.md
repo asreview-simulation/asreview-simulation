@@ -7,7 +7,7 @@
 
 asreviewlib.balancers.BaseBalancer
 asreviewlib.balancers.DoubleBalancer
-asreviewlib.balancers.SimpleBalancer
+asreviewlib.balancers.NoBalancer
 asreviewlib.balancers.TripleBalancer
 asreviewlib.balancers.UndersampleBalancer
 asreviewlib.balancers

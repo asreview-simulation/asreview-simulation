@@ -1,2 +1,0 @@
-class SimpleBalancer:
-    name = 'simple'

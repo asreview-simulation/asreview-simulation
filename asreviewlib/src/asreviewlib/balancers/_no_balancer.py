@@ -1,0 +1,2 @@
+class NoBalancer:
+    name = 'none'
