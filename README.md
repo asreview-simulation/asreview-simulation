@@ -162,102 +162,146 @@ Print the help:
 $ asreview-cli --help
 Usage: asreview-cli [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
+  Example usage:
+
+      $ asreview-cli print-settings
+
+      $ asreview-cli simulate labeled-records.ris
+
+  Commands can be chained together, e.g.
+
+      $ asreview-cli load-config thefile.cfg simulate labeled-records.ris
+
+      $ asreview-cli load-config thefile.cfg simulate labeled-records.ris
+
+      $ asreview-cli b-double --alpha 1.23 print-settings
+
 Options:
   --help  Show this message and exit.
 
 Commands:
-  b-double        Use double balancer
-  b-simple        Use simple balancer
-  b-triple        Use triple balancer
-  b-undersample   Use undersample balancer
-  c-nb            Use Naive Bayes classifier
-  c-rf            Use Random Forest classifier
-  print-settings  Print settings
-  simulate        Run simulation and exit; terminates parsing
-```
+  b-double          Use double balancer
+  b-none            Use no balancer
+  b-triple          Use triple balancer
+  b-undersample     Use undersample balancer
+  c-logistic        Use Logistic Regression classifier
+  c-lstm-base       Use LSTM Base classifier
+  c-lstm-pool       Use LSTM Pool classifier
+  c-nb              Use Naive Bayes classifier
+  c-nn2layer        Use 2-layer Neural Net classifier
+  c-rf              Use Random Forest classifier
+  c-svm             Use Support Vecor Machine classifier
+  e-doc2vec         Use Doc2Vec extractor
+  e-embedding-idf   Use Embedding IDF extractor
+  e-embedding-lstm  Use Embedding LSTM extractor
+  e-sbert           Use SBERT extractor
+  e-tfidf           Use TF-IDF extractor
+  load-config       Load config
+  print-settings    Print settings
+  q-cluster         Use Cluster querier
+  q-mixed           Use Mixed querier
+  s-handpicked      Use handpicked prior sampler
+  s-random          Use random prior sampler
+  simulate          Run simulation and exit; terminates parsing```
 
 Print the default settings:
 
 ```shell
-$ asreview-cli print-settings | jq .
+$ asreview-cli print-settings --pretty
 {
-  "balancer": {
-    "model": "double",
-    "params": {
-      "a": 2.155,
-      "alpha": 0.94,
-      "b": 0.789,
-      "beta": 1
+    "balancer": {
+        "model": "double",
+        "params": {
+            "a": 2.155,
+            "alpha": 0.94,
+            "b": 0.789,
+            "beta": 1.0
+        }
+    },
+    "classifier": {
+        "model": "nb",
+        "params": {
+            "alpha": 3.822
+        }
+    },
+    "extractor": {
+        "model": "tfidf",
+        "params": {
+            "n_gram_max": 1,
+            "stop_words": "english"
+        }
+    },
+    "sampler": {
+        "model": "random",
+        "params": {
+            "n_included": 1,
+            "n_excluded": 1
+        }
+    },
+    "querier": {
+        "model": "max",
+        "params": {}
     }
-  },
-  "classifier": {
-    "model": "nb",
-    "params": {
-      "alpha": 3.822
-    }
-  },
-  "extractor": {
-    "model": "tfidf",
-    "params": {
-      "n_gram_max": 1,
-      "stop_words": "english"
-    }
-  },
-  "querier": {
-    "model": "max",
-    "params": {}
-  }
 }
 ```
 
 Print the help for a subcommand, e.g. for triple balancer:
 
 ```shell
-$ asreview-cli b-triple --help
+$ asreview-cli b-triple --help                                                                                                                                  
 Usage: asreview-cli b-triple [OPTIONS]
 
   Use triple balancer
 
 Options:
-  -a FLOAT          hyperparameter 'a'.
-  -alpha FLOAT      hyperparameter 'alpha'.
-  -b FLOAT          hyperparameter 'b'.
-  -beta FLOAT       hyperparameter 'beta'.
-  -c FLOAT          hyperparameter 'c'.
-  -gamma FLOAT      hyperparameter 'gamma'.
-  -shuffle BOOLEAN  hyperparameter 'shuffle'.
-  --help            Show this message and exit.
+  --a FLOAT          hyperparameter 'a'.
+  --alpha FLOAT      hyperparameter 'alpha'.
+  --b FLOAT          hyperparameter 'b'.
+  --beta FLOAT       hyperparameter 'beta'.
+  --c FLOAT          hyperparameter 'c'.
+  --gamma FLOAT      hyperparameter 'gamma'.
+  --shuffle BOOLEAN  hyperparameter 'shuffle'.
+  -f, --force        Force setting the balancer configuration, even if that
+                     means overwriting a previous configuration.
+  --help             Show this message and exit.
 ```
 
 Change the settings by chaining subcommands and printing them at the end:
 
 ```shell
-$ asreview-cli b-undersample -ratio 0.5 c-rf -class_weight 1.0001 print-settings | jq .
+$ asreview-cli b-undersample --ratio 0.5 c-rf --class_weight 1.0001 print-settings --pretty                                                                     
 {
-  "balancer": {
-    "model": "undersample",
-    "params": {
-      "ratio": 0.5
+    "balancer": {
+        "model": "undersample",
+        "params": {
+            "ratio": 0.5
+        }
+    },
+    "classifier": {
+        "model": "rf",
+        "params": {
+            "n_estimators": 100,
+            "max_features": 10,
+            "class_weight": 1.0001
+        }
+    },
+    "extractor": {
+        "model": "tfidf",
+        "params": {
+            "n_gram_max": 1,
+            "stop_words": "english"
+        }
+    },
+    "sampler": {
+        "model": "random",
+        "params": {
+            "n_included": 1,
+            "n_excluded": 1
+        }
+    },
+    "querier": {
+        "model": "max",
+        "params": {}
     }
-  },
-  "classifier": {
-    "model": "rf",
-    "params": {
-      "n_estimators": 100,
-      "max_features": 10,
-      "class_weight": 1.0001
-    }
-  },
-  "extractor": {
-    "model": "tfidf",
-    "params": {
-      "n_gram_max": 1,
-      "stop_words": "english"
-    }
-  },
-  "querier": {
-    "model": "max",
-    "params": {}
-  }
 }
 ```
