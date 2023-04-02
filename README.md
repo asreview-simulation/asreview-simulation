@@ -159,7 +159,7 @@ python3
 Print the help:
 
 ```shell
-$ asreview-cli --help
+$ asreview-cli --help                                                                                                                                           
 Usage: asreview-cli [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
   Example usage:
@@ -172,9 +172,7 @@ Usage: asreview-cli [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
       $ asreview-cli load-config thefile.cfg simulate labeled-records.ris
 
-      $ asreview-cli load-config thefile.cfg simulate labeled-records.ris
-
-      $ asreview-cli b-double --alpha 1.23 print-settings
+      $ asreview-cli b-double --alpha 1.23 print-settings --pretty
 
 Options:
   --help  Show this message and exit.
@@ -202,7 +200,8 @@ Commands:
   q-mixed           Use Mixed querier
   s-handpicked      Use handpicked prior sampler
   s-random          Use random prior sampler
-  simulate          Run simulation and exit; terminates parsing```
+  simulate          Run simulation and exit; terminates parsing
+```
 
 Print the default settings:
 
