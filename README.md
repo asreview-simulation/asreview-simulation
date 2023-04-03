@@ -116,12 +116,12 @@ pytest asreviewlib # should fail with messages about sys
 
 The `list_*` functions from `asreviewlib` can be extended in a few predefined ways using plugins:
 
-1. `list_balancers` looks for balancers added by entrypoint group `'balancers'`
-2. `list_classifiers` looks for classifiers added by entrypoint group `'classifiers'`
-3. `list_extractors` looks for extractors added by entrypoint group `'extractors'`
-4. `list_queriers` looks for queriers added by entrypoint group `'queriers'`
-5. `list_readers` looks for readers added by entrypoint group `'readers'`
-6. `list_writers` looks for writers added by entrypoint group `'writers'`
+1. `list_balancers` looks for balancers added by entrypoint group `'asreviewlib.balancers'`
+2. `list_classifiers` looks for classifiers added by entrypoint group `'asreviewlib.classifiers'`
+3. `list_extractors` looks for extractors added by entrypoint group `'asreviewlib.extractors'`
+4. `list_queriers` looks for queriers added by entrypoint group `'asreviewlib.queriers'`
+5. `list_readers` looks for readers added by entrypoint group `'asreviewlib.readers'`
+6. `list_writers` looks for writers added by entrypoint group `'asreviewlib.writers'`
 
 ```shell
 python3 -m venv venv
@@ -164,15 +164,28 @@ Usage: asreview-cli [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
   Example usage:
 
-      $ asreview-cli print-settings
+    $ asreview-cli print-settings
 
-      $ asreview-cli simulate labeled-records.ris
+    $ asreview-cli start labeled-records.db
 
   Commands can be chained together, e.g.
 
-      $ asreview-cli load-config thefile.cfg simulate labeled-records.ris
+    $ asreview-cli load-config thefile.cfg start labeled-records.db
 
-      $ asreview-cli b-double --alpha 1.23 print-settings --pretty
+    $ asreview-cli b-double --alpha 1.23 print-settings --pretty
+
+    $ asreview-cli b-none c-nb e-tfidf q-mixed start labeled-records.db
+
+    $ asreview-cli s-random --n_included 10 --n_excluded 15                      \
+                   e-tfidf --ngram_max 2                                         \
+                   c-nb --alpha 3.823                                            \
+                   q-mixed --strategy1 max --strategy2 random --mix_ratio 0.95   \
+                   b-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1           \
+                   start labeled-records.db
+
+  Chained commands are evaluated left to right; make sure to end the chain
+  with either a 'start' command or a 'print-settings' command, otherwise it
+  appears like nothing is happening.
 
 Options:
   --help  Show this message and exit.
@@ -200,7 +213,7 @@ Commands:
   q-mixed           Use Mixed querier
   s-handpicked      Use handpicked prior sampler
   s-random          Use random prior sampler
-  simulate          Run simulation and exit; terminates parsing
+  start             Start the simulation and exit; terminates parsing
 ```
 
 Print the default settings:
@@ -226,7 +239,7 @@ $ asreview-cli print-settings --pretty
     "extractor": {
         "model": "tfidf",
         "params": {
-            "n_gram_max": 1,
+            "ngrams_max": 1,
             "stop_words": "english"
         }
     },
@@ -241,8 +254,7 @@ $ asreview-cli print-settings --pretty
         "model": "max",
         "params": {}
     }
-}
-```
+}```
 
 Print the help for a subcommand, e.g. for triple balancer:
 
