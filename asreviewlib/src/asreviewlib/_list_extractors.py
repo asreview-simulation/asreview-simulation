@@ -14,7 +14,7 @@ def list_extractors():
         SbertExtractor,
         TfidfExtractor
     ]}
-    other_extractors = {e.name: e.load() for e in entrypoints(group="extractors")}
+    other_extractors = {e.name: e.load() for e in entrypoints(group="asreviewlib.extractors")}
     rv = dict()
     rv.update(my_extractors)
     rv.update(other_extractors)

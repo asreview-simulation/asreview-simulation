@@ -18,7 +18,7 @@ def list_queriers():
         RandomQuerier,
         UncertaintyQuerier
     ]}
-    other_queriers = {e.name: e.load() for e in entrypoints(group="queriers")}
+    other_queriers = {e.name: e.load() for e in entrypoints(group="asreviewlib.queriers")}
     rv = dict()
     rv.update(my_queriers)
     rv.update(other_queriers)

@@ -12,7 +12,7 @@ def list_writers():
         TsvWriter,
         XlsWriter
     ]}
-    other_writers = {e.name: e.load() for e in entrypoints(group="writers")}
+    other_writers = {e.name: e.load() for e in entrypoints(group="asreviewlib.writers")}
     rv = dict()
     rv.update(my_writers)
     rv.update(other_writers)

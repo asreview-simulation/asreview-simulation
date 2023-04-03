@@ -12,7 +12,7 @@ def list_readers():
         TsvReader,
         XlsReader
     ]}
-    other_readers = {e.name: e.load() for e in entrypoints(group="readers")}
+    other_readers = {e.name: e.load() for e in entrypoints(group="asreviewlib.readers")}
     rv = dict()
     rv.update(my_readers)
     rv.update(other_readers)

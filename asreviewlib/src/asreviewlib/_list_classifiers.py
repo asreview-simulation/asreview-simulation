@@ -18,7 +18,7 @@ def list_classifiers():
         RandomForestClassifier,
         SvmClassifier
     ]}
-    other_classifiers = {e.name: e.load() for e in entrypoints(group="classifiers")}
+    other_classifiers = {e.name: e.load() for e in entrypoints(group="asreviewlib.classifiers")}
     rv = dict()
     rv.update(my_classifiers)
     rv.update(other_classifiers)

@@ -12,7 +12,7 @@ def list_balancers():
         TripleBalancer,
         UndersampleBalancer
     ]}
-    other_balancers = {e.name: e.load() for e in entrypoints(group="balancers")}
+    other_balancers = {e.name: e.load() for e in entrypoints(group="asreviewlib.balancers")}
     rv = dict()
     rv.update(my_balancers)
     rv.update(other_balancers)
