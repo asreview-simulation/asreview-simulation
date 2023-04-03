@@ -254,7 +254,8 @@ $ asreview-cli print-settings --pretty
         "model": "max",
         "params": {}
     }
-}```
+}
+```
 
 Print the help for a subcommand, e.g. for triple balancer:
 
