@@ -11,7 +11,7 @@ dependencies = [
     "asreviewlib == 0.1.0-a0"
 ]
 
-[project.entry-points."classifiers"]
+[project.entry-points."asreviewlib.classifiers"]
 new = "asreviewlib_plugin_classifier:NewClassifier"
 
 [project.optional-dependencies]
