@@ -1,11 +1,12 @@
 import click
 from asreviewlib.balancers import NoBalancer
+from .._epilog import epilog
 
 
 name = NoBalancer.name
 
 
-@click.command(name=f"b-{name}", help="Use no balancer")
+@click.command(name=f"b-{name}", help="Use no balancer", epilog=epilog)
 @click.option("-f", "--force", "force", is_flag=True, help="Force setting the balancer configura" +
               "tion, even if that means overwriting a previous configuration.")
 @click.pass_obj

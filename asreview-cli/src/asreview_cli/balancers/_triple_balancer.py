@@ -1,11 +1,12 @@
 import click
 from asreviewlib.balancers import TripleBalancer
+from .._epilog import epilog
 
 
 name = TripleBalancer.name 
 
 
-@click.command(name=f"b-{name}", help="Use triple balancer")
+@click.command(name=f"b-{name}", help="Use triple balancer", epilog=epilog)
 @click.option("--a", "a", default=2.155, type=click.FLOAT, help="hyperparameter 'a'.")
 @click.option("--alpha", "alpha", default=0.94, type=click.FLOAT, help="hyperparameter 'alpha'.")
 @click.option("--b", "b", default=0.789, type=click.FLOAT, help="hyperparameter 'b'.")

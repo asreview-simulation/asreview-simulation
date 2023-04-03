@@ -1,11 +1,12 @@
 import click
 from asreviewlib.queriers import ClusterQuerier
+from .._epilog import epilog
 
 
 name = ClusterQuerier.name
 
 
-@click.command(name=f"q-{name}", help="Use Cluster querier")
+@click.command(name=f"q-{name}", help="Use Cluster querier", epilog=epilog)
 @click.option("--cluster_size", "cluster_size", default=350, type=click.INT, help="hyperparameter 'cluster_size'.")
 @click.option("--update_interval", "update_interval", default=200, type=click.INT,
               help="hyperparameter 'update_interval'.")

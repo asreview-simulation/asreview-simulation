@@ -1,11 +1,12 @@
 import click
 from asreviewlib.extractors import EmbeddingIdfExtractor
+from .._epilog import epilog
 
 
 name = EmbeddingIdfExtractor.name
 
 
-@click.command(name=f"e-{name}", help="Use Embedding IDF extractor")
+@click.command(name=f"e-{name}", help="Use Embedding IDF extractor", epilog=epilog)
 @click.option("-f", "--force", "force", is_flag=True, help="Force setting the extractor configura" +
               "tion, even if that means overwriting a previous configuration.")
 @click.pass_obj

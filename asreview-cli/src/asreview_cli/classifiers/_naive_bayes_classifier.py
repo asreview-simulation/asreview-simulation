@@ -1,11 +1,12 @@
 import click
 from asreviewlib.classifiers import NaiveBayesClassifier
+from .._epilog import epilog
 
 
 name = NaiveBayesClassifier.name
 
 
-@click.command(name=f"c-{name}", help="Use Naive Bayes classifier")
+@click.command(name=f"c-{name}", help="Use Naive Bayes classifier", epilog=epilog)
 @click.option("--alpha", "alpha", default=3.822, type=click.FLOAT, help="hyperparameter 'alpha'.")
 @click.option("-f", "--force", "force", is_flag=True, help="Force setting the classifier configura" +
               "tion, even if that means overwriting a previous configuration.")

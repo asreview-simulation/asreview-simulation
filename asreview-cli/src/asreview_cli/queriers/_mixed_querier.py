@@ -1,11 +1,12 @@
 import click
 from asreviewlib.queriers import MixedQuerier
+from .._epilog import epilog
 
 
 name = MixedQuerier.name
 
 
-@click.command(name=f"q-{name}", help="Use Mixed querier")
+@click.command(name=f"q-{name}", help="Use Mixed querier", epilog=epilog)
 @click.option("--strategy1", "strategy1", default="max", type=click.STRING, help="hyperparameter 'strategy1'.")
 @click.option("--strategy2", "strategy2", default="random", type=click.STRING, help="hyperparameter 'strategy2'.")
 @click.option("--mix_ratio", "mix_ratio", default=0.95, type=click.FLOAT, help="hyperparameter 'mix_ratio'.")

@@ -7,12 +7,19 @@ name = "asreview-cli"
 version = "0.1.0-alpha0"
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = [
+    "click ~= 8.0",
+    "asreviewlib == 0.1.0-alpha0"
+]
 
 [project.optional-dependencies]
 test = ["pytest"]
 
 [project.scripts]
 asreview-cli = "asreview_cli:cli"
+
+[project.entry-points."asreview.entry_points"]
+simulation = "asreview_cli.entrypoint:SimulateEntrypoint"
 
 [tool.setuptools.packages.find]
 where = ["src"]

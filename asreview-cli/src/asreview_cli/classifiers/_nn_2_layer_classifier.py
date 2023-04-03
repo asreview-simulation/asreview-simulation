@@ -1,11 +1,12 @@
 import click
 from asreviewlib.classifiers import NN2LayerClassifier
+from .._epilog import epilog
 
 
 name = NN2LayerClassifier.name
 
 
-@click.command(name=f"c-{name}", help="Use 2-layer Neural Net classifier")
+@click.command(name=f"c-{name}", help="Use 2-layer Neural Net classifier", epilog=epilog)
 @click.option("--dense_width", "dense_width", default=128, type=click.INT, help="hyperparameter 'dense_width'.")
 @click.option("--optimizer", "optimizer", default="rmsprop", type=click.STRING, help="hyperparameter 'optimizer'.")
 @click.option("--learn_rate", "learn_rate", default=1.0, type=click.FLOAT, help="hyperparameter 'learn_rate'.")

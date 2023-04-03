@@ -1,10 +1,11 @@
 import click
+from .._epilog import epilog
 
 
 name = "random"
 
 
-@click.command(name=f"s-{name}", help="Use random prior sampler")
+@click.command(name=f"s-{name}", help="Use random prior sampler", epilog=epilog)
 @click.option("--n_included", "n_included", default=1, type=click.INT, help="hyperparameter 'n_included'.")
 @click.option("--n_excluded", "n_excluded", default=1, type=click.INT, help="hyperparameter 'n_excluded'.")
 @click.option("-f", "--force", "force", is_flag=True, help="Force setting the querier configura" +

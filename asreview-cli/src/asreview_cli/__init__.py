@@ -1,4 +1,4 @@
-from ._cli import group as cli
+from ._cli import cli
 
 
 del _cli

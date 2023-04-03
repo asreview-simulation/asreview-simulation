@@ -22,48 +22,68 @@ from .queriers import cluster_querier
 from .queriers import mixed_querier
 from ._load_config import load_config
 from ._print_settings import print_settings
-from ._simulate import simulate
+from ._start import start
 from ._state import State
 
 
-cli_help = """
-Example usage:\n
-    $ asreview-cli print-settings\n
-    $ asreview-cli simulate labeled-records.ris\n
-Commands can be chained together, e.g.\n
-    $ asreview-cli load-config thefile.cfg simulate labeled-records.ris\n
-    $ asreview-cli load-config thefile.cfg simulate labeled-records.ris\n
-    $ asreview-cli b-double --alpha 1.23 print-settings\n
+def cli_help(cli_name="asreview-cli"):
+    return f"""
+Example usage:
+
+  $ {cli_name} print-settings
+
+  $ {cli_name} start labeled-records.db
+
+Commands can be chained together, e.g.
+
+
+  $ {cli_name} load-config thefile.cfg start labeled-records.db
+
+  $ {cli_name} b-double --alpha 1.23 print-settings --pretty
+
+  $ {cli_name} b-none c-nb e-tfidf q-mixed start labeled-records.db
+
+\b
+  $ {cli_name} s-random --n_included 10 --n_excluded 15                      \\
+    {' ' * len(cli_name)} e-tfidf --ngram_max 2                                         \\
+    {' ' * len(cli_name)} c-nb --alpha 3.823                                            \\
+    {' ' * len(cli_name)} q-mixed --strategy1 max --strategy2 random --mix_ratio 0.95   \\
+    {' ' * len(cli_name)} b-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1           \\
+    {' ' * len(cli_name)} start labeled-records.db
+
+Chained commands are evaluated left to right; make sure to end the chain with
+either a 'start' command or a 'print-settings' command, otherwise it appears
+like nothing is happening.
 """
 
 
-@click.group("cli", chain=True, help=cli_help)
+@click.group("cli", chain=True, help=cli_help())
 @click.pass_context
-def group(ctx):
+def cli(ctx):
     if ctx.obj is None:
         ctx.obj = State()
 
 
-group.add_command(double_balancer)
-group.add_command(no_balancer)
-group.add_command(triple_balancer)
-group.add_command(undersample_balancer)
-group.add_command(naive_bayes_classifier)
-group.add_command(random_forest_classifier)
-group.add_command(logistic_classifier)
-group.add_command(lstm_base_classifier)
-group.add_command(lstm_pool_classifier)
-group.add_command(nn_2_layer_classifier)
-group.add_command(svm_classifier)
-group.add_command(doc2vec_extractor)
-group.add_command(tfidf_extractor)
-group.add_command(embedding_idf_extractor)
-group.add_command(embedding_lstm_extractor)
-group.add_command(sbert_extractor)
-group.add_command(random_prior_sampler)
-group.add_command(handpicked_prior_sampler)
-group.add_command(cluster_querier)
-group.add_command(mixed_querier)
-group.add_command(load_config)
-group.add_command(print_settings)
-group.add_command(simulate)
+cli.add_command(double_balancer)
+cli.add_command(no_balancer)
+cli.add_command(triple_balancer)
+cli.add_command(undersample_balancer)
+cli.add_command(naive_bayes_classifier)
+cli.add_command(random_forest_classifier)
+cli.add_command(logistic_classifier)
+cli.add_command(lstm_base_classifier)
+cli.add_command(lstm_pool_classifier)
+cli.add_command(nn_2_layer_classifier)
+cli.add_command(svm_classifier)
+cli.add_command(doc2vec_extractor)
+cli.add_command(tfidf_extractor)
+cli.add_command(embedding_idf_extractor)
+cli.add_command(embedding_lstm_extractor)
+cli.add_command(sbert_extractor)
+cli.add_command(random_prior_sampler)
+cli.add_command(handpicked_prior_sampler)
+cli.add_command(cluster_querier)
+cli.add_command(mixed_querier)
+cli.add_command(load_config)
+cli.add_command(print_settings)
+cli.add_command(start)

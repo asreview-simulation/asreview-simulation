@@ -1,11 +1,12 @@
 import click
 from asreviewlib.extractors import SbertExtractor
+from .._epilog import epilog
 
 
 name = SbertExtractor.name
 
 
-@click.command(name=f"e-{name}", help="Use SBERT extractor")
+@click.command(name=f"e-{name}", help="Use SBERT extractor", epilog=epilog)
 @click.option("--transformer_model", "transformer_model", default="all-mpnet-base-v2", type=click.STRING,
               help="hyperparameter 'transformer_model'.")
 @click.option("-f", "--force", "force", is_flag=True, help="Force setting the extractor configura" +

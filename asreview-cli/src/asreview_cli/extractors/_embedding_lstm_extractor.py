@@ -1,11 +1,12 @@
 import click
 from asreviewlib.extractors import EmbeddingLstmExtractor
+from .._epilog import epilog
 
 
 name = EmbeddingLstmExtractor.name
 
 
-@click.command(name=f"e-{name}", help="Use Embedding LSTM extractor")
+@click.command(name=f"e-{name}", help="Use Embedding LSTM extractor", epilog=epilog)
 @click.option("--loop_sequence", "loop_sequence", default=1, type=click.INT, help="hyperparameter 'loop_sequence'.")
 @click.option("--num_words", "num_words", default=20000, type=click.INT, help="hyperparameter 'num_words'.")
 @click.option("--max_sequence_length", "max_sequence_length", default=1000, type=click.INT,

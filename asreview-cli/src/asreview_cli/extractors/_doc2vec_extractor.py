@@ -1,11 +1,12 @@
 import click
 from asreviewlib.extractors import Doc2VecExtractor
+from .._epilog import epilog
 
 
 name = Doc2VecExtractor.name
 
 
-@click.command(name=f"e-{name}", help="Use Doc2Vec extractor")
+@click.command(name=f"e-{name}", help="Use Doc2Vec extractor", epilog=epilog)
 @click.option("--vector_size", "vector_size", default=40, type=click.INT, help="hyperparameter 'vector_size'.")
 @click.option("--epochs", "epochs", default=33, type=click.INT, help="hyperparameter 'epochs'.")
 @click.option("--min_count", "min_count", default=1, type=click.INT, help="hyperparameter 'min_count'.")
