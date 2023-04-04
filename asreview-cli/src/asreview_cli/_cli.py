@@ -1,7 +1,8 @@
 import click
 
+from importlib.metadata import entry_points as entrypoints
 from .balancers import double_balancer
-from .balancers import no_balancer
+from .balancers import none_balancer
 from .balancers import triple_balancer
 from .balancers import undersample_balancer
 from .classifiers import naive_bayes_classifier
@@ -20,10 +21,89 @@ from .samplers import random_prior_sampler
 from .samplers import handpicked_prior_sampler
 from .queriers import cluster_querier
 from .queriers import mixed_querier
-from ._load_config import load_config
-from ._print_settings import print_settings
-from ._start import start
+from .starters import load_config
+from .terminators import print_settings
+from .terminators import start
 from ._state import State
+
+
+def _add_balancer_subcommands():
+    my_balancers = [
+        double_balancer,
+        none_balancer,
+        triple_balancer,
+        undersample_balancer
+    ]
+    other_balancers = [e.load() for e in entrypoints(group="asreview-cli.balancers")]
+    for b in my_balancers + other_balancers:
+        cli.add_command(b)
+
+
+def _add_classifier_subcommands():
+    my_classifiers = [
+        naive_bayes_classifier,
+        random_forest_classifier,
+        logistic_classifier,
+        lstm_base_classifier,
+        lstm_pool_classifier,
+        nn_2_layer_classifier,
+        svm_classifier
+    ]
+    other_classifiers = [e.load() for e in entrypoints(group="asreview-cli.classifiers")]
+    for c in my_classifiers + other_classifiers:
+        cli.add_command(c)
+
+
+def _add_extractor_subcommands():
+    my_extractors = [
+        doc2vec_extractor,
+        tfidf_extractor,
+        embedding_idf_extractor,
+        embedding_lstm_extractor,
+        sbert_extractor
+    ]
+    other_extractors = [e.load() for e in entrypoints(group="asreview-cli.extractors")]
+    for e in my_extractors + other_extractors:
+        cli.add_command(e)
+
+
+def _add_querier_subcommands():
+    my_queriers = [
+        cluster_querier,
+        mixed_querier
+    ]
+    other_queriers = [e.load() for e in entrypoints(group="asreview-cli.queriers")]
+    for q in my_queriers + other_queriers:
+        cli.add_command(q)
+
+
+def _add_sampler_subcommands():
+    my_samplers = [
+        random_prior_sampler,
+        handpicked_prior_sampler
+    ]
+    other_samplers = [e.load() for e in entrypoints(group="asreview-cli.samplers")]
+    for s in my_samplers + other_samplers:
+        cli.add_command(s)
+
+
+def _add_starter_subcommands():
+    my_starters = [
+        load_config
+    ]
+    other_starters = [e.load() for e in entrypoints(group="asreview-cli.starters")]
+    for s in my_starters + other_starters:
+        cli.add_command(s)
+
+
+def _add_terminator_subcommands():
+    my_terminators = [
+        print_settings,
+        start
+    ]
+    other_terminators = [e.load() for e in entrypoints(group="asreview-cli.terminators")]
+    for t in my_terminators + other_terminators:
+        cli.add_command(t)
 
 
 def cli_help(cli_name="asreview-cli"):
@@ -66,26 +146,10 @@ def cli(ctx):
         ctx.obj = State()
 
 
-cli.add_command(double_balancer)
-cli.add_command(no_balancer)
-cli.add_command(triple_balancer)
-cli.add_command(undersample_balancer)
-cli.add_command(naive_bayes_classifier)
-cli.add_command(random_forest_classifier)
-cli.add_command(logistic_classifier)
-cli.add_command(lstm_base_classifier)
-cli.add_command(lstm_pool_classifier)
-cli.add_command(nn_2_layer_classifier)
-cli.add_command(svm_classifier)
-cli.add_command(doc2vec_extractor)
-cli.add_command(tfidf_extractor)
-cli.add_command(embedding_idf_extractor)
-cli.add_command(embedding_lstm_extractor)
-cli.add_command(sbert_extractor)
-cli.add_command(random_prior_sampler)
-cli.add_command(handpicked_prior_sampler)
-cli.add_command(cluster_querier)
-cli.add_command(mixed_querier)
-cli.add_command(load_config)
-cli.add_command(print_settings)
-cli.add_command(start)
+_add_starter_subcommands()
+_add_sampler_subcommands()
+_add_balancer_subcommands()
+_add_classifier_subcommands()
+_add_extractor_subcommands()
+_add_querier_subcommands()
+_add_terminator_subcommands()

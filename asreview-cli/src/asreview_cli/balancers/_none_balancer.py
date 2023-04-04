@@ -1,9 +1,9 @@
 import click
-from asreviewlib.balancers import NoBalancer
+from asreviewlib.balancers import NoneBalancer
 from .._epilog import epilog
 
 
-name = NoBalancer.name
+name = NoneBalancer.name
 
 
 @click.command(epilog=epilog,
@@ -14,7 +14,7 @@ name = NoBalancer.name
               "ans overwriting a previous configuration.",
               is_flag=True)
 @click.pass_obj
-def no_balancer(obj, force):
+def none_balancer(obj, force):
     if not force:
         assert obj.provided.balancer is False, "Attempted reassignment of balancer"
     obj.balancer.model = name
