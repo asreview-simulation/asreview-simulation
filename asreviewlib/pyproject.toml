@@ -7,6 +7,9 @@ name = "asreviewlib"
 version = "0.1.0-alpha0"
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = [
+    "asreview == 1.1.1"
+]
 
 [project.optional-dependencies]
 test = ["pytest"]
