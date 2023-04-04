@@ -12,7 +12,12 @@ def list_balancers():
         TripleBalancer,
         UndersampleBalancer
     ]}
-    other_balancers = {e.name: e.load() for e in entrypoints(group="asreviewlib.balancers")}
+    try:
+        other_balancers = {e.name: e.load() for e in entrypoints(group="asreviewlib.balancers")}
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreviewlib.balancers'. The error message was: {e}\nContinuing...")
+        other_balancers = {}
     rv = dict()
     rv.update(my_balancers)
     rv.update(other_balancers)

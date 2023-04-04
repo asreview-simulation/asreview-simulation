@@ -18,7 +18,12 @@ def list_classifiers():
         RandomForestClassifier,
         SvmClassifier
     ]}
-    other_classifiers = {e.name: e.load() for e in entrypoints(group="asreviewlib.classifiers")}
+    try:
+        other_classifiers = {e.name: e.load() for e in entrypoints(group="asreviewlib.classifiers")}
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreviewlib.classifiers'. The error message was: {e}\nContinuing...")
+        other_classifiers = {}
     rv = dict()
     rv.update(my_classifiers)
     rv.update(other_classifiers)

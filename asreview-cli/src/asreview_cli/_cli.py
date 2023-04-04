@@ -34,7 +34,12 @@ def _add_balancer_subcommands():
         triple_balancer,
         undersample_balancer
     ]
-    other_balancers = [e.load() for e in entrypoints(group="asreview_cli.balancers")]
+    try:
+        other_balancers = [e.load() for e in entrypoints(group="asreview_cli.balancers")]
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreview_cli.balancers'. The error message was: {e}\nContinuing...")
+        other_balancers = []
     for b in my_balancers + other_balancers:
         cli.add_command(b)
 
@@ -49,7 +54,12 @@ def _add_classifier_subcommands():
         nn_2_layer_classifier,
         svm_classifier
     ]
-    other_classifiers = [e.load() for e in entrypoints(group="asreview_cli.classifiers")]
+    try:
+        other_classifiers = [e.load() for e in entrypoints(group="asreview_cli.classifiers")]
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreview_cli.classifiers'. The error message was: {e}\nContinuing...")
+        other_classifiers = []
     for c in my_classifiers + other_classifiers:
         cli.add_command(c)
 
@@ -62,7 +72,12 @@ def _add_extractor_subcommands():
         embedding_lstm_extractor,
         sbert_extractor
     ]
-    other_extractors = [e.load() for e in entrypoints(group="asreview_cli.extractors")]
+    try:
+        other_extractors = [e.load() for e in entrypoints(group="asreview_cli.extractors")]
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreview_cli.extractors'. The error message was: {e}\nContinuing...")
+        other_extractors = []
     for e in my_extractors + other_extractors:
         cli.add_command(e)
 
@@ -72,7 +87,12 @@ def _add_querier_subcommands():
         cluster_querier,
         mixed_querier
     ]
-    other_queriers = [e.load() for e in entrypoints(group="asreview_cli.queriers")]
+    try:
+        other_queriers = [e.load() for e in entrypoints(group="asreview_cli.queriers")]
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreview_cli.queriers'. The error message was: {e}\nContinuing...")
+        other_queriers = []
     for q in my_queriers + other_queriers:
         cli.add_command(q)
 
@@ -82,7 +102,12 @@ def _add_sampler_subcommands():
         random_prior_sampler,
         handpicked_prior_sampler
     ]
-    other_samplers = [e.load() for e in entrypoints(group="asreview_cli.samplers")]
+    try:
+        other_samplers = [e.load() for e in entrypoints(group="asreview_cli.samplers")]
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreview_cli.samplers'. The error message was: {e}\nContinuing...")
+        other_samplers = []
     for s in my_samplers + other_samplers:
         cli.add_command(s)
 
@@ -91,7 +116,12 @@ def _add_starter_subcommands():
     my_starters = [
         load_config
     ]
-    other_starters = [e.load() for e in entrypoints(group="asreview_cli.starters")]
+    try:
+        other_starters = [e.load() for e in entrypoints(group="asreview_cli.starters")]
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreview_cli.starters'. The error message was: {e}\nContinuing...")
+        other_starters = []
     for s in my_starters + other_starters:
         cli.add_command(s)
 
@@ -101,7 +131,12 @@ def _add_terminator_subcommands():
         print_settings,
         start
     ]
-    other_terminators = [e.load() for e in entrypoints(group="asreview_cli.terminators")]
+    try:
+        other_terminators = [e.load() for e in entrypoints(group="asreview_cli.terminators")]
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreview_cli.terminators'. The error message was: {e}\nContinuing...")
+        other_terminators = []
     for t in my_terminators + other_terminators:
         cli.add_command(t)
 

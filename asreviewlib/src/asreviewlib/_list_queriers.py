@@ -18,7 +18,12 @@ def list_queriers():
         RandomQuerier,
         UncertaintyQuerier
     ]}
-    other_queriers = {e.name: e.load() for e in entrypoints(group="asreviewlib.queriers")}
+    try:
+        other_queriers = {e.name: e.load() for e in entrypoints(group="asreviewlib.queriers")}
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreviewlib.queriers'. The error message was: {e}\nContinuing...")
+        other_queriers = {}
     rv = dict()
     rv.update(my_queriers)
     rv.update(other_queriers)

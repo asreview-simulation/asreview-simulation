@@ -12,7 +12,12 @@ def list_writers():
         TsvWriter,
         XlsWriter
     ]}
-    other_writers = {e.name: e.load() for e in entrypoints(group="asreviewlib.writers")}
+    try:
+        other_writers = {e.name: e.load() for e in entrypoints(group="asreviewlib.writers")}
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreviewlib.writers'. The error message was: {e}\nContinuing...")
+        other_writers = {}
     rv = dict()
     rv.update(my_writers)
     rv.update(other_writers)

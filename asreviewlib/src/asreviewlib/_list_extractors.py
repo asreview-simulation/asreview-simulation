@@ -14,7 +14,12 @@ def list_extractors():
         SbertExtractor,
         TfidfExtractor
     ]}
-    other_extractors = {e.name: e.load() for e in entrypoints(group="asreviewlib.extractors")}
+    try:
+        other_extractors = {e.name: e.load() for e in entrypoints(group="asreviewlib.extractors")}
+    except Exception as e:
+        print("Something went wrong loading a module from entrypoint group " +
+              f"'asreviewlib.extractors'. The error message was: {e}\nContinuing...")
+        other_extractors = {}
     rv = dict()
     rv.update(my_extractors)
     rv.update(other_extractors)
