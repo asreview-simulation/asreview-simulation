@@ -6,30 +6,66 @@ from .._epilog import epilog
 name = Doc2VecExtractor.name
 
 
-@click.command(name=f"e-{name}", help="Use Doc2Vec extractor", epilog=epilog)
-@click.option("--vector_size", "vector_size", default=40, type=click.INT, help="hyperparameter 'vector_size'.")
-@click.option("--epochs", "epochs", default=33, type=click.INT, help="hyperparameter 'epochs'.")
-@click.option("--min_count", "min_count", default=1, type=click.INT, help="hyperparameter 'min_count'.")
-@click.option("--n_jobs", "n_jobs", default=1, type=click.INT, help="hyperparameter 'n_jobs'.")
-@click.option("--window", "window", default=7, type=click.INT, help="hyperparameter 'window'.")
-@click.option("--dm_concat", "dm_concat", default=0, type=click.INT, help="hyperparameter 'dm_concat'.")
-@click.option("--dm", "dm", default=2, type=click.INT, help="hyperparameter 'dm'.")
-@click.option("--dbow_words", "dbow_words", default=0, type=click.INT, help="hyperparameter 'dbow_words'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the extractor configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use Doc2Vec extractor",
+               name=f"e-{name}")
+@click.option("--epochs", "epochs",
+              default=33,
+              help="hyperparameter 'epochs'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--dbow_words", "dbow_words",
+              default=0,
+              help="hyperparameter 'dbow_words'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--dm", "dm",
+              default=2,
+              help="hyperparameter 'dm'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--dm_concat", "dm_concat",
+              default=0,
+              help="hyperparameter 'dm_concat'.",
+              show_default=True,
+              type=click.INT)
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
+@click.option("--min_count", "min_count",
+              default=1,
+              help="hyperparameter 'min_count'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--n_jobs", "n_jobs",
+              default=1,
+              help="hyperparameter 'n_jobs'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--vector_size", "vector_size",
+              default=40,
+              help="hyperparameter 'vector_size'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--window", "window",
+              default=7,
+              help="hyperparameter 'window'.",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def doc2vec_extractor(obj, vector_size, epochs, min_count, n_jobs, window, dm_concat, dm, dbow_words, force):
+def doc2vec_extractor(obj, epochs, dbow_words, dm, dm_concat, force, min_count, n_jobs, vector_size, window):
     if not force:
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
     obj.classifier.model = name
     obj.classifier.params = {
-        "vector_size": vector_size,
+        "dbow_words": dbow_words,
+        "dm": dm,
+        "dm_concat": dm_concat,
         "epochs": epochs,
         "min_count": min_count,
         "n_jobs": n_jobs,
-        "window": window,
-        "dm_concat": dm_concat,
-        "dm": dm,
-        "dbow_words": dbow_words
+        "vector_size": vector_size,
+        "window": window
     }
     obj.provided.extractor = True

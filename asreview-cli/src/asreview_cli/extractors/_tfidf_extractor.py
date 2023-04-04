@@ -6,13 +6,25 @@ from .._epilog import epilog
 name = TfidfExtractor.name
 
 
-@click.command(name=f"e-{name}", help="Use TF-IDF extractor", epilog=epilog)
-@click.option("--ngram_max", "ngram_max", default=1, type=click.INT, help="hyperparameter 'ngram_max'.")
-@click.option("--stop_words", "stop_words", default="english", type=click.STRING, help="hyperparameter 'stop_words'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the extractor configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use TF-IDF extractor",
+               name=f"e-{name}")
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
+@click.option("--ngram_max", "ngram_max",
+              default=1,
+              help="hyperparameter 'ngram_max'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--stop_words", "stop_words",
+              default="english",
+              help="hyperparameter 'stop_words'.",
+              show_default=True,
+              type=click.Choice(["string"]))
 @click.pass_obj
-def tfidf_extractor(obj, ngram_max, stop_words, force):
+def tfidf_extractor(obj, force, ngram_max, stop_words):
     if not force:
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
     obj.classifier.model = name

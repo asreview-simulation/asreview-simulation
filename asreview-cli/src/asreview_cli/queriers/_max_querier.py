@@ -6,9 +6,13 @@ from .._epilog import epilog
 name = MaxQuerier.name
 
 
-@click.command(name=f"q-{name}", help="Use Max querier", epilog=epilog)
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the querier configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use Max querier",
+               name=f"q-{name}")
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
 @click.pass_obj
 def max_querier(obj, force):
     if not force:

@@ -5,18 +5,30 @@ from .._epilog import epilog
 name = "random"
 
 
-@click.command(name=f"s-{name}", help="Use random prior sampler", epilog=epilog)
-@click.option("--n_included", "n_included", default=1, type=click.INT, help="hyperparameter 'n_included'.")
-@click.option("--n_excluded", "n_excluded", default=1, type=click.INT, help="hyperparameter 'n_excluded'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the querier configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use random prior sampler",
+               name=f"s-{name}")
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
+@click.option("--n_excluded", "n_excluded",
+              default=1,
+              help="hyperparameter 'n_excluded'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--n_included", "n_included",
+              default=1,
+              help="hyperparameter 'n_included'.",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def random_prior_sampler(obj, n_included, n_excluded, force):
+def random_prior_sampler(obj, force, n_excluded, n_included):
     if not force:
         assert obj.provided.sampler is False, "Attempted reassignment of sampler"
     obj.sampler.model = name
     obj.sampler.params = {
-        "n_included": n_included,
-        "n_excluded": n_excluded
+        "n_excluded": n_excluded,
+        "n_included": n_included
     }
     obj.provided.sampler = True

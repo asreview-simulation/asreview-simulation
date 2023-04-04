@@ -6,10 +6,15 @@ from .._epilog import epilog
 name = LstmPoolClassifier.name
 
 
-@click.command(name=f"c-{name}", help="Use LSTM Pool classifier", epilog=epilog)
-@click.argument("feature_matrix_file", type=click.Path(exists=True, readable=True))
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the classifier configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use LSTM Pool classifier",
+               name=f"c-{name}")
+@click.argument("feature_matrix_file",
+                type=click.Path(exists=True, readable=True))
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
 @click.pass_obj
 def lstm_pool_classifier(obj, feature_matrix_file, force):
     if not force:

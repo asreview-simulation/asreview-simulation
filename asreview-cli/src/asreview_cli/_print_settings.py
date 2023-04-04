@@ -10,6 +10,6 @@ def print_settings(obj, pretty):
     d = dataclasses.asdict(obj)
     d.pop("provided")
     if pretty:
-        click.echo(json.dumps(d, indent=4))
+        click.echo(json.dumps(d, indent=4, sort_keys=True))
         return
     click.echo(json.dumps(d))

@@ -6,13 +6,20 @@ from .._epilog import epilog
 name = SbertExtractor.name
 
 
-@click.command(name=f"e-{name}", help="Use SBERT extractor", epilog=epilog)
-@click.option("--transformer_model", "transformer_model", default="all-mpnet-base-v2", type=click.STRING,
-              help="hyperparameter 'transformer_model'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the extractor configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use SBERT extractor",
+               name=f"e-{name}")
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
+@click.option("--transformer_model", "transformer_model",
+              default="all-mpnet-base-v2",
+              help="hyperparameter 'transformer_model'.",
+              show_default=True,
+              type=click.Choice(["all-mpnet-base-v2"]))
 @click.pass_obj
-def sbert_extractor(obj, transformer_model, force):
+def sbert_extractor(obj, force, transformer_model):
     if not force:
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
     obj.classifier.model = name

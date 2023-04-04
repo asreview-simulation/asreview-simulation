@@ -5,13 +5,18 @@ from .._epilog import epilog
 name = "handpicked"
 
 
-@click.command(name=f"s-{name}", help="Use handpicked prior sampler\n\n   " +
-               "IDS: a comma separated string", epilog=epilog)
-@click.argument("ids", type=click.STRING)
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the querier configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use handpicked prior sampler.\n\nIDS: a comma separated string",
+               name=f"s-{name}",
+               short_help="Use handpicked prior sampler")
+@click.argument("ids",
+                type=click.STRING)
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
 @click.pass_obj
-def handpicked_prior_sampler(obj, ids, force):
+def handpicked_prior_sampler(obj, force, ids):
     """
     IDS: comma separated string
     """

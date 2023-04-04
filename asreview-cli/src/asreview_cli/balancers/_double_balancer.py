@@ -6,13 +6,33 @@ from .._epilog import epilog
 name = DoubleBalancer.name
 
 
-@click.command(name=f"b-{name}", help="Use double balancer", epilog=epilog)
-@click.option("--a", "a", default=2.155, type=click.FLOAT, help="hyperparameter 'a'.")
-@click.option("--alpha", "alpha", default=0.94, type=click.FLOAT, help="hyperparameter 'alpha'.")
-@click.option("--b", "b", default=0.789, type=click.FLOAT, help="hyperparameter 'b'.")
-@click.option("--beta", "beta", default=1.0, type=click.FLOAT, help="hyperparameter 'beta'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the balancer configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use double balancer",
+               name=f"b-{name}")
+@click.option("--a", "a",
+              default=2.155,
+              help="hyperparameter 'a'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--alpha", "alpha",
+              default=0.94,
+              help="hyperparameter 'alpha'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--b", "b",
+              default=0.789,
+              help="hyperparameter 'b'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--beta", "beta",
+              default=1.0,
+              help="hyperparameter 'beta'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
 @click.pass_obj
 def double_balancer(obj, a, alpha, b, beta, force):
     if not force:

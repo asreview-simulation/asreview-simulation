@@ -6,22 +6,42 @@ from .._epilog import epilog
 name = SvmClassifier.name
 
 
-@click.command(name=f"c-{name}", help="Use Support Vector Machine classifier", epilog=epilog)
-@click.option("--gamma", "gamma", default="auto", type=click.STRING, help="hyperparameter 'auto'.")
-@click.option("--class_weight", "class_weight", default=0.249, type=click.FLOAT, help="hyperparameter 'class_weight'.")
-@click.option("--c", "c", default=15.4, type=click.FLOAT, help="hyperparameter 'c'.")
-@click.option("--kernel", "kernel", default="linear", type=click.STRING, help="hyperparameter 'kernel'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the classifier configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use Support Vector Machine classifier",
+               name=f"c-{name}")
+@click.option("--c", "c",
+              default=15.4,
+              help="hyperparameter 'c'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--class_weight", "class_weight",
+              default=0.249,
+              help="hyperparameter 'class_weight'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
+@click.option("--gamma", "gamma",
+              default="auto",
+              help="hyperparameter 'auto'.",
+              show_default=True,
+              type=click.Choice("auto"))
+@click.option("--kernel", "kernel",
+              default="linear",
+              help="hyperparameter 'kernel'.",
+              show_default=True,
+              type=click.Choice(["linear"]))
 @click.pass_obj
-def svm_classifier(obj, gamma, class_weight, c, kernel, force):
+def svm_classifier(obj, c, class_weight, gamma, force, kernel):
     if not force:
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.model = name
     obj.classifier.params = {
-        "gamma": gamma,
-        "class_weight": class_weight,
         "c": c,
+        "class_weight": class_weight,
+        "gamma": gamma,
         "kernel": kernel
     }
     obj.provided.classifier = True

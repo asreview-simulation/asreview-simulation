@@ -3,21 +3,51 @@ from asreviewlib.balancers import TripleBalancer
 from .._epilog import epilog
 
 
-name = TripleBalancer.name 
+name = TripleBalancer.name
 
 
-@click.command(name=f"b-{name}", help="Use triple balancer", epilog=epilog)
-@click.option("--a", "a", default=2.155, type=click.FLOAT, help="hyperparameter 'a'.")
-@click.option("--alpha", "alpha", default=0.94, type=click.FLOAT, help="hyperparameter 'alpha'.")
-@click.option("--b", "b", default=0.789, type=click.FLOAT, help="hyperparameter 'b'.")
-@click.option("--beta", "beta", default=1.0, type=click.FLOAT, help="hyperparameter 'beta'.")
-@click.option("--c", "c", default=0.835, type=click.FLOAT, help="hyperparameter 'c'.")
-@click.option("--gamma", "gamma", default=2.0, type=click.FLOAT, help="hyperparameter 'gamma'.")
-@click.option("--shuffle", "shuffle", default=True, type=click.BOOL, help="hyperparameter 'shuffle'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the balancer configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use triple balancer",
+               name=f"b-{name}")
+@click.option("--a", "a",
+              default=2.155,
+              help="hyperparameter 'a'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--alpha", "alpha",
+              default=0.94,
+              help="hyperparameter 'alpha'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--b", "b",
+              default=0.789,
+              help="hyperparameter 'b'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--beta", "beta",
+              default=1.0,
+              help="hyperparameter 'beta'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--c", "c",
+              default=0.835,
+              help="hyperparameter 'c'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
+@click.option("--gamma", "gamma",
+              default=2.0,
+              help="hyperparameter 'gamma'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("--shuffle", "shuffle",
+              help="hyperparameter 'shuffle'.",
+              is_flag=True)
 @click.pass_obj
-def triple_balancer(obj, a, alpha, b, beta, c, gamma, shuffle, force):
+def triple_balancer(obj, a, alpha, b, beta, c, force, gamma, shuffle):
     if not force:
         assert obj.provided.balancer is False, "Attempted reassignment of balancer"
     obj.balancer.model = name

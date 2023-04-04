@@ -6,9 +6,13 @@ from .._epilog import epilog
 name = EmbeddingIdfExtractor.name
 
 
-@click.command(name=f"e-{name}", help="Use Embedding IDF extractor", epilog=epilog)
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the extractor configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use Embedding IDF extractor",
+               name=f"e-{name}")
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
 @click.pass_obj
 def embedding_idf_extractor(obj, force):
     if not force:

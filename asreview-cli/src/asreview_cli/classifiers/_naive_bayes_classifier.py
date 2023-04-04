@@ -6,10 +6,18 @@ from .._epilog import epilog
 name = NaiveBayesClassifier.name
 
 
-@click.command(name=f"c-{name}", help="Use Naive Bayes classifier", epilog=epilog)
-@click.option("--alpha", "alpha", default=3.822, type=click.FLOAT, help="hyperparameter 'alpha'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the classifier configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use Naive Bayes classifier",
+               name=f"c-{name}")
+@click.option("--alpha", "alpha",
+              default=3.822,
+              help="hyperparameter 'alpha'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
 @click.pass_obj
 def naive_bayes_classifier(obj, alpha, force):
     if not force:

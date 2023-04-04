@@ -6,12 +6,20 @@ from .._epilog import epilog
 name = UndersampleBalancer.name
 
 
-@click.command(name=f"b-{name}", help="Use undersample balancer", epilog=epilog)
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the balancer configura" +
-              "tion, even if that means overwriting a previous configuration.")
-@click.option("--ratio", "ratio", default=1.0, type=click.FLOAT, help="hyperparameter 'ratio'.")
+@click.command(epilog=epilog,
+               help="Use undersample balancer",
+               name=f"b-{name}")
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
+@click.option("--ratio", "ratio",
+              default=1.0,
+              help="hyperparameter 'ratio'.",
+              show_default=True,
+              type=click.FLOAT)
 @click.pass_obj
-def undersample_balancer(obj, ratio, force):
+def undersample_balancer(obj, force, ratio):
     if not force:
         assert obj.provided.balancer is False, "Attempted reassignment of balancer"
     obj.balancer.model = name

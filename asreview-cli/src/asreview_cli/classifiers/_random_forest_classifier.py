@@ -6,20 +6,36 @@ from .._epilog import epilog
 name = RandomForestClassifier.name
 
 
-@click.command(name=f"c-{name}", help="Use Random Forest classifier", epilog=epilog)
-@click.option("--n_estimators", "n_estimators", default=100, type=click.INT, help="hyperparameter 'n_estimators'.")
-@click.option("--max_features", "max_features", default=10, type=click.INT, help="hyperparameter 'max_features'.")
-@click.option("--class_weight", "class_weight", default=1.0, type=click.FLOAT, help="hyperparameter 'class_weight'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the classifier configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use Random Forest classifier",
+               name=f"c-{name}")
+@click.option("--class_weight", "class_weight",
+              default=1.0,
+              help="hyperparameter 'class_weight'.",
+              show_default=True,
+              type=click.FLOAT)
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
+@click.option("--max_features", "max_features",
+              default=10,
+              help="hyperparameter 'max_features'.",
+              show_default=True,
+              type=click.INT)
+@click.option("--n_estimators", "n_estimators",
+              default=100,
+              help="hyperparameter 'n_estimators'.",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def random_forest_classifier(obj, n_estimators, max_features, class_weight, force):
+def random_forest_classifier(obj, class_weight, force, max_features, n_estimators):
     if not force:
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.model = name
     obj.classifier.params = {
-        "n_estimators": n_estimators,
+        "class_weight": class_weight,
         "max_features": max_features,
-        "class_weight": class_weight
+        "n_estimators": n_estimators
     }
     obj.provided.classifier = True

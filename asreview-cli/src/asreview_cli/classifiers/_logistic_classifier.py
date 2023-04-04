@@ -6,11 +6,23 @@ from .._epilog import epilog
 name = LogisticClassifier.name
 
 
-@click.command(name=f"c-{name}", help="Use Logistic Regression classifier", epilog=epilog)
-@click.option("--c", "c", default=1.0, type=float, help="hyperparameter 'C'.")
-@click.option("--class_weight", "class_weight", default=1.0, type=click.FLOAT, help="hyperparameter 'class_weight'.")
-@click.option("-f", "--force", "force", is_flag=True, help="Force setting the classifier configura" +
-              "tion, even if that means overwriting a previous configuration.")
+@click.command(epilog=epilog,
+               help="Use Logistic Regression classifier",
+               name=f"c-{name}")
+@click.option("--c", "c",
+              default=1.0,
+              help="hyperparameter 'C'.",
+              show_default=True,
+              type=float)
+@click.option("--class_weight", "class_weight",
+              default=1.0,
+              help="hyperparameter 'class_weight'.",
+              type=click.FLOAT,
+              show_default=True)
+@click.option("-f", "--force", "force",
+              help="Force setting the querier configuration, even if that me" +
+              "ans overwriting a previous configuration.",
+              is_flag=True)
 @click.pass_obj
 def logistic_classifier(obj, c, class_weight, force):
     if not force:
