@@ -1,10 +1,10 @@
-from ._load_config import load_config
+from ._load_settings import load_settings
 
 
-del _load_config
+del _load_settings
 
 __all__ = [
-    "load_config"
+    "load_settings"
 ]
 
 for _item in dir():
