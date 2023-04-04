@@ -1,2 +1,1 @@
-class BaseModel:
-    pass
+from asreview.models.base import BaseModel   # noqa

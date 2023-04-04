@@ -1,2 +1,1 @@
-class MaxUncertaintyQuerier:
-    name = 'max-uncertainty'
+from asreview.models.query.mixed import MaxUncertaintyQuery as MaxUncertaintyQuerier  # noqa

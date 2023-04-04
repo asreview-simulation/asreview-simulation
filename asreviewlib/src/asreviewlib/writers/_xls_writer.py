@@ -1,2 +1,1 @@
-class XlsWriter:
-    name = 'xls-writer'
+from asreview.io.excel_writer import ExcelWriter as XlsWriter   # noqa

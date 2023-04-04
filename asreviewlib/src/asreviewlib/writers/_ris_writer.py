@@ -1,2 +1,1 @@
-class RisWriter:
-    name = 'ris-writer'
+from asreview.io.ris_writer import RISWriter as RisWriter   # noqa

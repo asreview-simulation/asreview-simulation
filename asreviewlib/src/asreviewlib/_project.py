@@ -1,2 +1,1 @@
-class Project:
-    pass
+from asreview.project import ASReviewProject as Project   # noqa

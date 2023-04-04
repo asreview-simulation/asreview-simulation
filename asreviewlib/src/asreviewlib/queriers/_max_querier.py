@@ -1,2 +1,1 @@
-class MaxQuerier:
-    name = 'max'
+from asreview.models.query.max import MaxQuery as MaxQuerier  # noqa

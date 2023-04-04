@@ -1,2 +1,1 @@
-class RandomForestClassifier:
-    name = 'rf'
+from asreview.models.classifiers.rf import RandomForestClassifier  # noqa

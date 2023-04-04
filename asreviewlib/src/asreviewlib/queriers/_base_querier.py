@@ -1,2 +1,1 @@
-class BaseQuerier:
-    name = 'base'
+from asreview.models.query.base import BaseQueryStrategy as BaseQuerier  # noqa

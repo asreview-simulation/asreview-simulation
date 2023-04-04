@@ -1,2 +1,1 @@
-class Data:
-    pass
+from asreview.data.base import ASReviewData as Data   # noqa

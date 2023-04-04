@@ -1,6 +1,2 @@
-class ASReviewProjectExistsError(Exception):
-    pass
-
-
-class ASReviewProjectNotFoundError(Exception):
-    pass
+from asreview.project import ProjectExistsError as ASReviewProjectExistsError   # noqa
+from asreview.project import ProjectNotFoundError as ASReviewProjectNotFoundError   # noqa

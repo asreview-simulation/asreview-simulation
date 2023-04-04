@@ -17,4 +17,3 @@ def list_balancers():
     rv.update(my_balancers)
     rv.update(other_balancers)
     return rv
-

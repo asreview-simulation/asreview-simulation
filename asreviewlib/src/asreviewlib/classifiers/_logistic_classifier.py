@@ -1,2 +1,1 @@
-class LogisticClassifier:
-    name = 'logistic'
+from asreview.models.classifiers.logistic import LogisticClassifier  # noqa
