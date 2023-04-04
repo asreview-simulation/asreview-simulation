@@ -14,6 +14,11 @@ name = MixedQuerier.name
               help="hyperparameter 'mix_ratio'.",
               show_default=True,
               type=click.FLOAT)
+@click.option("--seed", "seed",
+              default=535,
+              help="Random seed",
+              show_default=True,
+              type=click.INT)
 @click.option("--strategy1", "strategy1",
               default="max",
               help="hyperparameter 'strategy1'.",
@@ -29,12 +34,13 @@ name = MixedQuerier.name
               "ans overwriting a previous configuration.",
               is_flag=True)
 @click.pass_obj
-def mixed_querier(obj, force, mix_ratio, strategy1, strategy2):
+def mixed_querier(obj, force, mix_ratio, seed, strategy1, strategy2):
     if not force:
         assert obj.provided.querier is False, "Attempted reassignment of querier"
     obj.querier.model = name
     obj.querier.params = {
         "mix_ratio": mix_ratio,
+        "seed": seed,
         "strategy1": strategy1,
         "strategy2": strategy2
     }

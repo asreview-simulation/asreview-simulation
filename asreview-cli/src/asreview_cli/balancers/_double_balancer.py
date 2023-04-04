@@ -33,8 +33,13 @@ name = DoubleBalancer.name
               help="Force setting the querier configuration, even if that me" +
               "ans overwriting a previous configuration.",
               is_flag=True)
+@click.option("--seed", "seed",
+              default=535,
+              help="Random seed",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def double_balancer(obj, a, alpha, b, beta, force):
+def double_balancer(obj, a, alpha, b, beta, force, seed):
     if not force:
         assert obj.provided.balancer is False, "Attempted reassignment of balancer"
     obj.balancer.model = name
@@ -42,6 +47,7 @@ def double_balancer(obj, a, alpha, b, beta, force):
         "a": a,
         "alpha": alpha,
         "b": b,
-        "beta": beta
+        "beta": beta,
+        "seed": seed
     }
     obj.provided.balancer = True

@@ -22,13 +22,19 @@ name = "random"
               help="hyperparameter 'n_included'.",
               show_default=True,
               type=click.INT)
+@click.option("--seed", "seed",
+              default=535,
+              help="Random seed",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def random_prior_sampler(obj, force, n_excluded, n_included):
+def random_prior_sampler(obj, force, n_excluded, n_included, seed):
     if not force:
         assert obj.provided.sampler is False, "Attempted reassignment of sampler"
     obj.sampler.model = name
     obj.sampler.params = {
         "n_excluded": n_excluded,
-        "n_included": n_included
+        "n_included": n_included,
+        "seed": seed
     }
     obj.provided.sampler = True

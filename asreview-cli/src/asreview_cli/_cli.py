@@ -21,8 +21,9 @@ from .samplers import random_prior_sampler
 from .samplers import handpicked_prior_sampler
 from .queriers import cluster_querier
 from .queriers import mixed_querier
-from .starters import load_config
+from .starters import load_settings
 from .terminators import print_settings
+from .terminators import save_settings
 from .terminators import start
 from ._state import State
 
@@ -114,7 +115,7 @@ def _add_sampler_subcommands():
 
 def _add_starter_subcommands():
     my_starters = [
-        load_config
+        load_settings
     ]
     try:
         other_starters = [e.load() for e in entrypoints(group="asreview_cli.starters")]
@@ -129,6 +130,7 @@ def _add_starter_subcommands():
 def _add_terminator_subcommands():
     my_terminators = [
         print_settings,
+        save_settings,
         start
     ]
     try:

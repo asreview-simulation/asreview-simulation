@@ -43,11 +43,16 @@ name = TripleBalancer.name
               help="hyperparameter 'gamma'.",
               show_default=True,
               type=click.FLOAT)
+@click.option("--seed", "seed",
+              default=535,
+              help="Random seed",
+              show_default=True,
+              type=click.INT)
 @click.option("--shuffle", "shuffle",
               help="hyperparameter 'shuffle'.",
               is_flag=True)
 @click.pass_obj
-def triple_balancer(obj, a, alpha, b, beta, c, force, gamma, shuffle):
+def triple_balancer(obj, a, alpha, b, beta, c, force, gamma, seed, shuffle):
     if not force:
         assert obj.provided.balancer is False, "Attempted reassignment of balancer"
     obj.balancer.model = name
@@ -58,6 +63,7 @@ def triple_balancer(obj, a, alpha, b, beta, c, force, gamma, shuffle):
         "beta": beta,
         "c": c,
         "gamma": gamma,
+        "seed": seed,
         "shuffle": shuffle
     }
     obj.provided.balancer = True

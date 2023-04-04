@@ -33,8 +33,13 @@ name = SvmClassifier.name
               help="hyperparameter 'kernel'.",
               show_default=True,
               type=click.Choice(["linear"]))
+@click.option("--seed", "seed",
+              default=535,
+              help="Random seed",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def svm_classifier(obj, c, class_weight, gamma, force, kernel):
+def svm_classifier(obj, c, class_weight, gamma, force, kernel, seed):
     if not force:
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.model = name
@@ -42,6 +47,7 @@ def svm_classifier(obj, c, class_weight, gamma, force, kernel):
         "c": c,
         "class_weight": class_weight,
         "gamma": gamma,
-        "kernel": kernel
+        "kernel": kernel,
+        "seed": seed
     }
     obj.provided.classifier = True

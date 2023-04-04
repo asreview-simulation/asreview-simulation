@@ -18,12 +18,18 @@ name = UndersampleBalancer.name
               help="hyperparameter 'ratio'.",
               show_default=True,
               type=click.FLOAT)
+@click.option("--seed", "seed",
+              default=535,
+              help="Random seed",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def undersample_balancer(obj, force, ratio):
+def undersample_balancer(obj, force, ratio, seed):
     if not force:
         assert obj.provided.balancer is False, "Attempted reassignment of balancer"
     obj.balancer.model = name
     obj.balancer.params = {
-        "ratio": ratio
+        "ratio": ratio,
+        "seed": seed
     }
     obj.provided.balancer = True

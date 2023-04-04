@@ -23,13 +23,19 @@ name = LogisticClassifier.name
               help="Force setting the querier configuration, even if that me" +
               "ans overwriting a previous configuration.",
               is_flag=True)
+@click.option("--seed", "seed",
+              default=535,
+              help="Random seed",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def logistic_classifier(obj, c, class_weight, force):
+def logistic_classifier(obj, c, class_weight, force, seed):
     if not force:
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.model = name
     obj.classifier.params = {
         "c": c,
-        "class_weight": class_weight
+        "class_weight": class_weight,
+        "seed": seed
     }
     obj.provided.classifier = True

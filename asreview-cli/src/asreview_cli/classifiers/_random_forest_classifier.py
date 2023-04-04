@@ -28,14 +28,20 @@ name = RandomForestClassifier.name
               help="hyperparameter 'n_estimators'.",
               show_default=True,
               type=click.INT)
+@click.option("--seed", "seed",
+              default=535,
+              help="Random seed",
+              show_default=True,
+              type=click.INT)
 @click.pass_obj
-def random_forest_classifier(obj, class_weight, force, max_features, n_estimators):
+def random_forest_classifier(obj, class_weight, force, max_features, n_estimators, seed):
     if not force:
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.model = name
     obj.classifier.params = {
         "class_weight": class_weight,
         "max_features": max_features,
-        "n_estimators": n_estimators
+        "n_estimators": n_estimators,
+        "seed": seed
     }
     obj.provided.classifier = True
