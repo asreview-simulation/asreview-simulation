@@ -57,7 +57,9 @@ like nothing is happening.
 """
 
 
-@click.group("cli", chain=True, help=cli_help())
+@click.group("cli",
+             chain=True,
+             help=cli_help())
 @click.pass_context
 def cli(ctx):
     if ctx.obj is None:

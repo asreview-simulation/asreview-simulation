@@ -44,10 +44,8 @@ name = NN2LayerClassifier.name
               show_default=True,
               type=click.FLOAT)
 @click.option("--shuffle", "shuffle",
-              default=False,
               help="hyperparameter 'shuffle'.",
-              show_default=True,
-              type=click.BOOL)
+              is_flag=True)
 @click.option("--verbose", "verbose",
               default=0,
               help="hyperparameter 'verbose'.",

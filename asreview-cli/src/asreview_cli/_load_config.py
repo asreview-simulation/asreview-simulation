@@ -1,7 +1,8 @@
 import click
 
 
-@click.command("load-config", help="Load config")
+@click.command("load-config",
+               help="Load config")
 @click.argument("config_file")
 @click.pass_obj
 def load_config(obj, config_file):
