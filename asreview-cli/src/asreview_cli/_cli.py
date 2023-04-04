@@ -34,7 +34,7 @@ def _add_balancer_subcommands():
         triple_balancer,
         undersample_balancer
     ]
-    other_balancers = [e.load() for e in entrypoints(group="asreview-cli.balancers")]
+    other_balancers = [e.load() for e in entrypoints(group="asreview_cli.balancers")]
     for b in my_balancers + other_balancers:
         cli.add_command(b)
 
@@ -49,7 +49,7 @@ def _add_classifier_subcommands():
         nn_2_layer_classifier,
         svm_classifier
     ]
-    other_classifiers = [e.load() for e in entrypoints(group="asreview-cli.classifiers")]
+    other_classifiers = [e.load() for e in entrypoints(group="asreview_cli.classifiers")]
     for c in my_classifiers + other_classifiers:
         cli.add_command(c)
 
@@ -62,7 +62,7 @@ def _add_extractor_subcommands():
         embedding_lstm_extractor,
         sbert_extractor
     ]
-    other_extractors = [e.load() for e in entrypoints(group="asreview-cli.extractors")]
+    other_extractors = [e.load() for e in entrypoints(group="asreview_cli.extractors")]
     for e in my_extractors + other_extractors:
         cli.add_command(e)
 
@@ -72,7 +72,7 @@ def _add_querier_subcommands():
         cluster_querier,
         mixed_querier
     ]
-    other_queriers = [e.load() for e in entrypoints(group="asreview-cli.queriers")]
+    other_queriers = [e.load() for e in entrypoints(group="asreview_cli.queriers")]
     for q in my_queriers + other_queriers:
         cli.add_command(q)
 
@@ -82,7 +82,7 @@ def _add_sampler_subcommands():
         random_prior_sampler,
         handpicked_prior_sampler
     ]
-    other_samplers = [e.load() for e in entrypoints(group="asreview-cli.samplers")]
+    other_samplers = [e.load() for e in entrypoints(group="asreview_cli.samplers")]
     for s in my_samplers + other_samplers:
         cli.add_command(s)
 
@@ -91,7 +91,7 @@ def _add_starter_subcommands():
     my_starters = [
         load_config
     ]
-    other_starters = [e.load() for e in entrypoints(group="asreview-cli.starters")]
+    other_starters = [e.load() for e in entrypoints(group="asreview_cli.starters")]
     for s in my_starters + other_starters:
         cli.add_command(s)
 
@@ -101,7 +101,7 @@ def _add_terminator_subcommands():
         print_settings,
         start
     ]
-    other_terminators = [e.load() for e in entrypoints(group="asreview-cli.terminators")]
+    other_terminators = [e.load() for e in entrypoints(group="asreview_cli.terminators")]
     for t in my_terminators + other_terminators:
         cli.add_command(t)
 
