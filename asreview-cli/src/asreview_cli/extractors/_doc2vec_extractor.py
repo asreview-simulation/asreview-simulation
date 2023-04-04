@@ -8,7 +8,7 @@ name = Doc2VecExtractor.name
 
 @click.command(epilog=epilog,
                help="Use Doc2Vec extractor",
-               name=f"e-{name}")
+               name=f"ext:{name}")
 @click.option("--epochs", "epochs",
               default=33,
               help="hyperparameter 'epochs'.",

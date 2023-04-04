@@ -39,16 +39,16 @@ Commands can be chained together, e.g.
 
   $ {cli_name} load-config thefile.cfg start labeled-records.db
 
-  $ {cli_name} b-double --alpha 1.23 print-settings --pretty
+  $ {cli_name} bal:double --alpha 1.23 print-settings --pretty
 
-  $ {cli_name} b-none c-nb e-tfidf q-mixed start labeled-records.db
+  $ {cli_name} bal:none c-nb e-tfidf q-mixed start labeled-records.db
 
 \b
-  $ {cli_name} s-random --n_included 10 --n_excluded 15                      \\
-    {' ' * len(cli_name)} e-tfidf --ngram_max 2                                         \\
-    {' ' * len(cli_name)} c-nb --alpha 3.823                                            \\
-    {' ' * len(cli_name)} q-mixed --strategy1 max --strategy2 random --mix_ratio 0.95   \\
-    {' ' * len(cli_name)} b-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1           \\
+  $ {cli_name} sam:random --n_included 10 --n_excluded 15                      \\
+    {' ' * len(cli_name)} ext:tfidf --ngram_max 2                                         \\
+    {' ' * len(cli_name)} cls:nb --alpha 3.823                                            \\
+    {' ' * len(cli_name)} qer:mixed --strategy1 max --strategy2 random --mix_ratio 0.95   \\
+    {' ' * len(cli_name)} bal:double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1           \\
     {' ' * len(cli_name)} start labeled-records.db
 
 Chained commands are evaluated left to right; make sure to end the chain with

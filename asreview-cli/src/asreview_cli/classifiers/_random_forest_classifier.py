@@ -8,7 +8,7 @@ name = RandomForestClassifier.name
 
 @click.command(epilog=epilog,
                help="Use Random Forest classifier",
-               name=f"c-{name}")
+               name=f"cls:{name}")
 @click.option("--class_weight", "class_weight",
               default=1.0,
               help="hyperparameter 'class_weight'.",

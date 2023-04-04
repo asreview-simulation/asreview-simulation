@@ -8,7 +8,7 @@ name = LogisticClassifier.name
 
 @click.command(epilog=epilog,
                help="Use Logistic Regression classifier",
-               name=f"c-{name}")
+               name=f"cls:{name}")
 @click.option("--c", "c",
               default=1.0,
               help="hyperparameter 'C'.",

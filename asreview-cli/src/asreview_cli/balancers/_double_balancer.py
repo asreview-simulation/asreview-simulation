@@ -8,7 +8,7 @@ name = DoubleBalancer.name
 
 @click.command(epilog=epilog,
                help="Use double balancer",
-               name=f"b-{name}")
+               name=f"bal:{name}")
 @click.option("--a", "a",
               default=2.155,
               help="hyperparameter 'a'.",

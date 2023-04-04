@@ -8,7 +8,7 @@ name = EmbeddingIdfExtractor.name
 
 @click.command(epilog=epilog,
                help="Use Embedding IDF extractor",
-               name=f"e-{name}")
+               name=f"ext:{name}")
 @click.option("-f", "--force", "force",
               help="Force setting the querier configuration, even if that me" +
               "ans overwriting a previous configuration.",

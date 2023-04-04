@@ -8,7 +8,7 @@ name = SvmClassifier.name
 
 @click.command(epilog=epilog,
                help="Use Support Vector Machine classifier",
-               name=f"c-{name}")
+               name=f"cls:{name}")
 @click.option("--c", "c",
               default=15.4,
               help="hyperparameter 'c'.",

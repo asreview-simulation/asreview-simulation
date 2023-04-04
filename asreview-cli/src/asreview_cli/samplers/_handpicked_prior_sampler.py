@@ -7,7 +7,7 @@ name = "handpicked"
 
 @click.command(epilog=epilog,
                help="Use handpicked prior sampler.\n\nIDS: a comma separated string",
-               name=f"s-{name}",
+               name=f"sam:{name}",
                short_help="Use handpicked prior sampler")
 @click.argument("ids",
                 type=click.STRING)

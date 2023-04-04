@@ -8,7 +8,7 @@ name = TfidfExtractor.name
 
 @click.command(epilog=epilog,
                help="Use TF-IDF extractor",
-               name=f"e-{name}")
+               name=f"ext:{name}")
 @click.option("-f", "--force", "force",
               help="Force setting the querier configuration, even if that me" +
               "ans overwriting a previous configuration.",
@@ -22,7 +22,7 @@ name = TfidfExtractor.name
               default="english",
               help="hyperparameter 'stop_words'.",
               show_default=True,
-              type=click.Choice(["string"]))
+              type=click.Choice(["english"]))
 @click.pass_obj
 def tfidf_extractor(obj, force, ngram_max, stop_words):
     if not force:

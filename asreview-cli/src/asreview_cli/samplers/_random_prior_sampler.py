@@ -7,7 +7,7 @@ name = "random"
 
 @click.command(epilog=epilog,
                help="Use random prior sampler",
-               name=f"s-{name}")
+               name=f"sam:{name}")
 @click.option("-f", "--force", "force",
               help="Force setting the querier configuration, even if that me" +
               "ans overwriting a previous configuration.",

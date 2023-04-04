@@ -8,7 +8,7 @@ name = LstmPoolClassifier.name
 
 @click.command(epilog=epilog,
                help="Use LSTM Pool classifier",
-               name=f"c-{name}")
+               name=f"cls:{name}")
 @click.argument("feature_matrix_file",
                 type=click.Path(exists=True, readable=True))
 @click.option("-f", "--force", "force",

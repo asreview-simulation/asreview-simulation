@@ -8,7 +8,7 @@ name = NoBalancer.name
 
 @click.command(epilog=epilog,
                help="Use no balancer",
-               name=f"b-{name}")
+               name=f"bal:{name}")
 @click.option("-f", "--force", "force",
               help="Force setting the querier configuration, even if that me" +
               "ans overwriting a previous configuration.",

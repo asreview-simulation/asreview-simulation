@@ -7,7 +7,7 @@ name = MixedQuerier.name
 
 
 @click.command(epilog=epilog,
-               name=f"q-{name}",
+               name=f"qer:{name}",
                help="Use Mixed querier")
 @click.option("--mix_ratio", "mix_ratio",
               default=0.95,

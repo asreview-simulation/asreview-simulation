@@ -8,7 +8,7 @@ name = MaxQuerier.name
 
 @click.command(epilog=epilog,
                help="Use Max querier",
-               name=f"q-{name}")
+               name=f"qer:{name}")
 @click.option("-f", "--force", "force",
               help="Force setting the querier configuration, even if that me" +
               "ans overwriting a previous configuration.",

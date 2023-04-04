@@ -172,15 +172,15 @@ Usage: asreview-cli [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
     $ asreview-cli load-config thefile.cfg start labeled-records.db
 
-    $ asreview-cli b-double --alpha 1.23 print-settings --pretty
+    $ asreview-cli bal:double --alpha 1.23 print-settings --pretty
 
-    $ asreview-cli b-none c-nb e-tfidf q-mixed start labeled-records.db
+    $ asreview-cli bal:none c-nb e-tfidf q-mixed start labeled-records.db
 
-    $ asreview-cli s-random --n_included 10 --n_excluded 15                      \
-                   e-tfidf --ngram_max 2                                         \
-                   c-nb --alpha 3.823                                            \
-                   q-mixed --strategy1 max --strategy2 random --mix_ratio 0.95   \
-                   b-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1           \
+    $ asreview-cli sam:random --n_included 10 --n_excluded 15                      \
+                   ext:tfidf --ngram_max 2                                         \
+                   cls:nb --alpha 3.823                                            \
+                   qer:mixed --strategy1 max --strategy2 random --mix_ratio 0.95   \
+                   bal:double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1           \
                    start labeled-records.db
 
   Chained commands are evaluated left to right; make sure to end the chain
@@ -191,29 +191,29 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  b-double          Use double balancer
-  b-none            Use no balancer
-  b-triple          Use triple balancer
-  b-undersample     Use undersample balancer
-  c-logistic        Use Logistic Regression classifier
-  c-lstm-base       Use LSTM Base classifier
-  c-lstm-pool       Use LSTM Pool classifier
-  c-nb              Use Naive Bayes classifier
-  c-nn2layer        Use 2-layer Neural Net classifier
-  c-rf              Use Random Forest classifier
-  c-svm             Use Support Vecor Machine classifier
-  e-doc2vec         Use Doc2Vec extractor
-  e-embedding-idf   Use Embedding IDF extractor
-  e-embedding-lstm  Use Embedding LSTM extractor
-  e-sbert           Use SBERT extractor
-  e-tfidf           Use TF-IDF extractor
-  load-config       Load config
-  print-settings    Print settings
-  q-cluster         Use Cluster querier
-  q-mixed           Use Mixed querier
-  s-handpicked      Use handpicked prior sampler
-  s-random          Use random prior sampler
-  start             Start the simulation and exit; terminates parsing
+  bal:double          Use double balancer
+  bal:none            Use no balancer
+  bal:triple          Use triple balancer
+  bal:undersample     Use undersample balancer
+  cls:logistic        Use Logistic Regression classifier
+  cls:lstm-base       Use LSTM Base classifier
+  cls:lstm-pool       Use LSTM Pool classifier
+  cls:nb              Use Naive Bayes classifier
+  cls:nn-2-layer      Use 2-layer Neural Net classifier
+  cls:rf              Use Random Forest classifier
+  cls:svm             Use Support Vector Machine classifier
+  ext:doc2vec         Use Doc2Vec extractor
+  ext:embedding-idf   Use Embedding IDF extractor
+  ext:embedding-lstm  Use Embedding LSTM extractor
+  ext:sbert           Use SBERT extractor
+  ext:tfidf           Use TF-IDF extractor
+  load-config         Load config
+  print-settings      Print settings
+  qer:cluster         Use Cluster querier
+  qer:mixed           Use Mixed querier
+  sam:handpicked      Use handpicked prior sampler
+  sam:random          Use random prior sampler
+  start               Start the simulation and exit; terminates parsing
 ```
 
 Print the default settings:
@@ -246,8 +246,8 @@ $ asreview-cli print-settings --pretty
     "sampler": {
         "model": "random",
         "params": {
-            "n_included": 1,
-            "n_excluded": 1
+            "n_excluded": 1,
+            "n_included": 1
         }
     },
     "querier": {
@@ -260,28 +260,34 @@ $ asreview-cli print-settings --pretty
 Print the help for a subcommand, e.g. for triple balancer:
 
 ```shell
-$ asreview-cli b-triple --help
-Usage: asreview-cli b-triple [OPTIONS]
+$ asreview-cli bal:triple --help
+
+Usage: asreview-cli bal:triple [OPTIONS]
 
   Use triple balancer
 
 Options:
-  --a FLOAT          hyperparameter 'a'.
-  --alpha FLOAT      hyperparameter 'alpha'.
-  --b FLOAT          hyperparameter 'b'.
-  --beta FLOAT       hyperparameter 'beta'.
-  --c FLOAT          hyperparameter 'c'.
-  --gamma FLOAT      hyperparameter 'gamma'.
-  --shuffle BOOLEAN  hyperparameter 'shuffle'.
-  -f, --force        Force setting the balancer configuration, even if that
-                     means overwriting a previous configuration.
-  --help             Show this message and exit.
+  --a FLOAT      hyperparameter 'a'.  [default: 2.155]
+  --alpha FLOAT  hyperparameter 'alpha'.  [default: 0.94]
+  --b FLOAT      hyperparameter 'b'.  [default: 0.789]
+  --beta FLOAT   hyperparameter 'beta'.  [default: 1.0]
+  --c FLOAT      hyperparameter 'c'.  [default: 0.835]
+  -f, --force    Force setting the querier configuration, even if that means
+                 overwriting a previous configuration.
+  --gamma FLOAT  hyperparameter 'gamma'.  [default: 2.0]
+  --shuffle      hyperparameter 'shuffle'.
+  --help         Show this message and exit.
+
+  This command is chainable with other commands. Chained commands are
+  evaluated left to right; make sure to end the chain with either a 'start'
+  command or a 'print-settings' command, otherwise it appears like nothing is
+  happening.
 ```
 
 Change the settings by chaining subcommands and printing them at the end:
 
 ```shell
-$ asreview-cli b-undersample --ratio 0.5 c-rf --class_weight 1.0001 print-settings --pretty
+$ asreview-cli bal:undersample --ratio 0.5 c-rf --class_weight 1.0001 print-settings --pretty
 {
     "balancer": {
         "model": "undersample",
@@ -292,9 +298,9 @@ $ asreview-cli b-undersample --ratio 0.5 c-rf --class_weight 1.0001 print-settin
     "classifier": {
         "model": "rf",
         "params": {
-            "n_estimators": 100,
+            "class_weight": 1.0001,
             "max_features": 10,
-            "class_weight": 1.0001
+            "n_estimators": 100,
         }
     },
     "extractor": {
@@ -307,8 +313,8 @@ $ asreview-cli b-undersample --ratio 0.5 c-rf --class_weight 1.0001 print-settin
     "sampler": {
         "model": "random",
         "params": {
-            "n_included": 1,
-            "n_excluded": 1
+            "n_excluded": 1,
+            "n_included": 1
         }
     },
     "querier": {

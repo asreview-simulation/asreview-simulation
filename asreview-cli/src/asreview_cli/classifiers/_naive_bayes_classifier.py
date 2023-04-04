@@ -8,7 +8,7 @@ name = NaiveBayesClassifier.name
 
 @click.command(epilog=epilog,
                help="Use Naive Bayes classifier",
-               name=f"c-{name}")
+               name=f"cls:{name}")
 @click.option("--alpha", "alpha",
               default=3.822,
               help="hyperparameter 'alpha'.",
