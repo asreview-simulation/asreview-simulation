@@ -28,6 +28,12 @@ from .terminators import start
 from ._state import State
 
 
+class NaturalOrderGroup(click.Group):
+    # thanks https://github.com/pallets/click/issues/513#issuecomment-504158316
+    def list_commands(self, ctx):
+        return self.commands.keys()
+
+
 def _add_balancer_subcommands():
     my_balancers = [
         double_balancer,
@@ -41,7 +47,7 @@ def _add_balancer_subcommands():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreview_cli.balancers'. The error message was: {e}\nContinuing...")
         other_balancers = []
-    for b in my_balancers + other_balancers:
+    for b in _sort_commands(my_balancers + other_balancers):
         cli.add_command(b)
 
 
@@ -61,7 +67,7 @@ def _add_classifier_subcommands():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreview_cli.classifiers'. The error message was: {e}\nContinuing...")
         other_classifiers = []
-    for c in my_classifiers + other_classifiers:
+    for c in _sort_commands(my_classifiers + other_classifiers):
         cli.add_command(c)
 
 
@@ -79,7 +85,7 @@ def _add_extractor_subcommands():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreview_cli.extractors'. The error message was: {e}\nContinuing...")
         other_extractors = []
-    for e in my_extractors + other_extractors:
+    for e in _sort_commands(my_extractors + other_extractors):
         cli.add_command(e)
 
 
@@ -94,7 +100,7 @@ def _add_querier_subcommands():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreview_cli.queriers'. The error message was: {e}\nContinuing...")
         other_queriers = []
-    for q in my_queriers + other_queriers:
+    for q in _sort_commands(my_queriers + other_queriers):
         cli.add_command(q)
 
 
@@ -109,7 +115,7 @@ def _add_sampler_subcommands():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreview_cli.samplers'. The error message was: {e}\nContinuing...")
         other_samplers = []
-    for s in my_samplers + other_samplers:
+    for s in _sort_commands(my_samplers + other_samplers):
         cli.add_command(s)
 
 
@@ -123,7 +129,7 @@ def _add_starter_subcommands():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreview_cli.starters'. The error message was: {e}\nContinuing...")
         other_starters = []
-    for s in my_starters + other_starters:
+    for s in _sort_commands(my_starters + other_starters):
         cli.add_command(s)
 
 
@@ -139,8 +145,12 @@ def _add_terminator_subcommands():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreview_cli.terminators'. The error message was: {e}\nContinuing...")
         other_terminators = []
-    for t in my_terminators + other_terminators:
+    for t in _sort_commands(my_terminators + other_terminators):
         cli.add_command(t)
+
+
+def _sort_commands(commands):
+    return sorted(commands, key=lambda command: command.name)
 
 
 def cli_help(cli_name="asreview-cli"):
@@ -176,6 +186,7 @@ like nothing is happening.
 
 @click.group("cli",
              chain=True,
+             cls=NaturalOrderGroup,
              help=cli_help())
 @click.pass_context
 def cli(ctx):
