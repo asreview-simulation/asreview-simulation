@@ -17,6 +17,8 @@ def list_members(pkg):
 
 actual_members = list_members(asreviewlib)
 expected_members = [
+    'asreviewlib._internal',
+    'asreviewlib._internal.check_star_exports',
     'asreviewlib.balancers.BaseBalancer',
     'asreviewlib.balancers.DoubleBalancer',
     'asreviewlib.balancers.NoneBalancer',
@@ -38,10 +40,6 @@ expected_members = [
     'asreviewlib.datasets.BaseDataset',
     'asreviewlib.datasets.FirstDataset',
     'asreviewlib.datasets.SecondDataset',
-    'asreviewlib.demo_d.fun',
-    'asreviewlib.demo_d',
-    'asreviewlib.demo_f',
-    'asreviewlib.demo_f.fun',
     'asreviewlib.exceptions.ASReviewProjectExistsError',
     'asreviewlib.exceptions.ASReviewProjectNotFoundError',
     'asreviewlib.exceptions',

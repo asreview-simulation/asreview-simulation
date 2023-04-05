@@ -3,6 +3,7 @@ from ._none_balancer import NoneBalancer
 from ._double_balancer import DoubleBalancer
 from ._triple_balancer import TripleBalancer
 from ._undersample_balancer import UndersampleBalancer
+from asreviewlib._internal import check_star_exports
 
 
 del _base_balancer
@@ -16,12 +17,8 @@ __all__ = [
     "NoneBalancer",
     "DoubleBalancer",
     "TripleBalancer",
-    "UndersampleBalancer",
+    "UndersampleBalancer"
 ]
 
-for _item in dir():
-    if not _item.endswith('__'):
-        assert _item in __all__, f"Named export {_item} missing from __all__ in {__package__}"
-for _item in __all__:
-    assert _item in dir(), f"__all__ includes unknown item {_item} in {__package__}"
-del _item
+check_star_exports(__package__, dir(), __all__)
+del check_star_exports

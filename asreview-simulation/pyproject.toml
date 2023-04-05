@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-test = ["pytest"]
+testing = ["pytest"]
 
 [project.scripts]
 asreview-simulation = "asreview_simulation:cli"

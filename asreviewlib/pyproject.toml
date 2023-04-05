@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.7"
 
 [project.optional-dependencies]
-test = ["pytest"]
+testing = ["pytest"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
