@@ -15,7 +15,7 @@ dependencies = [
 new = "asreviewlib_plugin_classifier:NewClassifier"
 
 [project.optional-dependencies]
-test = ["pytest"]
+testing = ["pytest"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

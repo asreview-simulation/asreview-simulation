@@ -15,7 +15,7 @@ dependencies = [
 third = "asreviewlib_plugin_dataset:ThirdDataset"
 
 [project.optional-dependencies]
-test = ["pytest"]
+testing = ["pytest"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

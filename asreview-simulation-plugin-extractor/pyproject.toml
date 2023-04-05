@@ -15,7 +15,7 @@ dependencies = [
 new = "asreview_simulation_plugin_extractor:new_extractor_cmd"
 
 [project.optional-dependencies]
-test = ["pytest"]
+testing = ["pytest"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
