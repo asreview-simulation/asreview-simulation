@@ -1,1 +1,2 @@
-from asreview.models.classifiers.nb import NaiveBayesClassifier  # noqa
+class NaiveBayesClassifier:
+    name = "nb"

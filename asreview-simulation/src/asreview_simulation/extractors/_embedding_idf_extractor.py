@@ -17,6 +17,6 @@ name = EmbeddingIdfExtractor.name
 def embedding_idf_extractor(obj, force):
     if not force:
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
-    obj.classifier.model = name
-    obj.classifier.params = {}
+    obj.extractor.model = name
+    obj.extractor.params = {}
     obj.provided.extractor = True

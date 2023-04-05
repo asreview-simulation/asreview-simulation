@@ -1,5 +1,6 @@
 from . import balancers
 from . import classifiers
+from . import datasets
 from . import demo_d
 from . import exceptions
 from . import extractors
@@ -12,6 +13,7 @@ from ._data import Data
 from ._list_balancers import list_balancers
 from ._list_classifiers import list_classifiers
 from ._list_extractors import list_extractors
+from ._list_datasets import list_datasets
 from ._list_projects import list_projects
 from ._list_queriers import list_queriers
 from ._list_readers import list_readers
@@ -23,6 +25,7 @@ del _base_model
 del _data
 del _list_balancers
 del _list_classifiers
+del _list_datasets
 del _list_extractors
 del _list_projects
 del _list_queriers
@@ -35,11 +38,13 @@ __all__ = [
     "BaseModel",
     "classifiers",
     "Data",
+    "datasets",
     "demo_d",
     "exceptions",
     "extractors",
     "list_balancers",
     "list_classifiers",
+    "list_datasets",
     "list_extractors",
     "list_projects",
     "list_queriers",

@@ -24,7 +24,7 @@ def list_classifiers():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.classifiers'. The error message was: {e}\nContinuing...")
         other_classifiers = {}
-    rv = dict()
-    rv.update(my_classifiers)
-    rv.update(other_classifiers)
-    return rv
+    d = dict()
+    d.update(my_classifiers)
+    d.update(other_classifiers)
+    return dict(sorted(d.items()))

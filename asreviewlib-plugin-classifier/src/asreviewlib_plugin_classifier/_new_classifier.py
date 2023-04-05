@@ -1,2 +1,2 @@
 class NewClassifier:
-    name = 'new'
+    name = "new"

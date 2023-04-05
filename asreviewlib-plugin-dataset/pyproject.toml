@@ -3,16 +3,16 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "asreview-cli-plugin-extractor"
+name = "asreviewlib-plugin-dataset"
 version = "0.1.0-alpha0"
 readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [
-    "click"
+    "asreviewlib == 0.1.0-a0"
 ]
 
-[project.entry-points."asreview_cli.extractors"]
-new = "asreview_cli_plugin_extractor:new_extractor_cmd"
+[project.entry-points."asreviewlib.datasets"]
+third = "asreviewlib_plugin_dataset:ThirdDataset"
 
 [project.optional-dependencies]
 test = ["pytest"]

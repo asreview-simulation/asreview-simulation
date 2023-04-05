@@ -57,8 +57,8 @@ name = Doc2VecExtractor.name
 def doc2vec_extractor(obj, epochs, dbow_words, dm, dm_concat, force, min_count, n_jobs, vector_size, window):
     if not force:
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
-    obj.classifier.model = name
-    obj.classifier.params = {
+    obj.extractor.model = name
+    obj.extractor.params = {
         "dbow_words": dbow_words,
         "dm": dm,
         "dm_concat": dm_concat,

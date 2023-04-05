@@ -47,8 +47,8 @@ name = EmbeddingLstmExtractor.name
 def embedding_lstm_extractor(obj, force, loop_sequence, max_sequence_length, n_jobs, num_words, padding, truncating):
     if not force:
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
-    obj.classifier.model = name
-    obj.classifier.params = {
+    obj.extractor.model = name
+    obj.extractor.params = {
         "loop_sequence": loop_sequence,
         "max_sequence_length": max_sequence_length,
         "n_jobs": n_jobs,

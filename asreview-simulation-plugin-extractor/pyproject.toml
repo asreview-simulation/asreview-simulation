@@ -3,10 +3,16 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "asreviewlib"
+name = "asreview-simulation-plugin-extractor"
 version = "0.1.0-alpha0"
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = [
+    "click"
+]
+
+[project.entry-points."asreview_simulation.extractors"]
+new = "asreview_simulation_plugin_extractor:new_extractor_cmd"
 
 [project.optional-dependencies]
 test = ["pytest"]

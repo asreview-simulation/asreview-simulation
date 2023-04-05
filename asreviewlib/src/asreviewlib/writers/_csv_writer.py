@@ -1,1 +1,2 @@
-from asreview.io.csv_writer import CSVWriter as CsvWriter   # noqa
+class CsvWriter:
+    name = "csv"

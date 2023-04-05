@@ -3,13 +3,13 @@ from ._cli import cli_help
 from asreview.entry_points import BaseEntryPoint
 
 
-class SimulateEntrypoint(BaseEntryPoint):
+class SimulationEntrypoint(BaseEntryPoint):
     """Simulation"""
 
     description = "Simulate labeling records using different models and parameterizations."
 
     def __init__(self):
-        self.version = "simulation-cli-plugin"
+        self.version = "plugin-simulation"
 
     def execute(self, argv):
         name = "asreview simulation"

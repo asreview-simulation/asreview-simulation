@@ -24,7 +24,7 @@ def list_queriers():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.queriers'. The error message was: {e}\nContinuing...")
         other_queriers = {}
-    rv = dict()
-    rv.update(my_queriers)
-    rv.update(other_queriers)
-    return rv
+    d = dict()
+    d.update(my_queriers)
+    d.update(other_queriers)
+    return dict(sorted(d.items()))

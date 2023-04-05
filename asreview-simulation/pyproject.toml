@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "asreview-cli"
+name = "asreview-simulation"
 version = "0.1.0-alpha0"
 readme = "README.md"
 requires-python = ">=3.7"
@@ -16,10 +16,10 @@ dependencies = [
 test = ["pytest"]
 
 [project.scripts]
-asreview-cli = "asreview_cli:cli"
+asreview-simulation = "asreview_simulation:cli"
 
 [project.entry-points."asreview.entry_points"]
-simulation = "asreview_cli.entrypoint:SimulateEntrypoint"
+simulation = "asreview_simulation.entrypoint:SimulationEntrypoint"
 
 [tool.setuptools.packages.find]
 where = ["src"]

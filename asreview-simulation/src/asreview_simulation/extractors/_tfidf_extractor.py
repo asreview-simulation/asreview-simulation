@@ -27,8 +27,8 @@ name = TfidfExtractor.name
 def tfidf_extractor(obj, force, ngram_max, stop_words):
     if not force:
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
-    obj.classifier.model = name
-    obj.classifier.params = {
+    obj.extractor.model = name
+    obj.extractor.params = {
         "ngram_max": ngram_max,
         "stop_words": stop_words
     }

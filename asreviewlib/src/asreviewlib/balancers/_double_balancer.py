@@ -1,1 +1,2 @@
-from asreview.models.balance.double import DoubleBalance as DoubleBalancer  # noqa
+class DoubleBalancer:
+    name = "double"

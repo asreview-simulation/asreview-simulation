@@ -20,7 +20,7 @@ def list_extractors():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.extractors'. The error message was: {e}\nContinuing...")
         other_extractors = {}
-    rv = dict()
-    rv.update(my_extractors)
-    rv.update(other_extractors)
-    return rv
+    d = dict()
+    d.update(my_extractors)
+    d.update(other_extractors)
+    return dict(sorted(d.items()))

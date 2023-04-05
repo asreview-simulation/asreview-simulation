@@ -18,7 +18,7 @@ def list_readers():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.readers'. The error message was: {e}\nContinuing...")
         other_readers = {}
-    rv = dict()
-    rv.update(my_readers)
-    rv.update(other_readers)
-    return rv
+    d = dict()
+    d.update(my_readers)
+    d.update(other_readers)
+    return dict(sorted(d.items()))

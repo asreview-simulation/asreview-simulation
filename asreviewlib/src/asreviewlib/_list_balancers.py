@@ -18,7 +18,7 @@ def list_balancers():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.balancers'. The error message was: {e}\nContinuing...")
         other_balancers = {}
-    rv = dict()
-    rv.update(my_balancers)
-    rv.update(other_balancers)
-    return rv
+    d = dict()
+    d.update(my_balancers)
+    d.update(other_balancers)
+    return dict(sorted(d.items()))

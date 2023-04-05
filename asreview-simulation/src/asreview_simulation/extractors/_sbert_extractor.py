@@ -22,8 +22,8 @@ name = SbertExtractor.name
 def sbert_extractor(obj, force, transformer_model):
     if not force:
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
-    obj.classifier.model = name
-    obj.classifier.params = {
+    obj.extractor.model = name
+    obj.extractor.params = {
         "transformer_model": transformer_model
     }
     obj.provided.extractor = True

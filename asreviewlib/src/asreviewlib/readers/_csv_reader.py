@@ -1,1 +1,2 @@
-from asreview.io.csv_reader import CSVReader as CsvReader   # noqa
+class CsvReader:
+    name = "csv"

@@ -1,1 +1,2 @@
-from asreview.models.balance.triple import TripleBalance as TripleBalancer   # noqa
+class TripleBalancer:
+    name = "triple"

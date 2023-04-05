@@ -18,7 +18,7 @@ def list_writers():
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.writers'. The error message was: {e}\nContinuing...")
         other_writers = {}
-    rv = dict()
-    rv.update(my_writers)
-    rv.update(other_writers)
-    return rv
+    d = dict()
+    d.update(my_writers)
+    d.update(other_writers)
+    return dict(sorted(d.items()))

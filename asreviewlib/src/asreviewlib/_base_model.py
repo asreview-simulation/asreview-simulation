@@ -1,1 +1,2 @@
-from asreview.models.base import BaseModel   # noqa
+class BaseModel:
+    name = "base"
