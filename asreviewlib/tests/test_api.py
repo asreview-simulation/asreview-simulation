@@ -40,6 +40,8 @@ expected_members = [
     'asreviewlib.datasets.SecondDataset',
     'asreviewlib.demo_d.fun',
     'asreviewlib.demo_d',
+    'asreviewlib.demo_f',
+    'asreviewlib.demo_f.fun',
     'asreviewlib.exceptions.ASReviewProjectExistsError',
     'asreviewlib.exceptions.ASReviewProjectNotFoundError',
     'asreviewlib.exceptions',

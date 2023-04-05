@@ -2,6 +2,7 @@ from . import balancers
 from . import classifiers
 from . import datasets
 from . import demo_d
+from . import demo_f
 from . import exceptions
 from . import extractors
 from . import queriers
@@ -40,6 +41,7 @@ __all__ = [
     "Data",
     "datasets",
     "demo_d",
+    "demo_f",
     "exceptions",
     "extractors",
     "list_balancers",
