@@ -159,16 +159,18 @@ Example usage:
 
   $ {cli_name} print-settings
 
-  $ {cli_name} start labeled-records.db
+  $ {cli_name} start --data labeled-records.db
 
 Commands can be chained together, e.g.
 
 
-  $ {cli_name} load-config thefile.cfg start labeled-records.db
+  $ {cli_name} load-settings thefile.cfg start --data labeled-records.db
+
+  $ {cli_name} load-settings thefile.cfg start --dataset second
 
   $ {cli_name} bal:double --alpha 1.23 print-settings --pretty
 
-  $ {cli_name} bal:none c-nb e-tfidf q-mixed start labeled-records.db
+  $ {cli_name} bal:none cls:nb ext:tfidf qer:mixed start --data labeled-records.db
 
 \b
   $ {cli_name} sam:random --n_included 10 --n_excluded 15                      \\
@@ -176,7 +178,7 @@ Commands can be chained together, e.g.
     {' ' * len(cli_name)} cls:nb --alpha 3.823                                            \\
     {' ' * len(cli_name)} qer:mixed --strategy1 max --strategy2 random --mix_ratio 0.95   \\
     {' ' * len(cli_name)} bal:double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1           \\
-    {' ' * len(cli_name)} start labeled-records.db
+    {' ' * len(cli_name)} start --data labeled-records.db
 
 Chained commands are evaluated left to right; make sure to end the chain with
 either a 'start' command or a 'print-settings' command, otherwise it may appear

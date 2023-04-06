@@ -11,22 +11,22 @@ name = Doc2VecExtractor.name
                name=f"ext:{name}")
 @click.option("--epochs", "epochs",
               default=33,
-              help="hyperparameter 'epochs'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--dbow_words", "dbow_words",
               default=0,
-              help="hyperparameter 'dbow_words'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--dm", "dm",
               default=2,
-              help="hyperparameter 'dm'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--dm_concat", "dm_concat",
               default=0,
-              help="hyperparameter 'dm_concat'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("-f", "--force", "force",
@@ -35,22 +35,22 @@ name = Doc2VecExtractor.name
               is_flag=True)
 @click.option("--min_count", "min_count",
               default=1,
-              help="hyperparameter 'min_count'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--n_jobs", "n_jobs",
               default=1,
-              help="hyperparameter 'n_jobs'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--vector_size", "vector_size",
               default=40,
-              help="hyperparameter 'vector_size'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--window", "window",
               default=7,
-              help="hyperparameter 'window'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.pass_obj

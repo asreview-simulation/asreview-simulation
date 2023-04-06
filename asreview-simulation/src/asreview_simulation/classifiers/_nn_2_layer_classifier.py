@@ -11,17 +11,17 @@ name = NN2LayerClassifier.name
                name=f"cls:{name}")
 @click.option("--batch_size", "batch_size",
               default=32,
-              help="hyperparameter 'batch_size'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--dense_width", "dense_width",
               default=128,
-              help="hyperparameter 'dense_width'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--epochs", "epochs",
               default=35,
-              help="hyperparameter 'epochs'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("-f", "--force", "force",
@@ -30,25 +30,25 @@ name = NN2LayerClassifier.name
               is_flag=True)
 @click.option("--learn_rate", "learn_rate",
               default=1.0,
-              help="hyperparameter 'learn_rate'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("--optimizer", "optimizer",
               default="rmsprop",
-              help="hyperparameter 'optimizer'.",
+              help="hyperparameter",
               show_default=True,
-              type=click.Choice(["rmsprop"]))
+              type=click.Choice(["sgd", "rmsprop", "adagrad", "adam", "nadam"]))
 @click.option("--regularization", "regularization",
               default=0.01,
-              help="hyperparameter 'regularization'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("--shuffle", "shuffle",
-              help="hyperparameter 'shuffle'.",
+              help="hyperparameter",
               is_flag=True)
-@click.option("--verbose", "verbose",
+@click.option("-V", "--verbose", "verbose",
               default=0,
-              help="hyperparameter 'verbose'.",
+              help="verbosity",
               show_default=True,
               type=click.INT)
 @click.pass_obj

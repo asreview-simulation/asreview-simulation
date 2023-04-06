@@ -11,7 +11,7 @@ name = NaiveBayesClassifier.name
                name=f"cls:{name}")
 @click.option("--alpha", "alpha",
               default=3.822,
-              help="hyperparameter 'alpha'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("-f", "--force", "force",

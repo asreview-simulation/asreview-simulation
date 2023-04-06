@@ -15,7 +15,7 @@ name = SbertExtractor.name
               is_flag=True)
 @click.option("--transformer_model", "transformer_model",
               default="all-mpnet-base-v2",
-              help="hyperparameter 'transformer_model'.",
+              help="hyperparameter",
               show_default=True,
               type=click.Choice(["all-mpnet-base-v2"]))
 @click.pass_obj

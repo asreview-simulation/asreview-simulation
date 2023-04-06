@@ -15,7 +15,7 @@ name = UndersampleBalancer.name
               is_flag=True)
 @click.option("--ratio", "ratio",
               default=1.0,
-              help="hyperparameter 'ratio'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("--seed", "seed",

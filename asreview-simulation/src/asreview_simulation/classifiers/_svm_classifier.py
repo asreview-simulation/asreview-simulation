@@ -11,12 +11,12 @@ name = SvmClassifier.name
                name=f"cls:{name}")
 @click.option("--c", "c",
               default=15.4,
-              help="hyperparameter 'c'.",
+              help="hyperparameter.",
               show_default=True,
               type=click.FLOAT)
 @click.option("--class_weight", "class_weight",
               default=0.249,
-              help="hyperparameter 'class_weight'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("-f", "--force", "force",
@@ -25,14 +25,14 @@ name = SvmClassifier.name
               is_flag=True)
 @click.option("--gamma", "gamma",
               default="auto",
-              help="hyperparameter 'auto'.",
+              help="hyperparameter",
               show_default=True,
-              type=click.Choice("auto"))
+              type=click.Choice(["auto", "scale"]))
 @click.option("--kernel", "kernel",
               default="linear",
-              help="hyperparameter 'kernel'.",
+              help="hyperparameter",
               show_default=True,
-              type=click.Choice(["linear"]))
+              type=click.Choice(["linear", "rbf", "poly", "sigmoid"]))
 @click.option("--seed", "seed",
               default=535,
               help="Random seed",

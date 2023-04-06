@@ -15,32 +15,32 @@ name = EmbeddingLstmExtractor.name
               is_flag=True)
 @click.option("--loop_sequence", "loop_sequence",
               default=1,
-              help="hyperparameter 'loop_sequence'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--max_sequence_length", "max_sequence_length",
               default=1000,
-              help="hyperparameter 'max_sequence_length'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--n_jobs", "n_jobs",
               default=1,
-              help="hyperparameter 'n_jobs'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--num_words", "num_words",
               default=20000,
-              help="hyperparameter 'num_words'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--padding", "padding",
               default="post",
-              help="hyperparameter 'padding'.",
+              help="hyperparameter",
               show_default=True,
               type=click.Choice(["post"]))
 @click.option("--truncating", "truncating",
               default="post",
-              help="hyperparameter 'truncating'.",
+              help="hyperparameter",
               show_default=True,
               type=click.Choice(["post"]))
 @click.pass_obj

@@ -15,14 +15,14 @@ name = TfidfExtractor.name
               is_flag=True)
 @click.option("--ngram_max", "ngram_max",
               default=1,
-              help="hyperparameter 'ngram_max'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--stop_words", "stop_words",
               default="english",
-              help="hyperparameter 'stop_words'.",
+              help="hyperparameter",
               show_default=True,
-              type=click.Choice(["english"]))
+              type=click.Choice(["english", "none"]))
 @click.pass_obj
 def tfidf_extractor(obj, force, ngram_max, stop_words):
     if not force:

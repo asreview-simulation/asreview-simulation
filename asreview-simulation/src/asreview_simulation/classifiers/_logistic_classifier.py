@@ -11,12 +11,12 @@ name = LogisticClassifier.name
                name=f"cls:{name}")
 @click.option("--c", "c",
               default=1.0,
-              help="hyperparameter 'C'.",
+              help="hyperparameter",
               show_default=True,
               type=float)
 @click.option("--class_weight", "class_weight",
               default=1.0,
-              help="hyperparameter 'class_weight'.",
+              help="hyperparameter",
               type=click.FLOAT,
               show_default=True)
 @click.option("-f", "--force", "force",

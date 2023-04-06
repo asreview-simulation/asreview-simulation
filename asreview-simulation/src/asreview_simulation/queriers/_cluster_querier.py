@@ -15,7 +15,7 @@ name = ClusterQuerier.name
               is_flag=True)
 @click.option("--cluster_size", "cluster_size",
               default=350,
-              help="hyperparameter 'cluster_size'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--seed", "seed",
@@ -25,7 +25,7 @@ name = ClusterQuerier.name
               type=click.INT)
 @click.option("--update_interval", "update_interval",
               default=200,
-              help="hyperparameter 'update_interval'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.pass_obj

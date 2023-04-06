@@ -11,7 +11,7 @@ name = MixedQuerier.name
                help="Use Mixed querier")
 @click.option("--mix_ratio", "mix_ratio",
               default=0.95,
-              help="hyperparameter 'mix_ratio'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("--seed", "seed",
@@ -21,12 +21,12 @@ name = MixedQuerier.name
               type=click.INT)
 @click.option("--strategy1", "strategy1",
               default="max",
-              help="hyperparameter 'strategy1'.",
+              help="hyperparameter",
               show_default=True,
               type=click.Choice(["max"]))
 @click.option("--strategy2", "strategy2",
               default="random",
-              help="hyperparameter 'strategy2'.",
+              help="hyperparameter",
               show_default=True,
               type=click.Choice(["random"]))
 @click.option("-f", "--force", "force",

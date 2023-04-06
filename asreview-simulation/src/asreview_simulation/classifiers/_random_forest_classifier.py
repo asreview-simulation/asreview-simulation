@@ -11,7 +11,7 @@ name = RandomForestClassifier.name
                name=f"cls:{name}")
 @click.option("--class_weight", "class_weight",
               default=1.0,
-              help="hyperparameter 'class_weight'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("-f", "--force", "force",
@@ -20,12 +20,12 @@ name = RandomForestClassifier.name
               is_flag=True)
 @click.option("--max_features", "max_features",
               default=10,
-              help="hyperparameter 'max_features'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--n_estimators", "n_estimators",
               default=100,
-              help="hyperparameter 'n_estimators'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--seed", "seed",

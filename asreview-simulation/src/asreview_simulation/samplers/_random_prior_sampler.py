@@ -14,12 +14,12 @@ name = "random"
               is_flag=True)
 @click.option("--n_excluded", "n_excluded",
               default=1,
-              help="hyperparameter 'n_excluded'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--n_included", "n_included",
               default=1,
-              help="hyperparameter 'n_included'.",
+              help="hyperparameter",
               show_default=True,
               type=click.INT)
 @click.option("--seed", "seed",

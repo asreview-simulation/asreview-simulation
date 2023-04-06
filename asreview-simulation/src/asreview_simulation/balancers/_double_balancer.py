@@ -11,22 +11,22 @@ name = DoubleBalancer.name
                name=f"bal:{name}")
 @click.option("--a", "a",
               default=2.155,
-              help="hyperparameter 'a'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("--alpha", "alpha",
               default=0.94,
-              help="hyperparameter 'alpha'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("--b", "b",
               default=0.789,
-              help="hyperparameter 'b'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("--beta", "beta",
               default=1.0,
-              help="hyperparameter 'beta'.",
+              help="hyperparameter",
               show_default=True,
               type=click.FLOAT)
 @click.option("-f", "--force", "force",
