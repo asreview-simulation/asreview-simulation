@@ -96,7 +96,7 @@ Since none of the packages are actually published you have to install them with 
         >>> import privacy_patterns_1
         >>> privacy_patterns_1.demo.fun()  # works fine, prints:
         module privacy_patterns_1.demo imports built-in module 'sys': <module 'sys' (built-in)>
-        >>> dir(privacy_patterns_1.demo)   # indeed lists 'demo' but also unwanted 'sys'
+        >>> dir(privacy_patterns_1.demo)   # indeed lists 'fun' but also unwanted 'sys'
         Ctrl-D
         $ pytest ./privacy-patterns-1      # should fail with messages about sys
         ```
@@ -109,7 +109,7 @@ Since none of the packages are actually published you have to install them with 
         >>> import privacy_patterns_2
         >>> privacy_patterns_2.demo.fun()  # works fine, prints:
         module privacy_patterns_2.demo._demo imports built-in module 'sys': <module 'sys' (built-in)>
-        >>> dir(privacy_patterns_2.demo)   # indeed lists 'demo' but not 'sys'
+        >>> dir(privacy_patterns_2.demo)   # indeed lists 'fun' but not 'sys'
         Ctrl-D
         $ pytest ./privacy-patterns-2      # passes
         ```
