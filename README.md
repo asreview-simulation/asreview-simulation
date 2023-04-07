@@ -194,8 +194,10 @@ Commands:
 
 ### Print the default settings:
 
-```json
+```shell
 $ asreview-simulation print-settings --pretty
+```
+```json
 {
     "balancer": {
         "model": "double",
