@@ -18,8 +18,8 @@ testing = ["pytest"]
 [project.scripts]
 asreview-simulation = "asreview_simulation:cli"
 
-[project.entry-points."asreview.entry_points"]
-simulation = "asreview_simulation.entrypoint:SimulationEntrypoint"
+[project.entry-points."asreview.subcommands"]
+simulation = "asreview_simulation.subcommands:SimulationSubcommand"
 
 [tool.setuptools.packages.find]
 where = ["src"]

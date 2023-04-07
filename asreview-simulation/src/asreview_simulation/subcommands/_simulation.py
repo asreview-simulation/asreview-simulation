@@ -1,17 +1,17 @@
-from ._cli import cli
-from ._cli import cli_help
-from asreview.entry_points import BaseEntryPoint
+from .._cli import cli
+from .._cli import cli_help
+from asreview.subcommands import BaseSubcommand
 
 
-class SimulationEntrypoint(BaseEntryPoint):
+class SimulationSubcommand(BaseSubcommand):
     """Simulation"""
 
     description = "Simulate labeling records using different models and parameterizations."
 
     def __init__(self):
-        self.version = "plugin-simulation"
+        self.version = "simulation"
 
-    def execute(self, argv):
+    def __call__(self, argv):
         name = "asreview simulation"
         cli.help = cli_help(name)
         cli(argv, prog_name=name)
