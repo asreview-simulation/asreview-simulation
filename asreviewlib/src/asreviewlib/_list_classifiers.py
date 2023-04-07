@@ -5,7 +5,7 @@ from .classifiers import NaiveBayesClassifier
 from .classifiers import NN2LayerClassifier
 from .classifiers import RandomForestClassifier
 from .classifiers import SvmClassifier
-from importlib.metadata import entry_points as entrypoints
+from importlib.metadata import entry_points
 
 
 def list_classifiers():
@@ -19,7 +19,7 @@ def list_classifiers():
         SvmClassifier
     ]}
     try:
-        other_classifiers = {e.name: e.load() for e in entrypoints(group="asreviewlib.classifiers")}
+        other_classifiers = {e.name: e.load() for e in entry_points(group="asreviewlib.classifiers")}
     except Exception as e:
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.classifiers'. The error message was: {e}\nContinuing...")

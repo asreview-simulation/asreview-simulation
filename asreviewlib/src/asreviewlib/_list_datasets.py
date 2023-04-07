@@ -1,6 +1,6 @@
 from .datasets import FirstDataset
 from .datasets import SecondDataset
-from importlib.metadata import entry_points as entrypoints
+from importlib.metadata import entry_points
 
 
 def list_datasets():
@@ -9,7 +9,7 @@ def list_datasets():
         SecondDataset
     ]}
     try:
-        other_datasets = {e.name: e.load() for e in entrypoints(group="asreviewlib.datasets")}
+        other_datasets = {e.name: e.load() for e in entry_points(group="asreviewlib.datasets")}
     except Exception as e:
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.datasets'. The error message was: {e}\nContinuing...")

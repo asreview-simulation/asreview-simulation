@@ -2,7 +2,7 @@ from .readers import CsvReader
 from .readers import RisReader
 from .readers import TsvReader
 from .readers import XlsReader
-from importlib.metadata import entry_points as entrypoints
+from importlib.metadata import entry_points
 
 
 def list_readers():
@@ -13,7 +13,7 @@ def list_readers():
         XlsReader
     ]}
     try:
-        other_readers = {e.name: e.load() for e in entrypoints(group="asreviewlib.readers")}
+        other_readers = {e.name: e.load() for e in entry_points(group="asreviewlib.readers")}
     except Exception as e:
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.readers'. The error message was: {e}\nContinuing...")

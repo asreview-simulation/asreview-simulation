@@ -2,7 +2,7 @@ from .writers import CsvWriter
 from .writers import RisWriter
 from .writers import TsvWriter
 from .writers import XlsWriter
-from importlib.metadata import entry_points as entrypoints
+from importlib.metadata import entry_points
 
 
 def list_writers():
@@ -13,7 +13,7 @@ def list_writers():
         XlsWriter
     ]}
     try:
-        other_writers = {e.name: e.load() for e in entrypoints(group="asreviewlib.writers")}
+        other_writers = {e.name: e.load() for e in entry_points(group="asreviewlib.writers")}
     except Exception as e:
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.writers'. The error message was: {e}\nContinuing...")

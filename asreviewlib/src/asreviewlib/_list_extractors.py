@@ -3,7 +3,7 @@ from .extractors import EmbeddingIdfExtractor
 from .extractors import EmbeddingLstmExtractor
 from .extractors import SbertExtractor
 from .extractors import TfidfExtractor
-from importlib.metadata import entry_points as entrypoints
+from importlib.metadata import entry_points
 
 
 def list_extractors():
@@ -15,7 +15,7 @@ def list_extractors():
         TfidfExtractor
     ]}
     try:
-        other_extractors = {e.name: e.load() for e in entrypoints(group="asreviewlib.extractors")}
+        other_extractors = {e.name: e.load() for e in entry_points(group="asreviewlib.extractors")}
     except Exception as e:
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.extractors'. The error message was: {e}\nContinuing...")

@@ -2,7 +2,7 @@ from .balancers import DoubleBalancer
 from .balancers import NoneBalancer
 from .balancers import TripleBalancer
 from .balancers import UndersampleBalancer
-from importlib.metadata import entry_points as entrypoints
+from importlib.metadata import entry_points
 
 
 def list_balancers():
@@ -13,7 +13,7 @@ def list_balancers():
         UndersampleBalancer
     ]}
     try:
-        other_balancers = {e.name: e.load() for e in entrypoints(group="asreviewlib.balancers")}
+        other_balancers = {e.name: e.load() for e in entry_points(group="asreviewlib.balancers")}
     except Exception as e:
         print("Something went wrong loading a module from entrypoint group " +
               f"'asreviewlib.balancers'. The error message was: {e}\nContinuing...")
