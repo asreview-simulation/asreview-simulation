@@ -49,7 +49,7 @@ name = TripleBalancer.name
               show_default=True,
               type=click.INT)
 @click.option("--shuffle", "shuffle",
-              help="hyperparameter 'shuffle'.",
+              help="hyperparameter",
               is_flag=True)
 @click.pass_obj
 def triple_balancer(obj, a, alpha, b, beta, c, force, gamma, seed, shuffle):
