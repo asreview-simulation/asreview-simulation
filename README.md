@@ -1,6 +1,6 @@
 # A fresh take on ASReview's project layout
 
-Each directory here is supposed to be represent a published package from pypi. Their directory names are the package names.
+Each directory here is supposed to represent a published package from pypi. Their directory names are the package names.
 Since none of the packages are actually published you have to install them with e.g. `pip install -e ./asreviewlib`
 
 - `asreview`:
