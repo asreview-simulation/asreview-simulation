@@ -316,8 +316,8 @@ $ asreview-simulation bal:undersample --ratio 0.5 cls:rf --class_weight 1.0001 p
 See [`asreviewlib/test/test_api.py`](asreviewlib/tests/test_api.py) for the complete and up to date programming interface.
 
 ```text
-asreviewlib._internal
 asreviewlib._internal.check_star_exports
+asreviewlib._internal
 asreviewlib.balancers.BaseBalancer
 asreviewlib.balancers.DoubleBalancer
 asreviewlib.balancers.NoneBalancer
@@ -335,10 +335,10 @@ asreviewlib.classifiers.RandomForestClassifier
 asreviewlib.classifiers.SvmClassifier
 asreviewlib.classifiers
 asreviewlib.Data
-asreviewlib.datasets
 asreviewlib.datasets.BaseDataset
 asreviewlib.datasets.FirstDataset
 asreviewlib.datasets.SecondDataset
+asreviewlib.datasets
 asreviewlib.exceptions.ASReviewProjectExistsError
 asreviewlib.exceptions.ASReviewProjectNotFoundError
 asreviewlib.exceptions
@@ -353,11 +353,12 @@ asreviewlib.list_balancers
 asreviewlib.list_classifiers
 asreviewlib.list_datasets
 asreviewlib.list_extractors
-asreviewlib.list_projects
 asreviewlib.list_queriers
 asreviewlib.list_readers
 asreviewlib.list_writers
-asreviewlib.Project
+asreviewlib.projects.list_projects
+asreviewlib.projects.Project
+asreviewlib.projects
 asreviewlib.queriers.BaseQuerier
 asreviewlib.queriers.ClusterQuerier
 asreviewlib.queriers.MaxQuerier
