@@ -269,7 +269,7 @@ Options:
 Change the settings by chaining subcommands. Chain with the print command at the end to see them in the terminal:
 
 ```shell
-$ asreview-simulation bal:undersample --ratio 0.5 cls:rf --class_weight 1.0001 print-settings --pretty                                                         
+$ asreview-simulation bal:undersample --ratio 0.5 cls:rf --class_weight 1.0001 print-settings --pretty
 ```
 ```json
 {
