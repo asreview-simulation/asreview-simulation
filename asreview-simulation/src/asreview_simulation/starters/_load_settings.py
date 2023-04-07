@@ -3,7 +3,7 @@ import click
 
 @click.command("load-settings",
                help="Load settings")
-@click.argument("settings_file")
+@click.argument("settings_file", type=click.File("rt"))
 @click.pass_obj
 def load_settings(obj, settings_file):
     assert obj.provided.balancer is False, "Attempted reassignment of balancer"
@@ -12,7 +12,7 @@ def load_settings(obj, settings_file):
     assert obj.provided.querier is False, "Attempted reassignment of querier"
 
     # TODO load config, assign state
-    click.echo(f"Would load configuration from file {settings_file}")
+    click.echo(f"Would load configuration from file {settings_file.name}")
 
     obj.provided.balancer = True
     obj.provided.classifier = True
