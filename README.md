@@ -313,7 +313,7 @@ $ asreview-simulation bal:undersample --ratio 0.5 cls:rf --class_weight 1.0001 p
 
 ## Appendix: `asreviewlib` API
 
-See [`asreviewlib/test/test_api.py`](asreviewlib/test/test_api.py) for the complete and up to date programming interface.
+See [`asreviewlib/test/test_api.py`](asreviewlib/tests/test_api.py) for the complete and up to date programming interface.
 
 ```text
 asreviewlib.balancers.BaseBalancer
