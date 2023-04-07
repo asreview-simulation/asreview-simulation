@@ -96,7 +96,7 @@ Since none of the packages are actually published you have to install them with 
         >>> import privacy_patterns_1
         >>> privacy_patterns_1.demo.fun()  # works fine, prints:
         module privacy_patterns_1.demo imports built-in module 'sys': <module 'sys' (built-in)>
-        >>> dir(privacy_patterns_1.demo)   # indeed lists 'demo' but also unwanted 'sys'
+        >>> dir(privacy_patterns_1.demo)   # indeed lists 'fun' but also unwanted 'sys'
         Ctrl-D
         $ pytest ./privacy-patterns-1      # should fail with messages about sys
         ```
@@ -109,7 +109,7 @@ Since none of the packages are actually published you have to install them with 
         >>> import privacy_patterns_2
         >>> privacy_patterns_2.demo.fun()  # works fine, prints:
         module privacy_patterns_2.demo._demo imports built-in module 'sys': <module 'sys' (built-in)>
-        >>> dir(privacy_patterns_2.demo)   # indeed lists 'demo' but not 'sys'
+        >>> dir(privacy_patterns_2.demo)   # indeed lists 'fun' but not 'sys'
         Ctrl-D
         $ pytest ./privacy-patterns-2      # passes
         ```
@@ -194,8 +194,10 @@ Commands:
 
 ### Print the default settings:
 
-```json
+```shell
 $ asreview-simulation print-settings --pretty
+```
+```json
 {
     "balancer": {
         "model": "double",
@@ -266,8 +268,10 @@ Options:
 
 Change the settings by chaining subcommands. Chain with the print command at the end to see them in the terminal:
 
-```json
+```shell
 $ asreview-simulation bal:undersample --ratio 0.5 cls:rf --class_weight 1.0001 print-settings --pretty                                                         
+```
+```json
 {
     "balancer": {
         "model": "undersample",
@@ -309,7 +313,7 @@ $ asreview-simulation bal:undersample --ratio 0.5 cls:rf --class_weight 1.0001 p
 
 ## Appendix: `asreviewlib` API
 
-See [`asreviewlib/test/test_api.py`](asreviewlib/test/test_api.py) for the complete and up to date programming interface.
+See [`asreviewlib/test/test_api.py`](asreviewlib/tests/test_api.py) for the complete and up to date programming interface.
 
 ```text
 asreviewlib.balancers.BaseBalancer
