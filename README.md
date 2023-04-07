@@ -255,7 +255,7 @@ Options:
                   overwriting a previous configuration.
   --gamma FLOAT   hyperparameter  [default: 2.0]
   --seed INTEGER  Random seed  [default: 535]
-  --shuffle       hyperparameter 'shuffle'.
+  --shuffle       hyperparameter
   -h, --help      Show this message and exit.
 
   This command is chainable with other commands. Chained commands are
