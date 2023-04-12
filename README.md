@@ -66,6 +66,7 @@ Since none of the packages are actually published you have to install them with 
         rf
         svm
         ```
+    - The package does not define a subcommand (e.g. with `argparse` or `click`), nor does it publish any objects in any entry_point besides `asreviewlib.classifiers`. Hence the `asreview-simulation` CLI does not know about the new classifier even after you install it.
 - `asreviewlib-plugin-dataset`:
     - provides a plugin to `asreviewlib` where it will show up as a new dataset `ThirdDataset` to be used in Python code, e.g.:
 
