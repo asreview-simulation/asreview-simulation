@@ -103,7 +103,7 @@ Since none of the packages are actually published you have to install them with 
 - `privacy-patterns-2`
     - illustrates a pattern that helps avoid unintentionally exposing internals
 
-        ```
+        ```shell
         pip install -e ./privacy-patterns-2[testing]
         python3
         >>> import privacy_patterns_2
@@ -117,7 +117,7 @@ Since none of the packages are actually published you have to install them with 
     - illustrates a pattern that helps avoid unintentionally exposing internals
 
         ```shell
-        $ pip install -e privacy-patterns-3[testing]
+        $ pip install -e ./privacy-patterns-3[testing]
         $ pytest ./privacy-patterns-3 # should pass but the api includes
                                       # one private member, '_internal'
         ```
