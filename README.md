@@ -6,6 +6,9 @@ Since none of the packages are actually published you have to install them with 
 - `asreview`:
     - provides an initially empty `asreview` CLI command 
     - its functionality can be extended by plugins that supply subcommands via entry point group `"asreview.subcommands"`   
+- `asreview-lab`:    
+    - provides a rudimentary plugin to `asreview` that would start the backend and the frontend. Currently neither has an implementation. 
+    - install with `pip install -e ./asreview-lab/backend`
 - `asreview-simulation`:
     - provides a standalone CLI command `asreview-simulation`
     - provides a plugin to `asreview` where it will show up as the subcommand `simulation` so users can call `asreview simulation` (i.e. without the dash)
