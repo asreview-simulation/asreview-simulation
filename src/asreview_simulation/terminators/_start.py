@@ -21,9 +21,9 @@ dataset_names = get_entry_points("asreview.datasets").keys()
 @click.pass_obj
 def start(obj, data, dataset, write_interval):
     if data is None and dataset is None:
-        raise Exception("Neither '--data' nor '--dataset' was set.")
+        raise ValueError("Neither '--data' nor '--dataset' was specified.")
     if data is not None and dataset is not None:
-        raise Exception("Expected '--data' or '--dataset' to be set, found both.")
+        raise ValueError("Expected either '--data' or '--dataset' to be specified, found both.")
     click.echo("simulation starting")
     click.echo("doing things...")
     click.echo("simulation ended")
