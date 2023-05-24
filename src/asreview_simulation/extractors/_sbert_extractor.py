@@ -1,9 +1,9 @@
 import click
-from asreviewlib.extractors import SbertExtractor
+from asreview.models.feature_extraction import SBERT
 from .._epilog import epilog
 
 
-name = SbertExtractor.name
+name = SBERT.name
 
 
 @click.command(epilog=epilog,

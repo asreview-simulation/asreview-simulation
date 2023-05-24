@@ -1,9 +1,9 @@
 import click
-from asreviewlib.balancers import TripleBalancer
+from asreview.models.balance import TripleBalance
 from .._epilog import epilog
 
 
-name = TripleBalancer.name
+name = TripleBalance.name
 
 
 @click.command(epilog=epilog,

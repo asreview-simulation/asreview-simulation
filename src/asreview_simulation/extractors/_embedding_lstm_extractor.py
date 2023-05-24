@@ -1,9 +1,9 @@
 import click
-from asreviewlib.extractors import EmbeddingLstmExtractor
+from asreview.models.feature_extraction import EmbeddingLSTM
 from .._epilog import epilog
 
 
-name = EmbeddingLstmExtractor.name
+name = EmbeddingLSTM.name
 
 
 @click.command(epilog=epilog,

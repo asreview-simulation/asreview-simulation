@@ -20,7 +20,11 @@ from .extractors import sbert_extractor
 from .samplers import random_prior_sampler
 from .samplers import handpicked_prior_sampler
 from .queriers import cluster_querier
-from .queriers import mixed_querier
+from .queriers import max_querier
+from .queriers import max_random_querier
+from .queriers import max_uncertainty_querier
+from .queriers import random_querier
+from .queriers import uncertainty_querier
 from .starters import load_settings
 from .terminators import print_settings
 from .terminators import save_settings
@@ -92,7 +96,11 @@ def _add_extractor_subcommands():
 def _add_querier_subcommands():
     my_queriers = [
         cluster_querier,
-        mixed_querier
+        max_querier,
+        max_random_querier,
+        max_uncertainty_querier,
+        random_querier,
+        uncertainty_querier
     ]
     try:
         other_queriers = [e.load() for e in entrypoints(group="asreview_simulation.queriers")]

@@ -1,9 +1,9 @@
 import click
-from asreviewlib.balancers import NoneBalancer
+from asreview.models.balance import SimpleBalance
 from .._epilog import epilog
 
 
-name = NoneBalancer.name
+name = SimpleBalance.name
 
 
 @click.command(epilog=epilog,

@@ -1,20 +1,20 @@
 import click
-from asreview.models.query import MaxQuery
+from asreview.models.query import UncertaintyQuery
 from .._epilog import epilog
 
 
-name = MaxQuery.name
+name = UncertaintyQuery.name
 
 
 @click.command(epilog=epilog,
-               help="Use Max querier",
+               help="Uncertainty query strategy",
                name=f"qer:{name}")
 @click.option("-f", "--force", "force",
               help="Force setting the querier configuration, even if that me" +
               "ans overwriting a previous configuration.",
               is_flag=True)
 @click.pass_obj
-def max_querier(obj, force):
+def uncertainty_querier(obj, force):
     if not force:
         assert obj.provided.querier is False, "Attempted reassignment of querier"
     obj.querier.model = name

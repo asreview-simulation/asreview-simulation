@@ -1,9 +1,9 @@
 import click
-from asreviewlib.classifiers import LstmPoolClassifier
+from asreview.models.classifiers import LSTMPoolClassifier
 from .._epilog import epilog
 
 
-name = LstmPoolClassifier.name
+name = LSTMPoolClassifier.name
 
 
 @click.command(epilog=epilog,

@@ -9,8 +9,9 @@ readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [
     "click ~= 8.0",
-    "asreviewlib == 0.1.0-alpha0"
+    "asreview == 1.2"
 ]
+description = "Simulate a manual ASReview analysis"
 
 [project.optional-dependencies]
 testing = ["pytest"]
@@ -18,7 +19,7 @@ testing = ["pytest"]
 [project.scripts]
 asreview-simulation = "asreview_simulation:cli"
 
-[project.entry-points."asreview.subcommands"]
+[project.entry-points."asreview.entry_points"]
 simulation = "asreview_simulation.subcommands:SimulationSubcommand"
 
 [tool.setuptools.packages.find]

@@ -1,9 +1,9 @@
 import click
-from asreviewlib.classifiers import LstmBaseClassifier
+from asreview.models.classifiers import LSTMBaseClassifier
 from .._epilog import epilog
 
 
-name = LstmBaseClassifier.name
+name = LSTMBaseClassifier.name
 
 
 @click.command(epilog=epilog,

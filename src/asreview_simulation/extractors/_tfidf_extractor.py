@@ -1,9 +1,9 @@
 import click
-from asreviewlib.extractors import TfidfExtractor
+from asreview.models.feature_extraction import Tfidf
 from .._epilog import epilog
 
 
-name = TfidfExtractor.name
+name = Tfidf.name
 
 
 @click.command(epilog=epilog,

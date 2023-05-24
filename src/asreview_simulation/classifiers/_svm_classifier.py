@@ -1,9 +1,9 @@
 import click
-from asreviewlib.classifiers import SvmClassifier
+from asreview.models.classifiers import SVMClassifier
 from .._epilog import epilog
 
 
-name = SvmClassifier.name
+name = SVMClassifier.name
 
 
 @click.command(epilog=epilog,

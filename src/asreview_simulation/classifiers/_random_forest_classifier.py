@@ -1,5 +1,5 @@
 import click
-from asreviewlib.classifiers import RandomForestClassifier
+from asreview.models.classifiers import RandomForestClassifier
 from .._epilog import epilog
 
 

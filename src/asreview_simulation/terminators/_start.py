@@ -1,8 +1,8 @@
 import click
-from asreviewlib import list_datasets
+from asreview.utils import get_entry_points
 
 
-dataset_names = list_datasets().keys()
+dataset_names = get_entry_points("asreview.datasets").keys()
 
 
 @click.command("start",

@@ -1,5 +1,5 @@
 import click
-from asreviewlib.classifiers import NaiveBayesClassifier
+from asreview.models.classifiers import NaiveBayesClassifier
 from .._epilog import epilog
 
 

@@ -1,5 +1,5 @@
 import click
-from asreviewlib.classifiers import LogisticClassifier
+from asreview.models.classifiers import LogisticClassifier
 from .._epilog import epilog
 
 

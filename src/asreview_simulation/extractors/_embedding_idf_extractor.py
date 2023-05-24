@@ -1,9 +1,9 @@
 import click
-from asreviewlib.extractors import EmbeddingIdfExtractor
+from asreview.models.feature_extraction import EmbeddingIdf
 from .._epilog import epilog
 
 
-name = EmbeddingIdfExtractor.name
+name = EmbeddingIdf.name
 
 
 @click.command(epilog=epilog,

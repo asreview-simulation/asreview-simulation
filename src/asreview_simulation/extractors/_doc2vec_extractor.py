@@ -1,9 +1,9 @@
 import click
-from asreviewlib.extractors import Doc2VecExtractor
+from asreview.models.feature_extraction import Doc2Vec
 from .._epilog import epilog
 
 
-name = Doc2VecExtractor.name
+name = Doc2Vec.name
 
 
 @click.command(epilog=epilog,

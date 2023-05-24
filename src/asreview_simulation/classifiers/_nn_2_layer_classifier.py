@@ -1,5 +1,5 @@
 import click
-from asreviewlib.classifiers import NN2LayerClassifier
+from asreview.models.classifiers import NN2LayerClassifier
 from .._epilog import epilog
 
 
