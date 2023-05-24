@@ -14,7 +14,7 @@ name = SimpleBalance.name
               "ans overwriting a previous configuration.",
               is_flag=True)
 @click.pass_obj
-def none_balancer(obj, force):
+def simple_balancer(obj, force):
     if not force:
         assert obj.provided.balancer is False, "Attempted reassignment of balancer"
     obj.balancer.model = name

@@ -2,7 +2,7 @@ import click
 
 from importlib.metadata import entry_points as entrypoints
 from .balancers import double_balancer
-from .balancers import none_balancer
+from .balancers import simple_balancer
 from .balancers import triple_balancer
 from .balancers import undersample_balancer
 from .classifiers import naive_bayes_classifier
@@ -41,7 +41,7 @@ class NaturalOrderGroup(click.Group):
 def _add_balancer_subcommands():
     my_balancers = [
         double_balancer,
-        none_balancer,
+        simple_balancer,
         triple_balancer,
         undersample_balancer
     ]
@@ -174,11 +174,11 @@ Commands can be chained together, e.g.
 
   $ {cli_name} load-settings thefile.cfg start --data labeled-records.db
 
-  $ {cli_name} load-settings thefile.cfg start --dataset second
+  $ {cli_name} load-settings thefile.cfg start --dataset dataset_name
 
   $ {cli_name} bal:double --alpha 1.23 print-settings --pretty
 
-  $ {cli_name} bal:none cls:nb ext:tfidf qer:mixed start --data labeled-records.db
+  $ {cli_name} bal:simple cls:nb ext:tfidf qer:mixed start --data labeled-records.db
 
 \b
   $ {cli_name} sam:random --n_included 10 --n_excluded 15                      \\
