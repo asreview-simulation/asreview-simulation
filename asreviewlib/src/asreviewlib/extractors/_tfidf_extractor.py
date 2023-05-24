@@ -1,2 +1,0 @@
-class TfidfExtractor:
-    name = "tfidf"

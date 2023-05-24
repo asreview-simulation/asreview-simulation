@@ -1,2 +1,0 @@
-class TsvReader:
-    name = "tsv"

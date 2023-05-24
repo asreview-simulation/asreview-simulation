@@ -1,2 +1,0 @@
-class LogisticClassifier:
-    name = "logistic"

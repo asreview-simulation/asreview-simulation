@@ -1,2 +1,0 @@
-class BaseModel:
-    name = "base"

@@ -1,2 +1,0 @@
-class MixedQuerier:
-    name = "mixed"

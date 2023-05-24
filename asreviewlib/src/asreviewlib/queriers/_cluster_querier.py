@@ -1,2 +1,0 @@
-class ClusterQuerier:
-    name = "cluster"

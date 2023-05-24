@@ -1,2 +1,0 @@
-class TripleBalancer:
-    name = "triple"

@@ -1,2 +1,0 @@
-class MaxQuerier:
-    name = "max"

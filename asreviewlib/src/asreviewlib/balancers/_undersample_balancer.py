@@ -1,2 +1,0 @@
-class UndersampleBalancer:
-    name = "undersample"

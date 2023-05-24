@@ -1,2 +1,0 @@
-class XlsWriter:
-    name = "xls"

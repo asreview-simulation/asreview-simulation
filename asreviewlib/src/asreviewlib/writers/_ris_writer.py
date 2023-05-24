@@ -1,2 +1,0 @@
-class RisWriter:
-    name = "ris"

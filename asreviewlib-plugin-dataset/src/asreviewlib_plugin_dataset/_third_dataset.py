@@ -1,2 +1,0 @@
-class ThirdDataset:
-    name = 'third'

@@ -1,2 +1,0 @@
-class UncertaintyQuerier:
-    name = "uncertainty"

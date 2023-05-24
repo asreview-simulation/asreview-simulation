@@ -1,2 +1,0 @@
-class BaseClassifier:
-    name = "base"
