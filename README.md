@@ -23,26 +23,26 @@ Usage: asreview-simulation [OPTIONS] COMMAND1 [ARGS]... [COMMAND2
 
     $ asreview-simulation print-settings
 
-    $ asreview-simulation start --data labeled-records.db
+    $ asreview-simulation start --data labeled-records.csv
 
   Commands can be chained together, e.g.
 
-    $ asreview-simulation load-settings thefile.cfg start --data labeled-
-    records.db
+    $ asreview-simulation load-settings thefile.json start --data labeled-
+    records.csv
 
-    $ asreview-simulation load-settings thefile.cfg start --dataset second
+    $ asreview-simulation load-settings thefile.json start --dataset benchmark:van_de_Schoot_2017
 
     $ asreview-simulation bal:double --alpha 1.23 print-settings --pretty
 
     $ asreview-simulation bal:none cls:nb ext:tfidf qer:mixed start --data
-    labeled-records.db
+    labeled-records.csv
 
     $ asreview-simulation sam:random --n_included 10 --n_excluded 15                      \
                           ext:tfidf --ngram_max 2                                         \
                           cls:nb --alpha 3.823                                            \
                           qer:mixed --strategy1 max --strategy2 random --mix_ratio 0.95   \
                           bal:double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1           \
-                          start --data labeled-records.db
+                          start --data labeled-records.csv
 
   Chained commands are evaluated left to right; make sure to end the chain
   with either a 'start' command or a 'print-settings' command, otherwise it
@@ -104,7 +104,7 @@ $ asreview-simulation print-settings --pretty
     "extractor": {
         "model": "tfidf",
         "params": {
-            "ngrams_max": 1,
+            "ngram_max": 1,
             "stop_words": "english"
         }
     },
@@ -179,7 +179,7 @@ $ asreview-simulation bal:undersample --ratio 0.5 cls:rf --class_weight 1.01 pri
     "extractor": {
         "model": "tfidf",
         "params": {
-            "ngrams_max": 1,
+            "ngram_max": 1,
             "stop_words": "english"
         }
     },
