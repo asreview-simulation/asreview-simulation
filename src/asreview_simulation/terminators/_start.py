@@ -1,29 +1,102 @@
+from warnings import warn
 import click
-from asreview.utils import get_entry_points
+from asreview.review.simulate import ReviewSimulate
+from asreview.models.classifiers import get_classifier_class
+from asreview.models.query import get_query_class
+from asreview.models.balance import get_balance_class
+from asreview.models.feature_extraction import get_feature_class
+from asreview.datasets import DatasetManager
+from asreview.project import ASReviewProject
+from pathlib import Path
+from asreview.data import load_data
 
 
-dataset_names = get_entry_points("asreview.datasets").keys()
+def list_dataset_names():
+    dataset_names = list()
+    for group in DatasetManager().list():
+        for dataset in group["datasets"]:
+            dataset_names.append(f"{group['group_id']}:{dataset['dataset_id']}")
+    return dataset_names
+
+
+def prep_project_directory(asreview_file, dataset):
+    # Prepare an *.asreview.tmp directory which will contain the log / state / configuration
+    # of the ASReview analysis. The directory will be zipped later and renamed to *.asreview
+    name = Path(asreview_file).stem
+    project_path = Path(asreview_file).with_suffix(".asreview.tmp")
+    project = ASReviewProject.create(project_path,
+                                     project_id=name,
+                                     project_name=name,
+                                     project_mode="simulate",
+                                     project_description="Simulation created via ASReview command line interface")
+
+    # Add the dataset to the project directory.
+    as_data = load_data(dataset)
+    if len(as_data) == 0:
+        raise ValueError("Supply at least one dataset with at least one record.")
+    dataset_path = Path(dataset.split(":")[1]).with_suffix('.csv').name
+    as_data.to_file(project_path / "data" / dataset_path)
+
+    # Write settings to settings.json
+    project.update_config(dataset_path=dataset_path)
+    return project, as_data
 
 
 @click.command("start",
-               help="Start the simulation and exit; terminates parsing")
+               help="Start the simulation and exit; terminates parsing",
+               context_settings=dict(max_content_width=120))
+@click.argument("asreview_file", type=click.STRING)
 @click.option("--data", "data",
               default=None,
               help="Name of the file that contains the fully labeled data. Precludes usage of --dataset.",
               type=click.Path(exists=True, readable=True))
 @click.option("--dataset", "dataset",
               default=None,
-              help="Name of the dataset that contains the fully labeled data. Precludes usage of --data.",
-              type=click.Choice(dataset_names))
+              help="Name of the dataset that contains the fully labeled data. Precludes " +
+                   "usage of --data. Valid options are: " + ", ".join([f"'{d}'" for d in list_dataset_names()]),
+              type=click.STRING)
 @click.option("--write-interval", "write_interval",
               help="Write interval.",
               type=click.INT)
 @click.pass_obj
-def start(obj, data, dataset, write_interval):
+def start(obj, asreview_file, data, dataset, write_interval):
     if data is None and dataset is None:
         raise ValueError("Neither '--data' nor '--dataset' was specified.")
     if data is not None and dataset is not None:
         raise ValueError("Expected either '--data' or '--dataset' to be specified, found both.")
-    click.echo("simulation starting")
-    click.echo("doing things...")
-    click.echo("simulation ended")
+    if dataset not in list_dataset_names():
+        warn("Unrecognized dataset name, not sure this is going to work.")
+
+    project, as_data = prep_project_directory(asreview_file, dataset)
+
+    classifier = get_classifier_class(obj.classifier.model)(**obj.classifier.params)
+    querier = get_query_class(obj.querier.model)(**obj.querier.params)
+    balancer = get_balance_class(obj.balancer.model)(**obj.balancer.params)
+    extractor = get_feature_class(obj.extractor.model)(**obj.extractor.params)
+
+    n_papers = None
+    n_instances = 1
+    stop_if = "min"
+    prior_idx = list()
+    n_prior_included = 1
+    n_prior_excluded = 1
+
+    reviewer = ReviewSimulate(as_data,
+                              project=project,
+                              model=classifier,
+                              query_model=querier,
+                              balance_model=balancer,
+                              feature_model=extractor,
+                              n_papers=n_papers,
+                              n_instances=n_instances,
+                              stop_if=stop_if,
+                              prior_indices=prior_idx,
+                              n_prior_included=n_prior_included,
+                              n_prior_excluded=n_prior_excluded,
+                              write_interval=write_interval)
+
+    project.update_review(status="review")  # (has side effects on disk)
+    click.echo("Simulation started")
+    reviewer.review()
+    click.echo("Simulation finished")
+    project.mark_review_finished()          # (has side effects on disk)
