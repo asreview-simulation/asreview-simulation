@@ -43,9 +43,10 @@ def prep_project_directory(asreview_file, dataset):
 
 
 @click.command("start",
-               help="Start the simulation and exit; terminates parsing",
+               help="Start the simulation and write the results to a new file DOT_ASREVIEW_FILE.\n\n" +
+                    "This command terminates parsing of further input supplied via the command line.",
                context_settings=dict(max_content_width=120))
-@click.argument("asreview_file", type=click.STRING)
+@click.argument("dot_asreview_file", type=click.STRING)
 @click.option("--data", "data",
               default=None,
               help="Name of the file that contains the fully labeled data. Precludes usage of --dataset.",
@@ -59,7 +60,10 @@ def prep_project_directory(asreview_file, dataset):
               help="Write interval.",
               type=click.INT)
 @click.pass_obj
-def start(obj, asreview_file, data, dataset, write_interval):
+def start(obj, dot_asreview_file, data, dataset, write_interval):
+    """
+    DOT_ASREVIEW_FILE: the file that will hold the results
+    """
     if data is None and dataset is None:
         raise ValueError("Neither '--data' nor '--dataset' was specified.")
     if data is not None and dataset is not None:
@@ -67,7 +71,7 @@ def start(obj, asreview_file, data, dataset, write_interval):
     if dataset not in list_dataset_names():
         warn("Unrecognized dataset name, not sure this is going to work.")
 
-    project, as_data = prep_project_directory(asreview_file, dataset)
+    project, as_data = prep_project_directory(dot_asreview_file, dataset)
 
     classifier = get_classifier_class(obj.classifier.model)(**obj.classifier.params)
     querier = get_query_class(obj.querier.model)(**obj.querier.params)
