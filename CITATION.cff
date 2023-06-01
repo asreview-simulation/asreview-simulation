@@ -1,0 +1,35 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: asreview-simulation
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Jurriaan H.
+    family-names: Spaaks
+    email: j.spaaks@esciencecenter.nl
+    affiliation: Netherlands eScience Center
+    orcid: 'https://orcid.org/0000-0002-7064-4069'
+identifiers:
+  - type: url
+    value: 'https://github.com/asreview-tuning/asreview-simulation'
+    description: Where the software is being developed
+  - type: url
+    value: 'https://github.com/asreview/asreview'
+    description: Where the software for the parent project is being developed
+repository-code: 'https://github.com/asreview-tuning/asreview-simulation'
+abstract: >-
+  Command line interface to simulate an ASReview analysis
+  using a variety of classifiers, feature extractors,
+  queriers, and balancers, which can all be configured to
+  run with custom parameterizations.
+keywords:
+  - Automated Systematic Review
+  - ASReview
+  - NLP
+  - Natural Language Processing
+  - AI
+license: Apache-2.0
