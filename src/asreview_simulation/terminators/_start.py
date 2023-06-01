@@ -34,7 +34,7 @@ def prep_project_directory(asreview_file, dataset):
     as_data = load_data(dataset)
     if len(as_data) == 0:
         raise ValueError("Supply at least one dataset with at least one record.")
-    dataset_path = Path(dataset.split(":")[1]).with_suffix('.csv').name
+    dataset_path = f"{dataset[10:]}.csv" if dataset.startswith("benchmark:") else f"{dataset}.csv"
     as_data.to_file(project_path / "data" / dataset_path)
 
     # Write settings to settings.json

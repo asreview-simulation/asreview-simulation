@@ -16,7 +16,7 @@ def list_dataset_names():
     for group in DatasetManager().list():
         for dataset in group["datasets"]:
             dataset_names.append(f"{group['group_id']}:{dataset['dataset_id']}")
-    return [n for n in dataset_names if n.startswith("benchmark:")]
+    return dataset_names
 
 
 @pytest.mark.parametrize("dataset", list_dataset_names())
@@ -27,7 +27,7 @@ def test_simulate_start(dataset):
             return hashlib.sha256(contents).hexdigest()
 
     def compare_data():
-        fname = f"{dataset.split(':')[1]}.csv"
+        fname = f"{dataset[10:]}.csv" if dataset.startswith("benchmark:") else f"{dataset}.csv"
         assert calc_hash(p1 / "data" / fname) == calc_hash(p2 / "data" / fname)
 
     def compare_project_json():
