@@ -42,6 +42,18 @@ def prep_project_directory(asreview_file, dataset):
     return project, as_data
 
 
+def assign_vars_prior_sampling(obj):
+    prior_idx = None
+    n_prior_included = None
+    n_prior_excluded = None
+    if obj.sampler == "handpicked":
+        prior_idx = obj.sampler.params
+    if obj.sampler == "random":
+        n_prior_included = obj.sampler.n_included
+        n_prior_excluded = obj.sampler.n_excluded
+    return prior_idx, n_prior_included, n_prior_excluded
+
+
 @click.command("start",
                help="Start the simulation and write the results to a new file DOT_ASREVIEW_FILE.\n\n" +
                     "This command terminates parsing of further input supplied via the command line.",
@@ -81,9 +93,7 @@ def start(obj, dot_asreview_file, data, dataset, write_interval):
     n_papers = None
     n_instances = 1
     stop_if = "min"
-    prior_idx = list()
-    n_prior_included = 1
-    n_prior_excluded = 1
+    prior_idx, n_prior_included, n_prior_excluded = assign_vars_prior_sampling(obj)
 
     reviewer = ReviewSimulate(as_data,
                               project=project,

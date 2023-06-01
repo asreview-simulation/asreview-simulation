@@ -4,12 +4,10 @@ import os
 import zipfile
 from pathlib import Path
 from tempfile import TemporaryDirectory
-
 import pytest
 from asreview.datasets import DatasetManager
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
-
 from asreview_simulation import cli
 
 
