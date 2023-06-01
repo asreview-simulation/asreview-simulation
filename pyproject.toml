@@ -15,7 +15,7 @@ description = "Simulate a manual ASReview analysis"
 
 [project.optional-dependencies]
 testing = ["pytest"]
-dev = ["isort"]
+dev = ["isort", "pre-commit"]
 
 [project.scripts]
 asreview-simulation = "asreview_simulation:cli"
