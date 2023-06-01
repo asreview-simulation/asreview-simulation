@@ -1,14 +1,14 @@
+from pathlib import Path
 from warnings import warn
 import click
-from asreview.review.simulate import ReviewSimulate
-from asreview.models.classifiers import get_classifier_class
-from asreview.models.query import get_query_class
-from asreview.models.balance import get_balance_class
-from asreview.models.feature_extraction import get_feature_class
-from asreview.datasets import DatasetManager
-from asreview.project import ASReviewProject
-from pathlib import Path
 from asreview.data import load_data
+from asreview.datasets import DatasetManager
+from asreview.models.balance import get_balance_class
+from asreview.models.classifiers import get_classifier_class
+from asreview.models.feature_extraction import get_feature_class
+from asreview.models.query import get_query_class
+from asreview.project import ASReviewProject
+from asreview.review.simulate import ReviewSimulate
 
 
 def list_dataset_names():

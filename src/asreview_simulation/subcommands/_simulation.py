@@ -1,6 +1,6 @@
+from asreview.entry_points import BaseEntryPoint
 from .._cli import cli
 from .._cli import cli_help
-from asreview.entry_points import BaseEntryPoint
 
 
 class SimulationSubcommand(BaseEntryPoint):

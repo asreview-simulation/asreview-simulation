@@ -1,35 +1,34 @@
-import click
-
 from importlib.metadata import entry_points as entrypoints
+import click
+from ._state import State
 from .balancers import double_balancer
 from .balancers import simple_balancer
 from .balancers import triple_balancer
 from .balancers import undersample_balancer
-from .classifiers import naive_bayes_classifier
-from .classifiers import random_forest_classifier
 from .classifiers import logistic_classifier
 from .classifiers import lstm_base_classifier
 from .classifiers import lstm_pool_classifier
+from .classifiers import naive_bayes_classifier
 from .classifiers import nn_2_layer_classifier
+from .classifiers import random_forest_classifier
 from .classifiers import svm_classifier
 from .extractors import doc2vec_extractor
-from .extractors import tfidf_extractor
 from .extractors import embedding_idf_extractor
 from .extractors import embedding_lstm_extractor
 from .extractors import sbert_extractor
-from .samplers import random_prior_sampler
-from .samplers import handpicked_prior_sampler
+from .extractors import tfidf_extractor
 from .queriers import cluster_querier
 from .queriers import max_querier
 from .queriers import max_random_querier
 from .queriers import max_uncertainty_querier
 from .queriers import random_querier
 from .queriers import uncertainty_querier
+from .samplers import handpicked_prior_sampler
+from .samplers import random_prior_sampler
 from .starters import load_settings
 from .terminators import print_settings
 from .terminators import save_settings
 from .terminators import start
-from ._state import State
 
 
 class NaturalOrderGroup(click.Group):

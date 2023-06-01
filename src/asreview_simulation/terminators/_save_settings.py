@@ -1,6 +1,6 @@
-import click
 import dataclasses
 import json
+import click
 
 
 @click.command("save-settings",
