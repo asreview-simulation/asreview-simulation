@@ -1,14 +1,16 @@
-import os
 import hashlib
-import zipfile
 import json
-import pytest
-from tempfile import TemporaryDirectory
+import os
+import zipfile
 from pathlib import Path
+from tempfile import TemporaryDirectory
+
+import pytest
+from asreview.datasets import DatasetManager
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
+
 from asreview_simulation import cli
-from asreview.datasets import DatasetManager
 
 
 def list_dataset_names():
@@ -20,7 +22,7 @@ def list_dataset_names():
 
 
 @pytest.mark.parametrize("dataset", list_dataset_names())
-def test_simulate_start(dataset):
+def test_simulation_start(dataset):
     def calc_hash(filename):
         with open(filename, "rb") as f:
             contents = f.read()
