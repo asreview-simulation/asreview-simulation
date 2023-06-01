@@ -27,7 +27,11 @@ def test_simulation_start(dataset):
             return hashlib.sha256(contents).hexdigest()
 
     def compare_data():
-        fname = f"{dataset[10:]}.csv" if dataset.startswith("benchmark:") else f"{dataset}.csv"
+        fname = (
+            f"{dataset[10:]}.csv"
+            if dataset.startswith("benchmark:")
+            else f"{dataset}.csv"
+        )
         assert calc_hash(p1 / "data" / fname) == calc_hash(p2 / "data" / fname)
 
     def compare_project_json():
@@ -39,8 +43,13 @@ def test_simulation_start(dataset):
         assert actual["version"] == expected["version"]
         assert actual["mode"] == expected["mode"]
         assert actual["dataset_path"] == expected["dataset_path"]
-        assert actual["feature_matrices"][0]["id"] == expected["feature_matrices"][0]["id"]
-        assert actual["feature_matrices"][0]["filename"] == expected["feature_matrices"][0]["filename"]
+        assert (
+            actual["feature_matrices"][0]["id"] == expected["feature_matrices"][0]["id"]
+        )
+        assert (
+            actual["feature_matrices"][0]["filename"]
+            == expected["feature_matrices"][0]["filename"]
+        )
         assert actual["reviews"][0]["status"] == expected["reviews"][0]["status"]
 
     def compare_settings_metadata_json():
@@ -54,10 +63,7 @@ def test_simulation_start(dataset):
         return project_data["reviews"][0]["id"]
 
     def run_asreview_simulate_cli():
-        args = [
-            dataset,
-            "--state_file", str(p1)
-        ]
+        args = [dataset, "--state_file", str(p1)]
         SimulateEntryPoint().execute(args)
         # unzip simulate results
         src = p1.parent / Path(p1.name + ".tmp")
@@ -69,11 +75,7 @@ def test_simulation_start(dataset):
 
     def run_asreview_simulation_start_cli():
         runner = CliRunner()
-        args = [
-            "start",
-            "--dataset", dataset,
-            str(p2)
-        ]
+        args = ["start", "--dataset", dataset, str(p2)]
         result = runner.invoke(cli, args)
         assert result.exit_code == 0
         # rename simulation results
