@@ -17,5 +17,5 @@ __all__ = [
     "tfidf_extractor",
     "embedding_idf_extractor",
     "embedding_lstm_extractor",
-    "sbert_extractor"
+    "sbert_extractor",
 ]

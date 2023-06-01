@@ -6,13 +6,19 @@ from .._epilog import epilog
 name = UncertaintyQuery.name
 
 
-@click.command(epilog=epilog,
-               help="Uncertainty query strategy",
-               name=f"qer:{name}")
-@click.option("-f", "--force", "force",
-              help="Force setting the querier configuration, even if that me" +
-              "ans overwriting a previous configuration.",
-              is_flag=True)
+@click.command(
+    epilog=epilog,
+    help="Uncertainty query strategy",
+    name=f"qer:{name}",
+)
+@click.option(
+    "-f",
+    "--force",
+    "force",
+    help="Force setting the querier configuration, even if that me"
+    + "ans overwriting a previous configuration.",
+    is_flag=True,
+)
 @click.pass_obj
 def uncertainty_querier(obj, force):
     if not force:

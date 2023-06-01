@@ -3,12 +3,15 @@ import json
 import click
 
 
-@click.command("save-settings",
-               help="Save settings")
+@click.command("save-settings", help="Save settings")
 @click.argument("filename", type=click.File("w"))
-@click.option("-p", "--pretty", "pretty",
-              help="Pretty-print the settings",
-              is_flag=True)
+@click.option(
+    "-p",
+    "--pretty",
+    "pretty",
+    help="Pretty-print the settings",
+    is_flag=True,
+)
 @click.pass_obj
 def save_settings(obj, filename, pretty):
     d = dataclasses.asdict(obj)

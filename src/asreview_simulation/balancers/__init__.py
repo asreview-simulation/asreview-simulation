@@ -13,5 +13,5 @@ __all__ = [
     "double_balancer",
     "simple_balancer",
     "triple_balancer",
-    "undersample_balancer"
+    "undersample_balancer",
 ]

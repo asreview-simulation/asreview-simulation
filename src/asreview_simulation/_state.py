@@ -19,8 +19,36 @@ class Provided:
 @dataclass
 class State:
     provided: Provided = Provided()
-    balancer: Model = Model("double", {"a": 2.155, "alpha": 0.94, "b": 0.789, "beta": 1.0})
-    classifier: Model = Model("nb", {"alpha": 3.822})
-    extractor: Model = Model("tfidf", {"ngram_max": 1, "stop_words": "english"})
-    sampler: Model = Model("random", {"n_excluded": 1, "n_included": 1})
-    querier: Model = Model("max", {})
+    balancer: Model = Model(
+        "double",
+        {
+            "a": 2.155,
+            "alpha": 0.94,
+            "b": 0.789,
+            "beta": 1.0,
+        },
+    )
+    classifier: Model = Model(
+        "nb",
+        {
+            "alpha": 3.822,
+        },
+    )
+    extractor: Model = Model(
+        "tfidf",
+        {
+            "ngram_max": 1,
+            "stop_words": "english",
+        },
+    )
+    sampler: Model = Model(
+        "random",
+        {
+            "n_excluded": 1,
+            "n_included": 1,
+        },
+    )
+    querier: Model = Model(
+        "max",
+        {},
+    )

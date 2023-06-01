@@ -6,13 +6,19 @@ from .._epilog import epilog
 name = SimpleBalance.name
 
 
-@click.command(epilog=epilog,
-               help="Use no balancer",
-               name=f"bal:{name}")
-@click.option("-f", "--force", "force",
-              help="Force setting the querier configuration, even if that me" +
-              "ans overwriting a previous configuration.",
-              is_flag=True)
+@click.command(
+    epilog=epilog,
+    help="Use no balancer",
+    name=f"bal:{name}",
+)
+@click.option(
+    "-f",
+    "--force",
+    "force",
+    help="Force setting the querier configuration, even if that me"
+    + "ans overwriting a previous configuration.",
+    is_flag=True,
+)
 @click.pass_obj
 def simple_balancer(obj, force):
     if not force:

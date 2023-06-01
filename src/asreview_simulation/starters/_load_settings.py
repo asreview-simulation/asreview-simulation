@@ -2,8 +2,7 @@ import json
 import click
 
 
-@click.command("load-settings",
-               help="Load settings")
+@click.command("load-settings", help="Load settings")
 @click.argument("settings_file", type=click.File("rt"))
 @click.pass_obj
 def load_settings(obj, settings_file):
@@ -22,7 +21,9 @@ def load_settings(obj, settings_file):
             obj.balancer.params = settings["balancer"]["params"]
             obj.provided.balancer = True
         except KeyError as e:
-            print("Expected balancer settings to include both a model and its parameterization.")
+            print(
+                "Expected balancer settings to include both a model and its parameterization."
+            )
             raise e
 
     if "classifier" in settings.keys():
@@ -31,7 +32,9 @@ def load_settings(obj, settings_file):
             obj.classifier.params = settings["classifier"]["params"]
             obj.provided.classifier = True
         except KeyError as e:
-            print("Expected classifier settings to include both a model and its parameterization.")
+            print(
+                "Expected classifier settings to include both a model and its parameterization."
+            )
             raise e
 
     if "extractor" in settings.keys():
@@ -40,7 +43,9 @@ def load_settings(obj, settings_file):
             obj.extractor.params = settings["extractor"]["params"]
             obj.provided.extractor = True
         except KeyError as e:
-            print("Expected extractor settings to include both a model and its parameterization.")
+            print(
+                "Expected extractor settings to include both a model and its parameterization."
+            )
             raise e
 
     if "querier" in settings.keys():
@@ -49,5 +54,7 @@ def load_settings(obj, settings_file):
             obj.querier.params = settings["querier"]["params"]
             obj.provided.querier = True
         except KeyError as e:
-            print("Expected querier settings to include both a model and its parameterization.")
+            print(
+                "Expected querier settings to include both a model and its parameterization."
+            )
             raise e

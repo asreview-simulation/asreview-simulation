@@ -20,5 +20,5 @@ __all__ = [
     "max_random_querier",
     "max_uncertainty_querier",
     "uncertainty_querier",
-    "random_querier"
+    "random_querier",
 ]

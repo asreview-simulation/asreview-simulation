@@ -23,5 +23,5 @@ __all__ = [
     "naive_bayes_classifier",
     "random_forest_classifier",
     "nn_2_layer_classifier",
-    "svm_classifier"
+    "svm_classifier",
 ]

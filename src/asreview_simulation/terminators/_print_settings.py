@@ -3,11 +3,14 @@ import json
 import click
 
 
-@click.command("print-settings",
-               help="Print settings")
-@click.option("-p", "--pretty", "pretty",
-              help="Pretty-print the settings",
-              is_flag=True)
+@click.command("print-settings", help="Print settings")
+@click.option(
+    "-p",
+    "--pretty",
+    "pretty",
+    help="Pretty-print the settings",
+    is_flag=True,
+)
 @click.pass_obj
 def print_settings(obj, pretty):
     d = dataclasses.asdict(obj)
