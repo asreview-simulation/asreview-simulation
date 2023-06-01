@@ -2,18 +2,33 @@ import os
 import hashlib
 import zipfile
 import json
+import pytest
 from tempfile import TemporaryDirectory
 from pathlib import Path
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
 from asreview_simulation import cli
+from asreview.datasets import DatasetManager
 
 
-def test_simulate_start():
+def list_dataset_names():
+    dataset_names = list()
+    for group in DatasetManager().list():
+        for dataset in group["datasets"]:
+            dataset_names.append(f"{group['group_id']}:{dataset['dataset_id']}")
+    return [n for n in dataset_names if n.startswith("benchmark:")]
+
+
+@pytest.mark.parametrize("dataset", list_dataset_names())
+def test_simulate_start(dataset):
     def calc_hash(filename):
         with open(filename, "rb") as f:
             contents = f.read()
             return hashlib.sha256(contents).hexdigest()
+
+    def compare_data():
+        fname = f"{dataset.split(':')[1]}.csv"
+        assert calc_hash(p1 / "data" / fname) == calc_hash(p2 / "data" / fname)
 
     def compare_project_json():
         with open(p1 / "project.json", "r") as f:
@@ -27,10 +42,6 @@ def test_simulate_start():
         assert actual["feature_matrices"][0]["id"] == expected["feature_matrices"][0]["id"]
         assert actual["feature_matrices"][0]["filename"] == expected["feature_matrices"][0]["filename"]
         assert actual["reviews"][0]["status"] == expected["reviews"][0]["status"]
-
-    def compare_data():
-        fname = f"{dataset.split(':')[1]}.csv"
-        assert calc_hash(p1 / "data" / fname) == calc_hash(p2 / "data" / fname)
 
     def compare_settings_metadata_json():
         settings1 = p1 / "reviews" / get_review_id(p1) / "settings_metadata.json"
@@ -70,7 +81,6 @@ def test_simulate_start():
         tgt = p2
         os.rename(src, tgt)
 
-    dataset = "benchmark:van_de_Schoot_2017"
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         p1 = Path(tmpdir) / "simulate.asreview"
         p2 = Path(tmpdir) / "simulation.asreview"
