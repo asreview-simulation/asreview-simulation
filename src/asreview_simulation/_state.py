@@ -13,8 +13,14 @@ class Model:
 
 @dataclass
 class Provided:
-    def __init__(self, balancer: bool = False, classifier: bool = False, extractor: bool = False,
-                 querier: bool = False, sampler: bool = False):
+    def __init__(
+        self,
+        balancer: bool = False,
+        classifier: bool = False,
+        extractor: bool = False,
+        querier: bool = False,
+        sampler: bool = False,
+    ):
         self.balancer = balancer
         self.classifier = classifier
         self.extractor = extractor
@@ -24,7 +30,15 @@ class Provided:
 
 @dataclass
 class State:
-    def __init__(self, provided=None, balancer=None, classifier=None, extractor=None, sampler=None, querier=None):
+    def __init__(
+        self,
+        provided=None,
+        balancer=None,
+        classifier=None,
+        extractor=None,
+        sampler=None,
+        querier=None,
+    ):
         if provided is not None:
             self.provided = provided
         else:

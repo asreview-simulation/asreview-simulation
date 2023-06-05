@@ -115,7 +115,12 @@ def start(obj, dot_asreview_file, data, dataset, write_interval):
     n_papers = None
     n_instances = 1
     stop_if = "min"
-    prior_indices, n_prior_included, n_prior_excluded, init_seed = assign_vars_for_prior_sampling(obj)
+    (
+        prior_indices,
+        n_prior_included,
+        n_prior_excluded,
+        init_seed,
+    ) = assign_vars_for_prior_sampling(obj)
 
     reviewer = ReviewSimulate(
         as_data,

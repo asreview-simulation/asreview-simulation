@@ -20,9 +20,7 @@ def calc_hash(filename):
 
 def compare_data_csv(p1, p2, dataset):
     fname = (
-        f"{dataset[10:]}.csv"
-        if dataset.startswith("benchmark:")
-        else f"{dataset}.csv"
+        f"{dataset[10:]}.csv" if dataset.startswith("benchmark:") else f"{dataset}.csv"
     )
     assert calc_hash(p1 / "data" / fname) == calc_hash(p2 / "data" / fname)
 
@@ -36,9 +34,7 @@ def compare_project_json(p1, p2):
     assert actual["version"] == expected["version"]
     assert actual["mode"] == expected["mode"]
     assert actual["dataset_path"] == expected["dataset_path"]
-    assert (
-        actual["feature_matrices"][0]["id"] == expected["feature_matrices"][0]["id"]
-    )
+    assert actual["feature_matrices"][0]["id"] == expected["feature_matrices"][0]["id"]
     assert (
         actual["feature_matrices"][0]["filename"]
         == expected["feature_matrices"][0]["filename"]
@@ -46,7 +42,9 @@ def compare_project_json(p1, p2):
     assert actual["reviews"][0]["status"] == expected["reviews"][0]["status"]
 
 
-def compare_results_sql(p1, p2, test_metadata=False, test_prior_records=False, test_queried_records=False):
+def compare_results_sql(
+    p1, p2, test_metadata=False, test_prior_records=False, test_queried_records=False
+):
     state1 = SQLiteState(read_only=True)
     state1._restore(p1, get_review_id(p1))
     df1 = state1.get_dataset()
@@ -75,7 +73,11 @@ def compare_results_sql(p1, p2, test_metadata=False, test_prior_records=False, t
         assert bool((results1 == results2).all())
     if test_queried_records is True:
         assert bool((df1.values == df2.values).all())
-    if test_metadata is False and test_prior_records is False and test_queried_records is False:
+    if (
+        test_metadata is False
+        and test_prior_records is False
+        and test_queried_records is False
+    ):
         raise "You probably wanted to test at least some aspects of the SQL file."
 
 
