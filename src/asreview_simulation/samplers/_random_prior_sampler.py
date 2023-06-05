@@ -19,6 +19,14 @@ name = "random"
     is_flag=True,
 )
 @click.option(
+    "--init_seed",
+    "init_seed",
+    default=535,
+    help="Random seed",
+    show_default=True,
+    type=click.INT,
+)
+@click.option(
     "--n_excluded",
     "n_excluded",
     default=1,
@@ -34,22 +42,14 @@ name = "random"
     show_default=True,
     type=click.INT,
 )
-@click.option(
-    "--seed",
-    "seed",
-    default=535,
-    help="Random seed",
-    show_default=True,
-    type=click.INT,
-)
 @click.pass_obj
-def random_prior_sampler(obj, force, n_excluded, n_included, seed):
+def random_prior_sampler(obj, force, init_seed, n_excluded, n_included):
     if not force:
         assert obj.provided.sampler is False, "Attempted reassignment of sampler"
     obj.sampler.model = name
     obj.sampler.params = {
+        "init_seed": init_seed,
         "n_excluded": n_excluded,
         "n_included": n_included,
-        "seed": seed,
     }
     obj.provided.sampler = True
