@@ -1,0 +1,38 @@
+name: linting
+
+on:
+ push:
+ pull_request:
+   types:
+   - opened
+   - reopened
+ workflow_dispatch:
+
+jobs:
+  lint:
+    name: ${{ matrix.python-version }}, ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['ubuntu-latest']
+        python-version: ['3.10']
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Python info
+        shell: bash
+        run: |
+          which python
+          python --version
+      - name: Install dependencies
+        shell: bash
+        run: |
+          python3 -m pip install --upgrade pip wheel setuptools
+          python3 -m pip install .[dev]
+      - name: Test
+        shell: bash
+        run: pre-commit run --all-files
