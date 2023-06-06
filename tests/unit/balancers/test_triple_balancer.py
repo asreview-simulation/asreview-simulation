@@ -22,6 +22,6 @@ def test_triple_balancer_default_parameterization():
     assert "beta" in params
     assert balancer["params"]["beta"] == 1.0
     assert "c" in params
-    assert balancer["params"]["c"] == 0.835 
+    assert balancer["params"]["c"] == 0.835
     assert "gamma" in params
     assert balancer["params"]["gamma"] == 2.0

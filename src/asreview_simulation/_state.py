@@ -13,7 +13,7 @@ class Model:
     def asdict(self):
         return {
             "model": self.model,
-            "params": self.params
+            "params": self.params,
         }
 
 
@@ -110,5 +110,5 @@ class State:
             "classifier": self.classifier.asdict(),
             "extractor": self.extractor.asdict(),
             "querier": self.querier.asdict(),
-            "sampler": self.sampler.asdict()
+            "sampler": self.sampler.asdict(),
         }

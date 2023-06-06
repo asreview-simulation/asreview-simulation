@@ -15,4 +15,3 @@ def test_max_uncertainty_querier_default_parameterization():
     params = querier["params"].keys()
     assert "mix_ratio" in params
     assert querier["params"]["mix_ratio"] == 0.95
-
