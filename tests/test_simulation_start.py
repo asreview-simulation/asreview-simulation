@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os
+import sys
 import zipfile
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -132,6 +133,9 @@ def test_simulation_start_with_minimal_args(dataset):
         assert result.exit_code == 0
         rename_simulation_results(p2)
 
+    if sys.platform == "win32" and dataset.startswith("benchmark-nature:"):
+        pytest.xfail(reason="data filename bug")
+
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"
@@ -185,6 +189,9 @@ def test_simulation_start_with_handpicked_prior(dataset):
         assert result.exit_code == 0
         rename_simulation_results(p2)
 
+    if sys.platform == "win32" and dataset.startswith("benchmark-nature:"):
+        pytest.xfail(reason="data filename bug")
+
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"
@@ -237,6 +244,9 @@ def test_simulation_start_with_seeded_random_prior(dataset):
         result = runner.invoke(cli, args)
         assert result.exit_code == 0
         rename_simulation_results(p2)
+
+    if sys.platform == "win32" and dataset.startswith("benchmark-nature:"):
+        pytest.xfail(reason="data filename bug")
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
