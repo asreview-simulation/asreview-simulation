@@ -1,3 +1,5 @@
+[![testing](https://github.com/asreview-tuning/asreview-simulation/actions/workflows/testing.yml/badge.svg)](https://github.com/asreview-tuning/asreview-simulation/actions/workflows/testing.yml)
+
 # asreview-simulation
 
 - provides a standalone CLI command `asreview-simulation`
