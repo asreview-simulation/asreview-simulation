@@ -29,6 +29,9 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip wheel setuptools
           python3 -m pip install .[testing]
-      - name: Test
+      - name: Run unit tests
         shell: bash
-        run: pytest -v
+        run: pytest -v tests/unit
+      - name: Run integration tests
+        shell: bash
+        run: pytest -v tests/it
