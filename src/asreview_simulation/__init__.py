@@ -1,5 +1,5 @@
 from ._cli import cli
-from ._simulation import SimulationSubcommand
+from ._simulation_entry_point import SimulationEntryPoint
 
 
 del _cli
@@ -7,5 +7,5 @@ del _cli
 
 __all__ = [
     "cli",
-    "SimulationSubcommand",
+    "SimulationEntryPoint",
 ]
