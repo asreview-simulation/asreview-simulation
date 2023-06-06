@@ -21,7 +21,7 @@ dev = ["isort", "pre-commit"]
 asreview-simulation = "asreview_simulation:cli"
 
 [project.entry-points."asreview.entry_points"]
-simulation = "asreview_simulation.subcommands:SimulationSubcommand"
+simulation = "asreview_simulation:SimulationEntryPoint"
 
 [tool.setuptools.packages.find]
 where = ["src"]
