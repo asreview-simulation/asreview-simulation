@@ -1,4 +1,3 @@
-import dataclasses
 import json
 import click
 
@@ -13,8 +12,7 @@ import click
 )
 @click.pass_obj
 def print_settings(obj, pretty):
-    d = dataclasses.asdict(obj)
-    d.pop("provided")
+    d = obj.asdict()
     if pretty:
         click.echo(json.dumps(d, indent=4, sort_keys=True))
         return

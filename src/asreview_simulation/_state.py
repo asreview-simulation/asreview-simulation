@@ -10,6 +10,12 @@ class Model:
     def __repr__(self):
         return f"Model(model='{self.model}', params={self.params}"
 
+    def asdict(self):
+        return {
+            "model": self.model,
+            "params": self.params
+        }
+
 
 @dataclass
 class Provided:
@@ -36,8 +42,8 @@ class State:
         balancer=None,
         classifier=None,
         extractor=None,
-        sampler=None,
         querier=None,
+        sampler=None,
     ):
         if provided is not None:
             self.provided = provided
@@ -78,6 +84,14 @@ class State:
                 },
             )
 
+        if querier is not None:
+            self.querier = querier
+        else:
+            self.querier = Model(
+                "max",
+                {},
+            )
+
         if sampler is not None:
             self.sampler = sampler
         else:
@@ -90,10 +104,11 @@ class State:
                 },
             )
 
-        if querier is not None:
-            self.querier = querier
-        else:
-            self.querier = Model(
-                "max",
-                {},
-            )
+    def asdict(self):
+        return {
+            "balancer": self.balancer.asdict(),
+            "classifier": self.classifier.asdict(),
+            "extractor": self.extractor.asdict(),
+            "querier": self.querier.asdict(),
+            "sampler": self.sampler.asdict()
+        }
