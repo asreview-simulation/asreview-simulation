@@ -159,7 +159,7 @@ def test_simulation_start_with_minimal_args(dataset):
 
 
 @pytest.mark.parametrize("dataset", list_dataset_names())
-def test_simulation_start_with_handpicked_prior(dataset):
+def test_simulation_start_with_stopping_rule_and_handpicked_prior(dataset):
     def determine_valid_set_of_ids(n=5):
         as_data = load_data(dataset)
         return (
@@ -171,6 +171,8 @@ def test_simulation_start_with_handpicked_prior(dataset):
         args = [
             "--state_file",
             str(p1),
+            "--stop_if",
+            "0",
             "--prior_idx",
             *[str(elem) for elem in ids],
             "--",
@@ -184,6 +186,8 @@ def test_simulation_start_with_handpicked_prior(dataset):
         args = [
             "sam:handpicked",
             ",".join([str(elem) for elem in ids]),
+            "stp:n",
+            "0",
             "start",
             "--dataset",
             dataset,
@@ -214,7 +218,7 @@ def test_simulation_start_with_handpicked_prior(dataset):
 
 
 @pytest.mark.parametrize("dataset", list_dataset_names())
-def test_simulation_start_with_seeded_random_prior(dataset):
+def test_simulation_start_with_stopping_rule_and_seeded_random_prior(dataset):
     def run_asreview_simulate_cli():
         args = [
             "--state_file",
@@ -225,6 +229,8 @@ def test_simulation_start_with_seeded_random_prior(dataset):
             "5",
             "--n_prior_excluded",
             "5",
+            "--stop_if",
+            "0",
             dataset,
         ]
         SimulateEntryPoint().execute(args)
@@ -240,6 +246,8 @@ def test_simulation_start_with_seeded_random_prior(dataset):
             "5",
             "--n_excluded",
             "5",
+            "stp:n",
+            "0",
             "start",
             "--dataset",
             dataset,

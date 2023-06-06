@@ -26,6 +26,9 @@ from .queriers import uncertainty_querier
 from .samplers import handpicked_prior_sampler
 from .samplers import random_prior_sampler
 from .starters import load_settings
+from .stopping import min_stopping
+from .stopping import n_stopping
+from .stopping import none_stopping
 from .terminators import print_settings
 from .terminators import save_settings
 from .terminators import start
@@ -164,6 +167,26 @@ def _add_starter_subcommands():
         cli.add_command(s)
 
 
+def _add_stopping_subcommands():
+    my_stopping = [
+        min_stopping,
+        n_stopping,
+        none_stopping,
+    ]
+    try:
+        other_stopping = [
+            e.load() for e in entrypoints(group="asreview_simulation.stopping")
+        ]
+    except Exception as e:
+        print(
+            "Something went wrong loading a module from entrypoint group "
+            + f"'asreview_simulation.stopping'. The error message was: {e}\nContinuing..."
+        )
+        other_stopping = []
+    for t in _sort_commands(my_stopping + other_stopping):
+        cli.add_command(t)
+
+
 def _add_terminator_subcommands():
     my_terminators = [
         print_settings,
@@ -240,4 +263,5 @@ _add_balancer_subcommands()
 _add_classifier_subcommands()
 _add_extractor_subcommands()
 _add_querier_subcommands()
+_add_stopping_subcommands()
 _add_terminator_subcommands()

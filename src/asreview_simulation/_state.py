@@ -26,30 +26,28 @@ class Provided:
         extractor: bool = False,
         querier: bool = False,
         sampler: bool = False,
+        stopping: bool = False,
     ):
         self.balancer = balancer
         self.classifier = classifier
         self.extractor = extractor
         self.querier = querier
         self.sampler = sampler
+        self.stopping = stopping
 
 
 @dataclass
 class State:
     def __init__(
         self,
-        provided=None,
         balancer=None,
         classifier=None,
         extractor=None,
+        provided=None,
         querier=None,
         sampler=None,
+        stopping=None,
     ):
-        if provided is not None:
-            self.provided = provided
-        else:
-            self.provided = Provided()
-
         if balancer is not None:
             self.balancer = balancer
         else:
@@ -84,6 +82,11 @@ class State:
                 },
             )
 
+        if provided is not None:
+            self.provided = provided
+        else:
+            self.provided = Provided()
+
         if querier is not None:
             self.querier = querier
         else:
@@ -104,6 +107,14 @@ class State:
                 },
             )
 
+        if stopping is not None:
+            self.stopping = stopping
+        else:
+            self.stopping = Model(
+                "min",
+                {},
+            )
+
     def asdict(self):
         return {
             "balancer": self.balancer.asdict(),
@@ -111,4 +122,5 @@ class State:
             "extractor": self.extractor.asdict(),
             "querier": self.querier.asdict(),
             "sampler": self.sampler.asdict(),
+            "stopping": self.stopping.asdict(),
         }

@@ -62,6 +62,16 @@ def assign_vars_for_prior_sampling(obj):
     return prior_indices, n_prior_included, n_prior_excluded, init_seed
 
 
+def assign_vars_for_stopping(obj):
+    if obj.stopping.model == "none":
+        return -1
+    if obj.stopping.model == "n":
+        return obj.stopping.params["n"]
+    if obj.stopping.model == "min":
+        return "min"
+    raise ValueError("Unexpected value in stopping model.")
+
+
 @click.command(
     "start",
     help="Start the simulation and write the results to a new file DOT_ASREVIEW_FILE.\n\n"
@@ -114,7 +124,7 @@ def start(obj, dot_asreview_file, data, dataset, write_interval):
 
     n_papers = None
     n_instances = 1
-    stop_if = "min"
+    stop_if = assign_vars_for_stopping(obj)
     (
         prior_indices,
         n_prior_included,
