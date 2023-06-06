@@ -5,8 +5,8 @@ import sys
 import zipfile
 from pathlib import Path
 from tempfile import TemporaryDirectory
-import pytest
 import numpy
+import pytest
 from asreview.data import load_data
 from asreview.datasets import DatasetManager
 from asreview.entry_points import SimulateEntryPoint
@@ -159,8 +159,8 @@ def test_simulation_start_with_handpicked_prior(dataset):
     def determine_valid_set_of_ids(n=5):
         as_data = load_data(dataset)
         return (
-            numpy.where(as_data.labels == 0)[0].tolist()[:n] +
-            numpy.where(as_data.labels == 1)[0].tolist()[:n]
+            numpy.where(as_data.labels == 0)[0].tolist()[:n]
+            + numpy.where(as_data.labels == 1)[0].tolist()[:n]
         )
 
     def run_asreview_simulate_cli():
