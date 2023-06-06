@@ -46,7 +46,11 @@ def compare_project_json(p1, p2):
 
 
 def compare_results_sql(
-    p1, p2, test_metadata=False, test_prior_records=False, test_queried_records=False
+    p1,
+    p2,
+    test_metadata=False,
+    test_prior_records=False,
+    test_queried_records=False,
 ):
     state1 = SQLiteState(read_only=True)
     state1._restore(p1, get_review_id(p1))
