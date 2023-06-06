@@ -5,6 +5,8 @@ import zipfile
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import pytest
+import numpy
+from asreview.data import load_data
 from asreview.datasets import DatasetManager
 from asreview.entry_points import SimulateEntryPoint
 from asreview.state.sqlstate import SQLiteState
@@ -70,9 +72,9 @@ def compare_results_sql(
     if test_prior_records is True:
         results1 = df1.loc[df1.query_strategy == "prior", columns].values
         results2 = df2.loc[df2.query_strategy == "prior", columns].values
-        assert bool((results1 == results2).all())
+        assert numpy.array_equal(results1, results2)
     if test_queried_records is True:
-        assert bool((df1.values == df2.values).all())
+        assert numpy.array_equal(df1.values, df2.values)
     if (
         test_metadata is False
         and test_prior_records is False
@@ -131,8 +133,11 @@ def test_simulation_start_with_minimal_args(dataset):
         rename_simulation_results(p2)
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
+        # prep
         p1 = Path(tmpdir) / "simulate.asreview"
         p2 = Path(tmpdir) / "simulation.asreview"
+
+        # run
         run_asreview_simulate_cli()
         run_asreview_simulation_start_cli()
 
@@ -146,6 +151,58 @@ def test_simulation_start_with_minimal_args(dataset):
 
 
 @pytest.mark.parametrize("dataset", list_dataset_names())
+def test_simulation_start_with_handpicked_prior(dataset):
+    def determine_valid_set_of_ids(n=5):
+        as_data = load_data(dataset)
+        return (
+            numpy.where(as_data.labels == 0)[0].tolist()[:n] +
+            numpy.where(as_data.labels == 1)[0].tolist()[:n]
+        )
+
+    def run_asreview_simulate_cli():
+        args = [
+            "--state_file",
+            str(p1),
+            "--prior_idx",
+            *[str(elem) for elem in ids],
+            "--",
+            dataset,
+        ]
+        SimulateEntryPoint().execute(args)
+        unzip_simulate_results(p1)
+
+    def run_asreview_simulation_start_cli():
+        runner = CliRunner()
+        args = [
+            "sam:handpicked",
+            ",".join([str(elem) for elem in ids]),
+            "start",
+            "--dataset",
+            dataset,
+            str(p2),
+        ]
+        result = runner.invoke(cli, args)
+        assert result.exit_code == 0
+        rename_simulation_results(p2)
+
+    with TemporaryDirectory(prefix="pytest.") as tmpdir:
+        # prep
+        p1 = Path(tmpdir) / "simulate.asreview"
+        p2 = Path(tmpdir) / "simulation.asreview"
+        ids = determine_valid_set_of_ids()
+
+        # run
+        run_asreview_simulate_cli()
+        run_asreview_simulation_start_cli()
+
+        # compare the two results
+        compare_project_json(p1, p2)
+        compare_data_csv(p1, p2, dataset)
+        compare_settings_metadata_json(p1, p2)
+        compare_results_sql(p1, p2, test_metadata=True, test_prior_records=True)
+
+
+@pytest.mark.parametrize("dataset", list_dataset_names())
 def test_simulation_start_with_seeded_random_prior(dataset):
     def run_asreview_simulate_cli():
         args = [
@@ -153,6 +210,10 @@ def test_simulation_start_with_seeded_random_prior(dataset):
             str(p1),
             "--init_seed",
             "42",
+            "--n_prior_included",
+            "5",
+            "--n_prior_excluded",
+            "5",
             dataset,
         ]
         SimulateEntryPoint().execute(args)
@@ -164,6 +225,10 @@ def test_simulation_start_with_seeded_random_prior(dataset):
             "sam:random",
             "--init_seed",
             "42",
+            "--n_included",
+            "5",
+            "--n_excluded",
+            "5",
             "start",
             "--dataset",
             dataset,
@@ -174,8 +239,11 @@ def test_simulation_start_with_seeded_random_prior(dataset):
         rename_simulation_results(p2)
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
+        # prep
         p1 = Path(tmpdir) / "simulate.asreview"
         p2 = Path(tmpdir) / "simulation.asreview"
+
+        # run
         run_asreview_simulate_cli()
         run_asreview_simulation_start_cli()
 
