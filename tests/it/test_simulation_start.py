@@ -72,7 +72,13 @@ def test_simulation_start_seeded_with_random_prior_seeded(dataset):
         compare_project_json(p1, p2)
         compare_data_csv(p1, p2, dataset)
         compare_settings_metadata_json(p1, p2)
-        compare_results_sql(p1, p2, test_metadata=True, test_prior_records=True, test_queried_records=True)
+        compare_results_sql(
+            p1,
+            p2,
+            test_metadata=True,
+            test_prior_records=True,
+            test_queried_records=True,
+        )
 
 
 @pytest.mark.parametrize("dataset", list_dataset_names())

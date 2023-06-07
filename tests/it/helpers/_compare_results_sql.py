@@ -1,6 +1,6 @@
+import numpy
 from asreview.state.sqlstate import SQLiteState
 from ._get_review_id import get_review_id
-import numpy
 
 
 def compare_results_sql(
@@ -46,5 +46,3 @@ def compare_results_sql(
         and test_queried_records is False
     ):
         raise "You probably wanted to test at least some aspects of the SQL file."
-
-

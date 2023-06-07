@@ -1,6 +1,6 @@
 from pathlib import Path
-from asreview.project import ASReviewProject
 from asreview.data import load_data
+from asreview.project import ASReviewProject
 
 
 def prep_project_directory(asreview_file, dataset):
