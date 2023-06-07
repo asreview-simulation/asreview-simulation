@@ -1,6 +1,6 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_nn_2_layer_classifier_default_parameterization():
@@ -11,7 +11,7 @@ def test_nn_2_layer_classifier_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     classifier = json.loads(result.output)["classifier"]
-    assert classifier["model"] == "nn-2-layer"
+    assert classifier["abbr"] == "nn-2-layer"
     params = classifier["params"].keys()
     assert "batch_size" in params
     assert classifier["params"]["batch_size"] == 32

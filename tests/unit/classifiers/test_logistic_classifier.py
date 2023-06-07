@@ -1,6 +1,6 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_logistic_classifier_default_parameterization():
@@ -11,7 +11,7 @@ def test_logistic_classifier_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     classifier = json.loads(result.output)["classifier"]
-    assert classifier["model"] == "logistic"
+    assert classifier["abbr"] == "logistic"
     params = classifier["params"].keys()
     assert "c" in params
     assert classifier["params"]["c"] == 1.0

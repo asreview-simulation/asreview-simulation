@@ -1,6 +1,6 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_random_sampler_default_parameterization():
@@ -11,7 +11,7 @@ def test_random_sampler_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     sampler = json.loads(result.output)["sampler"]
-    assert sampler["model"] == "random"
+    assert sampler["abbr"] == "random"
     params = sampler["params"].keys()
     assert "n_included" in params
     assert sampler["params"]["n_included"] == 1

@@ -1,6 +1,6 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_lstm_pool_classifier_default_parameterization(tmp_path):
@@ -14,6 +14,6 @@ def test_lstm_pool_classifier_default_parameterization(tmp_path):
     ]
     result = runner.invoke(cli, args)
     classifier = json.loads(result.output)["classifier"]
-    assert classifier["model"] == "lstm-pool"
+    assert classifier["abbr"] == "lstm-pool"
     params = classifier["params"].keys()
     assert len(params) == 0

@@ -1,6 +1,6 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_random_forest_classifier_default_parameterization():
@@ -11,7 +11,7 @@ def test_random_forest_classifier_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     classifier = json.loads(result.output)["classifier"]
-    assert classifier["model"] == "rf"
+    assert classifier["abbr"] == "rf"
     params = classifier["params"].keys()
     assert "class_weight" in params
     assert classifier["params"]["class_weight"] == 1

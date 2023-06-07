@@ -1,6 +1,6 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_handpicked_sampler_default_parameterization():
@@ -12,7 +12,7 @@ def test_handpicked_sampler_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     sampler = json.loads(result.output)["sampler"]
-    assert sampler["model"] == "handpicked"
+    assert sampler["abbr"] == "handpicked"
     params = sampler["params"].keys()
     assert "ids" in params
     assert sampler["params"]["ids"] == [1, 2, 3]

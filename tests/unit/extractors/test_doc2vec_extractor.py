@@ -1,17 +1,17 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_doc2vec_extractor_default_parameterization():
     runner = CliRunner()
     args = [
-        "ext:doc2vec",
+        "fex:doc2vec",
         "print-settings",
     ]
     result = runner.invoke(cli, args)
     extractor = json.loads(result.output)["extractor"]
-    assert extractor["model"] == "doc2vec"
+    assert extractor["abbr"] == "doc2vec"
     params = extractor["params"].keys()
     assert "dbow_words" in params
     assert extractor["params"]["dbow_words"] == 0

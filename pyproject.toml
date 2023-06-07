@@ -14,14 +14,17 @@ dependencies = [
 description = "Simulate a manual ASReview analysis"
 
 [project.optional-dependencies]
+linting = ["pre-commit"]
+doc2vec = ['gensim']
+sbert = ['sentence_transformers']
+tensorflow = ['tensorflow~=2.0']
 testing = ["pytest"]
-dev = ["isort", "pre-commit"]
 
 [project.scripts]
-asreview-simulation = "asreview_simulation:cli"
+asreview-simulation = "asreview_simulation.cli:cli"
 
 [project.entry-points."asreview.entry_points"]
-simulation = "asreview_simulation:SimulationEntryPoint"
+simulation = "asreview_simulation.cli:SimulationEntryPoint"
 
 [tool.setuptools.packages.find]
 where = ["src"]

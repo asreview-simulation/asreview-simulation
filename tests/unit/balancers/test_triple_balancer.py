@@ -1,6 +1,6 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_triple_balancer_default_parameterization():
@@ -11,7 +11,7 @@ def test_triple_balancer_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     balancer = json.loads(result.output)["balancer"]
-    assert balancer["model"] == "triple"
+    assert balancer["abbr"] == "triple"
     params = balancer["params"].keys()
     assert "a" in params
     assert balancer["params"]["a"] == 2.155

@@ -1,6 +1,6 @@
 import json
 from click.testing import CliRunner
-from asreview_simulation import cli
+from asreview_simulation.cli import cli
 
 
 def test_naive_bayes_classifier_default_parameterization():
@@ -11,7 +11,7 @@ def test_naive_bayes_classifier_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     classifier = json.loads(result.output)["classifier"]
-    assert classifier["model"] == "nb"
+    assert classifier["abbr"] == "nb"
     params = classifier["params"].keys()
     assert "alpha" in params
     assert classifier["params"]["alpha"] == 3.822
