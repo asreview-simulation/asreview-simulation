@@ -58,3 +58,25 @@ def load_settings(obj, settings_file):
                 "Expected querier settings to include a model abbreviation and the corresponding parameterization."
             )
             raise e
+
+    if "sampler" in settings.keys():
+        try:
+            obj.sampler.abbr = settings["sampler"]["abbr"]
+            obj.sampler.params = settings["sampler"]["params"]
+            obj.provided.sampler = True
+        except KeyError as e:
+            print(
+                "Expected sampler settings to include a model abbreviation and the corresponding parameterization."
+            )
+            raise e
+
+    if "stopping" in settings.keys():
+        try:
+            obj.stopping.abbr = settings["stopping"]["abbr"]
+            obj.stopping.params = settings["stopping"]["params"]
+            obj.provided.stopping = True
+        except KeyError as e:
+            print(
+                "Expected stopping settings to include a model abbreviation and the corresponding parameterization."
+            )
+            raise e
