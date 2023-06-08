@@ -13,7 +13,7 @@ def test_logistic_classifier_default_parameterization():
     classifier = json.loads(result.output)["classifier"]
     assert classifier["abbr"] == "logistic"
     params = classifier["params"].keys()
-    assert "c" in params
-    assert classifier["params"]["c"] == 1.0
+    assert "C" in params
+    assert classifier["params"]["C"] == 1.0
     assert "class_weight" in params
     assert classifier["params"]["class_weight"] == 1.0
