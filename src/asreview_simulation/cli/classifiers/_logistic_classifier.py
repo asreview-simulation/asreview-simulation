@@ -41,7 +41,7 @@ def logistic_classifier(obj, c, class_weight, force):
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.abbr = name
     obj.classifier.params = {
-        "c": c,
+        "C": c,
         "class_weight": class_weight,
     }
     obj.provided.classifier = True
