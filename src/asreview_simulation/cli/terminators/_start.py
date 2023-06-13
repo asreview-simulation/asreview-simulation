@@ -46,7 +46,8 @@ from asreview_simulation.lib import prep_project_directory
 @click.option(
     "--write-interval",
     "write_interval",
-    help="Write interval.",
+    help="Write interval. The simulation data will be written to file after each set of this many labeled records. " +
+    "By default only writes data at the end of the simulation to make it as fast as possible.",
     type=click.INT,
 )
 @click.pass_obj
