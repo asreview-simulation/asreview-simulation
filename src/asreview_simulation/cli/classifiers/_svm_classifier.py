@@ -57,7 +57,7 @@ def svm_classifier(obj, c, class_weight, gamma, force, kernel):
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.abbr = name
     obj.classifier.params = {
-        "c": c,
+        "C": c,
         "class_weight": class_weight,
         "gamma": gamma,
         "kernel": kernel,
