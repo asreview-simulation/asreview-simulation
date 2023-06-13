@@ -29,13 +29,14 @@ You can combine these into one command like so, e.g.:
 pip install .[linting,testing]
 ```
 
-## Running pre-commit on unstaged files
+## Linting
+
+Running pre-commit on unstaged files
 
 ```
 pip install --editable .[linting]
 pre-commit run --all-files
 ```
-
 
 ## Publishing releases to Zenodo
 
@@ -46,3 +47,8 @@ TODO:
 - use the zenodraft workflow to make the release
 - check the draft on zenodo, click publish there
 - update the workflow with the collection doi
+
+
+# notes
+
+- https://stackoverflow.com/questions/70984166/why-naive-bayes-gives-results-and-on-training-and-test-but-gives-error-of-negati
