@@ -1,5 +1,5 @@
-import sys
 import itertools
+import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import numpy
@@ -190,7 +190,6 @@ def test_simulation_start_unseeded_with_stopping_rule_and_handpicked_prior(datas
 
 
 def get_model_combinatorics():
-
     bals = ["double"]  # [elem.name for elem in list_balance_strategies()]
     clss = [elem.name for elem in list_classifiers()]
     fexs = [elem.name for elem in list_feature_extraction()]
@@ -209,9 +208,15 @@ def get_model_combinatorics():
             "double,lstm-pool,embedding-lstm,max": ("xfail", "tbd"),
             "double,lstm-pool,tfidf,max": ("xfail", "issue #21"),
             "double,lstm-pool,sbert,max": ("xfail", "tbd"),
-            "double,nb,doc2vec,max": ("xfail", "ValueError: Negative values in data passed to MultinomialNB"),
+            "double,nb,doc2vec,max": (
+                "xfail",
+                "ValueError: Negative values in data passed to MultinomialNB",
+            ),
             "double,nb,embedding-idf,max": ("xfail", "issue #34"),
-            "double,nb,sbert,max": ("xfail", "ValueError: Negative values in data passed to MultinomialNB"),
+            "double,nb,sbert,max": (
+                "xfail",
+                "ValueError: Negative values in data passed to MultinomialNB",
+            ),
             "double,nn-2-layer,doc2vec,max": ("xfail", "tbd"),
             "double,nn-2-layer,embedding-idf,max": ("xfail", "issue #34"),
             "double,nn-2-layer,embedding-lstm,max": ("xfail", "tbd"),
@@ -219,7 +224,7 @@ def get_model_combinatorics():
             "double,nn-2-layer,sbert,max": ("xfail", "tbd"),
             "double,rf,embedding-idf,max": ("xfail", "issue #34"),
             "double,rf,embedding-lstm,max": ("xfail", "tbd"),
-            "double,svm,embedding-idf,max": ("xfail", "issue #34")
+            "double,svm,embedding-idf,max": ("xfail", "issue #34"),
         }
         key = ",".join(combination)
         try:
@@ -230,7 +235,9 @@ def get_model_combinatorics():
     return result
 
 
-@pytest.mark.parametrize("combination, expected_status, reason", get_model_combinatorics())
+@pytest.mark.parametrize(
+    "combination, expected_status, reason", get_model_combinatorics()
+)
 def test_simulation_start_with_model_combination(combination, expected_status, reason):
     """
     - seeded random prior with 5 included and 5 excluded
@@ -239,6 +246,7 @@ def test_simulation_start_with_model_combination(combination, expected_status, r
     - try different combinations of balancer, classifier, extractor, querier
     - use default parameterization for each model
     """
+
     def run_asreview_simulate_cli():
         args = [
             "--state_file",
