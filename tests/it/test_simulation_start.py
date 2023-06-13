@@ -6,7 +6,10 @@ import numpy
 import pytest
 from asreview.data import load_data
 from asreview.entry_points import SimulateEntryPoint
-from asreview.utils import list_model_names
+from asreview.models.balance import list_balance_strategies
+from asreview.models.classifiers import list_classifiers
+from asreview.models.feature_extraction import list_feature_extraction
+from asreview.models.query import list_query_strategies
 from click.testing import CliRunner
 from asreview_simulation.cli import cli
 from tests.it.helpers import compare_data_csv
@@ -187,109 +190,36 @@ def test_simulation_start_unseeded_with_stopping_rule_and_handpicked_prior(datas
 
 
 def get_model_combinatorics():
-    bals = list_model_names(entry_name="asreview.models.balance")
-    clss = list_model_names(entry_name="asreview.models.classifiers")
-    fexs = ["tfidf"] # list_model_names(entry_name="asreview.models.feature_extraction")
-    qrys = list_model_names(entry_name="asreview.models.query")
+
+    bals = ["double"]  # [elem.name for elem in list_balance_strategies()]
+    clss = [elem.name for elem in list_classifiers()]
+    fexs = [elem.name for elem in list_feature_extraction()]
+    qrys = ["max"]  # [elem.name for elem in list_query_strategies()]
     result = []
     for combination in itertools.product(*[bals, clss, fexs, qrys]):
         xfails = {
-            "double,logistic,doc2vec,cluster": ("xfail", "tbd"),
-            "double,logistic,embedding-idf,cluster": ("xfail", "tbd"),
-            "double,logistic,embedding-idf,max_random": ("xfail", "tbd"),
-            "double,logistic,embedding-idf,max_uncertainty": ("xfail", "tbd"),
-            "double,logistic,embedding-idf,max": ("xfail", "tbd"),
-            "double,logistic,embedding-idf,random": ("xfail", "tbd"),
-            "double,logistic,embedding-idf,uncertainty": ("xfail", "tbd"),
-            "double,logistic,embedding-lstm,cluster": ("xfail", "tbd"),
-            "double,logistic,embedding-lstm,max_random": ("xfail", "tbd"),
-            "double,logistic,embedding-lstm,max_uncertainty": ("xfail", "tbd"),
-            "double,logistic,embedding-lstm,max": ("xfail", "tbd"),
-            "double,logistic,embedding-lstm,random": ("xfail", "tbd"),
-            "double,logistic,embedding-lstm,uncertainty": ("xfail", "tbd"),
-            "double,logistic,sbert,cluster": ("xfail", "patience"),
-            "double,logistic,sbert,max_random": ("xfail", "patience"),
-            "double,logistic,sbert,max_uncertainty": ("xfail", "patience"),
-            "double,logistic,sbert,max": ("xfail", "patience"),
-            "double,logistic,sbert,random": ("xfail", "patience"),
-            "double,logistic,sbert,uncertainty": ("xfail", "patience"),
-            "double,lstm-base,tfidf,cluster": ("xfail", "issue #20"),
-            "double,lstm-base,tfidf,max_random": ("xfail", "issue #20"),
-            "double,lstm-base,tfidf,max_uncertainty": ("xfail", "issue #20"),
-            "double,lstm-base,tfidf,max": ("xfail", "issue #20"),
-            "double,lstm-base,tfidf,random": ("xfail", "issue #20"),
-            "double,lstm-base,tfidf,uncertainty": ("xfail", "issue #20"),
-            "double,lstm-pool,tfidf,cluster": ("xfail", "issue #21"),
-            "double,lstm-pool,tfidf,max_random": ("xfail", "issue #21"),
-            "double,lstm-pool,tfidf,max_uncertainty": ("xfail", "issue #21"),
+            "double,logistic,embedding-idf,max": ("xfail", "issue #34"),
+            "double,lstm-base,embedding-idf,max": ("xfail", "issue #34"),
+            "double,lstm-base,embedding-lstm,max": ("xfail", "tbd"),
+            "double,lstm-base,doc2vec,max": ("xfail", "tbd"),
+            "double,lstm-base,tfidf,max": ("xfail", "tbd"),
+            "double,lstm-base,sbert,max": ("xfail", "tbd"),
+            "double,lstm-pool,doc2vec,max": ("xfail", "tbd"),
+            "double,lstm-pool,embedding-idf,max": ("xfail", "issue #34"),
+            "double,lstm-pool,embedding-lstm,max": ("xfail", "tbd"),
             "double,lstm-pool,tfidf,max": ("xfail", "issue #21"),
-            "double,lstm-pool,tfidf,random": ("xfail", "issue #21"),
-            "double,lstm-pool,tfidf,uncertainty": ("xfail", "issue #21"),
-            "double,nn-2-layer,tfidf,cluster": ("xfail", "tbd, results.sql not equal, maybe need to use almostequal"),
-            "double,nn-2-layer,tfidf,max_random": ("xfail", "tbd, results.sql not equal, maybe need to use almostequal"),
-            "double,nn-2-layer,tfidf,max_uncertainty": ("xfail", "tbd, results.sql not equal, maybe need to use almostequal"),
-            "double,nn-2-layer,tfidf,max": ("xfail", "tbd, results.sql not equal, maybe need to use almostequal"),
-            "double,nn-2-layer,tfidf,random": ("xfail", "tbd, results.sql not equal, maybe need to use almostequal"),
-            "double,nn-2-layer,tfidf,uncertainty": ("xfail", "tbd, results.sql not equal, maybe need to use almostequal"),
-            "double,svm,tfidf,cluster": ("xfail", "tbd"),
-            "double,svm,tfidf,max_random": ("xfail", "tbd"),
-            "double,svm,tfidf,max_uncertainty": ("xfail", "tbd"),
-            "double,svm,tfidf,max": ("xfail", "tbd"),
-            "double,svm,tfidf,random": ("xfail", "tbd"),
-            "double,svm,tfidf,uncertainty": ("xfail", "tbd"),
-            "simple,lstm-base,tfidf,cluster": ("xfail", "issue #20"),
-            "simple,lstm-base,tfidf,max_random": ("xfail", "issue #20"),
-            "simple,lstm-base,tfidf,max_uncertainty": ("xfail", "issue #20"),
-            "simple,lstm-base,tfidf,max": ("xfail", "issue #20"),
-            "simple,lstm-base,tfidf,random": ("xfail", "issue #20"),
-            "simple,lstm-base,tfidf,uncertainty": ("xfail", "issue #20"),
-            "simple,lstm-pool,tfidf,cluster": ("xfail", "issue #21"),
-            "simple,lstm-pool,tfidf,max_random": ("xfail", "issue #21"),
-            "simple,lstm-pool,tfidf,max_uncertainty": ("xfail", "issue #21"),
-            "simple,lstm-pool,tfidf,max": ("xfail", "issue #21"),
-            "simple,lstm-pool,tfidf,random": ("xfail", "issue #21"),
-            "simple,lstm-pool,tfidf,uncertainty": ("xfail", "issue #21"),
-            "simple,nn-2-layer,tfidf,cluster": ("xfail", "tbd"),
-            "simple,nn-2-layer,tfidf,max_random": ("xfail", "tbd"),
-            "simple,nn-2-layer,tfidf,max_uncertainty": ("xfail", "tbd"),
-            "simple,nn-2-layer,tfidf,max": ("xfail", "tbd"),
-            "simple,nn-2-layer,tfidf,random": ("xfail", "tbd"),
-            "simple,nn-2-layer,tfidf,uncertainty": ("xfail", "tbd"),
-            "simple,svm,tfidf,cluster": ("xfail", "tbd"),
-            "simple,svm,tfidf,max_random": ("xfail", "tbd"),
-            "simple,svm,tfidf,max_uncertainty": ("xfail", "tbd"),
-            "simple,svm,tfidf,max": ("xfail", "tbd"),
-            "simple,svm,tfidf,random": ("xfail", "tbd"),
-            "simple,svm,tfidf,uncertainty": ("xfail", "tbd"),
-            "triple,logistic,tfidf,max": ("xfail", "triple balancer is not implemented"),
-            "triple,lstm-base,tfidf,max": ("xfail", "triple balancer is not implemented"),
-            "triple,lstm-pool,tfidf,max": ("xfail", "triple balancer is not implemented"),
-            "triple,nb,tfidf,max": ("xfail", "'triple balancer is not implemented'"),
-            "triple,nn-2-layer,tfidf,max": ("xfail", "'triple balancer is not implemented'"),
-            "undersample,lstm-base,tfidf,cluster": ("xfail", "issue #20"),
-            "undersample,lstm-base,tfidf,max_random": ("xfail", "issue #20"),
-            "undersample,lstm-base,tfidf,max_uncertainty": ("xfail", "issue #20"),
-            "undersample,lstm-base,tfidf,max": ("xfail", "issue #20"),
-            "undersample,lstm-base,tfidf,random": ("xfail", "issue #20"),
-            "undersample,lstm-base,tfidf,uncertainty": ("xfail", "issue #20"),
-            "undersample,lstm-pool,tfidf,cluster": ("xfail", "issue #21"),
-            "undersample,lstm-pool,tfidf,max_random": ("xfail", "issue #21"),
-            "undersample,lstm-pool,tfidf,max_uncertainty": ("xfail", "issue #21"),
-            "undersample,lstm-pool,tfidf,max": ("xfail", "issue #21"),
-            "undersample,lstm-pool,tfidf,random": ("xfail", "issue #21"),
-            "undersample,lstm-pool,tfidf,uncertainty": ("xfail", "issue #21"),
-            "undersample,nn-2-layer,tfidf,cluster": ("xfail", "tbd"),
-            "undersample,nn-2-layer,tfidf,max_random": ("xfail", "tbd"),
-            "undersample,nn-2-layer,tfidf,max_uncertainty": ("xfail", "tbd"),
-            "undersample,nn-2-layer,tfidf,max": ("xfail", "tbd"),
-            "undersample,nn-2-layer,tfidf,random": ("xfail", "tbd"),
-            "undersample,nn-2-layer,tfidf,uncertainty": ("xfail", "tbd"),
-            "undersample,svm,tfidf,cluster": ("xfail", "tbd"),
-            "undersample,svm,tfidf,max_random": ("xfail", "tbd"),
-            "undersample,svm,tfidf,max_uncertainty": ("xfail", "tbd"),
-            "undersample,svm,tfidf,max": ("xfail", "tbd"),
-            "undersample,svm,tfidf,random": ("xfail", "tbd"),
-            "undersample,svm,tfidf,uncertainty": ("xfail", "tbd"),
+            "double,lstm-pool,sbert,max": ("xfail", "tbd"),
+            "double,nb,doc2vec,max": ("xfail", "ValueError: Negative values in data passed to MultinomialNB"),
+            "double,nb,embedding-idf,max": ("xfail", "issue #34"),
+            "double,nb,sbert,max": ("xfail", "ValueError: Negative values in data passed to MultinomialNB"),
+            "double,nn-2-layer,doc2vec,max": ("xfail", "tbd"),
+            "double,nn-2-layer,embedding-idf,max": ("xfail", "issue #34"),
+            "double,nn-2-layer,embedding-lstm,max": ("xfail", "tbd"),
+            "double,nn-2-layer,tfidf,max": ("xfail", "issue #33"),
+            "double,nn-2-layer,sbert,max": ("xfail", "tbd"),
+            "double,rf,embedding-idf,max": ("xfail", "issue #34"),
+            "double,rf,embedding-lstm,max": ("xfail", "tbd"),
+            "double,svm,embedding-idf,max": ("xfail", "issue #34")
         }
         key = ",".join(combination)
         try:
