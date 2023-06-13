@@ -13,8 +13,8 @@ def test_svm_classifier_default_parameterization():
     classifier = json.loads(result.output)["classifier"]
     assert classifier["abbr"] == "svm"
     params = classifier["params"].keys()
-    assert "c" in params
-    assert classifier["params"]["c"] == 15.4
+    assert "C" in params
+    assert classifier["params"]["C"] == 15.4
     assert "class_weight" in params
     assert classifier["params"]["class_weight"] == 0.249
     assert "gamma" in params
