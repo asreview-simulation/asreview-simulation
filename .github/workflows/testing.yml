@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           python3 -m pip install --upgrade pip wheel setuptools
-          python3 -m pip install .[testing]
+          python3 -m pip install .[doc2vec,sbert,tensorflow,testing]
       - name: Run unit tests
         shell: bash
         run: pytest -v tests/unit
