@@ -1,0 +1,74 @@
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from asreview.entry_points import SimulateEntryPoint
+from click.testing import CliRunner
+from asreview_simulation.cli import cli
+from tests.it.helpers import compare_data_csv
+from tests.it.helpers import compare_project_json
+from tests.it.helpers import compare_results_sql
+from tests.it.helpers import compare_settings_metadata_json
+from tests.it.helpers import rename_simulation_results
+from tests.it.helpers import unzip_simulate_results
+
+
+def test_with_init_seed():
+    def run_asreview_simulate_cli():
+        args = [
+            "--state_file",
+            str(p1),
+            "--init_seed",
+            "42",
+            "--n_prior_included",
+            "5",
+            "--n_prior_excluded",
+            "5",
+            "--stop_if",
+            "0",
+            dataset,
+        ]
+        SimulateEntryPoint().execute(args)
+        unzip_simulate_results(p1)
+
+    def run_asreview_simulation_start_cli():
+        runner = CliRunner()
+        args = [
+            "sam:random",
+            "--init_seed",
+            "42",
+            "--n_included",
+            "5",
+            "--n_excluded",
+            "5",
+            "stp:n",
+            "0",
+            "start",
+            "--dataset",
+            dataset,
+            str(p2),
+        ]
+        result = runner.invoke(cli, args)
+        assert result.exit_code == 0
+        rename_simulation_results(p2)
+
+    dataset = "benchmark:van_de_Schoot_2017"
+
+    with TemporaryDirectory(prefix="pytest.") as tmpdir:
+        # prep
+        p1 = Path(tmpdir) / "simulate.asreview"
+        p2 = Path(tmpdir) / "simulation.asreview"
+
+        # run
+        run_asreview_simulate_cli()
+        run_asreview_simulation_start_cli()
+
+        # compare the two results
+        compare_project_json(p1, p2)
+        compare_data_csv(p1, p2, dataset)
+        compare_settings_metadata_json(p1, p2)
+        compare_results_sql(
+            p1,
+            p2,
+            test_metadata=True,
+            test_prior_records=True,
+            test_queried_records=True,
+        )

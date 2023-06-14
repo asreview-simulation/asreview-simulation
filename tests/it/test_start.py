@@ -18,72 +18,7 @@ from tests.it.helpers import unzip_simulate_results
 
 
 @pytest.mark.parametrize("dataset", list_dataset_names())
-def test_simulation_start_seeded_with_random_prior_seeded(dataset):
-    def run_asreview_simulate_cli():
-        args = [
-            "--state_file",
-            str(p1),
-            "--init_seed",
-            "42",
-            "--n_prior_included",
-            "5",
-            "--n_prior_excluded",
-            "5",
-            "--seed",
-            "567",
-            dataset,
-        ]
-        SimulateEntryPoint().execute(args)
-        unzip_simulate_results(p1)
-
-    def run_asreview_simulation_start_cli():
-        runner = CliRunner()
-        args = [
-            "sam:random",
-            "--init_seed",
-            "42",
-            "--n_included",
-            "5",
-            "--n_excluded",
-            "5",
-            "start",
-            "--dataset",
-            dataset,
-            "--seed",
-            "567",
-            str(p2),
-        ]
-        result = runner.invoke(cli, args)
-        assert result.exit_code == 0
-        rename_simulation_results(p2)
-
-    if sys.platform == "win32" and dataset.startswith("benchmark-nature:"):
-        pytest.xfail(reason="data filename bug")
-
-    with TemporaryDirectory(prefix="pytest.") as tmpdir:
-        # prep
-        p1 = Path(tmpdir) / "simulate.asreview"
-        p2 = Path(tmpdir) / "simulation.asreview"
-
-        # run
-        run_asreview_simulate_cli()
-        run_asreview_simulation_start_cli()
-
-        # compare the two results
-        compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset)
-        compare_settings_metadata_json(p1, p2)
-        compare_results_sql(
-            p1,
-            p2,
-            test_metadata=True,
-            test_prior_records=True,
-            test_queried_records=True,
-        )
-
-
-@pytest.mark.parametrize("dataset", list_dataset_names())
-def test_simulation_start_unseeded_with_minimal_args(dataset):
+def test_with_minimal_args(dataset):
     def run_asreview_simulate_cli():
         args = [
             "--state_file",
@@ -127,7 +62,7 @@ def test_simulation_start_unseeded_with_minimal_args(dataset):
 
 
 @pytest.mark.parametrize("parameterization", get_model_combinatorics())
-def test_simulation_start_with_model_combination(parameterization):
+def test_with_model_combinations(parameterization):
     """
     - seeded random prior with 5 included and 5 excluded
     - generate 20 instances in each query
