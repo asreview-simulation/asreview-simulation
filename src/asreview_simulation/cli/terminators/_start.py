@@ -95,7 +95,7 @@ def start(obj, dot_asreview_file, data, dataset, seed, write_interval):
         n_prior_included,
         n_prior_excluded,
         init_seed,
-    ) = assign_vars_for_prior_sampling(obj)
+    ) = assign_vars_for_prior_sampling(obj, as_data)
 
     reviewer = ReviewSimulate(
         as_data,

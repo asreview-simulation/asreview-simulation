@@ -11,7 +11,6 @@ name = "handpicked"
     name=f"sam:{name}",
     short_help="Use handpicked prior sampler",
 )
-@click.argument("ids", type=click.STRING)
 @click.option(
     "-f",
     "--force",
@@ -20,20 +19,48 @@ name = "handpicked"
     + "ans overwriting a previous configuration.",
     is_flag=True,
 )
+@click.option(
+    "--records",
+    "records",
+    default=None,
+    help="Comma-separated string of integers, where each integer is the identifier for a record as used in the data.",
+    type=click.STRING,
+)
+@click.option(
+    "--rows",
+    "rows",
+    default=None,
+    help="Comma-separated string of integers, where each integer is the row number of a record in the data.",
+    type=click.STRING,
+)
 @click.pass_obj
-def handpicked_prior_sampler(obj, force, ids):
-    """
-    IDS: comma separated string
-    """
+def handpicked_prior_sampler(obj, force, records, rows):
     if not force:
         assert obj.provided.sampler is False, "Attempted reassignment of sampler"
 
-    try:
-        ids_list_of_int = [int(elem.strip()) for elem in ids.split(",")]
-    except ValueError as e:
-        click.echo("\nProblem parsing required argument IDS in 's-handpicked'.\n")
-        raise e
+    assert not (rows is None and records is None), "Need to define either --rows or --records."
+    assert not (rows is not None and records is not None), "Need to define one of --rows or --records, not both."
 
     obj.sampler.abbr = name
-    obj.sampler.params = {"ids": ids_list_of_int}
+
+    if rows is not None:
+        try:
+            ids = [int(elem.strip()) for elem in rows.split(",")]
+        except ValueError as e:
+            click.echo("\nProblem parsing row numbers.\n")
+            raise e
+        obj.sampler.params = {
+            "rows": ids
+        }
+
+    if records is not None:
+        try:
+            ids = [int(elem.strip()) for elem in records.split(",")]
+        except ValueError as e:
+            click.echo("\nProblem parsing record numbers.\n")
+            raise e
+        obj.sampler.params = {
+            "records": ids
+        }
+
     obj.provided.sampler = True
