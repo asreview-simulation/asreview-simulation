@@ -11,13 +11,6 @@ name = LSTMBaseClassifier.name
     help="Use LSTM Base classifier",
     name=f"cls:{name}",
 )
-@click.argument(
-    "feature_matrix_file",
-    type=click.Path(
-        exists=True,
-        readable=True,
-    ),
-)
 @click.option(
     "-f",
     "--force",
@@ -27,7 +20,7 @@ name = LSTMBaseClassifier.name
     is_flag=True,
 )
 @click.pass_obj
-def lstm_base_classifier(obj, feature_matrix_file, force):
+def lstm_base_classifier(obj, force):
     if not force:
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.abbr = name

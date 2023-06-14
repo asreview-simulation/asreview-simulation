@@ -12,6 +12,12 @@ name = EmbeddingLSTM.name
     name=f"fex:{name}",
 )
 @click.option(
+    "--embedding",
+    "embedding",
+    help="File path of embedding matrix. Required for LSTM models.",
+    type=click.Path(exists=True),
+)
+@click.option(
     "-f",
     "--force",
     "force",
@@ -70,6 +76,7 @@ name = EmbeddingLSTM.name
 @click.pass_obj
 def embedding_lstm_extractor(
     obj,
+    embedding,
     force,
     loop_sequence,
     max_sequence_length,
@@ -82,6 +89,7 @@ def embedding_lstm_extractor(
         assert obj.provided.extractor is False, "Attempted reassignment of extractor"
     obj.extractor.abbr = name
     obj.extractor.params = {
+        "embedding": embedding,
         "loop_sequence": loop_sequence,
         "max_sequence_length": max_sequence_length,
         "n_jobs": n_jobs,

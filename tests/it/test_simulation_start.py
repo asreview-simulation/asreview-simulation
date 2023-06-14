@@ -6,16 +6,15 @@ import numpy
 import pytest
 from asreview.data import load_data
 from asreview.entry_points import SimulateEntryPoint
-from asreview.models.balance import list_balance_strategies
-from asreview.models.classifiers import list_classifiers
-from asreview.models.feature_extraction import list_feature_extraction
-from asreview.models.query import list_query_strategies
+from asreview import get_data_home
 from click.testing import CliRunner
 from asreview_simulation.cli import cli
 from tests.it.helpers import compare_data_csv
 from tests.it.helpers import compare_project_json
 from tests.it.helpers import compare_results_sql
 from tests.it.helpers import compare_settings_metadata_json
+from tests.it.helpers import get_model_combinatorics
+from tests.it.helpers import get_xfails
 from tests.it.helpers import list_dataset_names
 from tests.it.helpers import rename_simulation_results
 from tests.it.helpers import unzip_simulate_results
@@ -189,65 +188,22 @@ def test_simulation_start_unseeded_with_stopping_rule_and_handpicked_prior(datas
         compare_results_sql(p1, p2, test_metadata=True, test_prior_records=True)
 
 
-def get_model_combinatorics():
-    bals = ["double"]  # [elem.name for elem in list_balance_strategies()]
-    clss = [elem.name for elem in list_classifiers()]
-    fexs = [elem.name for elem in list_feature_extraction()]
-    qrys = ["max"]  # [elem.name for elem in list_query_strategies()]
-    result = []
-    for combination in itertools.product(*[bals, clss, fexs, qrys]):
-        xfails = {
-            "double,logistic,embedding-idf,max": ("xfail", "issue #34"),
-            "double,lstm-base,embedding-idf,max": ("xfail", "issue #34"),
-            "double,lstm-base,embedding-lstm,max": ("xfail", "tbd"),
-            "double,lstm-base,doc2vec,max": ("xfail", "tbd"),
-            "double,lstm-base,tfidf,max": ("xfail", "tbd"),
-            "double,lstm-base,sbert,max": ("xfail", "tbd"),
-            "double,lstm-pool,doc2vec,max": ("xfail", "tbd"),
-            "double,lstm-pool,embedding-idf,max": ("xfail", "issue #34"),
-            "double,lstm-pool,embedding-lstm,max": ("xfail", "tbd"),
-            "double,lstm-pool,tfidf,max": ("xfail", "issue #21"),
-            "double,lstm-pool,sbert,max": ("xfail", "tbd"),
-            "double,nb,doc2vec,max": (
-                "xfail",
-                "ValueError: Negative values in data passed to MultinomialNB",
-            ),
-            "double,nb,embedding-idf,max": ("xfail", "issue #34"),
-            "double,nb,sbert,max": (
-                "xfail",
-                "ValueError: Negative values in data passed to MultinomialNB",
-            ),
-            "double,nn-2-layer,doc2vec,max": ("xfail", "tbd"),
-            "double,nn-2-layer,embedding-idf,max": ("xfail", "issue #34"),
-            "double,nn-2-layer,embedding-lstm,max": ("xfail", "tbd"),
-            "double,nn-2-layer,tfidf,max": ("xfail", "issue #33"),
-            "double,nn-2-layer,sbert,max": ("xfail", "tbd"),
-            "double,rf,embedding-idf,max": ("xfail", "issue #34"),
-            "double,rf,embedding-lstm,max": ("xfail", "tbd"),
-            "double,svm,embedding-idf,max": ("xfail", "issue #34"),
-        }
-        key = ",".join(combination)
-        try:
-            parameterization = (key,) + xfails[key]
-        except KeyError:
-            parameterization = (key,) + ("pass", "no_msg")
-        result.append(parameterization)
-    return result
-
-
-@pytest.mark.parametrize(
-    "combination, expected_status, reason", get_model_combinatorics()
-)
-def test_simulation_start_with_model_combination(combination, expected_status, reason):
+@pytest.mark.parametrize("parameterization", get_model_combinatorics())
+def test_simulation_start_with_model_combination(parameterization):
     """
     - seeded random prior with 5 included and 5 excluded
-    - stop querying after 90 records for a total of 100
+    - generate 20 instances in each query
+    - stop querying after 5 queries for a total of 110 records
     - use one dataset, benchmark:van_de_Schoot_2017
     - try different combinations of balancer, classifier, extractor, querier
     - use default parameterization for each model
     """
 
     def run_asreview_simulate_cli():
+        embedding_pars = list()
+        if fex == "embedding-idf" or fex == "embedding-lstm":
+            embedding_pars += ["--embedding"]
+            embedding_pars += [str(get_data_home() / "fasttext.cc.en.300.vec")]
         args = [
             "--state_file",
             str(p1),
@@ -265,17 +221,23 @@ def test_simulation_start_with_model_combination(combination, expected_status, r
             bal,
             "-e",
             fex,
+            *embedding_pars,
             "--seed",
             "567",
             "--stop_if",
-            "90",
+            "5",
+            "--n_instances",
+            "20",
             dataset,
         ]
         SimulateEntryPoint().execute(args)
         unzip_simulate_results(p1)
 
     def run_asreview_simulation_start_cli():
-        runner = CliRunner()
+        embedding_pars = list()
+        if fex == "embedding-idf" or fex == "embedding-lstm":
+            embedding_pars += ["--embedding"]
+            embedding_pars += [str(get_data_home() / "fasttext.cc.en.300.vec")]
         args = [
             "sam:random",
             "--init_seed",
@@ -287,9 +249,12 @@ def test_simulation_start_with_model_combination(combination, expected_status, r
             f"bal:{bal}",
             f"cls:{cls}",
             f"fex:{fex}",
+            *embedding_pars,
             f"qry:{qry}",
+            "--n_instances",
+            "20",
             "stp:n",
-            "90",
+            "5",
             "start",
             "--dataset",
             dataset,
@@ -297,17 +262,19 @@ def test_simulation_start_with_model_combination(combination, expected_status, r
             "567",
             str(p2),
         ]
+        runner = CliRunner()
         result = runner.invoke(cli, args)
-        assert result.exit_code == 0
+        assert result.exit_code == 0, "cli runner did not exit 0"
         rename_simulation_results(p2)
 
     dataset = "benchmark:van_de_Schoot_2017"
-    bal, cls, fex, qry = combination.split(",")
+    bal, cls, fex, qry = parameterization.split(",")
 
     if sys.platform == "win32" and dataset.startswith("benchmark-nature:"):
         pytest.xfail(reason="data filename bug")
 
-    if expected_status == "xfail":
+    xfail, reason = get_xfails(parameterization)
+    if xfail:
         pytest.xfail(reason=reason)
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:

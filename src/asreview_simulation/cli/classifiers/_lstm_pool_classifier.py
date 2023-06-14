@@ -11,13 +11,6 @@ name = LSTMPoolClassifier.name
     help="Use LSTM Pool classifier",
     name=f"cls:{name}",
 )
-@click.argument(
-    "feature_matrix_file",
-    type=click.Path(
-        exists=True,
-        readable=True,
-    ),
-)
 @click.option(
     "-f",
     "--force",
@@ -27,7 +20,7 @@ name = LSTMPoolClassifier.name
     is_flag=True,
 )
 @click.pass_obj
-def lstm_pool_classifier(obj, feature_matrix_file, force):
+def lstm_pool_classifier(obj, force):
     if not force:
         assert obj.provided.classifier is False, "Attempted reassignment of classifier"
     obj.classifier.abbr = name

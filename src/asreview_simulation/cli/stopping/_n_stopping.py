@@ -7,7 +7,7 @@ name = "n"
 
 @click.command(
     epilog=epilog,
-    help="Stop the simulation after evaluating N records, regardless of the relevance of evaluated "
+    help="Stop the simulation after evaluating N queries, regardless of the relevance of evaluated "
     + "records. N does not include any prior records.",
     name=f"stp:{name}",
 )
