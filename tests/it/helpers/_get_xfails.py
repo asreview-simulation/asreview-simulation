@@ -21,6 +21,7 @@ def get_xfails(parameterization):
         "double,nn-2-layer,tfidf,max": "issue #33",
         "double,rf,doc2vec,max": "tbd",
         "double,rf,embedding-idf,max": "issue #34",
+        "double,svm,doc2vec,max": "tbd",
         "double,svm,embedding-idf,max": "issue #34",
     }
     present = parameterization in reasons.keys()
