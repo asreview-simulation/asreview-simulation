@@ -6,7 +6,7 @@ on:
 jobs:
 
   test:
-    name: python${{ matrix.python-version }}-asreview${{matrix.asreview-version}}-${{ matrix.os }}
+    name: asr${{matrix.asreview-version}}-py${{ matrix.python-version }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
