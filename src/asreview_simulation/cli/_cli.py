@@ -3,7 +3,6 @@ import click
 from ._state import State
 from .balancers import double_balancer
 from .balancers import simple_balancer
-from .balancers import triple_balancer
 from .balancers import undersample_balancer
 from .classifiers import logistic_classifier
 from .classifiers import lstm_base_classifier
@@ -44,7 +43,6 @@ def _add_balancer_subcommands():
     my_balancers = [
         double_balancer,
         simple_balancer,
-        triple_balancer,
         undersample_balancer,
     ]
     try:
