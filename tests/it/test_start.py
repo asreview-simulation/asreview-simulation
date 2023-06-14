@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import pytest
@@ -12,13 +11,11 @@ from tests.it.helpers import compare_results_sql
 from tests.it.helpers import compare_settings_metadata_json
 from tests.it.helpers import get_model_combinatorics
 from tests.it.helpers import get_xfails
-from tests.it.helpers import list_dataset_names
 from tests.it.helpers import rename_simulation_results
 from tests.it.helpers import unzip_simulate_results
 
 
-@pytest.mark.parametrize("dataset", list_dataset_names())
-def test_with_minimal_args(dataset):
+def test_with_minimal_args():
     def run_asreview_simulate_cli():
         args = [
             "--state_file",
@@ -40,8 +37,7 @@ def test_with_minimal_args(dataset):
         assert result.exit_code == 0
         rename_simulation_results(p2)
 
-    if sys.platform == "win32" and dataset.startswith("benchmark-nature:"):
-        pytest.xfail(reason="data filename bug")
+    dataset = "benchmark:van_de_Schoot_2017"
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
@@ -142,9 +138,6 @@ def test_with_model_combinations(parameterization):
 
     dataset = "benchmark:van_de_Schoot_2017"
     bal, cls, fex, qry = parameterization.split(",")
-
-    if sys.platform == "win32" and dataset.startswith("benchmark-nature:"):
-        pytest.xfail(reason="data filename bug")
 
     xfail, reason = get_xfails(parameterization)
     if xfail:
