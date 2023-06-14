@@ -92,7 +92,9 @@ class State:
         else:
             self.querier = Model(
                 abbr="max",
-                params={},
+                params={
+                    "n_instances": 1,
+                },
             )
 
         if sampler is not None:

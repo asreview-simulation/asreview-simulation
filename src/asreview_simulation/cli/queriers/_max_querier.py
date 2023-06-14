@@ -19,10 +19,20 @@ name = MaxQuery.name
     + "ans overwriting a previous configuration.",
     is_flag=True,
 )
+@click.option(
+    "--n_instances",
+    "n_instances",
+    default=1,
+    help="Number of records per query",
+    show_default=True,
+    type=click.INT,
+)
 @click.pass_obj
-def max_querier(obj, force):
+def max_querier(obj, force, n_instances):
     if not force:
         assert obj.provided.querier is False, "Attempted reassignment of querier"
     obj.querier.abbr = name
-    obj.querier.params = {}
+    obj.querier.params = {
+        "n_instances": n_instances
+    }
     obj.provided.querier = True

@@ -71,6 +71,7 @@ def start(obj, dot_asreview_file, data, dataset, seed, write_interval):
     classifier = get_classifier(
         obj.classifier.abbr, random_state=random_state, **obj.classifier.params
     )
+    n_instances = obj.querier.params.pop("n_instances", 1)
     querier = get_query_model(
         obj.querier.abbr, random_state=random_state, **obj.querier.params
     )
@@ -82,7 +83,6 @@ def start(obj, dot_asreview_file, data, dataset, seed, write_interval):
     )
 
     n_papers = None
-    n_instances = 1
     stop_if = assign_vars_for_stopping(obj)
     (
         prior_indices,
