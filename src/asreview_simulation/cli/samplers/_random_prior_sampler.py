@@ -21,7 +21,7 @@ name = "random"
 @click.option(
     "--init_seed",
     "init_seed",
-    default=535,
+    default=None,
     help="Random seed",
     show_default=True,
     type=click.INT,
