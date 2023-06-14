@@ -84,8 +84,9 @@ def start(obj, dot_asreview_file, data, dataset, seed, write_interval):
     )
 
     if classifier.name.startswith("lstm-"):
-        classifier.embedding_matrix = \
-            extractor.get_embedding_matrix(as_data.texts, embedding)
+        classifier.embedding_matrix = extractor.get_embedding_matrix(
+            as_data.texts, embedding
+        )
 
     n_papers = None
     stop_if = assign_vars_for_stopping(obj)

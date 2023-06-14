@@ -10,4 +10,4 @@ def get_model_combinatorics():
     clss = [elem.name for elem in list_classifiers()]
     fexs = [elem.name for elem in list_feature_extraction()]
     qrys = ["max"]  # [elem.name for elem in list_query_strategies()]
-    return [",".join(combination) for combination in itertools.product(*[bals, clss, fexs, qrys])]
+    return [",".join(combo) for combo in itertools.product(*[bals, clss, fexs, qrys])]

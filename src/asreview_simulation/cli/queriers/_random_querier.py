@@ -33,6 +33,6 @@ def random_querier(obj, force, n_instances):
         assert obj.provided.querier is False, "Attempted reassignment of querier"
     obj.querier.abbr = name
     obj.querier.params = {
-        "n_instances": n_instances
+        "n_instances": n_instances,
     }
     obj.provided.querier = True

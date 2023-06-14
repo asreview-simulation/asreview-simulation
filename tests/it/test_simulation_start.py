@@ -4,9 +4,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import numpy
 import pytest
+from asreview import get_data_home
 from asreview.data import load_data
 from asreview.entry_points import SimulateEntryPoint
-from asreview import get_data_home
 from click.testing import CliRunner
 from asreview_simulation.cli import cli
 from tests.it.helpers import compare_data_csv

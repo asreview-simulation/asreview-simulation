@@ -29,17 +29,27 @@ def compare_results_sql(
     ]
 
     if test_metadata is True:
-        assert state1.version == state2.version, "version not the same in results.sql metadata"
-        assert state1.n_records == state2.n_records, "number of records not the same in results.sql metadata"
-        assert state1.n_priors == state2.n_priors, "number of priors not the same in results.sql metadata"
+        assert (
+            state1.version == state2.version
+        ), "version not the same in results.sql metadata"
+        assert (
+            state1.n_records == state2.n_records
+        ), "number of records not the same in results.sql metadata"
+        assert (
+            state1.n_priors == state2.n_priors
+        ), "number of priors not the same in results.sql metadata"
     if test_prior_records is True:
         results1 = df1.loc[df1.query_strategy == "prior", columns].values
         results2 = df2.loc[df2.query_strategy == "prior", columns].values
-        assert numpy.array_equal(results1, results2), "prior records not the same in results.sql"
+        assert numpy.array_equal(
+            results1, results2
+        ), "prior records not the same in results.sql"
     if test_queried_records is True:
         results1 = df1.loc[df1.query_strategy != "prior", columns].values
         results2 = df2.loc[df2.query_strategy != "prior", columns].values
-        assert numpy.array_equal(results1, results2), "queried records not the same in results.sql"
+        assert numpy.array_equal(
+            results1, results2
+        ), "queried records not the same in results.sql"
     if (
         test_metadata is False
         and test_prior_records is False
