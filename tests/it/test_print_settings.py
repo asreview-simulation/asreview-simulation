@@ -6,11 +6,13 @@ def test_with_default_settings():
     runner = CliRunner()
     args = [
         "print-settings",
-        "--pretty"
+        "--pretty",
     ]
     result = runner.invoke(cli, args)
     assert result.exit_code == 0
-    assert result.output == """{
+    assert (
+        result.output
+        == """{
     "balancer": {
         "abbr": "double",
         "params": {
@@ -53,3 +55,4 @@ def test_with_default_settings():
     }
 }
 """
+    )
