@@ -1,5 +1,5 @@
 from asreview.compat import convert_id_to_idx
- 
+
 
 def assign_vars_for_prior_sampling(obj, as_data):
     if obj.sampler.abbr == "handpicked":
@@ -13,7 +13,9 @@ def assign_vars_for_prior_sampling(obj, as_data):
         elif prior_rows is not None:
             prior_indices = prior_rows
         else:
-            raise ValueError("prior_records and prior_rows should not both be not None.")
+            raise ValueError(
+                "prior_records and prior_rows should not both be not None."
+            )
     elif obj.sampler.abbr == "random":
         prior_indices = list()
         n_prior_included = obj.sampler.params["n_included"]

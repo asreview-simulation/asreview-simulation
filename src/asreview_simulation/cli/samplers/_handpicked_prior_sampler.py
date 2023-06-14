@@ -38,8 +38,12 @@ def handpicked_prior_sampler(obj, force, records, rows):
     if not force:
         assert obj.provided.sampler is False, "Attempted reassignment of sampler"
 
-    assert not (rows is None and records is None), "Need to define either --rows or --records."
-    assert not (rows is not None and records is not None), "Need to define one of --rows or --records, not both."
+    assert not (
+        rows is None and records is None
+    ), "Need to define either --rows or --records."
+    assert not (
+        rows is not None and records is not None
+    ), "Need to define one of --rows or --records, not both."
 
     obj.sampler.abbr = name
 
@@ -50,7 +54,7 @@ def handpicked_prior_sampler(obj, force, records, rows):
             click.echo("\nProblem parsing row numbers.\n")
             raise e
         obj.sampler.params = {
-            "rows": ids
+            "rows": ids,
         }
 
     if records is not None:
@@ -60,7 +64,7 @@ def handpicked_prior_sampler(obj, force, records, rows):
             click.echo("\nProblem parsing record numbers.\n")
             raise e
         obj.sampler.params = {
-            "records": ids
+            "records": ids,
         }
 
     obj.provided.sampler = True
