@@ -13,6 +13,9 @@ def test_cluster_querier_default_parameterization():
     querier = json.loads(result.output)["querier"]
     assert querier["abbr"] == "cluster"
     params = querier["params"].keys()
+    assert len(params) == 3
+    assert "n_instances" in params
+    assert querier["params"]["n_instances"] == 1
     assert "cluster_size" in params
     assert querier["params"]["cluster_size"] == 350
     assert "update_interval" in params

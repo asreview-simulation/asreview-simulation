@@ -13,4 +13,6 @@ def test_max_querier_default_parameterization():
     querier = json.loads(result.output)["querier"]
     assert querier["abbr"] == "max"
     params = querier["params"].keys()
-    assert len(params) == 0
+    assert len(params) == 1
+    assert "n_instances" in params
+    assert querier["params"]["n_instances"] == 1
