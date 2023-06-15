@@ -5,28 +5,28 @@
 There are various sets of dependencies that you should install depending on the work you're planning to do. 
 
 ```shell
-pip install .[testing]
+pip install --editable .[testing]
 ```
 
 ```shell
-pip install .[linting]
+pip install --editable .[linting]
 ```
 
 ```shell
-pip install .[doc2vec]
+pip install --editable .[doc2vec]
 ```
 
 ```shell
-pip install .[sbert]
+pip install --editable .[sbert]
 ```
 
 ```shell
-pip install .[tensorflow]
+pip install --editable .[tensorflow]
 ```
 
 You can combine these into one command like so, e.g.:
 ```shell
-pip install .[linting,testing]
+pip install --editable .[linting,testing]
 ```
 
 ## Linting
