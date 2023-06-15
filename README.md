@@ -49,7 +49,8 @@ Subcommands can be chained together, for example using the logistic
 classifier with the undersample balancer goes like this:
 
 ```shell
-asreview simulation cls:logistic bal:undersample start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+asreview simulation cls:logistic bal:undersample \
+                    start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
 ```
 
 Most subcommands have their own parameterization. Check the help of a
@@ -62,7 +63,8 @@ asreview simulation cls:logistic --help
 Passing parameters to a subcommand goes like this:
 
 ```shell
-asreview simulation cls:logistic --class_weight 1.1 start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+asreview simulation cls:logistic --class_weight 1.1 \
+                    start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
 ```
 
 By using individually parameterized, chained subcommands we can compose a
