@@ -40,22 +40,14 @@ pre-commit run --all-files
 
 ## Publishing releases to Zenodo
 
-TODO:
-
-- get a personal access token from Zenodo specifically for this project
-- add it to the repo secrets as ZENODO_ACCESS_TOKEN
-- use the zenodraft workflow to make the release
-- check the draft on zenodo, click publish there
-- update the workflow with the collection doi
-
+The reposiotry has a GitHub action `zenodraft.yml` which can be triggered manually to publish a snapshot
+of the current repository contents (`main` branch) to Zenodo as a zipped archive. The workflow does not
+finalize the resulting deposition on Zenodo, so that the repository admin has a chance to review the draft
+deposition before making it final by pressing the "Publish" button on Zenodo.  
 
 # notes
 
 - https://stackoverflow.com/questions/70984166/why-naive-bayes-gives-results-and-on-training-and-test-but-gives-error-of-negati
-
-
-
-
 - provides a standalone CLI command `asreview-simulation`
 - provides a plugin to `asreview` where it will show up as the subcommand `simulation` so users can call `asreview simulation` (i.e. without the dash)
 - its functionality can be extended by plugins:
