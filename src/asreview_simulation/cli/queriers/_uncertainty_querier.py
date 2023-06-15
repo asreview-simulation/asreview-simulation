@@ -30,7 +30,10 @@ name = UncertaintyQuery.name
 @click.pass_obj
 def uncertainty_querier(obj, force, n_instances):
     if not force:
-        assert obj.provided.querier is False, "Attempted reassignment of querier"
+        assert obj.provided.querier is False, (
+            "Attempted reassignment of querier. Use the --force flag "
+            + "if you mean to overwrite the querier configuration from previous steps. "
+        )
     obj.querier.abbr = name
     obj.querier.params = {
         "n_instances": n_instances,

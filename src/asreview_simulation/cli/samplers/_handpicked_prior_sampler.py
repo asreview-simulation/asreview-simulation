@@ -36,7 +36,10 @@ name = "handpicked"
 @click.pass_obj
 def handpicked_prior_sampler(obj, force, records, rows):
     if not force:
-        assert obj.provided.sampler is False, "Attempted reassignment of sampler"
+        assert obj.provided.sampler is False, (
+            "Attempted reassignment of sampler. Use the --force flag "
+            + "if you mean to overwrite the sampler configuration from previous steps. "
+        )
 
     assert not (
         rows is None and records is None

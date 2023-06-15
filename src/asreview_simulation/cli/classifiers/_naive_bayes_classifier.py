@@ -30,7 +30,10 @@ name = NaiveBayesClassifier.name
 @click.pass_obj
 def naive_bayes_classifier(obj, alpha, force):
     if not force:
-        assert obj.provided.classifier is False, "Attempted reassignment of classifier"
+        assert obj.provided.classifier is False, (
+            "Attempted reassignment of classifier. Use the --force flag "
+            + "if you mean to overwrite the classifier configuration from previous steps. "
+        )
     obj.classifier.abbr = name
     obj.classifier.params = {"alpha": alpha}
     obj.provided.classifier = True

@@ -86,7 +86,10 @@ def embedding_lstm_extractor(
     truncating,
 ):
     if not force:
-        assert obj.provided.extractor is False, "Attempted reassignment of extractor"
+        assert obj.provided.extractor is False, (
+            "Attempted reassignment of extractor. Use the --force flag "
+            + "if you mean to overwrite the extractor configuration from previous steps. "
+        )
     obj.extractor.abbr = name
     obj.extractor.params = {
         "embedding": embedding,

@@ -86,7 +86,10 @@ def nn_2_layer_classifier(
     shuffle,
 ):
     if not force:
-        assert obj.provided.classifier is False, "Attempted reassignment of classifier"
+        assert obj.provided.classifier is False, (
+            "Attempted reassignment of classifier. Use the --force flag "
+            + "if you mean to overwrite the classifier configuration from previous steps. "
+        )
     obj.classifier.abbr = name
     obj.classifier.params = {
         "batch_size": batch_size,

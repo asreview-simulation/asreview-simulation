@@ -46,7 +46,10 @@ name = ClusterQuery.name
 @click.pass_obj
 def cluster_querier(obj, force, cluster_size, n_instances, update_interval):
     if not force:
-        assert obj.provided.querier is False, "Attempted reassignment of querier"
+        assert obj.provided.querier is False, (
+            "Attempted reassignment of querier. Use the --force flag "
+            + "if you mean to overwrite the querier configuration from previous steps. "
+        )
     obj.querier.abbr = name
     obj.querier.params = {
         "cluster_size": cluster_size,

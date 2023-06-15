@@ -45,7 +45,10 @@ name = "random"
 @click.pass_obj
 def random_prior_sampler(obj, force, init_seed, n_excluded, n_included):
     if not force:
-        assert obj.provided.sampler is False, "Attempted reassignment of sampler"
+        assert obj.provided.sampler is False, (
+            "Attempted reassignment of sampler. Use the --force flag "
+            + "if you mean to overwrite the sampler configuration from previous steps. "
+        )
     obj.sampler.abbr = name
     obj.sampler.params = {
         "init_seed": init_seed,

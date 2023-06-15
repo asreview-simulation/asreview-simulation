@@ -21,7 +21,10 @@ name = "none"
 @click.pass_obj
 def none_stopping(obj, force):
     if not force:
-        assert obj.provided.stopping is False, "Attempted reassignment of stopping"
+        assert obj.provided.stopping is False, (
+            "Attempted reassignment of stopping. Use the --force flag "
+            + "if you mean to overwrite the stopping configuration from previous steps. "
+        )
     obj.stopping.abbr = name
     obj.stopping.params = {}
     obj.provided.stopping = True

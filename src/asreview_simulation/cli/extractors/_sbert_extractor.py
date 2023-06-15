@@ -30,7 +30,10 @@ name = SBERT.name
 @click.pass_obj
 def sbert_extractor(obj, force, transformer_model):
     if not force:
-        assert obj.provided.extractor is False, "Attempted reassignment of extractor"
+        assert obj.provided.extractor is False, (
+            "Attempted reassignment of extractor. Use the --force flag "
+            + "if you mean to overwrite the extractor configuration from previous steps. "
+        )
     obj.extractor.abbr = name
     obj.extractor.params = {"transformer_model": transformer_model}
     obj.provided.extractor = True

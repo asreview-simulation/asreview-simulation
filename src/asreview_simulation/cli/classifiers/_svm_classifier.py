@@ -54,7 +54,10 @@ name = SVMClassifier.name
 @click.pass_obj
 def svm_classifier(obj, c, class_weight, gamma, force, kernel):
     if not force:
-        assert obj.provided.classifier is False, "Attempted reassignment of classifier"
+        assert obj.provided.classifier is False, (
+            "Attempted reassignment of classifier. Use the --force flag "
+            + "if you mean to overwrite the classifier configuration from previous steps. "
+        )
     obj.classifier.abbr = name
     obj.classifier.params = {
         "C": c,

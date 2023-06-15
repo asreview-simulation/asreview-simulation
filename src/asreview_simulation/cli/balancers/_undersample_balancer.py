@@ -30,7 +30,10 @@ name = UndersampleBalance.name
 @click.pass_obj
 def undersample_balancer(obj, force, ratio):
     if not force:
-        assert obj.provided.balancer is False, "Attempted reassignment of balancer"
+        assert obj.provided.balancer is False, (
+            "Attempted reassignment of balancer. Use the --force flag "
+            + "if you mean to overwrite the balancer configuration from previous steps. "
+        )
     obj.balancer.abbr = name
     obj.balancer.params = {
         "ratio": ratio,

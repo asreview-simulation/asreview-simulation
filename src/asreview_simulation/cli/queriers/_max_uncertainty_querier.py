@@ -38,7 +38,10 @@ name = MaxUncertaintyQuery.name
 @click.pass_obj
 def max_uncertainty_querier(obj, force, mix_ratio, n_instances):
     if not force:
-        assert obj.provided.querier is False, "Attempted reassignment of querier"
+        assert obj.provided.querier is False, (
+            "Attempted reassignment of querier. Use the --force flag "
+            + "if you mean to overwrite the querier configuration from previous steps. "
+        )
     obj.querier.abbr = name
     obj.querier.params = {
         "mix_ratio": mix_ratio,

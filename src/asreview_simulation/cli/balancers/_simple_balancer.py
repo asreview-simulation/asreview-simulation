@@ -22,7 +22,10 @@ name = SimpleBalance.name
 @click.pass_obj
 def simple_balancer(obj, force):
     if not force:
-        assert obj.provided.balancer is False, "Attempted reassignment of balancer"
+        assert obj.provided.balancer is False, (
+            "Attempted reassignment of balancer. Use the --force flag "
+            + "if you mean to overwrite the balancer configuration from previous steps. "
+        )
     obj.balancer.abbr = name
     obj.balancer.params = {}
     obj.provided.balancer = True
