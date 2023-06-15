@@ -30,6 +30,12 @@ Print the configuration:
 asreview simulation print-settings
 ```
 
+With pretty-printing:
+
+```shell
+asreview simulation print-settings --pretty
+```
+
 Start a simulation using the default combination of models (`sam:random`,
 `bal:double`, `cls:nb`, `fex:tfidf`, `qry:max`, `stp:min`), each using its default
 parameterization:
