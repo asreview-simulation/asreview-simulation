@@ -7,15 +7,6 @@ from ._random_forest_classifier import random_forest_classifier
 from ._svm_classifier import svm_classifier
 
 
-del _naive_bayes_classifier
-del _random_forest_classifier
-del _logistic_classifier
-del _lstm_base_classifier
-del _lstm_pool_classifier
-del _nn_2_layer_classifier
-del _svm_classifier
-
-
 __all__ = [
     "logistic_classifier",
     "lstm_pool_classifier",
