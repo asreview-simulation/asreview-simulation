@@ -1,6 +1,14 @@
 # Developer notes
 
-## Dependencies
+## Install
+
+```shell
+mkdir <a directory>
+git clone https://github.com/asreview-tuning/asreview-simulation .
+python3 -m venv venv
+source venv/bin/activate
+pip install --editable .
+```
 
 There are various sets of dependencies that you should install depending on the work you're planning to do. 
 
@@ -25,6 +33,7 @@ pip install --editable .[tensorflow]
 ```
 
 You can combine these into one command like so, e.g.:
+
 ```shell
 pip install --editable .[linting,testing]
 ```
@@ -38,12 +47,40 @@ pip install --editable .[linting]
 pre-commit run --all-files
 ```
 
-## Publishing releases to Zenodo
+## Testing
+
+TODO
+
+### `tests/unit`
+
+TODO
+
+### `tests/mocked`
+
+TODO
+
+### `tests/it
+
+TODO
+
+## Publishing
+
+TODO
+
+### Zenodo
 
 The reposiotry has a GitHub action `zenodraft.yml` which can be triggered manually to publish a snapshot
 of the current repository contents (`main` branch) to Zenodo as a zipped archive. The workflow does not
 finalize the resulting deposition on Zenodo, so that the repository admin has a chance to review the draft
-deposition before making it final by pressing the "Publish" button on Zenodo.  
+deposition before making it final by pressing the "Publish" button on Zenodo.
+
+## GitHub
+
+TODO
+
+## PyPI
+
+TODO
 
 # notes
 
