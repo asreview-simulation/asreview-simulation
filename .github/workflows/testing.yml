@@ -34,6 +34,9 @@ jobs:
       - name: Run unit tests
         shell: bash
         run: pytest -v tests/unit
+      - name: Run mocked tests
+        shell: bash
+        run: pytest -v tests/mocked
       - name: Run integration tests
         shell: bash
         run: pytest -v tests/it
