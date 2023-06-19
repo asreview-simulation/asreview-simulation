@@ -14,7 +14,7 @@ name = EmbeddingLSTM.name
 @click.option(
     "--embedding",
     "embedding",
-    help="File path of embedding matrix. Required for LSTM models.",
+    help="File path of embedding matrix.",
     type=click.Path(exists=True),
 )
 @click.option(
@@ -92,7 +92,7 @@ def embedding_lstm_extractor(
         )
     obj.extractor.abbr = name
     obj.extractor.params = {
-        "embedding": embedding,
+        "embedding_fp": embedding,
         "loop_sequence": loop_sequence,
         "max_sequence_length": max_sequence_length,
         "n_jobs": n_jobs,

@@ -3,7 +3,7 @@ from click.testing import CliRunner
 from asreview_simulation.cli import cli
 
 
-def test_embeddding_idf_extractor_default_parameterization():
+def test_embedding_idf_extractor_default_parameterization():
     runner = CliRunner()
     args = [
         "fex:embedding-idf",

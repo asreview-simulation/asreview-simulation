@@ -10,6 +10,7 @@ import asreview_simulation
 from asreview_simulation.cli import cli
 from tests.helpers import compare_arguments_mock
 from tests.helpers import get_model_combinatorics
+from tests.helpers import get_xfails
 
 
 def test_minimal_args():
@@ -67,7 +68,7 @@ def test_with_model_combinations(parameterization):
 
     def run_asreview_simulate_cli():
         embedding_pars = list()
-        if fex == "embedding-idf" or fex == "embedding-lstm":
+        if fex == "embedding-lstm":
             embedding_pars += ["--embedding"]
             embedding_pars += [str(get_data_home() / "fasttext.cc.en.300.vec")]
         args = [
@@ -104,7 +105,7 @@ def test_with_model_combinations(parameterization):
 
     def run_asreview_simulation_start_cli():
         embedding_pars = list()
-        if fex == "embedding-idf" or fex == "embedding-lstm":
+        if fex == "embedding-lstm":
             embedding_pars += ["--embedding"]
             embedding_pars += [str(get_data_home() / "fasttext.cc.en.300.vec")]
         args = [
@@ -136,8 +137,13 @@ def test_with_model_combinations(parameterization):
             runner.invoke(cli, args)
             return asreview_simulation.cli.terminators._start.ReviewSimulate.call_args
 
+    xfail, reason = get_xfails(parameterization)
+    if xfail:
+        pytest.xfail(reason=reason)
+
     dataset = "benchmark:van_de_Schoot_2017"
     bal, cls, fex, qry = parameterization.split(",")
+
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"

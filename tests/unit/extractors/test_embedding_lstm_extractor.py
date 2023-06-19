@@ -3,7 +3,7 @@ from click.testing import CliRunner
 from asreview_simulation.cli import cli
 
 
-def test_embeddding_lstm_extractor_default_parameterization():
+def test_embedding_lstm_extractor_default_parameterization():
     runner = CliRunner()
     args = [
         "fex:embedding-lstm",
@@ -13,6 +13,9 @@ def test_embeddding_lstm_extractor_default_parameterization():
     extractor = json.loads(result.output)["extractor"]
     assert extractor["abbr"] == "embedding-lstm"
     params = extractor["params"].keys()
+    assert len(params) == 7
+    assert "embedding_fp" in params
+    assert extractor["params"]["embedding_fp"] is None
     assert "loop_sequence" in params
     assert extractor["params"]["loop_sequence"] == 1
     assert "max_sequence_length" in params

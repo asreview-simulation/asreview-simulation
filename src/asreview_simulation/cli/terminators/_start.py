@@ -68,25 +68,35 @@ def start(obj, dot_asreview_file, data, dataset, seed, write_interval):
 
     random_state = numpy.random.RandomState(seed)
 
-    classifier = get_classifier(
-        obj.classifier.abbr, random_state=random_state, **obj.classifier.params
-    )
+    # these are not valid parameter names, pop them into variables of their own
     n_instances = obj.querier.params.pop("n_instances", 1)
+
+    # assign model parameterizations using the data from obj
+    if obj.extractor.abbr == "embedding-lstm":
+        assert obj.classifier.abbr.startswith("lstm-"), "fex:embedding-lstm only works with cls:lstm-* classifiers."
+        classifier = get_classifier(
+            obj.classifier.abbr, random_state=random_state, **obj.classifier.params
+        )
+        embedding_fp = obj.extractor.params.pop("embedding_fp", None)
+        extractor = get_feature_model(
+            obj.extractor.abbr, random_state=random_state, **obj.extractor.params
+        )
+        classifier.embedding_matrix = extractor.get_embedding_matrix(
+            as_data.texts, embedding_fp
+        )
+    else:
+        classifier = get_classifier(
+            obj.classifier.abbr, random_state=random_state, **obj.classifier.params
+        )
+        extractor = get_feature_model(
+            obj.extractor.abbr, random_state=random_state, **obj.extractor.params
+        )
     querier = get_query_model(
         obj.querier.abbr, random_state=random_state, **obj.querier.params
     )
     balancer = get_balance_model(
         obj.balancer.abbr, random_state=random_state, **obj.balancer.params
     )
-    embedding = obj.extractor.params.pop("embedding", None)
-    extractor = get_feature_model(
-        obj.extractor.abbr, random_state=random_state, **obj.extractor.params
-    )
-
-    if classifier.name.startswith("lstm-"):
-        classifier.embedding_matrix = extractor.get_embedding_matrix(
-            as_data.texts, embedding
-        )
 
     n_papers = None
     stop_if = assign_vars_for_stopping(obj)

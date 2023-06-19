@@ -70,7 +70,7 @@ def test_with_model_combinations(parameterization):
 
     def run_asreview_simulate_cli():
         embedding_pars = list()
-        if fex == "embedding-idf" or fex == "embedding-lstm":
+        if fex == "embedding-lstm":
             embedding_pars += ["--embedding"]
             embedding_pars += [str(get_data_home() / "fasttext.cc.en.300.vec")]
         args = [
