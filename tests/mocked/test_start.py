@@ -1,15 +1,15 @@
+import unittest.mock
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from asreview.entry_points import SimulateEntryPoint
-from click.testing import CliRunner
-from asreview_simulation.cli import cli
 import asreview
-import asreview_simulation
-import unittest.mock
-from tests.helpers import compare_arguments_mock
-from tests.helpers import get_model_combinatorics
 import pytest
 from asreview import get_data_home
+from asreview.entry_points import SimulateEntryPoint
+from click.testing import CliRunner
+import asreview_simulation
+from asreview_simulation.cli import cli
+from tests.helpers import compare_arguments_mock
+from tests.helpers import get_model_combinatorics
 
 
 def test_minimal_args():

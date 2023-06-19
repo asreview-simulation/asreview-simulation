@@ -1,11 +1,11 @@
+import unittest.mock
 from pathlib import Path
 from tempfile import TemporaryDirectory
+import asreview
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
-from asreview_simulation.cli import cli
-import asreview
 import asreview_simulation
-import unittest.mock
+from asreview_simulation.cli import cli
 from tests.helpers import compare_arguments_mock
 
 
