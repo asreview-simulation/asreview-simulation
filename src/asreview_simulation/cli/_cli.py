@@ -187,9 +187,9 @@ def _add_stopping_subcommands():
 
 def _add_terminator_subcommands():
     my_terminators = [
+        start,
         print_settings,
         save_settings,
-        start,
     ]
     try:
         other_terminators = [
@@ -201,7 +201,7 @@ def _add_terminator_subcommands():
             + f"'asreview_simulation.terminators'. The error message was: {e}\nContinuing..."
         )
         other_terminators = []
-    for t in _sort_commands(my_terminators + other_terminators):
+    for t in my_terminators + other_terminators:
         cli.add_command(t)
 
 
@@ -274,11 +274,11 @@ def cli(ctx):
         ctx.obj = State()
 
 
+_add_terminator_subcommands()
 _add_starter_subcommands()
 _add_sampler_subcommands()
-_add_balancer_subcommands()
-_add_classifier_subcommands()
 _add_extractor_subcommands()
+_add_classifier_subcommands()
 _add_querier_subcommands()
+_add_balancer_subcommands()
 _add_stopping_subcommands()
-_add_terminator_subcommands()

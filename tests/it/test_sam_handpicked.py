@@ -1,17 +1,14 @@
-import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
-import numpy
-from asreview.data import load_data
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
 from asreview_simulation.cli import cli
-from tests.it.helpers import compare_data_csv
-from tests.it.helpers import compare_project_json
-from tests.it.helpers import compare_results_sql
-from tests.it.helpers import compare_settings_metadata_json
-from tests.it.helpers import rename_simulation_results
-from tests.it.helpers import unzip_simulate_results
+from tests.helpers import compare_data_csv
+from tests.helpers import compare_project_json
+from tests.helpers import compare_results_sql
+from tests.helpers import compare_settings_metadata_json
+from tests.helpers import rename_simulation_results
+from tests.helpers import unzip_simulate_results
 
 
 def test_with_records():
