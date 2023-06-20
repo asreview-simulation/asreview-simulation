@@ -4,6 +4,10 @@
 
 # asreview-simulation
 
+Command line interface to simulate an [ASReview](https://pypi.org/project/asreview) analysis using a variety
+of classifiers, feature extractors, queriers, and balancers, which can all be configured to run with
+custom parameterizations.
+
 ## Install
 
 ```shell
@@ -102,7 +106,7 @@ asreview simulation sam:random --n_included 10 --n_excluded 15            \
                     cls:nb --alpha 3.823                                  \
                     qry:max_random --mix_ratio 0.95 --n_instances 10      \
                     bal:double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \
-                    stp:n 20                                              \
+                    stp:nq 20                                              \
                     start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
 ```
 
@@ -138,7 +142,7 @@ qry:max_uncertainty  Mixed query strategy ('max' and 'uncertainty')
 qry:random           Random query
 qry:uncertainty      Uncertainty query strategy
 stp:min              Stop the simulation once all relevant records have...
-stp:n                Stop the simulation after evaluating N queries,...
+stp:nq               Stop the simulation after evaluating N queries,...
 stp:none             Stop the simulation after evaluating all records,...
 print-settings       Print settings
 save-settings        Save settings
