@@ -8,7 +8,7 @@ name = MaxQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Use Max querier",
+    help="Use Max query strategy",
     name=f"qry:{name}",
 )
 @click.option(

@@ -8,7 +8,7 @@ name = DoubleBalance.name
 
 @click.command(
     epilog=epilog,
-    help="Use double balancer",
+    help="Use Double balancer",
     name=f"bal:{name}",
 )
 @click.option(

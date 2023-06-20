@@ -7,7 +7,7 @@ name = "random"
 
 @click.command(
     epilog=epilog,
-    help="Use random prior sampler",
+    help="Use Random prior sampler",
     name=f"sam:{name}",
 )
 @click.option(

@@ -8,7 +8,7 @@ name = UncertaintyQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Uncertainty query strategy",
+    help="Use Uncertainty query strategy",
     name=f"qry:{name}",
 )
 @click.option(

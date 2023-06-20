@@ -8,7 +8,7 @@ name = ClusterQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Use Cluster querier",
+    help="Use Cluster query strategy",
     name=f"qry:{name}",
 )
 @click.option(

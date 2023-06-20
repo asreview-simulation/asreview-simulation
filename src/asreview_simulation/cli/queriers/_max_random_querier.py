@@ -8,7 +8,7 @@ name = MaxRandomQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Mixed query strategy ('max' and 'random')",
+    help="Use Mixed query strategy (Max and Random)",
     name=f"qry:{name}",
 )
 @click.option(

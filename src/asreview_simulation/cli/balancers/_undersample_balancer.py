@@ -8,7 +8,7 @@ name = UndersampleBalance.name
 
 @click.command(
     epilog=epilog,
-    help="Use undersample balancer",
+    help="Use Undersample balancer",
     name=f"bal:{name}",
 )
 @click.option(

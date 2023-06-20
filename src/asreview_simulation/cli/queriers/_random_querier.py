@@ -8,7 +8,7 @@ name = RandomQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Random query",
+    help="Use Random query strategy",
     name=f"qry:{name}",
 )
 @click.option(
