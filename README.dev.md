@@ -21,6 +21,10 @@ pip install --editable .[linting]
 ```
 
 ```shell
+pip install --editable .[publishing]
+```
+
+```shell
 pip install --editable .[doc2vec]
 ```
 
@@ -59,24 +63,38 @@ TODO
 
 TODO
 
-### `tests/it
+### `tests/it`
 
 TODO
 
 ## Publishing
 
+The software is published to various platforms, for details see the sections below.
+
+### Preparation
+
 TODO
+
+- unit tests pass
+- mocked tests pass
+- integration tests pass
+- citation metadata is up to date
+- version is consistent across the repository
+- source dist can be built
+- wheel dist can be built
 
 ### Zenodo
 
-The reposiotry has a GitHub action `zenodraft.yml` which can be triggered manually to publish a snapshot
+The repository has a GitHub action `zenodraft.yml` which can be triggered manually to publish a snapshot
 of the current repository contents (`main` branch) to Zenodo as a zipped archive. The workflow does not
 finalize the resulting deposition on Zenodo, so that the repository admin has a chance to review the draft
 deposition before making it final by pressing the "Publish" button on Zenodo.
 
 ## GitHub
 
-TODO
+Click the "Draft a new release" button on the releases page
+[https://github.com/asreview-tuning/asreview-simulation/releases](https://github.com/asreview-tuning/asreview-simulation/releases).
+Making a release is not set up to also trigger the zenodraft workflow.
 
 ## PyPI
 
