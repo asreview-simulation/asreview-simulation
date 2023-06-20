@@ -2,16 +2,16 @@ import click
 from .._epilog import epilog
 
 
-name = "n"
+name = "nq"
 
 
 @click.command(
     epilog=epilog,
-    help="Stop the simulation after evaluating N queries, regardless of the relevance of evaluated records.",
+    help="Stop the simulation after evaluating N_QUERIES queries, regardless of the relevance of evaluated records.",
     name=f"stp:{name}",
 )
 @click.argument(
-    "n",
+    "n_queries",
     default=None,
     type=click.INT,
 )
@@ -24,7 +24,7 @@ name = "n"
     is_flag=True,
 )
 @click.pass_obj
-def n_stopping(obj, force, n):
+def nq_stopping(obj, force, n_queries):
     if not force:
         assert obj.provided.stopping is False, (
             "Attempted reassignment of stopping. Use the --force flag "
@@ -32,6 +32,6 @@ def n_stopping(obj, force, n):
         )
     obj.stopping.abbr = name
     obj.stopping.params = {
-        "n": n,
+        "n_queries": n_queries,
     }
     obj.provided.stopping = True
