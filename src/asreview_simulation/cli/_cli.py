@@ -133,17 +133,7 @@ def _add_sampler_subcommands():
         random_prior_sampler,
         handpicked_prior_sampler,
     ]
-    try:
-        other_samplers = [
-            e.load() for e in entrypoints(group="asreview_simulation.samplers")
-        ]
-    except Exception as e:
-        print(
-            "Something went wrong loading a module from entrypoint group "
-            + f"'asreview_simulation.samplers'. The error message was: {e}\nContinuing..."
-        )
-        other_samplers = []
-    for s in _sort_commands(my_samplers + other_samplers):
+    for s in _sort_commands(my_samplers):
         cli.add_command(s)
 
 
@@ -151,37 +141,17 @@ def _add_starter_subcommands():
     my_starters = [
         load_settings,
     ]
-    try:
-        other_starters = [
-            e.load() for e in entrypoints(group="asreview_simulation.starters")
-        ]
-    except Exception as e:
-        print(
-            "Something went wrong loading a module from entrypoint group "
-            + f"'asreview_simulation.starters'. The error message was: {e}\nContinuing..."
-        )
-        other_starters = []
-    for s in _sort_commands(my_starters + other_starters):
+    for s in _sort_commands(my_starters):
         cli.add_command(s)
 
 
 def _add_stopping_subcommands():
     my_stopping = [
         min_stopping,
-        n_stopping,
+        nq_stopping,
         none_stopping,
     ]
-    try:
-        other_stopping = [
-            e.load() for e in entrypoints(group="asreview_simulation.stopping")
-        ]
-    except Exception as e:
-        print(
-            "Something went wrong loading a module from entrypoint group "
-            + f"'asreview_simulation.stopping'. The error message was: {e}\nContinuing..."
-        )
-        other_stopping = []
-    for t in _sort_commands(my_stopping + other_stopping):
+    for t in _sort_commands(my_stopping):
         cli.add_command(t)
 
 
@@ -191,17 +161,7 @@ def _add_terminator_subcommands():
         print_settings,
         save_settings,
     ]
-    try:
-        other_terminators = [
-            e.load() for e in entrypoints(group="asreview_simulation.terminators")
-        ]
-    except Exception as e:
-        print(
-            "Something went wrong loading a module from entrypoint group "
-            + f"'asreview_simulation.terminators'. The error message was: {e}\nContinuing..."
-        )
-        other_terminators = []
-    for t in my_terminators + other_terminators:
+    for t in my_terminators:
         cli.add_command(t)
 
 

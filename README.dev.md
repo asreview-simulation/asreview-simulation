@@ -92,7 +92,3 @@ TODO
     - new classifier subcommands via entry point group `"asreview_simulation.classifiers"`
     - new extractor subcommands via entry point group `"asreview_simulation.extractors"`
     - new querier subcommands via entry point group `"asreview_simulation.queriers"`
-    - new sampler subcommands via entry point group `"asreview_simulation.samplers"`
-    - new starter subcommands via entry point group `"asreview_simulation.starters"`
-    - new stopping subcommands via entry point group `"asreview_simulation.stopping"` 
-    - new terminator subcommands via entry point group `"asreview_simulation.terminators"`
