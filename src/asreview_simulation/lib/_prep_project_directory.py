@@ -7,7 +7,9 @@ def prep_project_directory(data, dataset, output_file):
     # Prepare an *.asreview.tmp directory which will contain the log / state / configuration
     # of the ASReview analysis. The directory will be zipped later and renamed to *.asreview
 
-    assert output_file.endswith(".asreview"), "OUTPUT_FILE should have '.asreview' filename extension."
+    assert output_file.endswith(
+        ".asreview"
+    ), "OUTPUT_FILE should have '.asreview' filename extension."
 
     case = data is None, dataset is None
     if case == (True, True):

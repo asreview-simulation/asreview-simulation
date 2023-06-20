@@ -26,8 +26,8 @@ from .samplers import handpicked_prior_sampler
 from .samplers import random_prior_sampler
 from .starters import load_settings
 from .stopping import min_stopping
-from .stopping import nq_stopping
 from .stopping import none_stopping
+from .stopping import nq_stopping
 from .terminators import print_settings
 from .terminators import save_settings
 from .terminators import start
