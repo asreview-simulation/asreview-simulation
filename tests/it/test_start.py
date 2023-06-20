@@ -64,7 +64,9 @@ def test_with_model_combinations(parameterization):
     - generate 20 instances in each query
     - stop querying after 5 queries for a total of 110 records
     - use one dataset, benchmark:van_de_Schoot_2017
-    - try different combinations of balancer, classifier, extractor, querier
+    - try different combinations of classifier and extractor
+    - balancer constant, set to 'double'
+    - querier constant, set to 'max'
     - use default parameterization for each model
     """
 
@@ -85,9 +87,9 @@ def test_with_model_combinations(parameterization):
             "-m",
             cls,
             "-q",
-            qry,
+            "max",
             "-b",
-            bal,
+            "double",
             "-e",
             fex,
             *embedding_pars,
@@ -115,14 +117,14 @@ def test_with_model_combinations(parameterization):
             "5",
             "--n_excluded",
             "5",
-            f"bal:{bal}",
+            f"bal:double",
             f"cls:{cls}",
             f"fex:{fex}",
             *embedding_pars,
-            f"qry:{qry}",
+            f"qry:max",
             "--n_instances",
             "20",
-            "stp:n",
+            "stp:nq",
             "5",
             "start",
             "--dataset",
@@ -137,7 +139,7 @@ def test_with_model_combinations(parameterization):
         rename_simulation_results(p2)
 
     dataset = "benchmark:van_de_Schoot_2017"
-    bal, cls, fex, qry = parameterization.split(",")
+    cls, fex = parameterization.split(",")
 
     xfail, reason = get_xfails(parameterization)
     if xfail:

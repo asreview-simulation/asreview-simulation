@@ -39,7 +39,7 @@ def test_with_init_seed():
             "5",
             "--n_excluded",
             "5",
-            "stp:n",
+            "stp:nq",
             "0",
             "start",
             "--dataset",
