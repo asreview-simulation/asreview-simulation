@@ -1,4 +1,3 @@
-from warnings import warn
 import click
 import numpy
 from asreview.models.balance import get_balance_model
@@ -14,11 +13,11 @@ from asreview_simulation.lib import prep_project_directory
 
 @click.command(
     "start",
-    help="Start the simulation and write the results to a new file DOT_ASREVIEW_FILE.\n\n"
-    + "This command terminates parsing of further input supplied via the command line.",
+    help="Start the simulation and write the results to a new file OUTPUT_FILE whose "
+    + "filename must end in '.asreview'.",
     context_settings=dict(max_content_width=120),
 )
-@click.argument("dot_asreview_file", type=click.STRING)
+@click.argument("output_file", type=click.STRING)
 @click.option(
     "--data",
     "data",
@@ -51,20 +50,9 @@ from asreview_simulation.lib import prep_project_directory
     type=click.INT,
 )
 @click.pass_obj
-def start(obj, dot_asreview_file, data, dataset, seed, write_interval):
-    """
-    DOT_ASREVIEW_FILE: the file that will hold the results
-    """
-    if data is None and dataset is None:
-        raise ValueError("Neither '--data' nor '--dataset' was specified.")
-    if data is not None and dataset is not None:
-        raise ValueError(
-            "Expected either '--data' or '--dataset' to be specified, found both."
-        )
-    if dataset not in list_dataset_names():
-        warn("Unrecognized dataset name, not sure this is going to work.")
+def start(obj, output_file, data, dataset, seed, write_interval):
 
-    project, as_data = prep_project_directory(dot_asreview_file, dataset)
+    project, as_data = prep_project_directory(data, dataset, output_file)
 
     random_state = numpy.random.RandomState(seed)
 
@@ -73,7 +61,9 @@ def start(obj, dot_asreview_file, data, dataset, seed, write_interval):
 
     # assign model parameterizations using the data from obj
     if obj.extractor.abbr == "embedding-lstm":
-        assert obj.classifier.abbr.startswith("lstm-"), "fex:embedding-lstm only works with cls:lstm-* classifiers."
+        assert obj.classifier.abbr.startswith(
+            "lstm-"
+        ), "fex:embedding-lstm only works with cls:lstm-* classifiers."
         classifier = get_classifier(
             obj.classifier.abbr, random_state=random_state, **obj.classifier.params
         )
@@ -99,7 +89,7 @@ def start(obj, dot_asreview_file, data, dataset, seed, write_interval):
     )
 
     n_papers = None
-    stop_if = assign_vars_for_stopping(obj)
+    stop_if = assign_vars_for_stopping(obj, as_data, n_instances)
     (
         prior_indices,
         n_prior_included,
