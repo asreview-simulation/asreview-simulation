@@ -171,6 +171,9 @@ def _sort_commands(commands):
 
 def cli_help(cli_name="asreview-simulation"):
     return f"""
+Command line interface to simulate an ASReview analysis using a variety of classifiers, feature
+extractors, queriers, and balancers, which can all be configured to run with custom parameterizations.
+
 Printing this help:
 
 $ {cli_name} --help
