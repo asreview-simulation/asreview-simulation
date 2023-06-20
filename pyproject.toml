@@ -15,9 +15,10 @@ description = "Simulate a manual ASReview analysis"
 
 [project.optional-dependencies]
 linting = ["pre-commit"]
-doc2vec = ['gensim']
-sbert = ['sentence_transformers']
-tensorflow = ['tensorflow~=2.0']
+doc2vec = ["gensim"]
+publishing = ["twine"]
+sbert = ["sentence_transformers"]
+tensorflow = ["tensorflow~=2.0"]
 testing = ["pytest"]
 
 [project.scripts]
