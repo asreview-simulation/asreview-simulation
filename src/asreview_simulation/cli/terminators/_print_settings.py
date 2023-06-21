@@ -5,7 +5,7 @@ import click
 @click.command(
     "print-settings",
     help="Print settings",
-    short_help="Print settings"
+    short_help="Print settings",
 )
 @click.option(
     "-p",
