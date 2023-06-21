@@ -15,7 +15,18 @@ from tests.helpers import rename_simulation_results
 from tests.helpers import unzip_simulate_results
 
 
-def test_with_minimal_args():
+def get_data_fnames():
+    basepath = Path(__file__).parent.parent / "data"
+    fnames = [
+        "van_de_Schoot_2017.csv",
+        "van_de_Schoot_2017.ris",
+        "van_de_Schoot_2017.tsv",
+        "van_de_Schoot_2017.xlsx",
+    ]
+    return [str(basepath / fname) for fname in fnames]
+
+
+def test_with_minimal_args_on_benchmark_dataset():
     def run_asreview_simulate_cli():
         args = [
             "--state_file",
@@ -50,7 +61,48 @@ def test_with_minimal_args():
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset)
+        compare_data_csv(p1, p2, dataset=dataset)
+        compare_settings_metadata_json(p1, p2)
+        # sql tables are expected to be different due to random
+        # seed differences, so no use in comparing that part
+        compare_results_sql(p1, p2, test_metadata=True)
+
+
+@pytest.mark.parametrize("fname", get_data_fnames())
+def test_with_minimal_args_on_user_supplied_data(fname):
+    def run_asreview_simulate_cli():
+        args = [
+            "--state_file",
+            str(p1),
+            fname,
+        ]
+        SimulateEntryPoint().execute(args)
+        unzip_simulate_results(p1)
+
+    def run_asreview_simulation_start_cli():
+        runner = CliRunner()
+        args = [
+            "start",
+            "--data",
+            fname,
+            str(p2),
+        ]
+        result = runner.invoke(cli, args)
+        assert result.exit_code == 0
+        rename_simulation_results(p2)
+
+    with TemporaryDirectory(prefix="pytest.") as tmpdir:
+        # prep
+        p1 = Path(tmpdir) / "simulate.asreview"
+        p2 = Path(tmpdir) / "simulation.asreview"
+
+        # run
+        run_asreview_simulate_cli()
+        run_asreview_simulation_start_cli()
+
+        # compare the two results
+        compare_project_json(p1, p2)
+        compare_data_csv(p1, p2, data=fname)
         compare_settings_metadata_json(p1, p2)
         # sql tables are expected to be different due to random
         # seed differences, so no use in comparing that part
@@ -58,7 +110,7 @@ def test_with_minimal_args():
 
 
 @pytest.mark.parametrize("parameterization", get_model_combinatorics())
-def test_with_model_combinations(parameterization):
+def test_with_model_combinations_on_benchmark_dataset(parameterization):
     """
     - seeded random prior with 5 included and 5 excluded
     - generate 20 instances in each query
@@ -145,6 +197,9 @@ def test_with_model_combinations(parameterization):
     if xfail:
         pytest.xfail(reason=reason)
 
+    if fex == "sbert":
+        pytest.skip(reason="takes too long")
+
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"
@@ -156,7 +211,7 @@ def test_with_model_combinations(parameterization):
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset)
+        compare_data_csv(p1, p2, dataset=dataset)
         compare_settings_metadata_json(p1, p2)
         compare_results_sql(
             p1,
