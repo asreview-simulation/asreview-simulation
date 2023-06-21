@@ -22,7 +22,7 @@ def test_with_init_seed():
             "5",
             "--stop_if",
             "0",
-            dataset,
+            benchmark,
         ]
         with unittest.mock.patch(mocked1, autospec=True, return_value=None):
             try:
@@ -43,15 +43,16 @@ def test_with_init_seed():
             "stp-nq",
             "0",
             "start",
-            "--dataset",
-            dataset,
+            "--benchmark",
+            benchmark,
+            "--out",
             str(p2),
         ]
         with unittest.mock.patch(mocked2, autospec=True, return_value=None):
             runner.invoke(cli, args)
             return asreview_simulation.cli.terminators._start.ReviewSimulate.call_args
 
-    dataset = "benchmark:van_de_Schoot_2017"
+    benchmark = "benchmark:van_de_Schoot_2017"
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"

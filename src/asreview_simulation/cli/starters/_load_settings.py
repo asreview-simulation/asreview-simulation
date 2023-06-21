@@ -7,8 +7,12 @@ import click
     help="Load settings",
     short_help="Load settings",
 )
-@click.argument(
+@click.option(
+    "--from",
     "settings_file",
+    help="The file holding the settings",
+    default=None,
+    required=True,
     type=click.File("rt"),
 )
 @click.pass_obj

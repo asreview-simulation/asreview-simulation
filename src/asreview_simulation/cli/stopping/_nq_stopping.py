@@ -12,11 +12,6 @@ name = "nq"
     name=f"stp-{name}",
     short_help="Number of queries based stopping rule",
 )
-@click.argument(
-    "n_queries",
-    default=None,
-    type=click.INT,
-)
 @click.option(
     "-f",
     "--force",
@@ -24,6 +19,14 @@ name = "nq"
     help="Force setting the stopping configuration, even if that me"
     + "ans overwriting a previous configuration.",
     is_flag=True,
+)
+@click.option(
+    "--n_queries",
+    "n_queries",
+    help="Number of queries after which the simulation ends",
+    default=None,
+    required=True,
+    type=click.INT,
 )
 @click.pass_obj
 def nq_stopping(obj, force, n_queries):

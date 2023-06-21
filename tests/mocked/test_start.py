@@ -18,7 +18,7 @@ def test_minimal_args():
         args = [
             "--state_file",
             str(p1),
-            dataset,
+            benchmark,
         ]
         with unittest.mock.patch(mocked1, autospec=True, return_value=None):
             try:
@@ -30,15 +30,16 @@ def test_minimal_args():
         runner = CliRunner()
         args = [
             "start",
-            "--dataset",
-            dataset,
+            "--benchmark",
+            benchmark,
+            "--out",
             str(p2),
         ]
         with unittest.mock.patch(mocked2, autospec=True, return_value=None):
             runner.invoke(cli, args)
             return asreview_simulation.cli.terminators._start.ReviewSimulate.call_args
 
-    dataset = "benchmark:van_de_Schoot_2017"
+    benchmark = "benchmark:van_de_Schoot_2017"
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"
@@ -97,7 +98,7 @@ def test_with_model_combinations(parameterization):
             "5",
             "--n_instances",
             "20",
-            dataset,
+            benchmark,
         ]
         with unittest.mock.patch(mocked1, autospec=True, return_value=None):
             try:
@@ -128,10 +129,11 @@ def test_with_model_combinations(parameterization):
             "stp-nq",
             "5",
             "start",
-            "--dataset",
-            dataset,
+            "--benchmark",
+            benchmark,
             "--seed",
             "567",
+            "--out",
             str(p2),
         ]
         runner = CliRunner()
@@ -143,7 +145,7 @@ def test_with_model_combinations(parameterization):
     if xfail:
         pytest.xfail(reason=reason)
 
-    dataset = "benchmark:van_de_Schoot_2017"
+    benchmark = "benchmark:van_de_Schoot_2017"
     cls, fex = parameterization.split(",")
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:

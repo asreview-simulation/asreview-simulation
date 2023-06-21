@@ -7,8 +7,11 @@ import click
     help="Save settings",
     short_help="Save settings",
 )
-@click.argument(
+@click.option(
+    "--to",
     "filename",
+    help="Where to save the settings",
+    required=True,
     type=click.File("w"),
 )
 @click.option(

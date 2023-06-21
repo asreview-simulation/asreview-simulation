@@ -19,7 +19,7 @@ def test_with_records():
             "--prior_record_id",
             *["0", "1", "2", "3", "4", "284", "335", "592", "675", "719"],
             "--",
-            dataset,
+            benchmark,
         ]
         with unittest.mock.patch(mocked1, autospec=True, return_value=None):
             try:
@@ -36,15 +36,16 @@ def test_with_records():
             "stp-nq",
             "0",
             "start",
-            "--dataset",
-            dataset,
+            "--benchmark",
+            benchmark,
+            "--out",
             str(p2),
         ]
         with unittest.mock.patch(mocked2, autospec=True, return_value=None):
             runner.invoke(cli, args)
             return asreview_simulation.cli.terminators._start.ReviewSimulate.call_args
 
-    dataset = "benchmark:van_de_Schoot_2017"
+    benchmark = "benchmark:van_de_Schoot_2017"
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"
@@ -70,7 +71,7 @@ def test_with_rows():
             "--prior_idx",
             *["0", "1", "2", "3", "4", "284", "335", "592", "675", "719"],
             "--",
-            dataset,
+            benchmark,
         ]
         with unittest.mock.patch(mocked1, autospec=True, return_value=None):
             try:
@@ -87,15 +88,16 @@ def test_with_rows():
             "stp-nq",
             "0",
             "start",
-            "--dataset",
-            dataset,
+            "--benchmark",
+            benchmark,
+            "--out",
             str(p2),
         ]
         with unittest.mock.patch(mocked2, autospec=True, return_value=None):
             runner.invoke(cli, args)
             return asreview_simulation.cli.terminators._start.ReviewSimulate.call_args
 
-    dataset = "benchmark:van_de_Schoot_2017"
+    benchmark = "benchmark:van_de_Schoot_2017"
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"

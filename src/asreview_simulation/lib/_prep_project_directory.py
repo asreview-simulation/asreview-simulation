@@ -3,7 +3,7 @@ from asreview.data import load_data
 from asreview.project import ASReviewProject
 
 
-def prep_project_directory(data, dataset, output_file):
+def prep_project_directory(benchmark, input_file, output_file):
     # Prepare an *.asreview.tmp directory which will contain the log / state / configuration
     # of the ASReview analysis. The directory will be zipped later and renamed to *.asreview
 
@@ -11,28 +11,29 @@ def prep_project_directory(data, dataset, output_file):
         ".asreview"
     ), "OUTPUT_FILE should have '.asreview' filename extension."
 
-    case = data is None, dataset is None
+    case = input_file is None, benchmark is None
     if case == (True, True):
-        raise ValueError("Neither '--data' nor '--dataset' was specified.")
+        raise ValueError("Neither '--in' nor '--benchmark' was specified.")
     elif case == (True, False):
-        # Use --dataset as the source
-        as_data = load_data(dataset)
-        if dataset.startswith("benchmark:"):
-            dataset_path = f"{dataset[10:]}.csv"
+        # Use --benchmark as the source
+        as_data = load_data(benchmark)
+        if benchmark.startswith("benchmark:"):
+            dataset_path = f"{benchmark[10:]}.csv"
         else:
-            dataset_path = f"{dataset}.csv"
+            dataset_path = f"{benchmark}.csv"
+        if len(as_data) == 0:
+            raise ValueError("Choose a benchmark dataset with at least one record.")
     elif case == (False, True):
-        # Use --data as the source
-        as_data = load_data(data)
-        dataset_path = str(Path(data).with_suffix(".csv").name)
+        # Use --in as the source
+        as_data = load_data(input_file)
+        dataset_path = str(Path(input_file).with_suffix(".csv").name)
+        if len(as_data) == 0:
+            raise ValueError("Supply data with at least one record.")
     elif case == (False, False):
-        msg = "Expected either '--data' or '--dataset' to be specified, found both."
+        msg = "Expected either '--in' or '--benchmark' to be specified, found both."
         raise ValueError(msg)
     else:
         raise ValueError("Unexpected case.")
-
-    if len(as_data) == 0:
-        raise ValueError("Supply at least one dataset with at least one record.")
 
     # Create the .asreview.tmp directory
     name = Path(output_file).stem

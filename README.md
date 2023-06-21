@@ -46,14 +46,23 @@ Start a simulation using the default combination of models (`sam-random`,
 parameterization:
 
 ```shell
-asreview simulation start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+asreview simulation start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+```
+
+Instead of a benchmark dataset, you can also supply your own data via the `--in` option, as follows:
+
+```shell
+asreview simulation start --in ./myfile.csv --out ./project.asreview
+asreview simulation start --in ./myfile.ris --out ./project.asreview
+asreview simulation start --in ./myfile.tsv --out ./project.asreview
+asreview simulation start --in ./myfile.xlsx --out ./project.asreview
 ```
 
 Using a different classifier strategy can be accomplished by using one of
 the `cls-*` subcommands before issuing the `start` subcommand, e.g.:
 
 ```shell
-asreview simulation cls-logistic start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+asreview simulation cls-logistic start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 Subcommands can be chained together, for example using the logistic
@@ -61,7 +70,7 @@ classifier with the undersample balancer goes like this:
 
 ```shell
 asreview simulation cls-logistic bal-undersample \
-                    start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+                    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 Most subcommands have their own parameterization. Check the help of a
@@ -97,7 +106,7 @@ Passing parameters to a subcommand goes like this:
 
 ```shell
 asreview simulation cls-logistic --class_weight 1.1 \
-                    start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+                    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 By using individually parameterized, chained subcommands we can compose a
@@ -109,8 +118,8 @@ asreview simulation sam-random --n_included 10 --n_excluded 15            \
                     cls-nb --alpha 3.823                                  \
                     qry-max-random --mix_ratio 0.95 --n_instances 10      \
                     bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \
-                    stp-nq 20                                              \
-                    start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+                    stp-nq --n_queries 20                                 \
+                    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 Chained commands are evaluated left to right; make sure to end the chain

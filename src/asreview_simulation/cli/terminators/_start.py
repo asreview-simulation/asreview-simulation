@@ -13,30 +13,40 @@ from asreview_simulation.lib import prep_project_directory
 
 @click.command(
     "start",
-    help="Start the simulation and write the results to a new file OUTPUT_FILE whose "
-    + "filename must end in '.asreview'.",
+    help="Start the simulation",
     context_settings=dict(max_content_width=120),
     short_help="Start the simulation",
 )
-@click.argument(
-    "output_file",
+@click.option(
+    "--benchmark",
+    "benchmark",
+    default=None,
+    help="Name of the dataset that contains the fully labeled data. Precludes "
+    + "usage of --in. Valid values are: "
+    + ", ".join([f"'{d}'" for d in list_dataset_names()]),
     type=click.STRING,
 )
 @click.option(
-    "--data",
-    "data",
+    "--in",
+    "input_file",
     default=None,
-    help="Name of the file that contains the fully labeled data. Precludes usage of --dataset.",
+    help="Name of the file that contains the fully labeled data. Precludes usage of --benchmark.",
     type=click.Path(exists=True, readable=True),
 )
 @click.option(
-    "--dataset",
-    "dataset",
+    "--no-zip",
+    "no_zip",
+    default=False,
+    help="Include this flag to avoid zipping the results of the analysis",
+    is_flag=True,
+)
+@click.option(
+    "--out",
+    "output_file",
     default=None,
-    help="Name of the dataset that contains the fully labeled data. Precludes "
-    + "usage of --data. Valid options are: "
-    + ", ".join([f"'{d}'" for d in list_dataset_names()]),
-    type=click.STRING,
+    help="Name of the file that will hold the results. Filename must end in '.asreview'.",
+    required=True,
+    type=click.Path(),
 )
 @click.option(
     "--seed",
@@ -54,8 +64,9 @@ from asreview_simulation.lib import prep_project_directory
     type=click.INT,
 )
 @click.pass_obj
-def start(obj, output_file, data, dataset, seed, write_interval):
-    project, as_data = prep_project_directory(data, dataset, output_file)
+def start(obj, benchmark, input_file, no_zip, output_file, seed, write_interval):
+
+    project, as_data = prep_project_directory(benchmark, input_file, output_file)
 
     random_state = numpy.random.RandomState(seed)
 
@@ -122,3 +133,10 @@ def start(obj, output_file, data, dataset, seed, write_interval):
     reviewer.review()
     click.echo("Simulation finished")
     project.mark_review_finished()  # (has side effects on disk)
+
+    # rename the .asreview.tmp directory to just .asreview
+    print("TODO renaming")
+
+    if not no_zip:
+        # zip the results
+        print("TODO zipping")

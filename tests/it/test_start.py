@@ -26,12 +26,12 @@ def get_data_fnames():
     return [str(basepath / fname) for fname in fnames]
 
 
-def test_with_minimal_args_on_benchmark_dataset():
+def test_with_minimal_args_on_benchmark():
     def run_asreview_simulate_cli():
         args = [
             "--state_file",
             str(p1),
-            dataset,
+            benchmark,
         ]
         SimulateEntryPoint().execute(args)
         unzip_simulate_results(p1)
@@ -40,15 +40,16 @@ def test_with_minimal_args_on_benchmark_dataset():
         runner = CliRunner()
         args = [
             "start",
-            "--dataset",
-            dataset,
+            "--benchmark",
+            benchmark,
+            "--out",
             str(p2),
         ]
         result = runner.invoke(cli, args)
         assert result.exit_code == 0
         rename_simulation_results(p2)
 
-    dataset = "benchmark:van_de_Schoot_2017"
+    benchmark = "benchmark:van_de_Schoot_2017"
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
@@ -61,7 +62,7 @@ def test_with_minimal_args_on_benchmark_dataset():
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset=dataset)
+        compare_data_csv(p1, p2, benchmark=benchmark)
         compare_settings_metadata_json(p1, p2)
         # sql tables are expected to be different due to random
         # seed differences, so no use in comparing that part
@@ -83,8 +84,9 @@ def test_with_minimal_args_on_user_supplied_data(fname):
         runner = CliRunner()
         args = [
             "start",
-            "--data",
+            "--in",
             fname,
+            "--out",
             str(p2),
         ]
         result = runner.invoke(cli, args)
@@ -102,7 +104,7 @@ def test_with_minimal_args_on_user_supplied_data(fname):
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, data=fname)
+        compare_data_csv(p1, p2, input_file=fname)
         compare_settings_metadata_json(p1, p2)
         # sql tables are expected to be different due to random
         # seed differences, so no use in comparing that part
@@ -110,7 +112,7 @@ def test_with_minimal_args_on_user_supplied_data(fname):
 
 
 @pytest.mark.parametrize("parameterization", get_model_combinatorics())
-def test_with_model_combinations_on_benchmark_dataset(parameterization):
+def test_with_model_combinations_on_benchmark(parameterization):
     """
     - seeded random prior with 5 included and 5 excluded
     - generate 20 instances in each query
@@ -151,7 +153,7 @@ def test_with_model_combinations_on_benchmark_dataset(parameterization):
             "5",
             "--n_instances",
             "20",
-            dataset,
+            benchmark,
         ]
         SimulateEntryPoint().execute(args)
         unzip_simulate_results(p1)
@@ -179,10 +181,11 @@ def test_with_model_combinations_on_benchmark_dataset(parameterization):
             "stp-nq",
             "5",
             "start",
-            "--dataset",
-            dataset,
+            "--benchmark",
+            benchmark,
             "--seed",
             "567",
+            "--out",
             str(p2),
         ]
         runner = CliRunner()
@@ -190,7 +193,7 @@ def test_with_model_combinations_on_benchmark_dataset(parameterization):
         assert result.exit_code == 0, "cli runner did not exit 0"
         rename_simulation_results(p2)
 
-    dataset = "benchmark:van_de_Schoot_2017"
+    benchmark = "benchmark:van_de_Schoot_2017"
     cls, fex = parameterization.split(",")
 
     xfail, reason = get_xfails(parameterization)
@@ -211,7 +214,7 @@ def test_with_model_combinations_on_benchmark_dataset(parameterization):
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset=dataset)
+        compare_data_csv(p1, p2, benchmark=benchmark)
         compare_settings_metadata_json(p1, p2)
         compare_results_sql(
             p1,

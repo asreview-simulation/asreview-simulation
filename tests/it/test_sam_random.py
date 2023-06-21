@@ -24,7 +24,7 @@ def test_with_init_seed():
             "5",
             "--stop_if",
             "0",
-            dataset,
+            benchmark,
         ]
         SimulateEntryPoint().execute(args)
         unzip_simulate_results(p1)
@@ -42,15 +42,16 @@ def test_with_init_seed():
             "stp-nq",
             "0",
             "start",
-            "--dataset",
-            dataset,
+            "--benchmark",
+            benchmark,
+            "--out",
             str(p2),
         ]
         result = runner.invoke(cli, args)
         assert result.exit_code == 0
         rename_simulation_results(p2)
 
-    dataset = "benchmark:van_de_Schoot_2017"
+    benchmark = "benchmark:van_de_Schoot_2017"
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
@@ -63,7 +64,7 @@ def test_with_init_seed():
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset=dataset)
+        compare_data_csv(p1, p2, benchmark=benchmark)
         compare_settings_metadata_json(p1, p2)
         compare_results_sql(
             p1,
