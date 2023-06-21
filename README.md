@@ -75,7 +75,7 @@ The above command will print:
 ```shell
 Usage: asreview simulation cls-logistic [OPTIONS]
 
-  Use Logistic Regression classifier
+  Configure the simulation to use Logistic Regression classifier
 
 Options:
   --c FLOAT             hyperparameter  [default: 1.0]
@@ -85,9 +85,12 @@ Options:
   -h, --help            Show this message and exit.
 
   This command is chainable with other commands. Chained commands are
-  evaluated left to right; make sure to end the chain with either a 'start'
-  command or a 'print-settings' command, otherwise it may appear like nothing
-  is happening.
+  evaluated left to right; make sure to end the chain with the 'start'
+  command, otherwise it may appear like nothing is happening.
+
+  Please report any issues at:
+
+  https://github.com/asreview-tuning/asreview-simulation/issues.
 ```
 
 Passing parameters to a subcommand goes like this:
