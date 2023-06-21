@@ -107,7 +107,7 @@ variety of configurations, e.g.:
 asreview simulation sam-random --n_included 10 --n_excluded 15            \
                     fex-tfidf --ngram_max 2                               \
                     cls-nb --alpha 3.823                                  \
-                    qry-max_random --mix_ratio 0.95 --n_instances 10      \
+                    qry-max-random --mix_ratio 0.95 --n_instances 10      \
                     bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \
                     stp-nq 20                                              \
                     start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
