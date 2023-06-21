@@ -111,8 +111,7 @@ asreview simulation sam-random --n_included 10 --n_excluded 15            \
 ```
 
 Chained commands are evaluated left to right; make sure to end the chain
-with either a `start` command or a `print-settings` command, otherwise it
-may appear like nothing is happening.
+with the `start` command, otherwise it may appear like nothing is happening.
 
 Here is the list of subcommands:
 
