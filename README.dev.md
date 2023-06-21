@@ -90,13 +90,13 @@ of the current repository contents (`main` branch) to Zenodo as a zipped archive
 finalize the resulting deposition on Zenodo, so that the repository admin has a chance to review the draft
 deposition before making it final by pressing the "Publish" button on Zenodo.
 
-## GitHub
+### GitHub
 
 Click the "Draft a new release" button on the releases page
 [https://github.com/asreview-tuning/asreview-simulation/releases](https://github.com/asreview-tuning/asreview-simulation/releases).
 Making a release is not set up to also trigger the zenodraft workflow.
 
-## PyPI
+### PyPI
 
 TODO
 
