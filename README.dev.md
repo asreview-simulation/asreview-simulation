@@ -67,11 +67,7 @@ TODO
 
 TODO
 
-## Publishing
-
-The software is published to various platforms, for details see the sections below.
-
-### Preparation
+## Publishing: Preparation
 
 TODO
 
@@ -83,24 +79,24 @@ TODO
 - source dist can be built
 - wheel dist can be built
 
-### Zenodo
+## Publishing: Zenodo
 
 The repository has a GitHub action `zenodraft.yml` which can be triggered manually to publish a snapshot
 of the current repository contents (`main` branch) to Zenodo as a zipped archive. The workflow does not
 finalize the resulting deposition on Zenodo, so that the repository admin has a chance to review the draft
 deposition before making it final by pressing the "Publish" button on Zenodo.
 
-### GitHub
+## Publishing: GitHub
 
 Click the "Draft a new release" button on the releases page
 [https://github.com/asreview-tuning/asreview-simulation/releases](https://github.com/asreview-tuning/asreview-simulation/releases).
 Making a release is not set up to also trigger the zenodraft workflow.
 
-### PyPI
+## Publishing: PyPI
 
 TODO
 
-# notes
+## notes
 
 - https://stackoverflow.com/questions/70984166/why-naive-bayes-gives-results-and-on-training-and-test-but-gives-error-of-negati
 - provides a standalone CLI command `asreview-simulation`
