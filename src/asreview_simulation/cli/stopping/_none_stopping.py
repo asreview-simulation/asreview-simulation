@@ -10,7 +10,7 @@ name = "none"
     help="Configure the simulation to stop after evaluating all records, "
     + "regardless of the relevance of evaluated records.",
     name=f"stp-{name}",
-    short_help="No stopping rule"
+    short_help="No stopping rule",
 )
 @click.option(
     "-f",
