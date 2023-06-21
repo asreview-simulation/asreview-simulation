@@ -65,7 +65,6 @@ from asreview_simulation.lib import prep_project_directory
 )
 @click.pass_obj
 def start(obj, benchmark, input_file, no_zip, output_file, seed, write_interval):
-
     project, as_data = prep_project_directory(benchmark, input_file, output_file)
 
     random_state = numpy.random.RandomState(seed)
