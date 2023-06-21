@@ -1,5 +1,5 @@
-from ._calc_hash import calc_hash
 from pathlib import Path
+from ._calc_hash import calc_hash
 
 
 def compare_data_csv(p1, p2, data=None, dataset=None):
@@ -11,6 +11,8 @@ def compare_data_csv(p1, p2, data=None, dataset=None):
     elif data is not None:
         fname = Path(data).with_suffix(".csv").name
     else:
-        raise ValueError("Unexpectedly did not receive a value for 'data' nor for 'dataset'.")
+        raise ValueError(
+            "Unexpectedly did not receive a value for 'data' nor for 'dataset'."
+        )
 
     assert calc_hash(p1 / "data" / fname) == calc_hash(p2 / "data" / fname)
