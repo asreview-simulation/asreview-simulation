@@ -62,15 +62,19 @@ Using a different classifier strategy can be accomplished by using one of
 the `cls-*` subcommands before issuing the `start` subcommand, e.g.:
 
 ```shell
-asreview simulation cls-logistic start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+asreview simulation \
+    cls-logistic \
+    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 Subcommands can be chained together, for example using the logistic
 classifier with the undersample balancer goes like this:
 
 ```shell
-asreview simulation cls-logistic bal-undersample \
-                    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+asreview simulation \
+    cls-logistic \
+    bal-undersample \
+    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 Most subcommands have their own parameterization. Check the help of a
@@ -105,21 +109,23 @@ Options:
 Passing parameters to a subcommand goes like this:
 
 ```shell
-asreview simulation cls-logistic --class_weight 1.1 \
-                    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+asreview simulation \
+    cls-logistic --class_weight 1.1 \
+    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 By using individually parameterized, chained subcommands we can compose a
 variety of configurations, e.g.:
 
 ```shell
-asreview simulation sam-random --n_included 10 --n_excluded 15            \
-                    fex-tfidf --ngram_max 2                               \
-                    cls-nb --alpha 3.823                                  \
-                    qry-max-random --mix_ratio 0.95 --n_instances 10      \
-                    bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \
-                    stp-nq --n_queries 20                                 \
-                    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+asreview simulation \
+    sam-random --n_included 10 --n_excluded 15            \
+    fex-tfidf --ngram_max 2                               \
+    cls-nb --alpha 3.823                                  \
+    qry-max-random --mix_ratio 0.95 --n_instances 10      \
+    bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \
+    stp-nq --n_queries 20                                 \
+    start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 Chained commands are evaluated left to right; make sure to end the chain
