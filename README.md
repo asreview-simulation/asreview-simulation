@@ -117,34 +117,34 @@ may appear like nothing is happening.
 Here is the list of subcommands:
 
 ```shell
-start                Start the simulation and write the results to a...
+start                Start the simulation
 print-settings       Print settings
 save-settings        Save settings
 load-settings        Load settings
-sam-handpicked       Use handpicked prior sampler
-sam-random           Use random prior sampler
-bal-double           Use double balancer
-bal-simple           Use no balancer
-bal-undersample      Use undersample balancer
-cls-logistic         Use Logistic Regression classifier
-cls-lstm-base        Use LSTM Base classifier
-cls-lstm-pool        Use LSTM Pool classifier
-cls-nb               Use Naive Bayes classifier
-cls-nn-2-layer       Use 2-layer Neural Net classifier
-cls-rf               Use Random Forest classifier
-cls-svm              Use Support Vector Machine classifier
-fex-doc2vec          Use Doc2Vec extractor
-fex-embedding-idf    Use Embedding IDF extractor
-fex-embedding-lstm   Use Embedding LSTM extractor
-fex-sbert            Use SBERT extractor
-fex-tfidf            Use TF-IDF extractor
-qry-cluster          Use Cluster querier
-qry-max              Use Max querier
-qry-max_random       Mixed query strategy ('max' and 'random')
-qry-max_uncertainty  Mixed query strategy ('max' and 'uncertainty')
-qry-random           Random query
+sam-handpicked       Handpicked prior sampler
+sam-random           Random prior sampler
+fex-doc2vec          Doc2Vec extractor
+fex-embedding-idf    Embedding IDF extractor
+fex-embedding-lstm   Embedding LSTM extractor
+fex-sbert            SBERT extractor
+fex-tfidf            TF-IDF extractor
+cls-logistic         Logistic Regression classifier
+cls-lstm-base        LSTM Base classifier
+cls-lstm-pool        LSTM Pool classifier
+cls-nb               Naive Bayes classifier
+cls-nn-2-layer       2-layer Neural Net classifier
+cls-rf               Random Forest classifier
+cls-svm              Support Vector Machine classifier
+qry-cluster          Cluster query strategy
+qry-max              Max query strategy
+qry-max-random       Mixed query strategy (Max and Random)
+qry-max-uncertainty  Mixed query strategy (Max and Uncertainty)
+qry-random           Random query strategy
 qry-uncertainty      Uncertainty query strategy
-stp-min              Stop the simulation once all relevant records have...
-stp-nq               Stop the simulation after evaluating N queries,...
-stp-none             Stop the simulation after evaluating all records,...
+bal-double           Double balancer
+bal-simple           No balancer
+bal-undersample      Undersample balancer
+stp-min              'min' stopping rule
+stp-none             No stopping rule
+stp-nq               Number of queries based stopping rule
 ```
