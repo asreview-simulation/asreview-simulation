@@ -24,7 +24,7 @@ def prep_project_directory(data, dataset, output_file):
     elif case == (False, True):
         # Use --data as the source
         as_data = load_data(data)
-        dataset_path = str(Path(data).name)
+        dataset_path = str(Path(data).with_suffix(".csv").name)
     elif case == (False, False):
         msg = "Expected either '--data' or '--dataset' to be specified, found both."
         raise ValueError(msg)
