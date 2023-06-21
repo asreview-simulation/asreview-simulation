@@ -7,6 +7,7 @@ def test_nq_stopping_default_parameterization():
     runner = CliRunner()
     args = [
         "stp-nq",
+        "--n_queries",
         "25",
         "print-settings",
     ]

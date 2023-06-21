@@ -179,6 +179,7 @@ def test_with_model_combinations_on_benchmark(parameterization):
             "--n_instances",
             "20",
             "stp-nq",
+            "--n_queries",
             "5",
             "start",
             "--benchmark",

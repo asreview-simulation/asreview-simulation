@@ -41,6 +41,7 @@ def test_with_init_seed():
             "--n_excluded",
             "5",
             "stp-nq",
+            "--n_queries",
             "0",
             "start",
             "--benchmark",
