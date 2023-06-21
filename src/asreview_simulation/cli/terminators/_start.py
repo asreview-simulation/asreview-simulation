@@ -16,8 +16,12 @@ from asreview_simulation.lib import prep_project_directory
     help="Start the simulation and write the results to a new file OUTPUT_FILE whose "
     + "filename must end in '.asreview'.",
     context_settings=dict(max_content_width=120),
+    short_help="Start the simulation",
 )
-@click.argument("output_file", type=click.STRING)
+@click.argument(
+    "output_file",
+    type=click.STRING,
+)
 @click.option(
     "--data",
     "data",
@@ -62,7 +66,7 @@ def start(obj, output_file, data, dataset, seed, write_interval):
     if obj.extractor.abbr == "embedding-lstm":
         assert obj.classifier.abbr.startswith(
             "lstm-"
-        ), "fex:embedding-lstm only works with cls:lstm-* classifiers."
+        ), "fex-embedding-lstm only works with cls-lstm-* classifiers."
         classifier = get_classifier(
             obj.classifier.abbr, random_state=random_state, **obj.classifier.params
         )

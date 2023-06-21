@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_tfidf_extractor_default_parameterization():
     runner = CliRunner()
     args = [
-        "fex:tfidf",
+        "fex-tfidf",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

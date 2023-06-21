@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_embedding_idf_extractor_default_parameterization():
     runner = CliRunner()
     args = [
-        "fex:embedding-idf",
+        "fex-embedding-idf",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

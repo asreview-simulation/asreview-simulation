@@ -8,8 +8,9 @@ name = MaxUncertaintyQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Use Mixed query strategy (Max and Uncertainty)",
-    name=f"qry:{name}",
+    help="Configure the simulation to use a Mixed query strategy (Max and Uncertainty)",
+    name=f"qry-{name}".replace("_", "-"),
+    short_help="Mixed query strategy (Max and Uncertainty)",
 )
 @click.option(
     "-f",

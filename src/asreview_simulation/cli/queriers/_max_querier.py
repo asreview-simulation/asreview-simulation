@@ -8,8 +8,9 @@ name = MaxQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Use Max query strategy",
-    name=f"qry:{name}",
+    help="Configure the simulation to use Max query strategy",
+    name=f"qry-{name}",
+    short_help="Max query strategy",
 )
 @click.option(
     "-f",

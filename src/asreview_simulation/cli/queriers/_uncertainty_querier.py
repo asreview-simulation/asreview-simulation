@@ -8,8 +8,9 @@ name = UncertaintyQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Use Uncertainty query strategy",
-    name=f"qry:{name}",
+    help="Configure the simulation to use Uncertainty query strategy",
+    name=f"qry-{name}",
+    short_help="Uncertainty query strategy",
 )
 @click.option(
     "-f",

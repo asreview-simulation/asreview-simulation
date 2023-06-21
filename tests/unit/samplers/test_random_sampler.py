@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_random_sampler_default_parameterization():
     runner = CliRunner()
     args = [
-        "sam:random",
+        "sam-random",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

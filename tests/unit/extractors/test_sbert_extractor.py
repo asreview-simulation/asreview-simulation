@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_sbert_extractor_default_parameterization():
     runner = CliRunner()
     args = [
-        "fex:sbert",
+        "fex-sbert",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

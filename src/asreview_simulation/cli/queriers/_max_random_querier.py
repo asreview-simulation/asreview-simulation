@@ -8,8 +8,9 @@ name = MaxRandomQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Use Mixed query strategy (Max and Random)",
-    name=f"qry:{name}",
+    help="Configure the simulation to use a Mixed query strategy (Max and Random)",
+    name=f"qry-{name}".replace("_", "-"),
+    short_help="Mixed query strategy (Max and Random)",
 )
 @click.option(
     "-f",

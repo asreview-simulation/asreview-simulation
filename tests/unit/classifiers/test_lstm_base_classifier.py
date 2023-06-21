@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_lstm_base_classifier_default_parameterization(tmp_path):
     runner = CliRunner()
     args = [
-        "cls:lstm-base",
+        "cls-lstm-base",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

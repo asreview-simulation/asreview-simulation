@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_doc2vec_extractor_default_parameterization():
     runner = CliRunner()
     args = [
-        "fex:doc2vec",
+        "fex-doc2vec",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

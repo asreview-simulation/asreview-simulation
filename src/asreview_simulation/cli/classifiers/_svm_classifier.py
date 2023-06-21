@@ -8,8 +8,9 @@ name = SVMClassifier.name
 
 @click.command(
     epilog=epilog,
-    help="Use Support Vector Machine classifier",
-    name=f"cls:{name}",
+    help="Configure the simulation to use Support Vector Machine classifier",
+    name=f"cls-{name}",
+    short_help="Support Vector Machine classifier",
 )
 @click.option(
     "--c",

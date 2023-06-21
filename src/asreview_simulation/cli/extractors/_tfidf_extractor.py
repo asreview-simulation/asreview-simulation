@@ -8,8 +8,9 @@ name = Tfidf.name
 
 @click.command(
     epilog=epilog,
-    help="Use TF-IDF extractor",
-    name=f"fex:{name}",
+    help="Configure the simulation to use TF-IDF extractor",
+    name=f"fex-{name}",
+    short_help="TF-IDF extractor",
 )
 @click.option(
     "-f",

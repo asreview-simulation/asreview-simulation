@@ -8,8 +8,9 @@ name = LSTMPoolClassifier.name
 
 @click.command(
     epilog=epilog,
-    help="Use LSTM Pool classifier",
-    name=f"cls:{name}",
+    help="Configure the simulation to use LSTM Pool classifier",
+    name=f"cls-{name}",
+    short_help="LSTM Pool classifier",
 )
 @click.option(
     "-f",

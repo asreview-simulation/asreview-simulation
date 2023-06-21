@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_embedding_lstm_extractor_default_parameterization():
     runner = CliRunner()
     args = [
-        "fex:embedding-lstm",
+        "fex-embedding-lstm",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

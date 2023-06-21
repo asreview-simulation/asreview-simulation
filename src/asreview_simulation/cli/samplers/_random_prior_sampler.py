@@ -7,8 +7,9 @@ name = "random"
 
 @click.command(
     epilog=epilog,
-    help="Use Random prior sampler",
-    name=f"sam:{name}",
+    help="Configure the simulation to use Random prior sampler",
+    name=f"sam-{name}",
+    short_help="Random prior sampler",
 )
 @click.option(
     "-f",

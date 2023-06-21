@@ -8,8 +8,9 @@ name = SimpleBalance.name
 
 @click.command(
     epilog=epilog,
-    help="Use no balancer",
-    name=f"bal:{name}",
+    help="Configure the simulation to use no balancer",
+    name=f"bal-{name}",
+    short_help="No balancer",
 )
 @click.option(
     "-f",

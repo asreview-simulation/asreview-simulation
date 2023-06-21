@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_svm_classifier_default_parameterization():
     runner = CliRunner()
     args = [
-        "cls:svm",
+        "cls-svm",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

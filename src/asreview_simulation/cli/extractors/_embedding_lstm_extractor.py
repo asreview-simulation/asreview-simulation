@@ -8,8 +8,9 @@ name = EmbeddingLSTM.name
 
 @click.command(
     epilog=epilog,
-    help="Use Embedding LSTM extractor",
-    name=f"fex:{name}",
+    help="Configure the simulation to use Embedding LSTM extractor",
+    name=f"fex-{name}",
+    short_help="Embedding LSTM extractor",
 )
 @click.option(
     "--embedding",

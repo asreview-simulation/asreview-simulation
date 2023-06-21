@@ -8,8 +8,9 @@ name = DoubleBalance.name
 
 @click.command(
     epilog=epilog,
-    help="Use Double balancer",
-    name=f"bal:{name}",
+    help="Configure the simulation to use Double balancer",
+    name=f"bal-{name}",
+    short_help="Double balancer",
 )
 @click.option(
     "--a",

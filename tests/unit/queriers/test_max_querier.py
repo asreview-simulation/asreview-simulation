@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_max_querier_default_parameterization():
     runner = CliRunner()
     args = [
-        "qry:max",
+        "qry-max",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

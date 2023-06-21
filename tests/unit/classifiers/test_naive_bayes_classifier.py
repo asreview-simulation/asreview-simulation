@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_naive_bayes_classifier_default_parameterization():
     runner = CliRunner()
     args = [
-        "cls:nb",
+        "cls-nb",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

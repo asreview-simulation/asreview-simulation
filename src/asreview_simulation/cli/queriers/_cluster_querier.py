@@ -8,8 +8,9 @@ name = ClusterQuery.name
 
 @click.command(
     epilog=epilog,
-    help="Use Cluster query strategy",
-    name=f"qry:{name}",
+    help="Configure the simulation to use Cluster query strategy",
+    name=f"qry-{name}",
+    short_help="Cluster query strategy",
 )
 @click.option(
     "-f",

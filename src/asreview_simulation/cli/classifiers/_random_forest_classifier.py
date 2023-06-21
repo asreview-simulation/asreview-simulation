@@ -8,8 +8,9 @@ name = RandomForestClassifier.name
 
 @click.command(
     epilog=epilog,
-    help="Use Random Forest classifier",
-    name=f"cls:{name}",
+    help="Configure the simulation to use Random Forest classifier",
+    name=f"cls-{name}",
+    short_help="Random Forest classifier",
 )
 @click.option(
     "--class_weight",

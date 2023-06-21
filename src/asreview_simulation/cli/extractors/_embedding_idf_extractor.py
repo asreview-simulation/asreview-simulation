@@ -8,8 +8,9 @@ name = EmbeddingIdf.name
 
 @click.command(
     epilog=epilog,
-    help="Use Embedding IDF extractor",
-    name=f"fex:{name}",
+    help="Configure the simulation to use Embedding IDF extractor",
+    name=f"fex-{name}",
+    short_help="Embedding IDF extractor",
 )
 @click.option(
     "-f",

@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_double_balancer_default_parameterization():
     runner = CliRunner()
     args = [
-        "bal:double",
+        "bal-double",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

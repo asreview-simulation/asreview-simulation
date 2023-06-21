@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_nn_2_layer_classifier_default_parameterization():
     runner = CliRunner()
     args = [
-        "cls:nn-2-layer",
+        "cls-nn-2-layer",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

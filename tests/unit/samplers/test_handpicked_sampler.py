@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_with_records():
     runner = CliRunner()
     args = [
-        "sam:handpicked",
+        "sam-handpicked",
         "--records",
         "1,2,3",
         "print-settings",
@@ -24,7 +24,7 @@ def test_with_records():
 def test_with_rows():
     runner = CliRunner()
     args = [
-        "sam:handpicked",
+        "sam-handpicked",
         "--rows",
         "1,2,3",
         "print-settings",

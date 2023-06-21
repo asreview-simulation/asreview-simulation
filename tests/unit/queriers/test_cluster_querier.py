@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_cluster_querier_default_parameterization():
     runner = CliRunner()
     args = [
-        "qry:cluster",
+        "qry-cluster",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

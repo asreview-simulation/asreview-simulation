@@ -2,7 +2,11 @@ import json
 import click
 
 
-@click.command("print-settings", help="Print settings")
+@click.command(
+    "print-settings",
+    help="Print settings",
+    short_help="Print settings"
+)
 @click.option(
     "-p",
     "--pretty",

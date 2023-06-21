@@ -7,8 +7,10 @@ name = "none"
 
 @click.command(
     epilog=epilog,
-    help="Stop the simulation after evaluating all records, regardless of the relevance of evaluated records.",
-    name=f"stp:{name}",
+    help="Configure the simulation to stop after evaluating all records, "
+    + "regardless of the relevance of evaluated records.",
+    name=f"stp-{name}",
+    short_help="No stopping rule"
 )
 @click.option(
     "-f",

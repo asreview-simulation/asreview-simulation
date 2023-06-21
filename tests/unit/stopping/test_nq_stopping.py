@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_nq_stopping_default_parameterization():
     runner = CliRunner()
     args = [
-        "stp:nq",
+        "stp-nq",
         "25",
         "print-settings",
     ]

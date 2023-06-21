@@ -182,38 +182,38 @@ Printing the configuration:
 
 $ {cli_name} print-settings
 
-Starting a simulation using the default combination of models (sam:random, bal:double, cls:nb, fex:tfidf,
-qry:max, stp:min), each using its default parameterization:
+Starting a simulation using the default combination of models (sam-random, bal-double, cls-nb, fex-tfidf,
+qry-max, stp-min), each using its default parameterization:
 
 $ {cli_name} start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
 
-Using a different classifier strategy can be accomplished by using one of the 'cls:*' subcommands
+Using a different classifier strategy can be accomplished by using one of the 'cls-*' subcommands
 before issuing the 'start' subcommand, e.g.:
 
-$ {cli_name} cls:logistic start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+$ {cli_name} cls-logistic start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
 
 Subcommands can be chained together, for example using the logistic classifier with
 the undersample balancer goes like this:
 
-$ {cli_name} cls:logistic bal:undersample start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+$ {cli_name} cls-logistic bal-undersample start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
 
 Most subcommands have their own parameterization. Check the help of a subcommand with --help or -h for short, e.g.:
 
-$ {cli_name} cls:logistic --help
+$ {cli_name} cls-logistic --help
 
 Passing parameters to a subcommand goes like this:
 
-$ {cli_name} cls:logistic --class_weight 1.1 start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
+$ {cli_name} cls-logistic --class_weight 1.1 start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
 
 By chaining individually parameterized subcommands, we can compose a variety of configurations, e.g.:
 
 \b
-$ {cli_name} sam:random --n_included 10 --n_excluded 15            \\
-  {' ' * len(cli_name)} fex:tfidf --ngram_max 2                               \\
-  {' ' * len(cli_name)} cls:nb --alpha 3.823                                  \\
-  {' ' * len(cli_name)} qry:max_random --mix_ratio 0.95 --n_instances 10      \\
-  {' ' * len(cli_name)} bal:double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \\
-  {' ' * len(cli_name)} stp:n 20                                              \\
+$ {cli_name} sam-random --n_included 10 --n_excluded 15            \\
+  {' ' * len(cli_name)} fex-tfidf --ngram_max 2                               \\
+  {' ' * len(cli_name)} cls-nb --alpha 3.823                                  \\
+  {' ' * len(cli_name)} qry-max_random --mix_ratio 0.95 --n_instances 10      \\
+  {' ' * len(cli_name)} bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \\
+  {' ' * len(cli_name)} stp-nq 20                                              \\
   {' ' * len(cli_name)} start --dataset benchmark:van_de_Schoot_2017 ./project.asreview
 
 Chained commands are evaluated left to right; make sure to end the chain with

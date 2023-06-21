@@ -2,8 +2,15 @@ import json
 import click
 
 
-@click.command("save-settings", help="Save settings")
-@click.argument("filename", type=click.File("w"))
+@click.command(
+    "save-settings",
+    help="Save settings",
+    short_help="Save settings",
+)
+@click.argument(
+    "filename",
+    type=click.File("w"),
+)
 @click.option(
     "-p",
     "--pretty",

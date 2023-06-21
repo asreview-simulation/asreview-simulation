@@ -8,8 +8,9 @@ name = LogisticClassifier.name
 
 @click.command(
     epilog=epilog,
-    help="Use Logistic Regression classifier",
-    name=f"cls:{name}",
+    help="Configure the simulation to use Logistic Regression classifier",
+    name=f"cls-{name}",
+    short_help="Logistic Regression classifier",
 )
 @click.option(
     "--c",

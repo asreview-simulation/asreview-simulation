@@ -7,8 +7,10 @@ name = "nq"
 
 @click.command(
     epilog=epilog,
-    help="Stop the simulation after evaluating N_QUERIES queries, regardless of the relevance of evaluated records.",
-    name=f"stp:{name}",
+    help="Configure the simulation to stop after evaluating N_QUERIES queries, "
+    + "regardless of the relevance of evaluated records.",
+    name=f"stp-{name}",
+    short_help="Number of queries based stopping rule",
 )
 @click.argument(
     "n_queries",

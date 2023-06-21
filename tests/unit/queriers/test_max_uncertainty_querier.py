@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_max_uncertainty_querier_default_parameterization():
     runner = CliRunner()
     args = [
-        "qry:max_uncertainty",
+        "qry-max-uncertainty",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

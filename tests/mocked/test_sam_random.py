@@ -33,14 +33,14 @@ def test_with_init_seed():
     def run_asreview_simulation_start_cli():
         runner = CliRunner()
         args = [
-            "sam:random",
+            "sam-random",
             "--init_seed",
             "42",
             "--n_included",
             "5",
             "--n_excluded",
             "5",
-            "stp:nq",
+            "stp-nq",
             "0",
             "start",
             "--dataset",

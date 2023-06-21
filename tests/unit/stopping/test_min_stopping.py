@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_min_stopping_default_parameterization():
     runner = CliRunner()
     args = [
-        "stp:min",
+        "stp-min",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

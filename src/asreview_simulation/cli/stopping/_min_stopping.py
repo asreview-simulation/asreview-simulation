@@ -7,8 +7,9 @@ name = "min"
 
 @click.command(
     epilog=epilog,
-    help="Stop the simulation once all relevant records have been found.",
-    name=f"stp:{name}",
+    help="Configure the simulation to stop once all relevant records have been found.",
+    name=f"stp-{name}",
+    short_help="'min' stopping rule",
 )
 @click.option(
     "-f",

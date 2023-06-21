@@ -8,8 +8,9 @@ name = Doc2Vec.name
 
 @click.command(
     epilog=epilog,
-    help="Use Doc2Vec extractor",
-    name=f"fex:{name}",
+    help="Configure the simulation to use Doc2Vec extractor",
+    name=f"fex-{name}",
+    short_help="Doc2Vec extractor",
 )
 @click.option(
     "--epochs",

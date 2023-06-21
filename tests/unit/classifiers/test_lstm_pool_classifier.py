@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_lstm_pool_classifier_default_parameterization(tmp_path):
     runner = CliRunner()
     args = [
-        "cls:lstm-pool",
+        "cls-lstm-pool",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

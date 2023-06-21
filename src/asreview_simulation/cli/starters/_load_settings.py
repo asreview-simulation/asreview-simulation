@@ -2,8 +2,15 @@ import json
 import click
 
 
-@click.command("load-settings", help="Load settings")
-@click.argument("settings_file", type=click.File("rt"))
+@click.command(
+    "load-settings",
+    help="Load settings",
+    short_help="Load settings",
+)
+@click.argument(
+    "settings_file",
+    type=click.File("rt"),
+)
 @click.pass_obj
 def load_settings(obj, settings_file):
     assert obj.provided.balancer is False, "Attempted reassignment of balancer"

@@ -8,8 +8,9 @@ name = SBERT.name
 
 @click.command(
     epilog=epilog,
-    help="Use SBERT extractor",
-    name=f"fex:{name}",
+    help="Configure the simulation to use SBERT extractor",
+    name=f"fex-{name}",
+    short_help="SBERT extractor",
 )
 @click.option(
     "-f",

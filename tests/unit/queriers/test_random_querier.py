@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_random_querier_default_parameterization():
     runner = CliRunner()
     args = [
-        "qry:random",
+        "qry-random",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

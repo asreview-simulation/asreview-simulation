@@ -30,10 +30,10 @@ def test_with_records():
     def run_asreview_simulation_start_cli():
         runner = CliRunner()
         args = [
-            "sam:handpicked",
+            "sam-handpicked",
             "--records",
             "0,1,2,3,4,284,335,592,675,719",
-            "stp:nq",
+            "stp-nq",
             "0",
             "start",
             "--dataset",
@@ -81,10 +81,10 @@ def test_with_rows():
     def run_asreview_simulation_start_cli():
         runner = CliRunner()
         args = [
-            "sam:handpicked",
+            "sam-handpicked",
             "--rows",
             "0,1,2,3,4,284,335,592,675,719",
-            "stp:nq",
+            "stp-nq",
             "0",
             "start",
             "--dataset",

@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_undersample_balancer_default_parameterization():
     runner = CliRunner()
     args = [
-        "bal:undersample",
+        "bal-undersample",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

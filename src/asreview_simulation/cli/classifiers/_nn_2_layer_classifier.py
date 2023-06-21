@@ -8,8 +8,9 @@ name = NN2LayerClassifier.name
 
 @click.command(
     epilog=epilog,
-    help="Use 2-layer Neural Net classifier",
-    name=f"cls:{name}",
+    help="Configure the simulation to use 2-layer Neural Net classifier",
+    name=f"cls-{name}",
+    short_help="2-layer Neural Net classifier",
 )
 @click.option(
     "--batch_size",

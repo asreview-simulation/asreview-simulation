@@ -8,8 +8,9 @@ name = UndersampleBalance.name
 
 @click.command(
     epilog=epilog,
-    help="Use Undersample balancer",
-    name=f"bal:{name}",
+    help="Configure the simulation to use Undersample balancer",
+    name=f"bal-{name}",
+    short_help="Undersample balancer",
 )
 @click.option(
     "-f",

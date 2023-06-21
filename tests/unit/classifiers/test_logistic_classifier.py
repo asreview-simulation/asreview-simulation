@@ -6,7 +6,7 @@ from asreview_simulation.cli import cli
 def test_logistic_classifier_default_parameterization():
     runner = CliRunner()
     args = [
-        "cls:logistic",
+        "cls-logistic",
         "print-settings",
     ]
     result = runner.invoke(cli, args)

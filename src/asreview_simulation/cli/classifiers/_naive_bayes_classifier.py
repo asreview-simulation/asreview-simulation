@@ -8,8 +8,9 @@ name = NaiveBayesClassifier.name
 
 @click.command(
     epilog=epilog,
-    help="Use Naive Bayes classifier",
-    name=f"cls:{name}",
+    help="Configure the simulation to use Naive Bayes classifier",
+    name=f"cls-{name}",
+    short_help="Naive Bayes classifier",
 )
 @click.option(
     "--alpha",
