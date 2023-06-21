@@ -56,7 +56,7 @@ def test_with_records():
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset)
+        compare_data_csv(p1, p2, dataset=dataset)
         compare_settings_metadata_json(p1, p2)
         compare_results_sql(p1, p2, test_metadata=True, test_prior_records=True)
 
@@ -106,6 +106,6 @@ def test_with_rows():
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset)
+        compare_data_csv(p1, p2, dataset=dataset)
         compare_settings_metadata_json(p1, p2)
         compare_results_sql(p1, p2, test_metadata=True, test_prior_records=True)

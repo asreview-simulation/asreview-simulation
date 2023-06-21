@@ -63,7 +63,7 @@ def test_with_init_seed():
 
         # compare the two results
         compare_project_json(p1, p2)
-        compare_data_csv(p1, p2, dataset)
+        compare_data_csv(p1, p2, dataset=dataset)
         compare_settings_metadata_json(p1, p2)
         compare_results_sql(
             p1,
