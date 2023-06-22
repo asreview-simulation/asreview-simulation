@@ -1,6 +1,6 @@
+import os
 from importlib.metadata import entry_points as entrypoints
 import click
-import os
 from ._state import State
 from .balancers import double_balancer
 from .balancers import simple_balancer
