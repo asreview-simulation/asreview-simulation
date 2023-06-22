@@ -53,19 +53,26 @@ pre-commit run --all-files
 
 ## Testing
 
-TODO
+There are various types of test: unit tests, tests that use mocking, and integration tests. Each has its own subdirectory. The tests can be run locally with:
+
+```shell
+pip install --editable .[testing]
+pytest -v
+```
+
+Besides running locally, they can also be run on GitHub infrastructure by manually triggering the GitHub action workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating system (Windows, Linux, MacOS), asreview version (1.x), and python version (3.9, 3.10, 3.11).
 
 ### `tests/unit`
 
-TODO
+These tests are simple, quick to run, and mostly focus on whether the `asreview-simulation` subcommands manipulate the state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one thing that could have gone wrong. This is in contrast to other types of test, e.g. integration testing (see below).  
 
 ### `tests/mocked`
 
-TODO
+The mocked tests verify whether the arguments that `SimulateReview` receives inside `asreview`'s `SimulateEntrypoint` are the same arguments as what `SimulateReview` in `asreview_simulate` receives. The simulation inside these tests just do the setting up of a simulation, including creating some files in a temporary directory, but they do not run. This makes them faster than the integration tests (see below), but naturally, the simulation does not generate output files, so there are no results to compare.
 
 ### `tests/it`
 
-TODO
+These are the most extensive type of tests. They set up a simulation using `asreview simulate`, then set up the same simulation using `asreview simulation [subcommands with options] start`, then compare the resulting files that are generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and `reviews/<id>/settings_metadata.json`, but not feature_matrices/<extractor-method>_feature_matrix.npz at the moment).
 
 ## Publishing: Preparation
 
