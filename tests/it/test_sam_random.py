@@ -7,7 +7,6 @@ from tests.helpers import compare_data_csv
 from tests.helpers import compare_project_json
 from tests.helpers import compare_results_sql
 from tests.helpers import compare_settings_metadata_json
-from tests.helpers import rename_simulation_results
 from tests.helpers import unzip_simulate_results
 
 
@@ -47,10 +46,10 @@ def test_with_init_seed():
             benchmark,
             "--out",
             str(p2),
+            "--no-zip",
         ]
         result = runner.invoke(cli, args)
         assert result.exit_code == 0
-        rename_simulation_results(p2)
 
     benchmark = "benchmark:van_de_Schoot_2017"
 

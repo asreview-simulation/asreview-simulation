@@ -11,7 +11,6 @@ from tests.helpers import compare_results_sql
 from tests.helpers import compare_settings_metadata_json
 from tests.helpers import get_model_combinatorics
 from tests.helpers import get_xfails
-from tests.helpers import rename_simulation_results
 from tests.helpers import unzip_simulate_results
 
 
@@ -44,10 +43,10 @@ def test_with_minimal_args_on_benchmark():
             benchmark,
             "--out",
             str(p2),
+            "--no-zip",
         ]
         result = runner.invoke(cli, args)
         assert result.exit_code == 0
-        rename_simulation_results(p2)
 
     benchmark = "benchmark:van_de_Schoot_2017"
 
@@ -88,10 +87,10 @@ def test_with_minimal_args_on_user_supplied_data(fname):
             fname,
             "--out",
             str(p2),
+            "--no-zip",
         ]
         result = runner.invoke(cli, args)
         assert result.exit_code == 0
-        rename_simulation_results(p2)
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
@@ -188,11 +187,11 @@ def test_with_model_combinations_on_benchmark(parameterization):
             "567",
             "--out",
             str(p2),
+            "--no-zip",
         ]
         runner = CliRunner()
         result = runner.invoke(cli, args)
         assert result.exit_code == 0, "cli runner did not exit 0"
-        rename_simulation_results(p2)
 
     benchmark = "benchmark:van_de_Schoot_2017"
     cls, fex = parameterization.split(",")

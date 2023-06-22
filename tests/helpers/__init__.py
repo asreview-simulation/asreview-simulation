@@ -8,7 +8,6 @@ from ._get_model_combinatorics import get_model_combinatorics
 from ._get_review_id import get_review_id
 from ._get_xfails import get_xfails
 from ._list_dataset_names import list_dataset_names
-from ._rename_simulation_results import rename_simulation_results
 from ._unzip_simulate_results import unzip_simulate_results
 
 
@@ -23,6 +22,5 @@ __all__ = [
     "get_review_id",
     "get_xfails",
     "list_dataset_names",
-    "rename_simulation_results",
     "unzip_simulate_results",
 ]
