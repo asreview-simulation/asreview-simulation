@@ -53,7 +53,14 @@ pre-commit run --all-files
 
 ## Testing
 
-There are various types of test: unit, mocked and it, each with their respective subdirectory. They can be run locally (requires `pip install .[testing]`), but can can also be run on GitHub via a GitHub action workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating system, asreview version, and python version.   
+There are various types of test: unit tests, tests that use mocking, and integration tests. Each has its own subdirectory. The tests can be run locally with:
+
+```shell
+pip install --editable .[testing]
+pytest -v
+```
+
+Besides running locally, they can also be run on GitHub infrastructure by manually triggering the GitHub action workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating system (Windows, Linux, MacOS), asreview version (1.x), and python version (3.9, 3.10, 3.11).
 
 ### `tests/unit`
 
