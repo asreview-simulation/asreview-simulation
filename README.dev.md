@@ -68,11 +68,11 @@ These tests are simple, quick to run, and mostly focus on whether the `asreview-
 
 ### `tests/mocked`
 
-The mocked tests verifies whether the arguments that `SimulateReview` receives inside `asreview`'s `SimulateEntrypoint` module are the same arguments as what `SimulateReview` in `asreview_simulate` receives. The simulation inside these tests just do the setting up of a simulation, but they do not run. This makes them faster than the integration tests (see below), but naturally, the simulation does not generate output files, so there are no results to compare.
+The mocked tests verify whether the arguments that `SimulateReview` receives inside `asreview`'s `SimulateEntrypoint` are the same arguments as what `SimulateReview` in `asreview_simulate` receives. The simulation inside these tests just do the setting up of a simulation, including creating some files in a temporary directory, but they do not run. This makes them faster than the integration tests (see below), but naturally, the simulation does not generate output files, so there are no results to compare.
 
 ### `tests/it`
 
-These are the most extensive type of tests, that set up a simulation using `asreview simulate`, then set up the same simulation using `asreview simulation [options] start`, then compare the resulting files (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and `reviews/<id>/settings_metadata.json`, but not feature_matrices/<extractor-method>_feature_matrix.npz at the moment).
+These are the most extensive type of tests. They set up a simulation using `asreview simulate`, then set up the same simulation using `asreview simulation [subcommands with options] start`, then compare the resulting files that are generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and `reviews/<id>/settings_metadata.json`, but not feature_matrices/<extractor-method>_feature_matrix.npz at the moment).
 
 ## Publishing: Preparation
 
