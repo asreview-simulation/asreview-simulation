@@ -53,11 +53,11 @@ pre-commit run --all-files
 
 ## Testing
 
-TODO
+There are various types of test: unit, mocked and it, each with their respective subdirectory. They can be run locally (requires `pip install .[testing]`), but can can also be run on GitHub via a GitHub action workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating system, asreview version, and python version.   
 
 ### `tests/unit`
 
-TODO
+These tests are simlpe, quick to run, and mostly focus on whether the `asreview-simulation` subcommands manipulate the state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one thing that could have gone wrong.   
 
 ### `tests/mocked`
 
