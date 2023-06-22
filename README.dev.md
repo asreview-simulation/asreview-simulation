@@ -57,11 +57,11 @@ There are various types of test: unit, mocked and it, each with their respective
 
 ### `tests/unit`
 
-These tests are simlpe, quick to run, and mostly focus on whether the `asreview-simulation` subcommands manipulate the state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one thing that could have gone wrong.   
+These tests are simlpe, quick to run, and mostly focus on whether the `asreview-simulation` subcommands manipulate the state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one thing that could have gone wrong. This is in contrast to other types of test, e.g. integration testing (see below).  
 
 ### `tests/mocked`
 
-TODO
+The mocked tests verifies whether the arguments that `SimulateReview` receives inside `asreview`'s `SimulateEntrypoint` module are the same arguments as what `SimulateReview` in `asreview_simulate` receives. The simulation inside these tests just do the setting up of a simulation, but they do not run. This makes them faster than the integration tests (see below), but naturally, the simulation does not generate output files, so there are no results to compare.
 
 ### `tests/it`
 
