@@ -1,5 +1,6 @@
 from importlib.metadata import entry_points as entrypoints
 import click
+import os
 from ._state import State
 from .balancers import double_balancer
 from .balancers import simple_balancer
@@ -185,27 +186,27 @@ $ {cli_name} print-settings
 Starting a simulation using the default combination of models (sam-random, bal-double, cls-nb, fex-tfidf,
 qry-max, stp-min), each using its default parameterization:
 
-$ {cli_name} start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+$ {cli_name} start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
 
 Instead of a benchmark dataset, you can also supply your own data via the `--in` option, as follows:
 
-$ {cli_name} start --in ./myfile.csv --out ./project.asreview
+$ {cli_name} start --in .{os.sep}myfile.csv --out .{os.sep}project.asreview
 
-$ {cli_name} start --in ./myfile.ris --out ./project.asreview
+$ {cli_name} start --in .{os.sep}myfile.ris --out .{os.sep}project.asreview
 
-$ {cli_name} start --in ./myfile.tsv --out ./project.asreview
+$ {cli_name} start --in .{os.sep}myfile.tsv --out .{os.sep}project.asreview
 
-$ {cli_name} start --in ./myfile.xlsx --out ./project.asreview
+$ {cli_name} start --in .{os.sep}myfile.xlsx --out .{os.sep}project.asreview
 
 Using a different classifier strategy can be accomplished by using one of the 'cls-*' subcommands
 before issuing the 'start' subcommand, e.g.:
 
-$ {cli_name} cls-logistic start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+$ {cli_name} cls-logistic start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
 
 Subcommands can be chained together, for example using the logistic classifier with
 the undersample balancer goes like this:
 
-$ {cli_name} cls-logistic bal-undersample start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+$ {cli_name} cls-logistic bal-undersample start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
 
 Most subcommands have their own parameterization. Check the help of a subcommand with --help or -h for short, e.g.:
 
@@ -213,7 +214,7 @@ $ {cli_name} cls-logistic --help
 
 Passing parameters to a subcommand goes like this:
 
-$ {cli_name} cls-logistic --class_weight 1.1 start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+$ {cli_name} cls-logistic --class_weight 1.1 start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
 
 By chaining individually parameterized subcommands, we can compose a variety of configurations, e.g.:
 
@@ -224,7 +225,7 @@ $ {cli_name} sam-random --n_included 10 --n_excluded 15            \\
   {' ' * len(cli_name)} qry-max_random --mix_ratio 0.95 --n_instances 10      \\
   {' ' * len(cli_name)} bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \\
   {' ' * len(cli_name)} stp-nq --n_queries 20                                 \\
-  {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
+  {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
 
 Chained commands are evaluated left to right; make sure to end the chain with
 the 'start' command, otherwise it may appear like nothing is happening.
