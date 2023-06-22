@@ -1,3 +1,5 @@
+import os
+import shutil
 import click
 import numpy
 from asreview.models.balance import get_balance_model
@@ -133,9 +135,11 @@ def start(obj, benchmark, input_file, no_zip, output_file, seed, write_interval)
     click.echo("Simulation finished")
     project.mark_review_finished()  # (has side effects on disk)
 
-    # rename the .asreview.tmp directory to just .asreview
-    print("TODO renaming")
-
-    if not no_zip:
+    p = project.project_path
+    if no_zip:
+        # rename the .asreview.tmp directory to just .asreview
+        os.rename(p, p.with_suffix(""))
+    else:
         # zip the results
-        print("TODO zipping")
+        project.export(p.with_suffix(""))
+        shutil.rmtree(p)
