@@ -64,7 +64,7 @@ Besides running locally, they can also be run on GitHub infrastructure by manual
 
 ### `tests/unit`
 
-These tests are simlpe, quick to run, and mostly focus on whether the `asreview-simulation` subcommands manipulate the state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one thing that could have gone wrong. This is in contrast to other types of test, e.g. integration testing (see below).  
+These tests are simple, quick to run, and mostly focus on whether the `asreview-simulation` subcommands manipulate the state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one thing that could have gone wrong. This is in contrast to other types of test, e.g. integration testing (see below).  
 
 ### `tests/mocked`
 
