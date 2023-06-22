@@ -10,6 +10,13 @@ def prep_project_directory(benchmark, input_file, output_file):
     assert output_file.endswith(
         ".asreview"
     ), "OUTPUT_FILE should have '.asreview' filename extension."
+    assert not Path(
+        output_file
+    ).exists(), f"Output file '{output_file}'  already exists."
+    output_file_tmp = Path(output_file).with_suffix(".asreview.tmp")
+    assert (
+        not output_file_tmp.exists()
+    ), f"Temporary file '{output_file_tmp}'  already exists."
 
     case = input_file is None, benchmark is None
     if case == (True, True):

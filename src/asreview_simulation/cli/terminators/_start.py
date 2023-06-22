@@ -32,7 +32,9 @@ from asreview_simulation.lib import prep_project_directory
     "--in",
     "input_file",
     default=None,
-    help="Name of the file that contains the fully labeled data. Precludes usage of --benchmark.",
+    help="Name of the file that contains the fully labeled data. Precludes usage of --benchmark. Valid file "
+    + "formats are csv, ris, tsv, and xlsx. See the ASReview documentation https://asreview.readthedocs.io "
+    + "for details.",
     type=click.Path(exists=True, readable=True),
 )
 @click.option(
