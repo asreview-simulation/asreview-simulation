@@ -14,29 +14,14 @@ There are various sets of dependencies that you should install depending on the 
 
 ```shell
 pip install --editable .[testing]
-```
-
-```shell
 pip install --editable .[linting]
-```
-
-```shell
 pip install --editable .[publishing]
-```
-
-```shell
 pip install --editable .[doc2vec]
-```
-
-```shell
 pip install --editable .[sbert]
-```
-
-```shell
 pip install --editable .[tensorflow]
 ```
 
-You can combine these into one command like so, e.g.:
+You can combine subsets of these into one command like so, e.g.:
 
 ```shell
 pip install --editable .[linting,testing]
