@@ -57,7 +57,7 @@ The mocked tests verify whether the arguments that `SimulateReview` receives ins
 
 ### `tests/it`
 
-These are the most extensive type of tests. They set up a simulation using `asreview simulate`, then set up the same simulation using `asreview simulation [subcommands with options] start`, then compare the resulting files that are generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and `reviews/<id>/settings_metadata.json`, but not feature_matrices/<extractor-method>_feature_matrix.npz at the moment).
+These are the most extensive type of tests. They set up a simulation using `asreview simulate`, then set up the same simulation using `asreview simulation [subcommands with options] start`, then compare the resulting files that are generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and `reviews/<id>/settings_metadata.json`, but not `feature_matrices/<extractor-method>_feature_matrix.npz` at the moment).
 
 ## Publishing: Preparation
 
