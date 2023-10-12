@@ -124,5 +124,5 @@ class State:
             "extractor": self.extractor.asdict(),
             "querier": self.querier.asdict(),
             "sampler": self.sampler.asdict(),
-            "stopping": self.stopping.asdict()
+            "stopping": self.stopping.asdict(),
         }

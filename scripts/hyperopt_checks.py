@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import hyperopt
-import numpy
 import matplotlib.pyplot as plt
+import numpy
 
 
 @dataclass
@@ -20,7 +20,9 @@ def generate_samples(pyll, n=100):
 
 def run_hyperopt_1d_uniform():
     dim = Dim(lo=-10, up=10, name="x")
-    pyll = [hyperopt.hp.uniform(dim.name, dim.lo, dim.up)]
+    pyll = [
+        hyperopt.hp.uniform(dim.name, dim.lo, dim.up),
+    ]
     nsamples = 100
     samples = generate_samples(pyll, nsamples)
     nbins = 21
@@ -38,7 +40,7 @@ def run_hyperopt_2d_uniform():
     dim1 = Dim(lo=10, up=30, name="y")
     pyll = [
         hyperopt.hp.uniform(dim0.name, dim0.lo, dim0.up),
-        hyperopt.hp.uniform(dim1.name, dim1.lo, dim1.up)
+        hyperopt.hp.uniform(dim1.name, dim1.lo, dim1.up),
     ]
     nsamples = 100
     samples = generate_samples(pyll, nsamples)
@@ -53,7 +55,7 @@ def run_hyperopt_1d_uniformint_like_fex_tfidf():
     # note the range on uniformint sampling is unexpected:
     dim = Dim(lo=0.5, up=3.5, name="fex/tfidf/ngram_max")
     pyll = [
-        hyperopt.hp.uniformint(dim.name, dim.lo, dim.up)
+        hyperopt.hp.uniformint(dim.name, dim.lo, dim.up),
     ]
     nsamples = 1000
     samples = generate_samples(pyll, nsamples)
@@ -69,7 +71,7 @@ def run_hyperopt_1d_uniformint_like_fex_tfidf():
 def run_hyperopt_1d_randint_like_fex_doc2vec_dm():
     dim = Dim(lo=0, up=3, name="fex/doc2vec/dm")
     pyll = [
-        hyperopt.hp.randint(dim.name, dim.lo, dim.up)  # draws integers [0, 3)
+        hyperopt.hp.randint(dim.name, dim.lo, dim.up),  # draws integers [0, 3)
     ]
     nsamples = 1000
     samples = generate_samples(pyll, nsamples)

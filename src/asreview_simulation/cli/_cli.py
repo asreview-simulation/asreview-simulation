@@ -162,7 +162,7 @@ def _add_terminator_subcommands():
         start,
         print_benchmark_names,
         print_settings,
-        save_settings
+        save_settings,
     ]
     for t in my_terminators:
         cli.add_command(t)
