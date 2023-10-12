@@ -51,11 +51,11 @@ def run_hyperopt_2d_uniform():
 
 def run_hyperopt_1d_uniformint_like_fex_tfidf():
     # note the range on uniformint sampling is unexpected:
-    dim = Dim(lo=0.5, up=3.5, name="ngram_max")
+    dim = Dim(lo=0.5, up=3.5, name="fex/tfidf/ngram_max")
     pyll = [
         hyperopt.hp.uniformint(dim.name, dim.lo, dim.up)
     ]
-    nsamples = 100
+    nsamples = 1000
     samples = generate_samples(pyll, nsamples)
     bin_edges = numpy.linspace(dim.lo, dim.up, round(dim.up - dim.lo) + 1)
     counts, bins = numpy.histogram([s[0] for s in samples], bin_edges)
@@ -66,8 +66,25 @@ def run_hyperopt_1d_uniformint_like_fex_tfidf():
     plt.draw()
 
 
+def run_hyperopt_1d_randint_like_fex_doc2vec_dm():
+    dim = Dim(lo=0, up=3, name="fex/doc2vec/dm")
+    pyll = [
+        hyperopt.hp.randint(dim.name, dim.lo, dim.up)  # draws integers [0, 3)
+    ]
+    nsamples = 1000
+    samples = generate_samples(pyll, nsamples)
+    bin_edges = numpy.linspace(dim.lo - 0.5, dim.up - 0.5, dim.up - dim.lo + 1)
+    counts, bins = numpy.histogram([s[0] for s in samples], bin_edges)
+    ax11.stairs(counts, bins)
+    ax11.set_xlabel(dim.name)
+    ax11.set_ylabel("count")
+    ax11.set_title(f"1-D randint random sampling N={nsamples}")
+    plt.draw()
+
+
 if __name__ == "__main__":
     run_hyperopt_1d_uniform()
     run_hyperopt_2d_uniform()
     run_hyperopt_1d_uniformint_like_fex_tfidf()
+    run_hyperopt_1d_randint_like_fex_doc2vec_dm()
     plt.show()
