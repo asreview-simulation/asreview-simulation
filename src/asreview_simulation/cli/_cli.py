@@ -29,6 +29,7 @@ from .starters import load_settings
 from .stopping import min_stopping
 from .stopping import none_stopping
 from .stopping import nq_stopping
+from .terminators import print_benchmark_names
 from .terminators import print_settings
 from .terminators import save_settings
 from .terminators import start
@@ -159,8 +160,9 @@ def _add_stopping_subcommands():
 def _add_terminator_subcommands():
     my_terminators = [
         start,
+        print_benchmark_names,
         print_settings,
-        save_settings,
+        save_settings
     ]
     for t in my_terminators:
         cli.add_command(t)
