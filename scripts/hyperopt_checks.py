@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import hyperopt
 import matplotlib.pyplot as plt
 import numpy
+from asreview_simulation.lib.pyll import get_pyll
 
 
 @dataclass
@@ -84,9 +85,40 @@ def run_hyperopt_1d_randint_like_fex_doc2vec_dm():
     plt.draw()
 
 
+def run_hyperopt_choice_bal_cls():
+    pyll = {
+        "bal": hyperopt.hp.choice("bal", [
+            get_pyll("bal-double"),
+            get_pyll("bal-simple"),
+            get_pyll("bal-undersample"),
+        ]),
+        "cls": hyperopt.hp.choice("cls", [
+            get_pyll("cls-logistic"),
+            get_pyll("cls-nb"),
+            get_pyll("cls-nn-2-layer")
+        ]),
+        "fex": hyperopt.hp.choice("fex", [
+            get_pyll("fex-doc2vec"),
+            get_pyll("fex-sbert"),
+            get_pyll("fex-tfidf"),
+        ]),
+        "qry": hyperopt.hp.choice("qry", [
+            get_pyll("qry-cluster"),
+            get_pyll("qry-max"),
+            get_pyll("qry-mixed"),
+            get_pyll("qry-random"),
+            get_pyll("qry-uncertainty"),
+        ])
+    }
+    nsamples = 100
+    samples = generate_samples(pyll, nsamples)
+    assert False, "needs assertions"
+
+
 if __name__ == "__main__":
     run_hyperopt_1d_uniform()
     run_hyperopt_2d_uniform()
     run_hyperopt_1d_uniformint_like_fex_tfidf()
     run_hyperopt_1d_randint_like_fex_doc2vec_dm()
+    run_hyperopt_choice_bal_cls()
     plt.show()
