@@ -71,7 +71,8 @@ def start(obj, benchmark, input_file, no_zip, output_file, seed, write_interval)
 
     random_state = numpy.random.RandomState(seed)
 
-    # these are not valid parameter names, pop them into variables of their own
+    # asreview's query model does not expect n_instances as part
+    # of the obj.querier.params dict but as a separate variable
     n_instances = obj.querier.params.pop("n_instances", 1)
 
     # assign model parameterizations using the data from obj
