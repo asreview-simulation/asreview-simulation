@@ -3,7 +3,8 @@ import hyperopt
 
 def get_pyll_cls_nn_2_layer():
     return {
-        "nn-2-layer": {
+        "abbr": "nn-2-layer",
+        "params": {
             "dense_width": hyperopt.hp.quniform("dense_width", 2, 100, 1),
             "epochs": hyperopt.hp.quniform("epochs", 20, 60, 1),
             "optimizer": hyperopt.hp.choice("optimizer", ["sgd", "rmsprop", "adagrad", "adam", "nadam"]),

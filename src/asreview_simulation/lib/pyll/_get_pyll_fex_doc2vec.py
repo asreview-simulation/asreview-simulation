@@ -3,7 +3,8 @@ import hyperopt
 
 def get_pyll_fex_doc2vec():
     return {
-        "doc2vec": {
+        "abbr": "doc2vec",
+        "params": {
             "dbow_words": hyperopt.hp.randint("dbow_words", 2),
             "dm_concat": hyperopt.hp.randint("dm_concat", 2),
             "dm": hyperopt.hp.randint("dm", 3),

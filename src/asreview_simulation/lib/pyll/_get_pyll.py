@@ -11,13 +11,19 @@ from ._get_pyll_fex_sbert import get_pyll_fex_sbert
 from ._get_pyll_fex_tfidf import get_pyll_fex_tfidf
 from ._get_pyll_qry_cluster import get_pyll_qry_cluster
 from ._get_pyll_qry_max import get_pyll_qry_max
-from ._get_pyll_qry_mixed import get_pyll_qry_mixed
+from ._get_pyll_qry_max_random import get_pyll_qry_max_random
+from ._get_pyll_qry_max_uncertainty import get_pyll_qry_max_uncertainty
 from ._get_pyll_qry_random import get_pyll_qry_random
 from ._get_pyll_qry_uncertainty import get_pyll_qry_uncertainty
+from ._get_pyll_sam_handpicked import get_pyll_sam_handpicked
+from ._get_pyll_sam_random import get_pyll_sam_random
+from ._get_pyll_stp_min import get_pyll_stp_min
+from ._get_pyll_stp_none import get_pyll_stp_none
+from ._get_pyll_stp_nq import get_pyll_stp_nq
 
 
 def get_pyll(name):
-    return {
+    funcmap = {
         "bal-double": get_pyll_bal_double,
         "bal-simple": get_pyll_bal_simple,
         "bal-undersample": get_pyll_bal_undersample,
@@ -31,7 +37,20 @@ def get_pyll(name):
         "fex-tfidf": get_pyll_fex_tfidf,
         "qry-cluster": get_pyll_qry_cluster,
         "qry-max": get_pyll_qry_max,
-        "qry-mixed": get_pyll_qry_mixed,
+        "qry-max-random": get_pyll_qry_max_random,
+        "qry-max-uncertainty": get_pyll_qry_max_uncertainty,
         "qry-random": get_pyll_qry_random,
         "qry-uncertainty": get_pyll_qry_uncertainty,
-    }[name]()
+        "sam-handpicked": get_pyll_sam_handpicked,
+        "sam-random": get_pyll_sam_random,
+        "stp-min": get_pyll_stp_min,
+        "stp-none": get_pyll_stp_none,
+        "stp-nq": get_pyll_stp_nq
+    }
+    try:
+        func = funcmap[name]
+    except KeyError as e:
+        names = "\n".join(list(funcmap.keys()))
+        print(f"'{name}' is not a valid name for a model. Valid names are:\n{names}")
+        raise e
+    return func()

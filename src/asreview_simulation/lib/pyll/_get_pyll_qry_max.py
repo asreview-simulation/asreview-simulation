@@ -1,4 +1,5 @@
 def get_pyll_qry_max():
     return {
-        "max": {}
+        "abbr": "max",
+        "params": {}
     }

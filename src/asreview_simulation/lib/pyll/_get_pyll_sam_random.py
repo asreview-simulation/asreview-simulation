@@ -1,4 +1,4 @@
-def get_pyll_qry_random():
+def get_pyll_sam_random():
     return {
         "abbr": "random",
         "params": {}
