@@ -194,7 +194,7 @@ def test_with_model_combinations_on_benchmark(parameterization):
         assert result.exit_code == 0, "cli runner did not exit 0"
 
     benchmark = "benchmark:van_de_Schoot_2017"
-    cls, fex = parameterization.split(",")
+    fex, cls = parameterization.split(",")
 
     xfail, reason = get_xfails(parameterization)
     if xfail:

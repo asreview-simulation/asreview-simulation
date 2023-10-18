@@ -147,7 +147,7 @@ def test_with_model_combinations(parameterization):
         pytest.xfail(reason=reason)
 
     benchmark = "benchmark:van_de_Schoot_2017"
-    cls, fex = parameterization.split(",")
+    fex, cls = parameterization.split(",")
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
