@@ -88,6 +88,25 @@ Making a release is not set up to also trigger the zenodraft workflow.
 
 TODO
 
+## Known problems
+
+1. Some models generate `results.sql` non-deterministically, making it difficult to test whether they are (still) doing
+the right thing (`cls-lstm-base`, `cls-lstm-pool`, `cls-nn-2-layer`)
+2. Embedding file doesn't seem to get used (`fex-embedding-idf`)
+3. ASReview pyll programs can differ from the interface that they are attempting to parameterize in terms of number,
+name, and type of parameters
+4. conditional drawing might be needed for lstm based fex and cls, because they preclude using any [cls, fex] model that
+isn't lstm based
+
+## Plan
+
+1. construct null distribution with pyll programs
+2. update default configuration with distribution sampled from pyll programs
+3. start ReviewSimulate with sampled distribution from pyll + default
+4. rate each result with an objective function, e.g. from datatools or homemade
+5. verify / update each model's pyll program
+6. visualize each model
+
 ## notes
 
 - https://stackoverflow.com/questions/70984166/why-naive-bayes-gives-results-and-on-training-and-test-but-gives-error-of-negati
