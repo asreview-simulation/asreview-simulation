@@ -95,7 +95,9 @@ def run_hyperopt_choice_bal_cls():
         "cls": hyperopt.hp.choice("cls", [
             get_pyll("cls-logistic"),
             get_pyll("cls-nb"),
-            get_pyll("cls-nn-2-layer")
+            get_pyll("cls-nn-2-layer"),
+            get_pyll("cls-rf"),
+            get_pyll("cls-svm"),
         ]),
         "fex": hyperopt.hp.choice("fex", [
             get_pyll("fex-doc2vec"),
@@ -105,9 +107,19 @@ def run_hyperopt_choice_bal_cls():
         "qry": hyperopt.hp.choice("qry", [
             get_pyll("qry-cluster"),
             get_pyll("qry-max"),
-            get_pyll("qry-mixed"),
+            get_pyll("qry-max-random"),
+            get_pyll("qry-max-uncertainty"),
             get_pyll("qry-random"),
             get_pyll("qry-uncertainty"),
+        ]),
+        "sam": hyperopt.hp.choice("sam", [
+            get_pyll("sam-handpicked"),
+            get_pyll("sam-random"),
+        ]),
+        "stp": hyperopt.hp.choice("stp", [
+            get_pyll("stp-min"),
+            get_pyll("stp-none"),
+            get_pyll("stp-nq"),
         ])
     }
     nsamples = 100
