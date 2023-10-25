@@ -88,6 +88,8 @@ Making a release is not set up to also trigger the zenodraft workflow.
 
 TODO
 
+- https://blog.pypi.org/posts/2023-05-25-securing-pypi-with-2fa/
+
 ## Known problems
 
 1. Some models generate `results.sql` non-deterministically, making it difficult to test whether they are (still) doing
