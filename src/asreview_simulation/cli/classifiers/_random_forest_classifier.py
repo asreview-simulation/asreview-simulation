@@ -8,7 +8,7 @@ name = RandomForestClassifier.name
 
 @click.command(
     epilog=epilog,
-    help="Configure the simulation to use Random Forest classifier",
+    help="Configure the simulation to use Random Forest classifier.",
     name=f"cls-{name}",
     short_help="Random Forest classifier",
 )
@@ -16,7 +16,7 @@ name = RandomForestClassifier.name
     "--class_weight",
     "class_weight",
     default=1.0,
-    help="hyperparameter",
+    help="Hyperparameter specifying the class weight of the inclusions.",
     show_default=True,
     type=click.FLOAT,
 )
@@ -32,7 +32,7 @@ name = RandomForestClassifier.name
     "--max_features",
     "max_features",
     default=10,
-    help="hyperparameter",
+    help="Hyperparameter specifying the number of features in the model.",
     show_default=True,
     type=click.INT,
 )
@@ -40,7 +40,7 @@ name = RandomForestClassifier.name
     "--n_estimators",
     "n_estimators",
     default=100,
-    help="hyperparameter",
+    help="Hyperparameter specifying the number of trees in the forest.",
     show_default=True,
     type=click.INT,
 )
