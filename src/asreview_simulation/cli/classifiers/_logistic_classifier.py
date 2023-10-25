@@ -8,7 +8,7 @@ name = LogisticClassifier.name
 
 @click.command(
     epilog=epilog,
-    help="Configure the simulation to use Logistic Regression classifier",
+    help="Configure the simulation to use Logistic Regression classifier.",
     name=f"cls-{name}",
     short_help="Logistic Regression classifier",
 )
@@ -16,7 +16,7 @@ name = LogisticClassifier.name
     "--c",
     "c",
     default=1.0,
-    help="hyperparameter",
+    help="Parameter inverse to the regularization strength of the model.",
     show_default=True,
     type=float,
 )
@@ -24,7 +24,7 @@ name = LogisticClassifier.name
     "--class_weight",
     "class_weight",
     default=1.0,
-    help="hyperparameter",
+    help="Class weight of the inclusions.",
     type=click.FLOAT,
     show_default=True,
 )

@@ -64,7 +64,7 @@ name = NN2LayerClassifier.name
     "--regularization",
     "regularization",
     default=0.01,
-    help="Hyperparameter specifying the strength of the regularization on the weights and biases.",
+    help="Strength of the regularization on the weights and biases.",
     show_default=True,
     type=click.FLOAT,
 )

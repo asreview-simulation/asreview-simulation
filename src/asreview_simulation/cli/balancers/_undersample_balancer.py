@@ -24,7 +24,7 @@ name = UndersampleBalance.name
     "--ratio",
     "ratio",
     default=1.0,
-    help="Hyperparameter that governs the undersampling ratio of the zeros. If for example we set a ratio of " +
+    help="Undersampling ratio of the zeros. If for example we set a ratio of " +
          "0.25, we would sample only a quarter of the zeros and all the ones.",
     show_default=True,
     type=click.FLOAT,

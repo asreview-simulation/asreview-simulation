@@ -16,7 +16,7 @@ name = RandomForestClassifier.name
     "--class_weight",
     "class_weight",
     default=1.0,
-    help="Hyperparameter specifying the class weight of the inclusions.",
+    help="Class weight of the inclusions.",
     show_default=True,
     type=click.FLOAT,
 )
@@ -32,7 +32,7 @@ name = RandomForestClassifier.name
     "--max_features",
     "max_features",
     default=10,
-    help="Hyperparameter specifying the number of features in the model.",
+    help="Number of features in the model.",
     show_default=True,
     type=click.INT,
 )
@@ -40,7 +40,7 @@ name = RandomForestClassifier.name
     "--n_estimators",
     "n_estimators",
     default=100,
-    help="Hyperparameter specifying the number of trees in the forest.",
+    help="Number of trees in the forest.",
     show_default=True,
     type=click.INT,
 )

@@ -24,7 +24,8 @@ name = ClusterQuery.name
     "--cluster_size",
     "cluster_size",
     default=350,
-    help="hyperparameter",
+    help="Size of the clusters to be made. If the size of the clusters is smaller than " +
+         "the size of the pool, fall back to max sampling.",
     show_default=True,
     type=click.INT,
 )
@@ -40,7 +41,7 @@ name = ClusterQuery.name
     "--update_interval",
     "update_interval",
     default=200,
-    help="hyperparameter",
+    help="Update the clustering every x instances.",
     show_default=True,
     type=click.INT,
 )

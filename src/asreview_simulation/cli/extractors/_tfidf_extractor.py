@@ -24,7 +24,8 @@ name = Tfidf.name
     "--ngram_max",
     "ngram_max",
     default=1,
-    help="hyperparameter",
+    help="Use n-grams up to ngram_max. For example in the case of ngram_max=2, " +
+         "monograms and bigrams could be used.",
     show_default=True,
     type=click.INT,
 )
@@ -32,7 +33,7 @@ name = Tfidf.name
     "--stop_words",
     "stop_words",
     default="english",
-    help="hyperparameter",
+    help="When set to 'english', use stopwords. If set to 'none', do not use stop words.",
     show_default=True,
     type=click.Choice(["english", "none"]),
 )

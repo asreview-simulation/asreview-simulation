@@ -30,7 +30,7 @@ name = EmbeddingLSTM.name
     "--loop_sequence",
     "loop_sequence",
     default=1,
-    help="hyperparameter",
+    help="Instead of zeros at the start/end of sequence loop it.",
     show_default=True,
     type=click.INT,
 )
@@ -38,7 +38,8 @@ name = EmbeddingLSTM.name
     "--max_sequence_length",
     "max_sequence_length",
     default=1000,
-    help="hyperparameter",
+    help="Maximum length of the sequence. Shorter gets truncated. Longer sequences get either " +
+         "padded with zeros or looped.",
     show_default=True,
     type=click.INT,
 )
@@ -46,7 +47,7 @@ name = EmbeddingLSTM.name
     "--n_jobs",
     "n_jobs",
     default=1,
-    help="hyperparameter",
+    help="Number of processors used in reading the embedding matrix.",
     show_default=True,
     type=click.INT,
 )
@@ -54,7 +55,7 @@ name = EmbeddingLSTM.name
     "--num_words",
     "num_words",
     default=20000,
-    help="hyperparameter",
+    help="Maximum number of unique words to be processed.",
     show_default=True,
     type=click.INT,
 )
@@ -62,17 +63,17 @@ name = EmbeddingLSTM.name
     "--padding",
     "padding",
     default="post",
-    help="hyperparameter",
+    help="Which side should be padded.",
     show_default=True,
-    type=click.Choice(["post"]),
+    type=click.Choice(["pre", "post"]),
 )
 @click.option(
     "--truncating",
     "truncating",
     default="post",
-    help="hyperparameter",
+    help="Which side should be truncated.",
     show_default=True,
-    type=click.Choice(["post"]),
+    type=click.Choice(["pre", "post"]),
 )
 @click.pass_obj
 def embedding_lstm_extractor(

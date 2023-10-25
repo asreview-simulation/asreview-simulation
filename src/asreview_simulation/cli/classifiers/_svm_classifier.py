@@ -16,7 +16,7 @@ name = SVMClassifier.name
     "--c",
     "c",
     default=15.4,
-    help="Hyperparameter specifying the C value of the SVM model.",
+    help="C value of the SVM model.",
     show_default=True,
     type=click.FLOAT,
 )
@@ -24,7 +24,7 @@ name = SVMClassifier.name
     "--class_weight",
     "class_weight",
     default=0.249,
-    help="Hyperparameter specifying the class_weight of the inclusions.",
+    help="Class weight of the inclusions.",
     show_default=True,
     type=click.FLOAT,
 )
@@ -40,7 +40,7 @@ name = SVMClassifier.name
     "--gamma",
     "gamma",
     default="auto",
-    help="Hyperparameter specifying the gamma value of the SVM model.",
+    help="Gamma value of the SVM model.",
     show_default=True,
     type=click.Choice(["auto", "scale"]),
 )
@@ -48,7 +48,7 @@ name = SVMClassifier.name
     "--kernel",
     "kernel",
     default="linear",
-    help="Hyperparameter specifying the kernel type of the SVM model.",
+    help="Kernel type of the SVM model.",
     show_default=True,
     type=click.Choice(["linear", "rbf", "poly", "sigmoid"]),
 )

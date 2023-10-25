@@ -16,7 +16,7 @@ name = NaiveBayesClassifier.name
     "--alpha",
     "alpha",
     default=3.822,
-    help="hyperparameter",
+    help="Additive (Laplace/Lidstone) smoothing parameter (0 for no smoothing).",
     show_default=True,
     type=click.FLOAT,
 )

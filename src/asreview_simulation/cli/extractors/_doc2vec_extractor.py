@@ -8,7 +8,7 @@ name = Doc2Vec.name
 
 @click.command(
     epilog=epilog,
-    help="Configure the simulation to use Doc2Vec extractor",
+    help="Configure the simulation to use Doc2Vec extractor.",
     name=f"fex-{name}",
     short_help="Doc2Vec extractor",
 )
@@ -16,7 +16,7 @@ name = Doc2Vec.name
     "--epochs",
     "epochs",
     default=33,
-    help="hyperparameter",
+    help="Number of epochs to train the doc2vec model.",
     show_default=True,
     type=click.INT,
 )
@@ -24,23 +24,24 @@ name = Doc2Vec.name
     "--dbow_words",
     "dbow_words",
     default=0,
-    help="hyperparameter",
+    help="Whether to train the word vectors using the skipgram method.",
     show_default=True,
     type=click.INT,
 )
 @click.option(
     "--dm",
     "dm",
-    default=2,
-    help="hyperparameter",
+    default="both",
+    help="Model to use. 'dbow': Use distribute bag of words; 'dm': Use distributed memory; " +
+         "'both': Use both 'dbow' and 'dm' with half the vector size and concatenate them.",
     show_default=True,
-    type=click.INT,
+    type=click.Choice(["dbow", "dm", "both"]),
 )
 @click.option(
     "--dm_concat",
     "dm_concat",
     default=0,
-    help="hyperparameter",
+    help="Whether to concatenate word vectors or not.",
     show_default=True,
     type=click.INT,
 )
@@ -56,7 +57,7 @@ name = Doc2Vec.name
     "--min_count",
     "min_count",
     default=1,
-    help="hyperparameter",
+    help="Minimum number of occurences for a word in the corpus for it to be included in the model.",
     show_default=True,
     type=click.INT,
 )
@@ -64,7 +65,7 @@ name = Doc2Vec.name
     "--n_jobs",
     "n_jobs",
     default=1,
-    help="hyperparameter",
+    help="Number of threads to train the model with.",
     show_default=True,
     type=click.INT,
 )
@@ -72,7 +73,7 @@ name = Doc2Vec.name
     "--vector_size",
     "vector_size",
     default=40,
-    help="hyperparameter",
+    help="Output size of the vector.",
     show_default=True,
     type=click.INT,
 )
@@ -80,7 +81,7 @@ name = Doc2Vec.name
     "--window",
     "window",
     default=7,
-    help="hyperparameter",
+    help="Maximum distance over which word vectors influence each other.",
     show_default=True,
     type=click.INT,
 )
@@ -105,7 +106,7 @@ def doc2vec_extractor(
     obj.extractor.abbr = name
     obj.extractor.params = {
         "dbow_words": dbow_words,
-        "dm": dm,
+        "dm": {"dbow": 0, "dm": 1, "both": 2}[dm],
         "dm_concat": dm_concat,
         "epochs": epochs,
         "min_count": min_count,

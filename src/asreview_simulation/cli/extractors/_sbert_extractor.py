@@ -8,7 +8,7 @@ name = SBERT.name
 
 @click.command(
     epilog=epilog,
-    help="Configure the simulation to use SBERT extractor",
+    help="Configure the simulation to use SBERT extractor.",
     name=f"fex-{name}",
     short_help="SBERT extractor",
 )
@@ -24,7 +24,7 @@ name = SBERT.name
     "--transformer_model",
     "transformer_model",
     default="all-mpnet-base-v2",
-    help="hyperparameter",
+    help="The transformer model to use. See https://huggingface.co/sentence-transformers for a list of model names.",
     show_default=True,
     type=click.Choice(["all-mpnet-base-v2"]),
 )
