@@ -6,5 +6,5 @@ def get_pyll_cls_nb():
         "abbr": "nb",
         "params": {
             "alpha": hyperopt.hp.lognormal("alpha", 0, 1),
-        }
+        },
     }

@@ -24,8 +24,8 @@ name = ClusterQuery.name
     "--cluster_size",
     "cluster_size",
     default=350,
-    help="Size of the clusters to be made. If the size of the clusters is smaller than " +
-         "the size of the pool, fall back to max sampling.",
+    help="Size of the clusters to be made. If the size of the clusters is smaller than "
+    + "the size of the pool, fall back to max sampling.",
     show_default=True,
     type=click.INT,
 )

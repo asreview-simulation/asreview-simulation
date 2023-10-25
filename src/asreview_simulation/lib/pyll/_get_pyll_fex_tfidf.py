@@ -9,5 +9,5 @@ def get_pyll_fex_tfidf():
             "split_ta": hyperopt.hp.randint("split_ta", 2),
             "stop_words": hyperopt.hp.choice("stop_words", ["english", "none"]),
             "use_keywords": hyperopt.hp.randint("use_keywords", 2),
-        }
+        },
     }

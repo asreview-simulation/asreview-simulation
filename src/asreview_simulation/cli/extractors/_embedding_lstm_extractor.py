@@ -38,8 +38,8 @@ name = EmbeddingLSTM.name
     "--max_sequence_length",
     "max_sequence_length",
     default=1000,
-    help="Maximum length of the sequence. Shorter gets truncated. Longer sequences get either " +
-         "padded with zeros or looped.",
+    help="Maximum length of the sequence. Shorter gets truncated. Longer sequences get either "
+    + "padded with zeros or looped.",
     show_default=True,
     type=click.INT,
 )

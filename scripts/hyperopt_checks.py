@@ -87,40 +87,58 @@ def run_hyperopt_1d_randint_like_fex_doc2vec_dm():
 
 def run_hyperopt_choice_bal_cls():
     pyll = {
-        "bal": hyperopt.hp.choice("bal", [
-            get_pyll("bal-double"),
-            get_pyll("bal-simple"),
-            get_pyll("bal-undersample"),
-        ]),
-        "cls": hyperopt.hp.choice("cls", [
-            get_pyll("cls-logistic"),
-            get_pyll("cls-nb"),
-            get_pyll("cls-nn-2-layer"),
-            get_pyll("cls-rf"),
-            get_pyll("cls-svm"),
-        ]),
-        "fex": hyperopt.hp.choice("fex", [
-            get_pyll("fex-doc2vec"),
-            get_pyll("fex-sbert"),
-            get_pyll("fex-tfidf"),
-        ]),
-        "qry": hyperopt.hp.choice("qry", [
-            get_pyll("qry-cluster"),
-            get_pyll("qry-max"),
-            get_pyll("qry-max-random"),
-            get_pyll("qry-max-uncertainty"),
-            get_pyll("qry-random"),
-            get_pyll("qry-uncertainty"),
-        ]),
-        "sam": hyperopt.hp.choice("sam", [
-            get_pyll("sam-handpicked"),
-            get_pyll("sam-random"),
-        ]),
-        "stp": hyperopt.hp.choice("stp", [
-            get_pyll("stp-min"),
-            get_pyll("stp-none"),
-            get_pyll("stp-nq"),
-        ])
+        "bal": hyperopt.hp.choice(
+            "bal",
+            [
+                get_pyll("bal-double"),
+                get_pyll("bal-simple"),
+                get_pyll("bal-undersample"),
+            ],
+        ),
+        "cls": hyperopt.hp.choice(
+            "cls",
+            [
+                get_pyll("cls-logistic"),
+                get_pyll("cls-nb"),
+                get_pyll("cls-nn-2-layer"),
+                get_pyll("cls-rf"),
+                get_pyll("cls-svm"),
+            ],
+        ),
+        "fex": hyperopt.hp.choice(
+            "fex",
+            [
+                get_pyll("fex-doc2vec"),
+                get_pyll("fex-sbert"),
+                get_pyll("fex-tfidf"),
+            ],
+        ),
+        "qry": hyperopt.hp.choice(
+            "qry",
+            [
+                get_pyll("qry-cluster"),
+                get_pyll("qry-max"),
+                get_pyll("qry-max-random"),
+                get_pyll("qry-max-uncertainty"),
+                get_pyll("qry-random"),
+                get_pyll("qry-uncertainty"),
+            ],
+        ),
+        "sam": hyperopt.hp.choice(
+            "sam",
+            [
+                get_pyll("sam-handpicked"),
+                get_pyll("sam-random"),
+            ],
+        ),
+        "stp": hyperopt.hp.choice(
+            "stp",
+            [
+                get_pyll("stp-min"),
+                get_pyll("stp-none"),
+                get_pyll("stp-nq"),
+            ],
+        ),
     }
     nsamples = 100
     samples = generate_samples(pyll, nsamples)

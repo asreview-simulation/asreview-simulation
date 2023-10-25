@@ -32,8 +32,8 @@ name = Doc2Vec.name
     "--dm",
     "dm",
     default="both",
-    help="Model to use. 'dbow': Use distribute bag of words; 'dm': Use distributed memory; " +
-         "'both': Use both 'dbow' and 'dm' with half the vector size and concatenate them.",
+    help="Model to use. 'dbow': Use distribute bag of words; 'dm': Use distributed memory; "
+    + "'both': Use both 'dbow' and 'dm' with half the vector size and concatenate them.",
     show_default=True,
     type=click.Choice(["dbow", "dm", "both"]),
 )

@@ -24,8 +24,8 @@ name = UndersampleBalance.name
     "--ratio",
     "ratio",
     default=1.0,
-    help="Undersampling ratio of the zeros. If for example we set a ratio of " +
-         "0.25, we would sample only a quarter of the zeros and all the ones.",
+    help="Undersampling ratio of the zeros. If for example we set a ratio of "
+    + "0.25, we would sample only a quarter of the zeros and all the ones.",
     show_default=True,
     type=click.FLOAT,
 )

@@ -14,5 +14,5 @@ def get_pyll_fex_doc2vec():
             "use_keywords": hyperopt.hp.randint("use_keywords", 2),
             "vector_size": hyperopt.hp.quniform("vector_size", 31.5, 127.499999, 8),
             "window": hyperopt.hp.quniform("window", 4.5, 9.4999999, 1),
-        }
+        },
     }

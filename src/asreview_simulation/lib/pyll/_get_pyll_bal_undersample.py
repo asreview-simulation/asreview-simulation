@@ -6,5 +6,5 @@ def get_pyll_bal_undersample():
         "abbr": "undersample",
         "params": {
             "ratio": hyperopt.hp.lognormal("ratio", 0, 1),
-        }
+        },
     }

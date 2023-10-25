@@ -45,7 +45,7 @@ def get_pyll(name):
         "sam-random": get_pyll_sam_random,
         "stp-min": get_pyll_stp_min,
         "stp-none": get_pyll_stp_none,
-        "stp-nq": get_pyll_stp_nq
+        "stp-nq": get_pyll_stp_nq,
     }
     try:
         func = funcmap[name]
