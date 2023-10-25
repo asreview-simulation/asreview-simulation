@@ -77,9 +77,6 @@ def start(obj, benchmark, input_file, no_zip, output_file, seed, write_interval)
 
     # assign model parameterizations using the data from obj
     if obj.extractor.abbr == "embedding-lstm":
-        assert obj.classifier.abbr.startswith(
-            "lstm-"
-        ), "fex-embedding-lstm only works with cls-lstm-* classifiers."
         classifier = get_classifier(
             obj.classifier.abbr, random_state=random_state, **obj.classifier.params
         )
