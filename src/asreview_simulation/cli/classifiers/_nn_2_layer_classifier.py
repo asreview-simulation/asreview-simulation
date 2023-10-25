@@ -16,7 +16,7 @@ name = NN2LayerClassifier.name
     "--batch_size",
     "batch_size",
     default=32,
-    help="hyperparameter",
+    help="Batch size used for the neural network.",
     show_default=True,
     type=click.INT,
 )
@@ -24,7 +24,7 @@ name = NN2LayerClassifier.name
     "--dense_width",
     "dense_width",
     default=128,
-    help="hyperparameter",
+    help="Size of the dense layers.",
     show_default=True,
     type=click.INT,
 )
@@ -32,7 +32,7 @@ name = NN2LayerClassifier.name
     "--epochs",
     "epochs",
     default=35,
-    help="hyperparameter",
+    help="Number of epochs to train the neural network.",
     show_default=True,
     type=click.INT,
 )
@@ -48,7 +48,7 @@ name = NN2LayerClassifier.name
     "--learn_rate",
     "learn_rate",
     default=1.0,
-    help="hyperparameter",
+    help="Learning rate multiplier of the default learning rate.",
     show_default=True,
     type=click.FLOAT,
 )
@@ -56,7 +56,7 @@ name = NN2LayerClassifier.name
     "--optimizer",
     "optimizer",
     default="rmsprop",
-    help="hyperparameter",
+    help="Name of the Keras optimizer.",
     show_default=True,
     type=click.Choice(["sgd", "rmsprop", "adagrad", "adam", "nadam"]),
 )
@@ -64,14 +64,14 @@ name = NN2LayerClassifier.name
     "--regularization",
     "regularization",
     default=0.01,
-    help="hyperparameter",
+    help="Hyperparameter specifying the strength of the regularization on the weights and biases.",
     show_default=True,
     type=click.FLOAT,
 )
 @click.option(
     "--shuffle",
     "shuffle",
-    help="hyperparameter",
+    help="Whether to shuffle the training data prior to training.",
     is_flag=True,
 )
 @click.pass_obj
