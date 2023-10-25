@@ -7,6 +7,7 @@ from ._compare_settings_metadata_json import compare_settings_metadata_json
 from ._get_model_combinatorics import get_model_combinatorics
 from ._get_review_id import get_review_id
 from ._get_xfails import get_xfails
+from ._get_xfails_mocked import get_xfails_mocked
 from ._list_dataset_names import list_dataset_names
 from ._unzip_simulate_results import unzip_simulate_results
 
@@ -21,6 +22,7 @@ __all__ = [
     "get_model_combinatorics",
     "get_review_id",
     "get_xfails",
+    "get_xfails_mocked",
     "list_dataset_names",
     "unzip_simulate_results",
 ]

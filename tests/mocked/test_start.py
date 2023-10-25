@@ -10,7 +10,7 @@ import asreview_simulation
 from asreview_simulation.cli import cli
 from tests.helpers import compare_arguments_mock
 from tests.helpers import get_model_combinatorics
-from tests.helpers import get_xfails
+from tests.helpers import get_xfails_mocked
 
 
 def test_minimal_args():
@@ -142,7 +142,7 @@ def test_with_model_combinations(parameterization):
             runner.invoke(cli, args)
             return asreview_simulation.cli.terminators._start.ReviewSimulate.call_args
 
-    xfail, reason = get_xfails(parameterization)
+    xfail, reason = get_xfails_mocked(parameterization)
     if xfail:
         pytest.xfail(reason=reason)
 
