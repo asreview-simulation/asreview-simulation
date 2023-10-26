@@ -25,6 +25,12 @@ def get_data_fnames():
     return [str(basepath / fname) for fname in fnames]
 
 
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_min
 def test_with_minimal_args_on_benchmark():
     def run_asreview_simulate_cli():
         args = [
@@ -68,6 +74,12 @@ def test_with_minimal_args_on_benchmark():
         compare_results_sql(p1, p2, test_metadata=True)
 
 
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_min
 @pytest.mark.parametrize("fname", get_data_fnames())
 def test_with_minimal_args_on_user_supplied_data(fname):
     def run_asreview_simulate_cli():
@@ -110,6 +122,10 @@ def test_with_minimal_args_on_user_supplied_data(fname):
         compare_results_sql(p1, p2, test_metadata=True)
 
 
+@pytest.mark.sam_random
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
 @pytest.mark.parametrize("parameterization", get_model_combinatorics())
 def test_with_model_combinations(parameterization):
     """

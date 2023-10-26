@@ -1,8 +1,15 @@
 import json
 from click.testing import CliRunner
 from asreview_simulation.cli import cli
+import pytest
 
 
+@pytest.mark.sam_random
+@pytest.mark.fex_sbert
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_min
 def test_sbert_extractor_default_parameterization():
     runner = CliRunner()
     args = [

@@ -8,8 +8,15 @@ from tests.helpers import compare_project_json
 from tests.helpers import compare_results_sql
 from tests.helpers import compare_settings_metadata_json
 from tests.helpers import unzip_simulate_results
+import pytest
 
 
+@pytest.mark.sam_handpicked
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
 def test_with_records():
     def run_asreview_simulate_cli():
         args = [
@@ -62,6 +69,12 @@ def test_with_records():
         compare_results_sql(p1, p2, test_metadata=True, test_prior_records=True)
 
 
+@pytest.mark.sam_handpicked
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
 def test_with_rows():
     def run_asreview_simulate_cli():
         args = [

@@ -8,8 +8,15 @@ from tests.helpers import compare_project_json
 from tests.helpers import compare_results_sql
 from tests.helpers import compare_settings_metadata_json
 from tests.helpers import unzip_simulate_results
+import pytest
 
 
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
 def test_with_init_seed():
     def run_asreview_simulate_cli():
         args = [

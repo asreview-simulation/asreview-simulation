@@ -1,8 +1,15 @@
 import json
 from click.testing import CliRunner
 from asreview_simulation.cli import cli
+import pytest
 
 
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_random
+@pytest.mark.bal_double
+@pytest.mark.stp_min
 def test_random_querier_default_parameterization():
     runner = CliRunner()
     args = [

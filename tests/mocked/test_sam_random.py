@@ -7,8 +7,15 @@ from click.testing import CliRunner
 import asreview_simulation
 from asreview_simulation.cli import cli
 from tests.helpers import compare_arguments_mock
+import pytest
 
 
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
 def test_with_init_seed():
     def run_asreview_simulate_cli():
         args = [

@@ -7,8 +7,15 @@ from click.testing import CliRunner
 import asreview_simulation
 from asreview_simulation.cli import cli
 from tests.helpers import compare_arguments_mock
+import pytest
 
 
+@pytest.mark.sam_handpicked
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
 def test_with_records():
     def run_asreview_simulate_cli():
         args = [
@@ -62,6 +69,12 @@ def test_with_records():
         compare_arguments_mock(args1, kwargs1, args2, kwargs2, tmpdir)
 
 
+@pytest.mark.sam_handpicked
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
 def test_with_rows():
     def run_asreview_simulate_cli():
         args = [

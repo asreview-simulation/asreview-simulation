@@ -1,8 +1,15 @@
 import json
 from click.testing import CliRunner
 from asreview_simulation.cli import cli
+import pytest
 
 
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_none
 def test_none_stopping_default_parameterization():
     runner = CliRunner()
     args = [

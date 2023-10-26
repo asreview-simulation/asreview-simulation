@@ -13,6 +13,12 @@ from tests.helpers import get_model_combinatorics
 from tests.helpers import get_xfails_mocked
 
 
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_min
 def test_minimal_args():
     def run_asreview_simulate_cli():
         args = [
@@ -55,6 +61,10 @@ def test_minimal_args():
         compare_arguments_mock(args1, kwargs1, args2, kwargs2, tmpdir)
 
 
+@pytest.mark.sam_random
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
 @pytest.mark.parametrize("parameterization", get_model_combinatorics())
 def test_with_model_combinations(parameterization):
     """
