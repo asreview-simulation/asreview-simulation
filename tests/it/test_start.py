@@ -111,7 +111,7 @@ def test_with_minimal_args_on_user_supplied_data(fname):
 
 
 @pytest.mark.parametrize("parameterization", get_model_combinatorics())
-def test_with_model_combinations_on_benchmark(parameterization):
+def test_with_model_combinations(parameterization):
     """
     - seeded random prior with 5 included and 5 excluded
     - generate 20 instances in each query
@@ -125,18 +125,17 @@ def test_with_model_combinations_on_benchmark(parameterization):
 
     def run_asreview_simulate_cli():
         embedding_pars = list()
-        if fex == "embedding-lstm":
+        if fex == "embedding-idf" or fex == "embedding-lstm":
             embedding_pars += ["--embedding"]
             embedding_pars += [str(get_data_home() / "fasttext.cc.en.300.vec")]
         args = [
-            "--state_file",
-            str(p1),
-            "--init_seed",
-            "42",
+            *embedding_pars,
             "--n_prior_included",
             "5",
             "--n_prior_excluded",
             "5",
+            "--state_file",
+            str(p1),
             "-m",
             cls,
             "-q",
@@ -145,13 +144,14 @@ def test_with_model_combinations_on_benchmark(parameterization):
             "double",
             "-e",
             fex,
-            *embedding_pars,
+            "--init_seed",
+            "42",
             "--seed",
             "567",
-            "--stop_if",
-            "5",
             "--n_instances",
             "20",
+            "--stop_if",
+            "5",
             benchmark,
         ]
         SimulateEntryPoint().execute(args)
@@ -170,11 +170,11 @@ def test_with_model_combinations_on_benchmark(parameterization):
             "5",
             "--n_excluded",
             "5",
-            f"bal-double",
+            "bal-double",
             f"cls-{cls}",
             f"fex-{fex}",
             *embedding_pars,
-            f"qry-max",
+            "qry-max",
             "--n_instances",
             "20",
             "stp-nq",
@@ -200,9 +200,6 @@ def test_with_model_combinations_on_benchmark(parameterization):
     if xfail:
         pytest.xfail(reason=reason)
 
-    if fex == "sbert":
-        pytest.skip(reason="takes too long")
-
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep
         p1 = Path(tmpdir) / "simulate.asreview"
@@ -212,14 +209,29 @@ def test_with_model_combinations_on_benchmark(parameterization):
         run_asreview_simulate_cli()
         run_asreview_simulation_start_cli()
 
-        # compare the two results
+        # compare project.json from either result
         compare_project_json(p1, p2)
+
+        # compare data/<filename>.csv from either result
         compare_data_csv(p1, p2, benchmark=benchmark)
+
+        # compare reviews/<review_id>/settings_metadata.json from either result
         compare_settings_metadata_json(p1, p2)
+
+        # for some classifier methods, records are not expected to
+        # match due to nondeterministic methods
+        test_queried_records = cls not in [
+            "lstm-base",
+            "lstm-pool",
+            "nn-2-layer",
+            "rf"
+        ]
+
+        # compare reviews/<review_id>/results.sql from either result
         compare_results_sql(
             p1,
             p2,
             test_metadata=True,
             test_prior_records=True,
-            test_queried_records=True,
+            test_queried_records=test_queried_records,
         )
