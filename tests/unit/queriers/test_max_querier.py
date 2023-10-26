@@ -7,7 +7,7 @@ from asreview_simulation.cli import cli
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
 @pytest.mark.cls_nb
-@pytest.mark.qry_max_querier
+@pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_min
 def test_max_querier_default_parameterization():
