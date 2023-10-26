@@ -43,3 +43,31 @@ src_paths = ["src", "tests"]
 filterwarnings = [
     "ignore::DeprecationWarning"
 ]
+markers = [
+    "sam_handpicked: test pertaining to handpicked prior knowledge",
+    "sam_random: test pertaining to randomly selected prior knowledge",
+    "fex_doc2vec: tests pertaining to Doc2Vec feature extractor",
+    "fex_embedding_idf: tests pertaining to EmbeddingIdf feature extractor",
+    "fex_embedding_lstm: tests pertaining to EmbeddingLSTM feature extractor",
+    "fex_sbert: tests pertaining to SBERT feature extractor",
+    "fex_tfidf: tests pertaining to Tfidf feature extractor",
+    "cls_logistic: tests pertaining to Logistic classifier",
+    "cls_lstm_base: tests pertaining to LSTMBase classifier",
+    "cls_lstm_pool: tests pertaining to LSTMPool classifier",
+    "cls_nb: tests pertaining to NaiveBayes classifier",
+    "cls_nn_2_layer: tests pertaining to NN2Layer classifier",
+    "cls_rf: tests pertaining to RandomForest classifier",
+    "cls_svm: tests pertaining to SVM classifier",
+    "qry_cluster: tests pertaining to ClusterQuery querier",
+    "qry_max: tests pertaining to MaxQuery querier",
+    "qry_max_random: tests pertaining to MaxRandomQuery querier",
+    "qry_max_uncertainty: tests pertaining to MaxUncertaintyQuery querier",
+    "qry_random: tests pertaining to RandomQuery querier",
+    "qry_uncertainty: tests pertaining to UncertaintyQuery querier",
+    "bal_double: tests pertaining to DoubleBalance balancer",
+    "bal_simple: tests pertaining to SimpleBalance balancer",
+    "bal_undersample: tests pertaining to UndersampleBalance balancer",
+    "stp_min: test pertaining to 'min' stopping rule",
+    "stp_none: test pertaining to no stopping rule",
+    "stp_nq: test pertaining to stopping rule based on number of queries",
+]
