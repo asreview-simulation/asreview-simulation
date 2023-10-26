@@ -37,12 +37,12 @@ jobs:
       - name: Run unit tests
         shell: bash
         # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -v -m 'not fex-embedding-idf and not fex-embedding-lstm' tests/unit
+        run: pytest -v -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/unit
       - name: Run mocked tests
         shell: bash
         # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -v -m 'not fex-embedding-idf and not fex-embedding-lstm' tests/mocked
+        run: pytest -v -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/mocked
       - name: Run integration tests
         shell: bash
         # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -v -m 'not fex-embedding-idf and not fex-embedding-lstm' tests/it
+        run: pytest -v -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/it
