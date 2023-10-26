@@ -38,26 +38,70 @@ pre-commit run --all-files
 
 ## Testing
 
-There are various types of test: unit tests, tests that use mocking, and integration tests. Each has its own subdirectory. The tests can be run locally with:
+There are various types of test: unit tests, tests that use mocking, and integration tests. Each has its own
+subdirectory. The tests can be run locally with:
 
 ```shell
 pip install --editable .[testing]
 pytest -v
 ```
 
-Besides running locally, they can also be run on GitHub infrastructure by manually triggering the GitHub action workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating system (Windows, Linux, MacOS), asreview version (1.x), and python version (3.9, 3.10, 3.11).
+Tests pertaining to a specific model have been marked accordingly with the following markers (see also `pytest`
+configuration section in `pyproject.toml`):
+
+| prior sampling   | feature extractor    | classifier       | querier           | balancer          | stopping   |
+|------------------|----------------------|------------------|-------------------|-------------------|------------|
+| `sam_handpicked` | `fex_doc2vec`        | `cls_logistic`   | `qry_cluster`     | `bal_double`      | `stp_min`  |
+| `sam_random`     | `fex_embeding_idf`   | `cls_lstm_base`  | `qry_max`         | `bal_simple`      | `stp_none` |
+|                  | `fex_embedding_lstm` | `cls_lstm_pool`  | `qry_max_random`  | `bal_undersample` | `stp_nq`   |
+|                  | `fex_sbert`          | `cls_nb`         | `qry_uncertainty` |                   |            |
+|                  | `fex_tfidf`          | `cls_nn_2_layer` | `qry_random`      |                   |            |
+|                  |                      | `cls_rf`         | `qry_uncertainty` |                   |            |
+|                  |                      | `cls_svm`        |                   |                   |            |
+
+You can instruct `pytest` to run only the tests for one or some of these marked sets. As an example, if you want to run
+only the tests related to Naive Bayes, you should call `pytest` with the `-m` flag as follows:
+
+```shell
+pytest -m cls_nb -v
+```
+
+Markers can also be combined with `or` and `and` and `not`, e.g.
+
+```shell
+pytest -m 'cls_nb and fex_tfidf' -v
+pytest -m 'cls_rf and not fex_embedding_idf and not fex_embedding_lstm' -v
+pytest -m 'cls_logistic or cls_rf' -v
+# etc
+```
+
+Besides running locally, they can also be run on GitHub infrastructure by manually triggering the GitHub action
+workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating
+system (Windows, Linux, MacOS), asreview version (1.x), and python version (3.8, 3.9, 3.10, 3.11, 3.12).
+
+Currently, the `testing` workflow on GitHub skips the tests for `fex-embedding-lstm` and for `fex-embedding-idf`,
+because the necessary `--embedding` file is not present at the time the workflow runs.
 
 ### `tests/unit`
 
-These tests are simple, quick to run, and mostly focus on whether the `asreview-simulation` subcommands manipulate the state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one thing that could have gone wrong. This is in contrast to other types of test, e.g. integration testing (see below).  
+These tests are simple, quick to run, and mostly focus on whether the `asreview-simulation` subcommands manipulate the
+state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one
+thing that could have gone wrong. This is in contrast to other types of test, e.g. integration testing (see below).
 
 ### `tests/mocked`
 
-The mocked tests verify whether the arguments that `SimulateReview` receives inside `asreview`'s `SimulateEntrypoint` are the same arguments as what `SimulateReview` in `asreview_simulate` receives. The simulation inside these tests just do the setting up of a simulation, including creating some files in a temporary directory, but they do not run. This makes them faster than the integration tests (see below), but naturally, the simulation does not generate output files, so there are no results to compare.
+The mocked tests verify whether the arguments that `SimulateReview` receives inside `asreview`'s `SimulateEntrypoint`
+are the same arguments as what `SimulateReview` in `asreview_simulate` receives. The simulation inside these tests just
+do the setting up of a simulation, including creating some files in a temporary directory, but they do not run. This
+makes them faster than the integration tests (see below), but naturally, the simulation does not generate output files,
+so there are no results to compare.
 
 ### `tests/it`
 
-These are the most extensive type of tests. They set up a simulation using `asreview simulate`, then set up the same simulation using `asreview simulation [subcommands with options] start`, then compare the resulting files that are generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and `reviews/<id>/settings_metadata.json`, but not `feature_matrices/<extractor-method>_feature_matrix.npz` at the moment).
+These are the most extensive type of tests. They set up a simulation using `asreview simulate`, then set up the same
+simulation using `asreview simulation [subcommands with options] start`, then compare the resulting files that are
+generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and
+`reviews/<id>/settings_metadata.json`, but not `feature_matrices/<extractor-method>_feature_matrix.npz` at the moment).
 
 ## Publishing: Preparation
 
