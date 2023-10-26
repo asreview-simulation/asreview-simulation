@@ -1,5 +1,6 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
+import pytest
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
 from asreview_simulation.cli import cli
@@ -8,7 +9,6 @@ from tests.helpers import compare_project_json
 from tests.helpers import compare_results_sql
 from tests.helpers import compare_settings_metadata_json
 from tests.helpers import unzip_simulate_results
-import pytest
 
 
 @pytest.mark.sam_random

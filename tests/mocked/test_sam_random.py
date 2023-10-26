@@ -2,12 +2,12 @@ import unittest.mock
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import asreview
+import pytest
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
 import asreview_simulation
 from asreview_simulation.cli import cli
 from tests.helpers import compare_arguments_mock
-import pytest
 
 
 @pytest.mark.sam_random

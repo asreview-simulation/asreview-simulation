@@ -31,4 +31,7 @@ def get_model_combinatorics():
     fexs = [fex.name for fex in list_feature_extraction()]
     clss = [cls.name for cls in list_classifiers()]
     combos = [(fex, cls) for (fex, cls) in itertools.product(*[fexs, clss])]
-    return [pytest.param(",".join([fex, cls]), marks=[marks.get(fex), marks.get(cls)]) for (fex, cls) in combos]
+    return [
+        pytest.param(",".join([fex, cls]), marks=[marks.get(fex), marks.get(cls)])
+        for (fex, cls) in combos
+    ]
