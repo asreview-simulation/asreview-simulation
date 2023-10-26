@@ -95,10 +95,203 @@ TODO
 1. Some models generate `results.sql` non-deterministically, making it difficult to test whether they are (still) doing
 the right thing (`cls-lstm-base`, `cls-lstm-pool`, `cls-nn-2-layer`)
 2. Embedding file doesn't seem to get used (`fex-embedding-idf`)
-3. ASReview pyll programs can differ from the interface that they are attempting to parameterize in terms of number,
-name, and type of parameters
-4. conditional drawing might be needed for lstm based fex and cls, because they preclude using any [cls, fex] model that
+3. conditional drawing might be needed for lstm based fex and cls, because they preclude using any [cls, fex] model that
 isn't lstm based
+
+### Hyperspace definition discrepancies
+
+There are some discrepancies between the Python interface, the documentation, and the hyperspace definitions. What
+follows is an overview of all models, along with how they define the number, name and type of their parameters in
+their constructor, in their documentation, and in their `.full_hyper_space` functions. The tables below are based
+on ASReview 1.2.
+
+#### `DoubleBalance`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `a`    : float              | `a`    : float                     | `bal_a`    : float                  |
+| `alpha`: float              | `alpha`: float                     | `bal_alpha`: float                  |
+| `b`    : float              | `b`    : float                     | `bal_b`    : float                  |
+| `beta` : float              | `beta` : float                     |                                     |
+| `random_state`              |                                    |                                     |
+
+#### `SimpleBalance`
+
+no params
+
+#### `UndersampleBalance`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `ratio`: float              | `ratio`: double                    | `bal_ratio`: float                  |
+| `random_state`              |                                    |                                     |
+
+#### `LogisticClassifier`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `C`           : float       | `C`           : float              | `mdl_C`            : float          |
+| `class_weight`: float       | `class_weight`: float              | `mdl_class_weight` : float          |
+| `random_state`              | `random_state`: int, RandomState   |                                     |
+| `n_jobs`      : int         | `n_jobs`      : int                |                                     |
+
+#### `LSTMBaseClassifier`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `embedding_matrix`          | `embedding_matrix`: numpy.ndarray  |                                     |
+| `backwards`     : bool      | `backwards`       : bool           |                                     |
+| `dropout`       : float     | `dropout`         : float          | `mdl_dropout`: float                |
+| `optimizer`     : str       | `optimizer`       : str            |                                     |
+| `lstm_out_width`: int       | `lstm_out_width`  : int            | `mdl_lstm_out_width`: int as float  |
+| `learn_rate`    : float     | `learn_rate`      : float          | `mdl_learn_rate_mult`: float        |
+| `dense_width`   : int       | `dense_width`     : int            | `mdl_dense_width` int as float      |
+| `verbose`       : int       | `verbose`         : int            |                                     |
+| `batch_size`    : int       | `batch_size`      : int            |                                     |
+| `epochs`        : int       | `epochs`          : int            |                                     |
+| `shuffle`       : bool      | `shuffle`         : bool           |                                     |
+| `class_weight`  : float     | `class_weight`    : float          |                                     |
+
+#### `LSTMPoolClassifier`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `embedding_matrix`          | `embedding_matrix`: numpy.ndarray  |                                     |
+| `backwards`     : bool      | `backwards`       : bool           |                                     |
+| `dropout`       : float     | `dropout`         : float          | `mdl_dropout`: float                |
+| `optimizer`     : str       | `optimizer`       : str            |                                     |
+| `lstm_out_width`: int       | `lstm_out_width`  : int            | `mdl_lstm_out_width`: int as float  |
+| `lstm_pool_size`            | `lstm_pool_size`  : int            |                                     |
+| `learn_rate`    : float     | `learn_rate`      : float          | `mdl_learn_rate_mult`: float        |
+| `verbose`       : int       | `verbose`         : int            |                                     |
+| `batch_size`    : int       | `batch_size`      : int            |                                     |
+| `epochs`        : int       | `epochs`          : int            |                                     |
+| `shuffle`       : bool      | `shuffle`         : bool           |                                     |
+| `class_weight`  : float     | `class_weight`    : float          |                                     |
+|                             |                                    | `mdl_dense_width`: int as float     |
+
+#### `NaiveBayesClassifier`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `alpha`: float              | `alpha`: float                     | `mdl_alpha`: float                  |
+
+#### `NN2LayerClassifier`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `dense_width`   : int       | `dense_width`   : int              | `mdl_dense_width` int as float      |
+| `optimizer`     : str       | `optimizer`     : str              | `mdl_optimizer` choice of str       |
+| `learn_rate`    : float     | `learn_rate`    : float            | `mdl_learn_rate` float              |
+| `regularization`: float     | `regularization`: float            | `mdl_regularization` float          |
+| `verbose`       : int       | `verbose`       : int              |                                     |
+| `epochs`        : int       | `epochs`        : int              | `mdl_epochs` int as float           |
+| `batch_size`    : int       | `batch_size`    : int              |                                     |
+| `shuffle`       : bool      | `shuffle`       : bool             |                                     |
+| `class_weight`  : float     | `class_weight`  : float            | `mdl_class_weight` float            |
+
+#### `RandomForestClassifier`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `n_estimators`: int         | `n_estimators` : int               | `mdl_n_estimators` int as float     |
+| `max_features`: int         | `max_features` : int               | `mdl_max_features` int as float     |
+| `class_weight`: float       | `class_weight` : float             | `mdl_class_weight` float            |
+| `random_state`              | `random_state` : int, RandomState  |                                     |
+
+#### `SvmClassifier`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `gamma`       : str         | `gamma`        : str               | `mdl_gamma`       : choice of str   |
+| `class_weight`: float       | `class_weight` : float             | `mdl_class_weight`: float           |
+| `C`           : float       | `C`            : float             | `mdl_C`           : float           |
+| `kernel`      : str         | `kernel`       : str               | `mdl_kernel`      : choice of str   |
+| `random_state`              | `random_state` : int, RandomState  |                                     |
+
+#### `Doc2Vec`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `split_ta`    : int         | -                                  | `fex_split_ta`    : int             |
+| `use_keywords`: int         | -                                  | `fex_use_keywords`: int             |
+| `vector_size` : int         | `vector_size`: int                 | `fex_vector_size` : int as float    |
+| `epochs`      : int         | `epochs`     : int                 | `fex_epochs`      : int as float    |
+| `min_count`   : int         | `min_count`  : int                 | `fex_min_count`   : int as float    |
+| `n_jobs`      : int         | `n_jobs`     : int                 |                                     |
+| `window`      : int         | `window`     : int                 | `fex_window`      : int as float    |
+| `dm_concat`   : int         | `dm_concat`  : int                 | `fex_dm_concat`   : int             |
+| `dm`          : int         | `dm`         : int                 | `fex_dm`          : int             |
+| `dbow_words`  : int         | `dbow_words` : int                 | `fex_dbow_words`  : int             |
+
+#### `EmbeddingIdf`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `split_ta`    : int         | -                                  | `fex_split_ta`    : int             |
+| `use_keywords`: int         | -                                  | `fex_use_keywords`: int             |
+| `random_state`              |                                    |                                     |
+
+#### `EmbeddingLSTM`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `split_ta`            : int | -                                  | `fex_split_ta`      : int           |
+| `use_keywords`        : int | -                                  | `fex_use_keywords`  : int           |
+| `loop_sequence`       : int | `loop_sequence`       : bool       | `fex_loop_sequences`: int           |
+| `num_words`           : int | `num_words`           : int        |                                     |
+| `max_sequence_length` : int | `max_sequence_length` : int        |                                     |
+| `padding`             : str | `padding`             : str        |                                     |
+| `truncating`          : str | `truncating`          :            |                                     |
+| `n_jobs`              : int | `n_jobs`                           |                                     |
+
+#### `SBERT`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `split_ta`         : int    | -                                  | `fex_split_ta`    : int             |
+| `use_keywords`     : int    | -                                  | `fex_use_keywords`: int             |
+| `transformer_model`: str    | `transformer_model`: str           |                                     |
+
+#### `Tfidf`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `split_ta`    : int         | -                                  | `fex_split_ta`    : int             |
+| `use_keywords`: int         | -                                  | `fex_use_keywords`: int             |
+| `ngram_max`   : int         | `ngram_max`: int                   | `fex_ngram_max`   : int             |
+| `stop_words`  : str         | `stop_words`: str                  | `fex_stop_words`  : choice of str   |
+
+#### `ClusterQuery`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `cluster_size`   : int      | `cluster_size`: int                | `qry_cluster_size`   : int as float |
+| `update_interval`: int      | `update_interval`: int             | `qry_update_interval`: int as float |
+| `random_state`              | `random_state` : int, RandomState  |                                     |
+
+#### `MaxQuery`
+
+no params
+
+#### `MixedQuery`
+
+| constructor                 | documentation                      | `.full_hyper_space()`               |
+|-----------------------------|------------------------------------|-------------------------------------|
+| `strategy_1`: str           | `strategy_1`   : str               |                                     |
+| `strategy_2`: str           | `strategy_2`   : str               |                                     |
+| `mix_ratio` : float         | `mix_ratio`    : float             | `qry_mix_ratio`: float              |
+| `random_state`              | `random_state` : float             |                                     |
+| `kwargs`                    | `kwargs`       : dict              | `qry_<strategy_1>_*` (dynamic)      |
+| `kwargs`                    | `kwargs`       : dict              | `qry_<strategy_2>_*` (dynamic)      |
+
+#### `RandomQuery`
+
+no params
+
+#### `UncertaintyQuery`
+
+no params
 
 ## Plan
 
