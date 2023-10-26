@@ -93,10 +93,10 @@ TODO
 ## Known problems
 
 1. Some models generate `results.sql` non-deterministically, making it difficult to test whether they are (still) doing
-the right thing (`cls-lstm-base`, `cls-lstm-pool`, `cls-nn-2-layer`)
-2. Embedding file doesn't seem to get used (`fex-embedding-idf`)
-3. conditional drawing might be needed for lstm based fex and cls, because they preclude using any [cls, fex] model that
-isn't lstm based
+the right thing (`cls-lstm-base`, `cls-lstm-pool`, `cls-nn-2-layer`, `cls-rf`). As a workaround, the tests for these
+classifiers do not compare the contents of `reviews/<review_id>/results.sql` at the moment.
+2. Embedding file doesn't seem to get used during `asreview simulate`, so there is nothing to compare to
+for `asreview simulation start`.
 
 ### Hyperspace definition discrepancies
 
