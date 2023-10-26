@@ -13,6 +13,12 @@ name = EmbeddingIdf.name
     short_help="Embedding IDF extractor",
 )
 @click.option(
+    "--embedding",
+    "embedding",
+    help="File path of embedding matrix.",
+    type=click.Path(exists=True),
+)
+@click.option(
     "-f",
     "--force",
     "force",
@@ -21,12 +27,14 @@ name = EmbeddingIdf.name
     is_flag=True,
 )
 @click.pass_obj
-def embedding_idf_extractor(obj, force):
+def embedding_idf_extractor(obj, embedding, force):
     if not force:
         assert obj.provided.extractor is False, (
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
     obj.extractor.abbr = name
-    obj.extractor.params = {}
+    obj.extractor.params = {
+        "embedding_fp": embedding,
+    }
     obj.provided.extractor = True
