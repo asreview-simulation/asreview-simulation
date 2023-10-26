@@ -11,7 +11,7 @@ def get_xfails_mocked(parameterization):
         "sbert,lstm-base": _make_msg("SBERT"),
         "sbert,lstm-pool": _make_msg("SBERT"),
         "tfidf,lstm-base": _make_msg("Tfidf"),
-        "tfidf,lstm-pool": _make_msg("Tfdf"),
+        "tfidf,lstm-pool": _make_msg("Tfidf"),
     }
     present = parameterization in reasons.keys()
     return present, reasons[parameterization] if present else ""
