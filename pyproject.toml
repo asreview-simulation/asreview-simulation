@@ -19,7 +19,7 @@ linting = ["pre-commit"]
 doc2vec = ["gensim"]
 publishing = ["twine"]
 sbert = ["sentence_transformers"]
-tensorflow = ["tensorflow~=2.0"]
+tensorflow = ["tensorflow == 2.0.0, < 2.10"]   # tensorflow.keras.wrappers disappeared in 2.10
 testing = ["pytest"]
 
 [project.scripts]
