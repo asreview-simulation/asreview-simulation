@@ -220,12 +220,7 @@ def test_with_model_combinations(parameterization):
 
         # for some classifier methods, records are not expected to
         # match due to nondeterministic methods
-        test_queried_records = cls not in [
-            "lstm-base",
-            "lstm-pool",
-            "nn-2-layer",
-            "rf"
-        ]
+        nondeterministic_classifiers = ["lstm-base", "lstm-pool", "nn-2-layer", "rf"]
 
         # compare reviews/<review_id>/results.sql from either result
         compare_results_sql(
@@ -233,5 +228,5 @@ def test_with_model_combinations(parameterization):
             p2,
             test_metadata=True,
             test_prior_records=True,
-            test_queried_records=test_queried_records,
+            test_queried_records=cls not in nondeterministic_classifiers,
         )
