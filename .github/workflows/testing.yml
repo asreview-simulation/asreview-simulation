@@ -21,31 +21,36 @@ jobs:
         os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
         python-version: ['3.8', '3.9', '3.10']
     steps:
+
       - uses: actions/checkout@v3
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Python info
         shell: bash
         run: |
           which python
           python --version
+
       - name: Install dependencies
         shell: bash
         run: |
           python3 -m pip install --upgrade pip wheel setuptools
           python3 -m pip install asreview==${{ matrix.asreview-version }}
           python3 -m pip install .[doc2vec,sbert,tensorflow,testing]
+
       - name: Run unit tests
         shell: bash
-        # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -v -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/unit
+        run: pytest tests/unit
+
       - name: Run mocked tests
         shell: bash
-        # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -v -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/mocked
+        run: pytest tests/mocked
+
       - name: Run integration tests
         shell: bash
         # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -v -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert' tests/it
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert' tests/it
