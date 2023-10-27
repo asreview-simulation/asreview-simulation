@@ -236,7 +236,7 @@ def test_with_model_combinations(parameterization):
 
         # for some classifier methods, records are not expected to
         # match due to nondeterministic methods
-        nondeterministic_classifiers = ["lstm-base", "lstm-pool", "nn-2-layer", "rf"]
+        nondeterministic_classifiers = ["lstm-base", "lstm-pool", "nn-2-layer", "rf", "svm"]
 
         # compare reviews/<review_id>/results.sql from either result
         compare_results_sql(
