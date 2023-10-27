@@ -2,8 +2,8 @@ name: testing
 
 on:
   workflow_dispatch:
-    schedule:
-      - cron: 42 4 * * 2     #  04:42 on Tuesdays
+  schedule:
+    - cron: 42 4 * * 2     #  04:42 on Tuesdays
 
 
 jobs:
@@ -41,13 +41,15 @@ jobs:
 
       - name: Run unit tests
         shell: bash
-        run: pytest tests/unit
+        # embedding based fex needs a 2G file that it currently doesn't have on GitHub
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/unit
 
       - name: Run mocked tests
         shell: bash
-        run: pytest tests/mocked
+        # embedding based fex needs a 2G file that it currently doesn't have on GitHub
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/mocked
 
       - name: Run integration tests
         shell: bash
         # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/it
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert and not fex_doc2vec' tests/it
