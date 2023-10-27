@@ -6,7 +6,7 @@ custom parameterizations.
 
 ## Status
 
-| Badge | Description |
+| Badge &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; | Description |
 |-------|-------------|
 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8042547.svg)](https://doi.org/10.5281/zenodo.8042547) | Persistent identifier for archived snapshots of the software |
 | [![linting](https://github.com/asreview-tuning/asreview-simulation/actions/workflows/linting.yml/badge.svg)](https://github.com/asreview-tuning/asreview-simulation/actions/workflows/linting.yml) | Linting (`isort` and `black`, via `pre-commit`) |
