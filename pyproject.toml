@@ -40,6 +40,9 @@ lines_between_sections = 0
 src_paths = ["src", "tests"]
 
 [tool.pytest.ini_options]
+# --max-fail=1 terminate testing on the first error
+# --strict-config: any errors in this section will raise an error
+# --strict-markers: tests decorated with unregistered markers will raise an error
 addopts = "--verbose --maxfail=1 --cache-clear --strict-config --strict-markers"
 markers = [
     "sam_handpicked: tests pertaining to handpicked prior knowledge",
