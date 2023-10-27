@@ -47,7 +47,7 @@ pytest -v
 ```
 
 Tests pertaining to a specific model have been marked accordingly with the following markers (see also `pytest`
-configuration section in `pyproject.toml`):
+configuration section in `pyproject.toml` or run `pytest --markers`):
 
 | prior sampling   | feature extractor    | classifier       | querier           | balancer          | stopping   |
 |------------------|----------------------|------------------|-------------------|-------------------|------------|

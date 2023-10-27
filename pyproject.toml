@@ -40,12 +40,10 @@ lines_between_sections = 0
 src_paths = ["src", "tests"]
 
 [tool.pytest.ini_options]
-filterwarnings = [
-    "ignore::DeprecationWarning"
-]
+addopts = "--verbose --maxfail=1 --cache-clear"
 markers = [
-    "sam_handpicked: test pertaining to handpicked prior knowledge",
-    "sam_random: test pertaining to randomly selected prior knowledge",
+    "sam_handpicked: tests pertaining to handpicked prior knowledge",
+    "sam_random: tests pertaining to randomly selected prior knowledge",
     "fex_doc2vec: tests pertaining to Doc2Vec feature extractor",
     "fex_embedding_idf: tests pertaining to EmbeddingIdf feature extractor",
     "fex_embedding_lstm: tests pertaining to EmbeddingLSTM feature extractor",
@@ -67,7 +65,7 @@ markers = [
     "bal_double: tests pertaining to DoubleBalance balancer",
     "bal_simple: tests pertaining to SimpleBalance balancer",
     "bal_undersample: tests pertaining to UndersampleBalance balancer",
-    "stp_min: test pertaining to 'min' stopping rule",
-    "stp_none: test pertaining to no stopping rule",
-    "stp_nq: test pertaining to stopping rule based on number of queries",
+    "stp_min: tests pertaining to 'min' stopping rule",
+    "stp_none: tests pertaining to no stopping rule",
+    "stp_nq: tests pertaining to stopping rule based on number of queries",
 ]
