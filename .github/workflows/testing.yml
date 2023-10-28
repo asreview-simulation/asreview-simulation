@@ -47,7 +47,7 @@ jobs:
       - name: Run mocked tests
         shell: bash
         # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/mocked
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert' tests/mocked
 
       - name: Run integration tests
         shell: bash
