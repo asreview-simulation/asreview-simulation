@@ -77,10 +77,13 @@ pytest -m 'cls_logistic or cls_rf' -v
 
 Besides running locally, they can also be run on GitHub infrastructure by manually triggering the GitHub action
 workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating
-system (Windows, Linux, MacOS), asreview version (1.x), and python version (3.8, 3.9, 3.10, 3.11, 3.12).
+system (Windows, Linux, MacOS), asreview version (1.0.4, 1.1.1, 1.2.1), and python version (3.8, 3.9, 3.10, 3.11).
 
-Currently, the `testing` workflow on GitHub skips the tests for `fex-embedding-lstm` and for `fex-embedding-idf`,
+Currently, the `testing` workflow on GitHub:
+
+1. skips the tests for `fex-embedding-lstm` and for `fex-embedding-idf`,
 because the necessary `--embedding` file is not present at the time the workflow runs.
+2. skips installing `tensorflow` and tests pertaining to `cls_nn_2_layer` on Python >= 3.11
 
 ### `tests/unit`
 
