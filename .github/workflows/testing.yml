@@ -43,7 +43,7 @@ jobs:
           which python
           python --version
 
-      - if: false
+      - if: ${{ matrix.tensorflow == 'with-tf' }}
         name: Install dependencies (with tensorflow)
         shell: bash
         run: |
@@ -59,27 +59,27 @@ jobs:
           python3 -m pip install asreview==${{ matrix.asreview-version }}
           python3 -m pip install .[doc2vec,sbert,testing]
 
-      # - name: Run unit tests
-      #   shell: bash
-      #   # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-      #   run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/unit
+      - name: Run unit tests
+        shell: bash
+        # embedding based fex needs a 2G file that it currently doesn't have on GitHub
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/unit
 
-      # - name: Run mocked tests
-      #   shell: bash
-      #   # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-      #   run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/mocked
+      - name: Run mocked tests
+        shell: bash
+        # embedding based fex needs a 2G file that it currently doesn't have on GitHub
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/mocked
 
-      # - if: matrix.tensorflow == 'with-tf'
-      #   name: Run integration tests
-      #   shell: bash
-      #   # fex_embedding and fex_lstm need a 2G file that it currently doesn't have on GitHub
-      #   # fex_sbert takes too long and causes timeout errors
-      #   run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert' tests/it
+      - if: ${{ matrix.tensorflow == 'with-tf' }}
+        name: Run integration tests
+        shell: bash
+        # fex_embedding and fex_lstm need a 2G file that it currently doesn't have on GitHub
+        # fex_sbert takes too long and causes timeout errors
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert' tests/it
 
-      # - if: matrix.tensorflow == 'without-tf'
-      #   name: Run integration tests
-      #   shell: bash
-      #   # fex_embedding and fex_lstm need a 2G file that it currently doesn't have on GitHub
-      #   # fex_sbert takes too long and causes timeout errors
-      #   # cls_nn_2_layer needs tensorflow that has install problems for py > 3.10
-      #   run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert and not cls_nn_2_layer' tests/it
+      - if: ${{ matrix.tensorflow == 'without-tf' }}
+        name: Run integration tests
+        shell: bash
+        # fex_embedding and fex_lstm need a 2G file that it currently doesn't have on GitHub
+        # fex_sbert takes too long and causes timeout errors
+        # cls_nn_2_layer needs tensorflow that has install problems for py > 3.10
+        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert and not cls_nn_2_layer' tests/it
