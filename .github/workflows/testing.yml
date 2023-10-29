@@ -22,12 +22,6 @@ jobs:
           # On python >= 3.11, pip complains that tensorflow wants to be >= 2.10,
           # but asreview <= 1.2.1 wants tensorflow to be < 2.10
 
-          - python-version: '3.8'
-            tensorflow: 'with-tf'
-
-          - python-version: '3.9'
-            tensorflow: 'with-tf'
-
           - python-version: '3.10'
             tensorflow: 'with-tf'
 
