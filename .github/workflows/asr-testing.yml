@@ -46,7 +46,7 @@ jobs:
       - name: Retain tests, clean up src files (Windows)
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
-          rmdir /s /q asreview
+          Remove-Item -Recurse -Force -Path asreview
 
       - name: Install ASReview version ${{ matrix.asreview-version }} with all optional dependencies
         run: |
