@@ -28,11 +28,15 @@ jobs:
           which python
           python --version
 
-      - name: Install ASReview version ${{ matrix.asreview-version }} with optional dependencies
+      - name: Install ASReview version ${{ matrix.asreview-version }} with all optional dependencies
         run: |
+          git clone https://github.com/asreview/asreview.git .
+          git checkout v${{ matrix.asreview-version }}
+          rm -rf asreview
           python3 -m pip install --upgrade pip wheel setuptools>=41.0.0
-          python3 -m pip install --no-cache-dir asreview[sbert,doc2vec,tensorflow,dev,test]==${{ matrix.asreview-version }}
+          python3 -m pip install --no-cache-dir asreview[doc2vec,sbert,tensorflow]==${{ matrix.asreview-version }}
+          python3 -m pip install pytest
 
-      - name: Run test suite
+      - name: Run tests
         run: |
           pytest -v tests/
