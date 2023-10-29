@@ -1,4 +1,4 @@
-name: asr-installing 
+name: asr-testing 
 
 on:
   workflow_dispatch:
@@ -28,8 +28,11 @@ jobs:
           which python
           python --version
 
-      - name: Install ASReview version ${{ matrix.asreview-version }} with 'all' optional dependencies
-        shell: bash
+      - name: Install ASReview version ${{ matrix.asreview-version }} with optional dependencies
         run: |
-          python3 -m pip install --upgrade pip wheel setuptools
-          python3 -m pip install asreview[all]==${{ matrix.asreview-version }}
+          python3 -m pip install --upgrade pip wheel setuptools>=41.0.0
+          python3 -m pip install --no-cache-dir asreview[sbert,doc2vec,tensorflow,dev,test]==${{ matrix.asreview-version }}
+
+      - name: Run test suite
+        run: |
+          pytest -v tests/
