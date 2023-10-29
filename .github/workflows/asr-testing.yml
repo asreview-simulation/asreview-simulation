@@ -34,17 +34,17 @@ jobs:
           git checkout v${{ matrix.asreview-version }}
 
       - name: Retain tests, clean up src files (Linux)
-        if: ${{ matrix.os }} == 'ubuntu-latest'
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
           rm -rf asreview
 
       - name: Retain tests, clean up src files (Mac)
-        if: ${{ matrix.os }} == 'macos-latest'
+        if: ${{ matrix.os == 'macos-latest' }}
         run: |
           rm -rf asreview
 
       - name: Retain tests, clean up src files (Windows)
-        if: ${{ matrix.os }} == 'windows-latest'
+        if: ${{ matrix.os == 'windows-latest' }}
         run: |
           rmdir /s /q asreview
 
