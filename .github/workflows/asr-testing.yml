@@ -35,13 +35,16 @@ jobs:
 
       - name: Retain tests, clean up src files (Mac / Linux)
         if: ${{ matrix.os }} == 'ubuntu-latest' || ${{ matrix.os }} == 'macos-latest'
+        run: |
           rm -rf asreview
 
       - name: Retain tests, clean up src files (Windows)
         if: ${{ matrix.os }} == 'windows-latest'
+        run: |
           rmdir asreview /s /q
 
       - name: Install ASReview version ${{ matrix.asreview-version }} with all optional dependencies
+        run: |
           python3 -m pip install --upgrade pip wheel setuptools>=41.0.0
           python3 -m pip install --no-cache-dir asreview[doc2vec,sbert,tensorflow]==${{ matrix.asreview-version }}
 
