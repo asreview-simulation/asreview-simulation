@@ -70,14 +70,14 @@ jobs:
         run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/mocked
 
       - if: ${{ matrix.tensorflow == 'with-tf' }}
-        name: Run integration tests
+        name: Run integration tests (with tensorflow)
         shell: bash
         # fex_embedding and fex_lstm need a 2G file that it currently doesn't have on GitHub
         # fex_sbert takes too long and causes timeout errors
         run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert' tests/it
 
       - if: ${{ matrix.tensorflow == 'without-tf' }}
-        name: Run integration tests
+        name: Run integration tests (without tensorflow)
         shell: bash
         # fex_embedding and fex_lstm need a 2G file that it currently doesn't have on GitHub
         # fex_sbert takes too long and causes timeout errors
