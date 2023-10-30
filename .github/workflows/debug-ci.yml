@@ -38,6 +38,7 @@ jobs:
         name: Create $HOME\asr_data directory with embedding file in it (Windows)
         shell: cmd
         run: |
+          set
           mkdir $HOME\asr_data
           cd $HOME\asr_data
           echo "contents" > fasttext.cc.en.300.vec
@@ -109,5 +110,4 @@ jobs:
       - if: ${{ matrix.os == 'windows-latest' }}
         shell: cmd
         run: |
-          set
           dir $HOME\asr_data
