@@ -11,10 +11,10 @@ jobs:
     steps:
       - shell: bash
         run: |
-          curl https://raw.githubusercontent.com/asreview-tuning/asreview-simulation/main/.zenodo.extras.json -o thefile.json
+          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec
       - uses: actions/cache@v3.3.2
         with:
-          path: thefile.json
+          path: fasttext.cc.en.300.vec
           key: thekey
 
   second:
@@ -24,8 +24,8 @@ jobs:
     steps:
       - uses: actions/cache@v3.3.2
         with:
-          path: thefile.json
+          path: fasttext.cc.en.300.vec
           key: thekey
       - shell: bash
         run: |
-          cat thefile.json
+          stat fasttext.cc.en.300.vec
