@@ -41,6 +41,7 @@ jobs:
           cd C:\Users\runneradmin\asr_data
           Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -Outfile fasttext.cc.en.300.vec.gz
           gunzip fasttext.cc.en.300.vec.gz
+          dir
 
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Commit embedding data to cache (Linux)
