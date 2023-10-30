@@ -21,6 +21,7 @@ jobs:
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
           key: thekey
+          enableCrossOsArchive: true
 
   second:
     name: show
