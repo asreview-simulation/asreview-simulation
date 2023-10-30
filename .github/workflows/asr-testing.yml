@@ -2,8 +2,6 @@ name: asr-testing
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: 42 4 * * 2     #  04:42 on Tuesdays
 
 jobs:
   test:
