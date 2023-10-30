@@ -7,9 +7,15 @@ jobs:
 
   first:
     name: download
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest']
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Create ~/asr_data directory with embedding file in it
+
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        name: Create ~/asr_data directory with embedding file in it (Linux)
         shell: bash
         run: |
           mkdir ~/asr_data
@@ -17,12 +23,47 @@ jobs:
           echo "contents" > fasttext.cc.en.300.vec
           # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           # gunzip fasttext.cc.en.300.vec.gz
-      - name: Commit embedding data to cache
+
+      - if: ${{ matrix.os == 'macos-latest' }}
+        name: Create ~/asr_data directory with embedding file in it (Mac)
+        shell: bash
+        run: |
+          mkdir ~/asr_data
+          cd ~/asr_data
+          echo "contents" > fasttext.cc.en.300.vec
+          # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
+          # gunzip fasttext.cc.en.300.vec.gz
+
+      - if: ${{ matrix.os == 'windows-latest' }}
+        name: Create %USERPROFILE%\asr_data directory with embedding file in it (Windows)
+        shell: cmd
+        run: |
+          mkdir %USERPROFILE%\asr_data
+          cd %USERPROFILE%\asr_data
+          echo "contents" > fasttext.cc.en.300.vec
+          # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
+          # gunzip fasttext.cc.en.300.vec.gz
+
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        name: Commit embedding data to cache (Linux)
         uses: actions/cache@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: thekey
-          enableCrossOsArchive: true
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'macos-latest' }}
+        name: Commit embedding data to cache (Mac)
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'windows-latest' }}
+        name: Commit embedding data to cache (Windows)
+        uses: actions/cache@v3.3.2
+        with:
+          path: '%USERPROFILE%\asr_data\fasttext.cc.en.300.vec'
+          key: thekey-${{ matrix.os }}
 
   second:
     name: show
@@ -33,11 +74,39 @@ jobs:
         os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest']    
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Retrieve embedding data from cache
+    
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        name: Retrieve embedding data from cache (Linux)
         uses: actions/cache@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: thekey
-      - shell: bash
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'macos-latest' }}
+        name: Retrieve embedding data from cache (Mac)
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'windows-latest' }}
+        name: Retrieve embedding data from cache (Windows)
+        uses: actions/cache@v3.3.2
+        with:
+          path: '%USERPROFILE%\asr_data\fasttext.cc.en.300.vec'
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        shell: bash
         run: |
           stat ~/asr_data/fasttext.cc.en.300.vec
+
+      - if: ${{ matrix.os == 'macos-latest' }}
+        shell: bash
+        run: |
+          stat ~/asr_data/fasttext.cc.en.300.vec
+
+      - if: ${{ matrix.os == 'windows-latest' }}
+        shell: cmd
+        run: |
+          dir %USERPROFILE\/asr_data
