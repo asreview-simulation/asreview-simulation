@@ -23,6 +23,8 @@ jobs:
           echo "contents" > fasttext.cc.en.300.vec
           # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           # gunzip fasttext.cc.en.300.vec.gz
+          python3 -m pip install asreview
+          python3 -c 'import sys; from asreview import get_data_home; print(get_data_home())' 
 
       - if: ${{ matrix.os == 'macos-latest' }}
         name: Create ~/asr_data directory with embedding file in it (Mac)
@@ -33,6 +35,8 @@ jobs:
           echo "contents" > fasttext.cc.en.300.vec
           # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           # gunzip fasttext.cc.en.300.vec.gz
+          python3 -m pip install asreview
+          python3 -c 'import sys; from asreview import get_data_home; print(get_data_home())' 
 
       - if: ${{ matrix.os == 'windows-latest' }}
         name: Create %USERPROFILE%\asr_data directory with embedding file in it (Windows)
@@ -43,6 +47,8 @@ jobs:
           echo "contents" > fasttext.cc.en.300.vec
           # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           # gunzip fasttext.cc.en.300.vec.gz
+          python3 -m pip install asreview
+          python3 -c 'import sys; from asreview import get_data_home; print(get_data_home())' 
 
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Commit embedding data to cache (Linux)
