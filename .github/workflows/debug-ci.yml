@@ -35,11 +35,11 @@ jobs:
           # gunzip fasttext.cc.en.300.vec.gz
 
       - if: ${{ matrix.os == 'windows-latest' }}
-        name: Create $HOME\asr_data directory with embedding file in it (Windows)
+        name: Create $env.USERPROFILE\asr_data directory with embedding file in it (Windows)
         shell: cmd
         run: |
-          mkdir "%HOMEDRIVE%%HOMEPATH%\asr_data"
-          cd "%HOMEDRIVE%%HOMEPATH%\asr_data"
+          mkdir $env.USERPROFILE\asr_data
+          cd $env.USERPROFILE\asr_data
           echo "contents" > fasttext.cc.en.300.vec
           # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           # gunzip fasttext.cc.en.300.vec.gz
@@ -62,7 +62,7 @@ jobs:
         name: Commit embedding data to cache (Windows)
         uses: actions/cache@v3.3.2
         with:
-          path: $HOME\asr_data\fasttext.cc.en.300.vec
+          path: $env.USERPROFILE\asr_data\fasttext.cc.en.300.vec
           key: thekey-${{ matrix.os }}
 
   second:
@@ -93,7 +93,7 @@ jobs:
         name: Retrieve embedding data from cache (Windows)
         uses: actions/cache@v3.3.2
         with:
-          path: $HOME\asr_data\fasttext.cc.en.300.vec
+          path: $env.USERPROFILE\asr_data\fasttext.cc.en.300.vec
           key: thekey-${{ matrix.os }}
 
       - if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -109,4 +109,4 @@ jobs:
       - if: ${{ matrix.os == 'windows-latest' }}
         shell: cmd
         run: |
-          dir $HOME\asr_data
+          dir $env.USERPROFILE\asr_data
