@@ -38,9 +38,8 @@ jobs:
         name: Create $HOME\asr_data directory with embedding file in it (Windows)
         shell: cmd
         run: |
-          set
-          mkdir %HOMEDRIVE%%HOMEPATH%\asr_data
-          cd %HOMEDRIVE%%HOMEPATH%\asr_data
+          mkdir "%HOMEDRIVE%%HOMEPATH%\asr_data"
+          cd "%HOMEDRIVE%%HOMEPATH%\asr_data"
           echo "contents" > fasttext.cc.en.300.vec
           # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           # gunzip fasttext.cc.en.300.vec.gz
