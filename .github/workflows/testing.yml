@@ -8,20 +8,61 @@ on:
 jobs:
   setup:
     name: download
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest']
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Create ~/asr_data directory with embedding file in it
+
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        name: Create ~/asr_data directory with embedding file in it (Linux)
         shell: bash
         run: |
           mkdir ~/asr_data
           cd ~/asr_data
           curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           gunzip fasttext.cc.en.300.vec.gz
-      - name: Commit embedding data to cache
+
+      - if: ${{ matrix.os == 'macos-latest' }}
+        name: Create ~/asr_data directory with embedding file in it (Mac)
+        shell: bash
+        run: |
+          mkdir ~/asr_data
+          cd ~/asr_data
+          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
+          gunzip fasttext.cc.en.300.vec.gz
+
+      - if: ${{ matrix.os == 'windows-latest' }}
+        name: Create C:\Users\runneradmin\asr_data directory with embedding file in it (Windows)
+        shell: pwsh
+        run: |
+          New-Item -Path C:\Users\runneradmin -Name "asr_data" -ItemType "directory"
+          cd C:\Users\runneradmin\asr_data
+          Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -Outfile fasttext.cc.en.300.vec.gz
+          gunzip fasttext.cc.en.300.vec.gz
+
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        name: Commit embedding data to cache (Linux)
         uses: actions/cache@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: thekey
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'macos-latest' }}
+        name: Commit embedding data to cache (Mac)
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'windows-latest' }}
+        name: Commit embedding data to cache (Windows)
+        uses: actions/cache@v3.3.2
+        with:
+          path: C:\Users\runneradmin\asr_data\fasttext.cc.en.300.vec
+          key: thekey-${{ matrix.os }}
+
 
   test:
     name: asr${{ matrix.asreview-version }}-${{ matrix.tensorflow }}-py${{ matrix.python-version }}-${{ matrix.os }}
@@ -46,11 +87,26 @@ jobs:
             tensorflow: 'without-tf'
     steps:
 
-      - name: Retrieve embedding data from cache
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        name: Retrieve embedding data from cache (Linux)
         uses: actions/cache@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: thekey
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'macos-latest' }}
+        name: Retrieve embedding data from cache (Mac)
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: thekey-${{ matrix.os }}
+
+      - if: ${{ matrix.os == 'windows-latest' }}
+        name: Retrieve embedding data from cache (Windows)
+        uses: actions/cache@v3.3.2
+        with:
+          path: C:\Users\runneradmin\asr_data\fasttext.cc.en.300.vec
+          key: thekey-${{ matrix.os }}
 
       - name: Get a copy of the code
         uses: actions/checkout@v3
