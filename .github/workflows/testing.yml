@@ -40,7 +40,8 @@ jobs:
           New-Item -Path C:\Users\runneradmin -Name "asr_data" -ItemType "directory"
           cd C:\Users\runneradmin\asr_data
           Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -Outfile fasttext.cc.en.300.vec.gz
-          Expand-Archive -Path fasttext.cc.en.300.vec.gz -DestinationPath C:\Users\runneradmin\asr_data
+          #Expand-Archive -Path fasttext.cc.en.300.vec.gz -DestinationPath C:\Users\runneradmin\asr_data
+          tar -xvzf fasttext.cc.en.300.vec.gz -C C:\Users\runneradmin\asr_data
           dir
 
       - if: ${{ matrix.os == 'ubuntu-latest' }}
