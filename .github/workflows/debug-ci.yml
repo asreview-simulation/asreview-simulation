@@ -14,13 +14,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
 
-      - if: ${{ matrix.os == 'windows-latest' }}
-        shell: pwsh
-        run: |
-          echo "The operating system on the runner is $env:RUNNER_OS."
-          echo "The user profile is $env:USERPROFILE."
-          New-Item -Path "$env:USERPROFILE" -Name "asr_data" -ItemType "directory"
-
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Create $HOME/asr_data directory with embedding file in it (Linux)
         shell: bash
@@ -43,12 +36,13 @@ jobs:
 
       - if: ${{ matrix.os == 'windows-latest' }}
         name: Create $env:USERPROFILE\asr_data directory with embedding file in it (Windows)
-        shell: cmd
+        shell: pwsh
         run: |
-          echo $env:USERPROFILE
-          # mkdir $env:USERPROFILE\asr_data
-          # cd $env:USERPROFILE\asr_data
-          # echo "contents" > fasttext.cc.en.300.vec
+          echo "The operating system on the runner is $env:RUNNER_OS."
+          echo "The user profile is $env:USERPROFILE."
+          New-Item -Path "$env:USERPROFILE" -Name "asr_data" -ItemType "directory"
+          cd $env:USERPROFILE\asr_data
+          echo "contents" > fasttext.cc.en.300.vec
           # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           # gunzip fasttext.cc.en.300.vec.gz
 
