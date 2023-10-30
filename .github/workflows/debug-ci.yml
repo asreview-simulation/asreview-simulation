@@ -4,14 +4,17 @@ on:
   workflow_dispatch:
 
 jobs:
-        
+
   first:
     name: download
     runs-on: ubuntu-latest
     steps:
       - shell: bash
         run: |
-          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec
+          mkdir ~/asr_data
+          echo "contents" > ~/asr_data/thefile.txt
+          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
+          gunzip fasttext.cc.en.300.vec.gz
       - uses: actions/cache@v3.3.2
         with:
           path: fasttext.cc.en.300.vec
