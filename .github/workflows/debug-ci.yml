@@ -1,0 +1,21 @@
+name: dbg
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  first:
+    name: download
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: |
+          curl https://raw.githubusercontent.com/asreview-tuning/asreview-simulation/main/.zenodo.extras.json -o thefile.json
+  second:
+    name: show
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: |
+          cat the file
