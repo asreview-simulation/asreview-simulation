@@ -5,12 +5,28 @@ on:
   schedule:
     - cron: 42 4 * * 2     #  04:42 on Tuesdays
 
-
 jobs:
+  setup:
+    name: download
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create ~/asr_data directory with embedding file in it
+        shell: bash
+        run: |
+          mkdir ~/asr_data
+          cd ~/asr_data
+          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
+          gunzip fasttext.cc.en.300.vec.gz
+      - name: Commit embedding data to cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: thekey
 
   test:
     name: asr${{ matrix.asreview-version }}-${{ matrix.tensorflow }}-py${{ matrix.python-version }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    needs: setup
     strategy:
       fail-fast: false
       matrix:
@@ -30,14 +46,21 @@ jobs:
             tensorflow: 'without-tf'
     steps:
 
-      - uses: actions/checkout@v3
+      - name: Retrieve embedding data from cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: thekey
+
+      - name: Get a copy of the code
+        uses: actions/checkout@v3
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Python info
+      - name: Show python info
         shell: bash
         run: |
           which python
@@ -61,25 +84,21 @@ jobs:
 
       - name: Run unit tests
         shell: bash
-        # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/unit
+        run: pytest tests/unit
 
       - name: Run mocked tests
         shell: bash
-        # embedding based fex needs a 2G file that it currently doesn't have on GitHub
-        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm' tests/mocked
+        run: pytest tests/mocked
 
       - if: ${{ matrix.tensorflow == 'with-tf' }}
         name: Run integration tests (with tensorflow)
         shell: bash
-        # fex_embedding and fex_lstm need a 2G file that it currently doesn't have on GitHub
         # fex_sbert takes too long and causes timeout errors
-        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert' tests/it
+        run: pytest -m 'not fex_sbert' tests/it
 
       - if: ${{ matrix.tensorflow == 'without-tf' }}
         name: Run integration tests (without tensorflow)
         shell: bash
-        # fex_embedding and fex_lstm need a 2G file that it currently doesn't have on GitHub
         # fex_sbert takes too long and causes timeout errors
         # cls_nn_2_layer needs tensorflow that has install problems for py > 3.10
-        run: pytest -m 'not fex_embedding_idf and not fex_embedding_lstm and not fex_sbert and not cls_nn_2_layer' tests/it
+        run: pytest -m 'not fex_sbert and not cls_nn_2_layer' tests/it
