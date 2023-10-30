@@ -48,21 +48,21 @@ jobs:
         uses: actions/cache/save@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: thekey-${{ matrix.os }}-${{ GITHUB_RUN_ID }}
+          key: thekey-${{ matrix.os }}-${{ github.run_id }}
 
       - if: ${{ matrix.os == 'macos-latest' }}
         name: Commit embedding data to cache (Mac)
         uses: actions/cache/save@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: thekey-${{ matrix.os }}-${{ GITHUB_RUN_ID }}
+          key: thekey-${{ matrix.os }}-${{ github.run_id }}
 
       - if: ${{ matrix.os == 'windows-latest' }}
         name: Commit embedding data to cache (Windows)
         uses: actions/cache/save@v3.3.2
         with:
           path: C:\Users\runneradmin\asr_data\fasttext.cc.en.300.vec
-          key: thekey-${{ matrix.os }}-${{ env:GITHUB_RUN_ID }}
+          key: thekey-${{ matrix.os }}-${{ github.run_id }}
 
 
   test:
@@ -93,7 +93,7 @@ jobs:
         uses: actions/cache/restore@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: thekey-${{ matrix.os }}-${{ GITHUB_RUN_ID }}
+          key: thekey-${{ matrix.os }}-${{ github.run_id }}
           fail-on-cache-miss: true
 
       - if: ${{ matrix.os == 'macos-latest' }}
@@ -101,7 +101,7 @@ jobs:
         uses: actions/cache/restore@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: thekey-${{ matrix.os }}-${{ GITHUB_RUN_ID }}
+          key: thekey-${{ matrix.os }}-${{ github.run_id }}
           fail-on-cache-miss: true
 
       - if: ${{ matrix.os == 'windows-latest' }}
@@ -109,7 +109,7 @@ jobs:
         uses: actions/cache/restore@v3.3.2
         with:
           path: C:\Users\runneradmin\asr_data\fasttext.cc.en.300.vec
-          key: thekey-${{ matrix.os }}-${{ env:GITHUB_RUN_ID }}
+          key: thekey-${{ matrix.os }}-${{ github.run_id }}
           fail-on-cache-miss: true
 
       - name: Get a copy of the code
