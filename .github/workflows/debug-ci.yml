@@ -14,27 +14,24 @@ jobs:
         run: |
           mkdir ~/asr_data
           cd ~/asr_data
-          echo "contents" > fasttext.cc.en.300.vec.gz
-          pwd
-          ls -l
-        #  curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
-        #  gunzip fasttext.cc.en.300.vec.gz
-  #     - name: Commit embedding data to cache
-  #       uses: actions/cache@v3.3.2
-  #       with:
-  #         path: fasttext.cc.en.300.vec
-  #         key: thekey
+          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
+          gunzip fasttext.cc.en.300.vec.gz
+      - name: Commit embedding data to cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: thekey
 
-  # second:
-  #   name: show
-  #   runs-on: ubuntu-latest
-  #   needs: first
-  #   steps:
-  #     - name: Retrieve embedding data from cache
-  #       uses: actions/cache@v3.3.2
-  #       with:
-  #         path: ~/asr_data/fasttext.cc.en.300.vec
-  #         key: thekey
-  #     - shell: bash
-  #       run: |
-  #         stat ~/asr_data/fasttext.cc.en.300.vec
+  second:
+    name: show
+    runs-on: ubuntu-latest
+    needs: first
+    steps:
+      - name: Retrieve embedding data from cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: thekey
+      - shell: bash
+        run: |
+          stat ~/asr_data/fasttext.cc.en.300.vec
