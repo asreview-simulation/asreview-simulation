@@ -15,7 +15,9 @@ jobs:
     steps:
 
       - if: ${{ matrix.os == 'windows-latest' }}
-        run: echo "The operating system on the runner is $env:RUNNER_OS."
+        run: |
+          echo "The operating system on the runner is $env:RUNNER_OS."
+          echo "The user profile is $env:USERPROFILE."
 
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Create $HOME/asr_data directory with embedding file in it (Linux)
