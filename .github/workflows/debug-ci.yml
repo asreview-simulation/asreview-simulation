@@ -4,11 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
-
+        
   first:
     name: download
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v2
+        with:
+          path: thefile.json
       - shell: bash
         run: |
           curl https://raw.githubusercontent.com/asreview-tuning/asreview-simulation/main/.zenodo.extras.json -o thefile.json
