@@ -141,7 +141,10 @@ def test_with_model_combinations(parameterization):
 
     def run_asreview_simulate_cli():
         if fex in ["embedding-idf", "embedding-lstm"]:
-            embedding_pars = ["--embedding", str(get_data_home() / "fasttext.cc.en.300.vec")]
+            embedding_pars = [
+                "--embedding",
+                str(get_data_home() / "fasttext.cc.en.300.vec"),
+            ]
         else:
             embedding_pars = list()
         args = [
@@ -175,7 +178,10 @@ def test_with_model_combinations(parameterization):
 
     def run_asreview_simulation_start_cli():
         if fex in ["embedding-idf", "embedding-lstm"]:
-            embedding_pars = ["--embedding", str(get_data_home() / "fasttext.cc.en.300.vec")]
+            embedding_pars = [
+                "--embedding",
+                str(get_data_home() / "fasttext.cc.en.300.vec"),
+            ]
         else:
             embedding_pars = list()
         args = [

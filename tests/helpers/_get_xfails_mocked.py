@@ -1,6 +1,6 @@
 msgs = [
     lambda fex: f"asreview.models.feature_extraction.{fex} instance doesn't have a method named 'get_embedding_matrix'",
-    "'asreview simulate' doesn't use its '--embedding' argument (#34)"
+    "'asreview simulate' doesn't use its '--embedding' argument (#34)",
 ]
 
 
