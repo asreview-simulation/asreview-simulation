@@ -38,9 +38,10 @@ jobs:
         name: Create $env.USERPROFILE\asr_data directory with embedding file in it (Windows)
         shell: cmd
         run: |
-          mkdir $env.USERPROFILE\asr_data
-          cd $env.USERPROFILE\asr_data
-          echo "contents" > fasttext.cc.en.300.vec
+          echo $env.USERPROFILE
+          # mkdir $env.USERPROFILE\asr_data
+          # cd $env.USERPROFILE\asr_data
+          # echo "contents" > fasttext.cc.en.300.vec
           # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
           # gunzip fasttext.cc.en.300.vec.gz
 
