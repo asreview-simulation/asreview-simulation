@@ -80,10 +80,10 @@ def test_with_model_combinations(parameterization):
     """
 
     def run_asreview_simulate_cli():
-        embedding_pars = list()
-        if fex == "embedding-lstm":
-            embedding_pars += ["--embedding"]
-            embedding_pars += [str(get_data_home() / "fasttext.cc.en.300.vec")]
+        if fex in ["embedding-idf", "embedding-lstm"]:
+            embedding_pars = ["--embedding", str(get_data_home() / "fasttext.cc.en.300.vec")]
+        else:
+            embedding_pars = list()
         args = [
             *embedding_pars,
             "--n_prior_included",
@@ -117,10 +117,10 @@ def test_with_model_combinations(parameterization):
                 return asreview.entry_points.simulate.ReviewSimulate.call_args
 
     def run_asreview_simulation_start_cli():
-        embedding_pars = list()
-        if fex == "embedding-lstm":
-            embedding_pars += ["--embedding"]
-            embedding_pars += [str(get_data_home() / "fasttext.cc.en.300.vec")]
+        if fex in ["embedding-idf", "embedding-lstm"]:
+            embedding_pars = ["--embedding", str(get_data_home() / "fasttext.cc.en.300.vec")]
+        else:
+            embedding_pars = list()
         args = [
             "sam-random",
             "--init_seed",
