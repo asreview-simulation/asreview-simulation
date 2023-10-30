@@ -35,6 +35,6 @@ def embedding_idf_extractor(obj, embedding, force):
         )
     obj.extractor.abbr = name
     obj.extractor.params = {
-        "embedding_fp": embedding,
+        "embedding_fp": embedding or "",
     }
     obj.provided.extractor = True

@@ -94,7 +94,7 @@ def embedding_lstm_extractor(
         )
     obj.extractor.abbr = name
     obj.extractor.params = {
-        "embedding_fp": embedding,
+        "embedding_fp": embedding or "",
         "loop_sequence": loop_sequence,
         "max_sequence_length": max_sequence_length,
         "n_jobs": n_jobs,
