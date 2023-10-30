@@ -12,7 +12,7 @@ jobs:
       - shell: bash
         run: |
           curl https://raw.githubusercontent.com/asreview-tuning/asreview-simulation/main/.zenodo.extras.json -o thefile.json
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3.3.2
         with:
           path: thefile.json
           key: thekey
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: first
     steps:
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3.3.2
         with:
           path: thefile.json
           key: thekey
