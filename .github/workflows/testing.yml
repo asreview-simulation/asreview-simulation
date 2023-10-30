@@ -39,7 +39,7 @@ jobs:
         run: |
           New-Item -Path C:\Users\runneradmin -Name "asr_data" -ItemType "directory"
           cd C:\Users\runneradmin\asr_data
-          Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz
+          Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -Outfile cc.en.300.vec.gz
           7z e cc.en.300.vec.gz
           mv cc.en.300.vec fasttext.cc.en.300.vec
           dir
