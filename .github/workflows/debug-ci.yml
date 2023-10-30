@@ -12,6 +12,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: thefile.json
+          key: thekey
       - shell: bash
         run: |
           curl https://raw.githubusercontent.com/asreview-tuning/asreview-simulation/main/.zenodo.extras.json -o thefile.json
