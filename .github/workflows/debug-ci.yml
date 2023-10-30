@@ -18,4 +18,4 @@ jobs:
     steps:
       - shell: bash
         run: |
-          cat the file
+          cat thefile.json
