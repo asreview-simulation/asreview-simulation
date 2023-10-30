@@ -9,18 +9,23 @@ jobs:
     name: download
     runs-on: ubuntu-latest
     steps:
+      - shell: bash
+        run: |
+          curl https://raw.githubusercontent.com/asreview-tuning/asreview-simulation/main/.zenodo.extras.json -o thefile.json
       - uses: actions/cache@v2
         with:
           path: thefile.json
           key: thekey
-      - shell: bash
-        run: |
-          curl https://raw.githubusercontent.com/asreview-tuning/asreview-simulation/main/.zenodo.extras.json -o thefile.json
+
   second:
     name: show
     runs-on: ubuntu-latest
     needs: first
     steps:
+      - uses: actions/cache@v2
+        with:
+          path: thefile.json
+          key: thekey
       - shell: bash
         run: |
           cat thefile.json
