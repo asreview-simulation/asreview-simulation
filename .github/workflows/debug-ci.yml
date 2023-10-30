@@ -14,8 +14,9 @@ jobs:
         run: |
           mkdir ~/asr_data
           cd ~/asr_data
-          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
-          gunzip fasttext.cc.en.300.vec.gz
+          echo "contents" > fasttext.cc.en.300.vec
+          # curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
+          # gunzip fasttext.cc.en.300.vec.gz
       - name: Commit embedding data to cache
         uses: actions/cache@v3.3.2
         with:
