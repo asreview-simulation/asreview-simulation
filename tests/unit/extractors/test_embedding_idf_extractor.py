@@ -20,4 +20,6 @@ def test_embedding_idf_extractor_default_parameterization():
     extractor = json.loads(result.output)["extractor"]
     assert extractor["abbr"] == "embedding-idf"
     params = extractor["params"].keys()
-    assert len(params) == 0
+    assert len(params) == 1
+    assert "embedding_fp" in params
+    assert extractor["params"]["embedding_fp"] == ""

@@ -22,7 +22,7 @@ def test_embedding_lstm_extractor_default_parameterization():
     params = extractor["params"].keys()
     assert len(params) == 7
     assert "embedding_fp" in params
-    assert extractor["params"]["embedding_fp"] is None
+    assert extractor["params"]["embedding_fp"] == ""
     assert "loop_sequence" in params
     assert extractor["params"]["loop_sequence"] == 1
     assert "max_sequence_length" in params
