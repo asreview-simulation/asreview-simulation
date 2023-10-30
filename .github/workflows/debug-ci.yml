@@ -15,9 +15,11 @@ jobs:
     steps:
 
       - if: ${{ matrix.os == 'windows-latest' }}
+        shell: pwsh
         run: |
           echo "The operating system on the runner is $env:RUNNER_OS."
           echo "The user profile is $env:USERPROFILE."
+          New-Item -Path "$env:USERPROFILE" -Name "asr_data" -ItemType "directory"
 
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Create $HOME/asr_data directory with embedding file in it (Linux)
