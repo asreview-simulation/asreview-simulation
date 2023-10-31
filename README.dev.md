@@ -340,18 +340,16 @@ no params
 
 ## Plan
 
-1. construct null distribution with pyll programs
-2. update default configuration with distribution sampled from pyll programs
-3. start ReviewSimulate with sampled distribution from pyll + default
-4. rate each result with an objective function, e.g. from datatools or homemade
-5. verify / update each model's pyll program
-6. visualize each model
+1. review / verify / update each model's pyll program with respect to number, name, and type of parameters
+2. add visualization for each pyll program so users can see what distribution a parameter is drawn from
+3. construct null distribution with pyll programs
+4. update default configuration with distribution sampled from pyll programs
+5. start ReviewSimulate with sampled distribution from pyll + default
+6. rate each result with an objective function, e.g. from datatools or homemade
 
 ## notes
 
 - https://stackoverflow.com/questions/70984166/why-naive-bayes-gives-results-and-on-training-and-test-but-gives-error-of-negati
-- provides a standalone CLI command `asreview-simulation`
-- provides a plugin to `asreview` where it will show up as the subcommand `simulation` so users can call `asreview simulation` (i.e. without the dash)
 - its functionality can be extended by plugins:
     - new balancer subcommands via entry point group `"asreview_simulation.balancers"`
     - new classifier subcommands via entry point group `"asreview_simulation.classifiers"`
