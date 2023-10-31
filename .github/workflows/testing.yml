@@ -39,8 +39,9 @@ jobs:
         run: |
           New-Item -Path C:\Users\runneradmin -Name "asr_data" -ItemType "directory"
           cd C:\Users\runneradmin\asr_data
-          Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -Outfile fasttext.cc.en.300.vec.gz
-          Expand-Archive -Path fasttext.cc.en.300.vec.gz -Force
+          Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -Outfile cc.en.300.vec.gz
+          7z e cc.en.300.vec.gz
+          mv cc.en.300.vec fasttext.cc.en.300.vec
           dir
 
       - if: ${{ matrix.os == 'ubuntu-latest' }}
