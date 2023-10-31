@@ -79,11 +79,8 @@ Besides running locally, they can also be run on GitHub infrastructure by manual
 workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating
 system (Windows, Linux, MacOS), asreview version (1.0.4, 1.1.1, 1.2.1), and python version (3.8, 3.9, 3.10, 3.11).
 
-Currently, the `testing` workflow on GitHub:
-
-1. skips the tests for `fex-embedding-lstm` and for `fex-embedding-idf`,
-because the necessary `--embedding` file is not present at the time the workflow runs.
-2. skips installing `tensorflow` and tests pertaining to `cls_nn_2_layer` on Python >= 3.11
+Currently, the `testing` workflow on GitHub skips any tests that require tensorflow on Python >= 3.11 (tests marked
+with `cls_lstm_base`, `cls_lstm_pool`, `cls_nn_2_layer`)
 
 ### `tests/unit`
 
