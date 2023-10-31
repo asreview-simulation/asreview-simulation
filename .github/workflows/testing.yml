@@ -21,8 +21,9 @@ jobs:
         run: |
           mkdir ~/asr_data
           cd ~/asr_data
-          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
-          gunzip fasttext.cc.en.300.vec.gz
+          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o cc.en.300.vec.gz
+          7z e cc.en.300.vec.gz
+          mv cc.en.300.vec fasttext.cc.en.300.vec
 
       - if: ${{ matrix.os == 'macos-latest' }}
         name: Create ~/asr_data directory with embedding file in it (Mac)
@@ -30,8 +31,9 @@ jobs:
         run: |
           mkdir ~/asr_data
           cd ~/asr_data
-          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o fasttext.cc.en.300.vec.gz
-          gunzip fasttext.cc.en.300.vec.gz
+          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o cc.en.300.vec.gz
+          7z e cc.en.300.vec.gz
+          mv cc.en.300.vec fasttext.cc.en.300.vec
 
       - if: ${{ matrix.os == 'windows-latest' }}
         name: Create C:\Users\runneradmin\asr_data directory with embedding file in it (Windows)
@@ -42,7 +44,6 @@ jobs:
           Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -Outfile cc.en.300.vec.gz
           7z e cc.en.300.vec.gz
           mv cc.en.300.vec fasttext.cc.en.300.vec
-          dir
 
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Commit embedding data to cache (Linux)
