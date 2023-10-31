@@ -16,8 +16,7 @@ name = MaxRandomQuery.name
     "-f",
     "--force",
     "force",
-    help="Force setting the querier configuration, even if that me"
-    + "ans overwriting a previous configuration.",
+    help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(

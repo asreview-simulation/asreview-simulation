@@ -16,8 +16,7 @@ name = "none"
     "-f",
     "--force",
     "force",
-    help="Force setting the stopping configuration, even if that me"
-    + "ans overwriting a previous configuration.",
+    help="Force setting the stopping configuration, even if that me" + "ans overwriting a previous configuration.",
     is_flag=True,
 )
 @click.pass_obj

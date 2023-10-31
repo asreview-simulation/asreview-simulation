@@ -77,29 +77,15 @@ def start(obj, benchmark, input_file, no_zip, output_file, seed, write_interval)
 
     # assign model parameterizations using the data from obj
     if obj.extractor.abbr == "embedding-lstm":
-        classifier = get_classifier(
-            obj.classifier.abbr, random_state=random_state, **obj.classifier.params
-        )
+        classifier = get_classifier(obj.classifier.abbr, random_state=random_state, **obj.classifier.params)
         embedding_fp = obj.extractor.params.pop("embedding_fp", None)
-        extractor = get_feature_model(
-            obj.extractor.abbr, random_state=random_state, **obj.extractor.params
-        )
-        classifier.embedding_matrix = extractor.get_embedding_matrix(
-            as_data.texts, embedding_fp
-        )
+        extractor = get_feature_model(obj.extractor.abbr, random_state=random_state, **obj.extractor.params)
+        classifier.embedding_matrix = extractor.get_embedding_matrix(as_data.texts, embedding_fp)
     else:
-        classifier = get_classifier(
-            obj.classifier.abbr, random_state=random_state, **obj.classifier.params
-        )
-        extractor = get_feature_model(
-            obj.extractor.abbr, random_state=random_state, **obj.extractor.params
-        )
-    querier = get_query_model(
-        obj.querier.abbr, random_state=random_state, **obj.querier.params
-    )
-    balancer = get_balance_model(
-        obj.balancer.abbr, random_state=random_state, **obj.balancer.params
-    )
+        classifier = get_classifier(obj.classifier.abbr, random_state=random_state, **obj.classifier.params)
+        extractor = get_feature_model(obj.extractor.abbr, random_state=random_state, **obj.extractor.params)
+    querier = get_query_model(obj.querier.abbr, random_state=random_state, **obj.querier.params)
+    balancer = get_balance_model(obj.balancer.abbr, random_state=random_state, **obj.balancer.params)
 
     n_papers = None
     stop_if = assign_vars_for_stopping(obj, as_data, n_instances)

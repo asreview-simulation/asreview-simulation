@@ -48,9 +48,7 @@ def _add_balancer_subcommands():
         undersample_balancer,
     ]
     try:
-        other_balancers = [
-            e.load() for e in entrypoints(group="asreview_simulation.balancers")
-        ]
+        other_balancers = [e.load() for e in entrypoints(group="asreview_simulation.balancers")]
     except Exception as e:
         print(
             "Something went wrong loading a module from entrypoint group "
@@ -72,9 +70,7 @@ def _add_classifier_subcommands():
         svm_classifier,
     ]
     try:
-        other_classifiers = [
-            e.load() for e in entrypoints(group="asreview_simulation.classifiers")
-        ]
+        other_classifiers = [e.load() for e in entrypoints(group="asreview_simulation.classifiers")]
     except Exception as e:
         print(
             "Something went wrong loading a module from entrypoint group "
@@ -94,9 +90,7 @@ def _add_extractor_subcommands():
         sbert_extractor,
     ]
     try:
-        other_extractors = [
-            e.load() for e in entrypoints(group="asreview_simulation.extractors")
-        ]
+        other_extractors = [e.load() for e in entrypoints(group="asreview_simulation.extractors")]
     except Exception as e:
         print(
             "Something went wrong loading a module from entrypoint group "
@@ -117,9 +111,7 @@ def _add_querier_subcommands():
         uncertainty_querier,
     ]
     try:
-        other_queriers = [
-            e.load() for e in entrypoints(group="asreview_simulation.queriers")
-        ]
+        other_queriers = [e.load() for e in entrypoints(group="asreview_simulation.queriers")]
     except Exception as e:
         print(
             "Something went wrong loading a module from entrypoint group "

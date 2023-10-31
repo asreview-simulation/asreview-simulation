@@ -32,9 +32,7 @@ def load_settings(obj, settings_file):
             obj.balancer.params = settings["balancer"]["params"]
             obj.provided.balancer = True
         except KeyError as e:
-            print(
-                "Expected balancer settings to include a model abbreviation and the corresponding parameterization."
-            )
+            print("Expected balancer settings to include a model abbreviation and the corresponding parameterization.")
             raise e
 
     if "classifier" in settings.keys():
@@ -54,9 +52,7 @@ def load_settings(obj, settings_file):
             obj.extractor.params = settings["extractor"]["params"]
             obj.provided.extractor = True
         except KeyError as e:
-            print(
-                "Expected extractor settings to include a model abbreviation and the corresponding parameterization."
-            )
+            print("Expected extractor settings to include a model abbreviation and the corresponding parameterization.")
             raise e
 
     if "querier" in settings.keys():
@@ -65,9 +61,7 @@ def load_settings(obj, settings_file):
             obj.querier.params = settings["querier"]["params"]
             obj.provided.querier = True
         except KeyError as e:
-            print(
-                "Expected querier settings to include a model abbreviation and the corresponding parameterization."
-            )
+            print("Expected querier settings to include a model abbreviation and the corresponding parameterization.")
             raise e
 
     if "sampler" in settings.keys():
@@ -76,9 +70,7 @@ def load_settings(obj, settings_file):
             obj.sampler.params = settings["sampler"]["params"]
             obj.provided.sampler = True
         except KeyError as e:
-            print(
-                "Expected sampler settings to include a model abbreviation and the corresponding parameterization."
-            )
+            print("Expected sampler settings to include a model abbreviation and the corresponding parameterization.")
             raise e
 
     if "stopping" in settings.keys():
@@ -87,7 +79,5 @@ def load_settings(obj, settings_file):
             obj.stopping.params = settings["stopping"]["params"]
             obj.provided.stopping = True
         except KeyError as e:
-            print(
-                "Expected stopping settings to include a model abbreviation and the corresponding parameterization."
-            )
+            print("Expected stopping settings to include a model abbreviation and the corresponding parameterization.")
             raise e

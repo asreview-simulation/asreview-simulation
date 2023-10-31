@@ -15,8 +15,7 @@ name = "handpicked"
     "-f",
     "--force",
     "force",
-    help="Force setting the querier configuration, even if that me"
-    + "ans overwriting a previous configuration.",
+    help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -41,12 +40,8 @@ def handpicked_prior_sampler(obj, force, records, rows):
             + "if you mean to overwrite the sampler configuration from previous steps. "
         )
 
-    assert not (
-        rows is None and records is None
-    ), "Need to define either --rows or --records."
-    assert not (
-        rows is not None and records is not None
-    ), "Need to define one of --rows or --records, not both."
+    assert not (rows is None and records is None), "Need to define either --rows or --records."
+    assert not (rows is not None and records is not None), "Need to define one of --rows or --records, not both."
 
     obj.sampler.abbr = name
 
