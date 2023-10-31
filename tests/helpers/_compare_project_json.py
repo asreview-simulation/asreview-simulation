@@ -11,8 +11,5 @@ def compare_project_json(p1, p2):
     assert actual["mode"] == expected["mode"]
     assert actual["dataset_path"] == expected["dataset_path"]
     assert actual["feature_matrices"][0]["id"] == expected["feature_matrices"][0]["id"]
-    assert (
-        actual["feature_matrices"][0]["filename"]
-        == expected["feature_matrices"][0]["filename"]
-    )
+    assert actual["feature_matrices"][0]["filename"] == expected["feature_matrices"][0]["filename"]
     assert actual["reviews"][0]["status"] == expected["reviews"][0]["status"]

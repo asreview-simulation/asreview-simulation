@@ -11,8 +11,6 @@ def compare_data_csv(p1, p2, benchmark=None, input_file=None):
     elif input_file is not None:
         fname = Path(input_file).with_suffix(".csv").name
     else:
-        raise ValueError(
-            "Unexpectedly did not receive a value for 'input_file' nor for 'benchmark'."
-        )
+        raise ValueError("Unexpectedly did not receive a value for 'input_file' nor for 'benchmark'.")
 
     assert calc_hash(p1 / "data" / fname) == calc_hash(p2 / "data" / fname)
