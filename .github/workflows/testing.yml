@@ -149,9 +149,17 @@ jobs:
         shell: bash
         run: pytest tests/unit
 
-      - name: Run mocked tests
+      - if: ${{ matrix.tensorflow == 'with-tf' }}
+        name: Run mocked tests (with tensorflow)
         shell: bash
         run: pytest tests/mocked
+
+      - if: ${{ matrix.tensorflow == 'without-tf' }}
+        name: Run mocked tests (without tensorflow)
+        shell: bash
+        # cls_lstm_base needs tensorflow
+        # cls_lstm_pool needs tensorflow
+        run: pytest -m 'not cls_lstm_base and not cls_lstm_pool' tests/mocked
 
       - if: ${{ matrix.tensorflow == 'with-tf' }}
         name: Run integration tests (with tensorflow)
@@ -162,8 +170,9 @@ jobs:
       - if: ${{ matrix.tensorflow == 'without-tf' }}
         name: Run integration tests (without tensorflow)
         shell: bash
-        # fex_embedding_lstm needs tensorflow
-        # fex_embedding_idf needs tensorflow
-        # fex_sbert takes too long and causes ci timeout errors
+        # cls_lstm_base needs tensorflow
+        # cls_lstm_pool needs tensorflow
         # cls_nn_2_layer needs tensorflow
-        run: pytest -m 'not fex_embedding_lstm and not fex_embedding_idf not fex_sbert and not cls_nn_2_layer' tests/it
+        # fex_embedding_lstm needs tensorflow
+        # fex_sbert takes too long and causes ci timeout errors
+        run: pytest -m 'not cls_lstm_base and not cls_lstm_pool and not cls_nn_2_layer and not fex_embedding_lstm and not fex_sbert' tests/it
