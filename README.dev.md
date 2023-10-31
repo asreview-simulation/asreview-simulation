@@ -145,10 +145,10 @@ for `asreview simulation start`.
 
 ### Hyperspace definition discrepancies
 
-There are some discrepancies between the Python interface, the documentation, and the hyperspace definitions. What
-follows is an overview of all models, along with how they define the number, name and type of their parameters in
-their constructor, in their documentation, and in their `.full_hyper_space` functions. The tables below are based
-on ASReview 1.2.
+There are some discrepancies between the Python interface, the documentation, and the hyperspace definitions in
+the model source files from `asreview`. What follows is an overview of all models, along with how they define the
+number, name and type of their parameters in their constructor, in their documentation, and in their
+`.full_hyper_space` functions. The tables below are based on ASReview 1.2.
 
 #### `DoubleBalance`
 
