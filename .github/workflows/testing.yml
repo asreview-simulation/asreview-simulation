@@ -19,8 +19,8 @@ jobs:
         name: Create ~/asr_data directory with embedding file in it (Linux)
         shell: bash
         run: |
-          mkdir ~/asr_data
-          cd ~/asr_data
+          mkdir $HOME/asr_data
+          cd $HOME/asr_data
           curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o cc.en.300.vec.gz
           7z e cc.en.300.vec.gz
           mv cc.en.300.vec fasttext.cc.en.300.vec
@@ -29,8 +29,8 @@ jobs:
         name: Create ~/asr_data directory with embedding file in it (Mac)
         shell: bash
         run: |
-          mkdir ~/asr_data
-          cd ~/asr_data
+          mkdir $HOME/asr_data
+          cd $HOME/asr_data
           curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o cc.en.300.vec.gz
           7z e cc.en.300.vec.gz
           mv cc.en.300.vec fasttext.cc.en.300.vec
@@ -39,8 +39,9 @@ jobs:
         name: Create C:\Users\runneradmin\asr_data directory with embedding file in it (Windows)
         shell: pwsh
         run: |
-          New-Item -Path C:\Users\runneradmin -Name "asr_data" -ItemType "directory"
-          cd C:\Users\runneradmin\asr_data
+          echo USERPROFILE=$env:USERPROFILE
+          New-Item -Path $env:USERPROFILE -Name "asr_data" -ItemType "directory"
+          cd $env:USERPROFILE\asr_data
           Invoke-WebRequest -Uri https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -Outfile cc.en.300.vec.gz
           7z e cc.en.300.vec.gz
           mv cc.en.300.vec fasttext.cc.en.300.vec
