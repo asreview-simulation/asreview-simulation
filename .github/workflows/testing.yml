@@ -153,12 +153,14 @@ jobs:
       - if: ${{ matrix.tensorflow == 'with-tf' }}
         name: Run integration tests (with tensorflow)
         shell: bash
-        # fex_sbert takes too long and causes timeout errors
+        # fex_sbert takes too long and causes ci timeout errors
         run: pytest -m 'not fex_sbert' tests/it
 
       - if: ${{ matrix.tensorflow == 'without-tf' }}
         name: Run integration tests (without tensorflow)
         shell: bash
-        # fex_sbert takes too long and causes timeout errors
-        # cls_nn_2_layer needs tensorflow that has install problems for py > 3.10
-        run: pytest -m 'not fex_sbert and not cls_nn_2_layer' tests/it
+        # fex_embedding_lstm needs tensorflow
+        # fex_embedding_idf needs tensorflow
+        # fex_sbert takes too long and causes ci timeout errors
+        # cls_nn_2_layer needs tensorflow
+        run: pytest -m 'not fex_embedding_lstm and not fex_embedding_idf not fex_sbert and not cls_nn_2_layer' tests/it
