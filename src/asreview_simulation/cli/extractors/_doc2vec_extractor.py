@@ -13,14 +13,6 @@ name = Doc2Vec.name
     short_help="Doc2Vec extractor",
 )
 @click.option(
-    "--epochs",
-    "epochs",
-    default=33,
-    help="Number of epochs to train the doc2vec model.",
-    show_default=True,
-    type=click.INT,
-)
-@click.option(
     "--dbow_words",
     "dbow_words",
     default=0,
@@ -46,6 +38,14 @@ name = Doc2Vec.name
     type=click.INT,
 )
 @click.option(
+    "--epochs",
+    "epochs",
+    default=33,
+    help="Number of epochs to train the doc2vec model.",
+    show_default=True,
+    type=click.INT,
+)
+@click.option(
     "-f",
     "--force",
     "force",
@@ -61,12 +61,14 @@ name = Doc2Vec.name
     type=click.INT,
 )
 @click.option(
-    "--n_jobs",
-    "n_jobs",
-    default=1,
-    help="Number of threads to train the model with.",
-    show_default=True,
-    type=click.INT,
+    "--split_ta",
+    "split_ta",
+    help="hyperparameter",
+)
+@click.option(
+    "--use_keywords",
+    "use_keywords",
+    help="hyperparameter",
 )
 @click.option(
     "--vector_size",
@@ -87,13 +89,14 @@ name = Doc2Vec.name
 @click.pass_obj
 def doc2vec_extractor(
     obj,
-    epochs,
     dbow_words,
     dm,
     dm_concat,
+    epochs,
     force,
     min_count,
-    n_jobs,
+    split_ta,
+    use_keywords,
     vector_size,
     window,
 ):
@@ -109,7 +112,8 @@ def doc2vec_extractor(
         "dm_concat": dm_concat,
         "epochs": epochs,
         "min_count": min_count,
-        "n_jobs": n_jobs,
+        "split_ta": split_ta,
+        "use_keywords": use_keywords,
         "vector_size": vector_size,
         "window": window,
     }

@@ -43,14 +43,6 @@ name = EmbeddingLSTM.name
     type=click.INT,
 )
 @click.option(
-    "--n_jobs",
-    "n_jobs",
-    default=1,
-    help="Number of processors used in reading the embedding matrix.",
-    show_default=True,
-    type=click.INT,
-)
-@click.option(
     "--num_words",
     "num_words",
     default=20000,
@@ -67,12 +59,22 @@ name = EmbeddingLSTM.name
     type=click.Choice(["pre", "post"]),
 )
 @click.option(
+    "--split_ta",
+    "split_ta",
+    help="hyperparameter",
+)
+@click.option(
     "--truncating",
     "truncating",
     default="post",
     help="Which side should be truncated.",
     show_default=True,
     type=click.Choice(["pre", "post"]),
+)
+@click.option(
+    "--use_keywords",
+    "use_keywords",
+    help="hyperparameter",
 )
 @click.pass_obj
 def embedding_lstm_extractor(
@@ -81,10 +83,11 @@ def embedding_lstm_extractor(
     force,
     loop_sequence,
     max_sequence_length,
-    n_jobs,
     num_words,
     padding,
+    split_ta,
     truncating,
+    use_keywords
 ):
     if not force:
         assert obj.provided.extractor is False, (
@@ -96,9 +99,10 @@ def embedding_lstm_extractor(
         "embedding_fp": embedding or "",
         "loop_sequence": loop_sequence,
         "max_sequence_length": max_sequence_length,
-        "n_jobs": n_jobs,
         "num_words": num_words,
         "padding": padding,
+        "split_ta": split_ta,
         "truncating": truncating,
+        "use_keywords": use_keywords
     }
     obj.provided.extractor = True
