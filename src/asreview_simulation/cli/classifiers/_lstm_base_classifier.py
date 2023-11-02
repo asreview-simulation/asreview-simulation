@@ -13,12 +13,6 @@ name = LSTMBaseClassifier.name
     short_help="LSTM Base classifier",
 )
 @click.option(
-    "--backwards",
-    "backwards",
-    help="Include this flag for backward LSTM (default is forward).",
-    is_flag=True,
-)
-@click.option(
     "--batch_size",
     "batch_size",
     default=32,
@@ -66,6 +60,12 @@ name = LSTMBaseClassifier.name
     is_flag=True,
 )
 @click.option(
+    "--forward",
+    "forward",
+    help="Include this flag for forward LSTM (default is backward).",
+    is_flag=True,
+)
+@click.option(
     "--optimizer",
     "optimizer",
     default="rmsprop",
@@ -96,7 +96,7 @@ name = LSTMBaseClassifier.name
     is_flag=True,
 )
 @click.pass_obj
-def lstm_base_classifier(obj, backwards, batch_size, class_weight, dense_width, dropout, epochs, force, optimizer, learn_rate, lstm_out_width, shuffle):
+def lstm_base_classifier(obj, batch_size, class_weight, dense_width, dropout, epochs, force, forward, optimizer, learn_rate, lstm_out_width, shuffle):
     if not force:
         assert obj.provided.classifier is False, (
             "Attempted reassignment of classifier. Use the --force flag "
@@ -104,7 +104,7 @@ def lstm_base_classifier(obj, backwards, batch_size, class_weight, dense_width, 
         )
     obj.classifier.abbr = name
     obj.classifier.params = {
-        "backwards": backwards,
+        "backwards": not forward,
         "batch_size": batch_size,
         "class_weight": class_weight,
         "dense_width": dense_width,

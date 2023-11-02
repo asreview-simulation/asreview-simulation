@@ -13,12 +13,6 @@ name = LSTMPoolClassifier.name
     short_help="LSTM Pool classifier",
 )
 @click.option(
-    "--backwards",
-    "backwards",
-    help="Include this flag to have a backward LSTM (default is forward).",
-    is_flag=True
-)
-@click.option(
     "--batch_size",
     "batch_size",
     default=32,
@@ -56,6 +50,12 @@ name = LSTMPoolClassifier.name
     "force",
     help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
     is_flag=True,
+)
+@click.option(
+    "--forward",
+    "forward",
+    help="Include this flag to have a forward LSTM (default is backward).",
+    is_flag=True
 )
 @click.option(
     "--learn_rate",
@@ -96,7 +96,7 @@ name = LSTMPoolClassifier.name
     is_flag=True,
 )
 @click.pass_obj
-def lstm_pool_classifier(obj, backwards, batch_size, class_weight, dropout, epochs, force, learn_rate, lstm_out_width, lstm_pool_size, optimizer, shuffle):
+def lstm_pool_classifier(obj, batch_size, class_weight, dropout, epochs, force, forward, learn_rate, lstm_out_width, lstm_pool_size, optimizer, shuffle):
     if not force:
         assert obj.provided.classifier is False, (
             "Attempted reassignment of classifier. Use the --force flag "
@@ -104,7 +104,7 @@ def lstm_pool_classifier(obj, backwards, batch_size, class_weight, dropout, epoc
         )
     obj.classifier.abbr = name
     obj.classifier.params = {
-        "backwards": backwards,
+        "backwards": not forward,
         "batch_size": batch_size,
         "class_weight": class_weight,
         "dropout": dropout,
