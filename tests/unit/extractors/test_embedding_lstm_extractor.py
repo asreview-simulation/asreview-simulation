@@ -20,18 +20,20 @@ def test_embedding_lstm_extractor_default_parameterization():
     extractor = json.loads(result.output)["extractor"]
     assert extractor["abbr"] == "embedding-lstm"
     params = extractor["params"].keys()
-    assert len(params) == 7
-    assert "embedding_fp" in params
-    assert extractor["params"]["embedding_fp"] == ""
-    assert "loop_sequence" in params
-    assert extractor["params"]["loop_sequence"] == 1
-    assert "max_sequence_length" in params
-    assert extractor["params"]["max_sequence_length"] == 1000
-    assert "n_jobs" in params
-    assert extractor["params"]["n_jobs"] == 1
-    assert "num_words" in params
-    assert extractor["params"]["num_words"] == 20000
-    assert "padding" in params
-    assert extractor["params"]["padding"] == "post"
-    assert "truncating" in params
-    assert extractor["params"]["truncating"] == "post"
+
+    expected_pairs = [
+        ("embedding_fp", ""),
+        ("loop_sequence", 1),
+        ("max_sequence_length", 1000),
+        ("num_words", 20000),
+        ("padding", "post"),
+        ("split_ta", 0),
+        ("truncating", "post"),
+        ("use_keywords", 0),
+    ]
+    assert not (len(params) < len(expected_pairs)), "Missing parameter"
+    assert not (len(params) > len(expected_pairs)), "Unexpected extra parameter"
+
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of 'fex-{extractor.abbr}'."
+        assert extractor["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
