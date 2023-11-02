@@ -15,10 +15,8 @@ name = Doc2Vec.name
 @click.option(
     "--dbow_words",
     "dbow_words",
-    default=0,
-    help="Whether to train the word vectors using the skipgram method.",
-    show_default=True,
-    type=click.INT,
+    help="Include this flag to train the word vectors using the skipgram method.",
+    is_flag=True,
 )
 @click.option(
     "--dm",
@@ -32,10 +30,8 @@ name = Doc2Vec.name
 @click.option(
     "--dm_concat",
     "dm_concat",
-    default=0,
-    help="Whether to concatenate word vectors or not.",
-    show_default=True,
-    type=click.INT,
+    help="Include this flag to concatenate word vectors.",
+    is_flag=True
 )
 @click.option(
     "--epochs",
@@ -63,12 +59,14 @@ name = Doc2Vec.name
 @click.option(
     "--split_ta",
     "split_ta",
-    help="hyperparameter",
+    help="Include this flag to split ta.",
+    is_flag=True
 )
 @click.option(
     "--use_keywords",
     "use_keywords",
-    help="hyperparameter",
+    help="Include this flag to use keywords.",
+    is_flag=True,
 )
 @click.option(
     "--vector_size",
@@ -87,19 +85,7 @@ name = Doc2Vec.name
     type=click.INT,
 )
 @click.pass_obj
-def doc2vec_extractor(
-    obj,
-    dbow_words,
-    dm,
-    dm_concat,
-    epochs,
-    force,
-    min_count,
-    split_ta,
-    use_keywords,
-    vector_size,
-    window,
-):
+def doc2vec_extractor(obj, dbow_words,  dm, dm_concat, epochs, force, min_count, split_ta, use_keywords, vector_size, window):
     if not force:
         assert obj.provided.extractor is False, (
             "Attempted reassignment of extractor. Use the --force flag "
@@ -107,13 +93,13 @@ def doc2vec_extractor(
         )
     obj.extractor.abbr = name
     obj.extractor.params = {
-        "dbow_words": dbow_words,
+        "dbow_words": {True: 1, False: 0}[dbow_words],
         "dm": {"dbow": 0, "dm": 1, "both": 2}[dm],
-        "dm_concat": dm_concat,
+        "dm_concat": {True: 1, False: 0}[dm_concat],
         "epochs": epochs,
         "min_count": min_count,
-        "split_ta": split_ta,
-        "use_keywords": use_keywords,
+        "split_ta": {True: 1, False: 0}[split_ta],
+        "use_keywords": {True: 1, False: 0}[use_keywords],
         "vector_size": vector_size,
         "window": window,
     }
