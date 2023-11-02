@@ -21,7 +21,7 @@ def test_lstm_base_classifier_default_parameterization(tmp_path):
     assert classifier["abbr"] == "lstm-base"
     params = classifier["params"].keys()
     expected_pairs = [
-        ("backwards", False),
+        ("backwards", True),
         ("batch_size", 32),
         ("class_weight", 30.0),
         ("dense_width", 128),
