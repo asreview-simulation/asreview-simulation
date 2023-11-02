@@ -20,4 +20,19 @@ def test_lstm_base_classifier_default_parameterization(tmp_path):
     classifier = json.loads(result.output)["classifier"]
     assert classifier["abbr"] == "lstm-base"
     params = classifier["params"].keys()
-    assert len(params) == 0
+    expected_pairs = [
+        ("backwards", False),
+        ("batch_size", 32),
+        ("class_weight", 30.0),
+        ("dense_width", 128),
+        ("dropout", 0.4),
+        ("epochs", 35),
+        ("optimizer", "rmsprop"),
+        ("learn_rate", 1.0),
+        ("lstm_out_width", 20),
+        ("shuffle", False),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
+        assert classifier["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
