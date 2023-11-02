@@ -35,5 +35,5 @@ def test_doc2vec_extractor_default_parameterization():
     assert not (len(params) > len(expected_pairs)), "Unexpected extra parameter"
 
     for param, expected_value in expected_pairs:
-        assert param in params, f"Expected key '{param}' to be present in parameterization of 'fex-{extractor.abbr}'."
+        assert param in params, f"Expected key '{param}' to be present in parameterization of feature extractor."
         assert extractor["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
