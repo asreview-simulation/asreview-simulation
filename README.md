@@ -29,19 +29,19 @@ pip install git+https://github.com/asreview-tuning/asreview-simulation.git@0.2.0
 
 Print the help:
 
-```shell
+```text
 asreview simulation --help
 ```
 
 Print the configuration:
 
-```shell
+```text
 asreview simulation print-settings
 ```
 
 With pretty-printing:
 
-```shell
+```text
 asreview simulation print-settings --pretty
 ```
 
@@ -49,13 +49,13 @@ Start a simulation using the default combination of models (`sam-random`,
 `bal-double`, `cls-nb`, `fex-tfidf`, `qry-max`, `stp-min`), each using its default
 parameterization:
 
-```shell
+```text
 asreview simulation start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
 Instead of a benchmark dataset, you can also supply your own data via the `--in` option, as follows:
 
-```shell
+```text
 asreview simulation start --in ./myfile.csv --out ./project.asreview
 asreview simulation start --in ./myfile.ris --out ./project.asreview
 asreview simulation start --in ./myfile.tsv --out ./project.asreview
@@ -65,7 +65,7 @@ asreview simulation start --in ./myfile.xlsx --out ./project.asreview
 Using a different classifier strategy can be accomplished by using one of
 the `cls-*` subcommands before issuing the `start` subcommand, e.g.:
 
-```shell
+```text
 asreview simulation \
     cls-logistic \
     start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
@@ -74,7 +74,7 @@ asreview simulation \
 Subcommands can be chained together, for example using the logistic
 classifier with the undersample balancer goes like this:
 
-```shell
+```text
 asreview simulation \
     cls-logistic \
     bal-undersample \
@@ -84,12 +84,12 @@ asreview simulation \
 Most subcommands have their own parameterization. Check the help of a
 subcommand with `--help` or `-h` for short, e.g.:
 
-```shell
+```text
 asreview simulation cls-logistic --help
 ```
 The above command will print:
 
-```shell
+```text
 Usage: asreview simulation cls-logistic [OPTIONS]
 
   Configure the simulation to use Logistic Regression classifier.
@@ -113,7 +113,7 @@ Options:
 
 Passing parameters to a subcommand goes like this:
 
-```shell
+```text
 asreview simulation \
     cls-logistic --class_weight 1.1 \
     start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
@@ -122,7 +122,7 @@ asreview simulation \
 By using individually parameterized, chained subcommands we can compose a
 variety of configurations, e.g.:
 
-```shell
+```text
 asreview simulation \
     sam-random --n_included 10 --n_excluded 15            \
     fex-tfidf --ngram_max 2                               \
@@ -138,7 +138,7 @@ with the `start` command, otherwise it may appear like nothing is happening.
 
 Here is the list of subcommands:
 
-```shell
+```text
 start                  Start the simulation
 print-benchmark-names  Print benchmark names
 print-settings         Print settings
