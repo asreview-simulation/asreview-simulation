@@ -20,11 +20,13 @@ def test_svm_classifier_default_parameterization():
     classifier = json.loads(result.output)["classifier"]
     assert classifier["abbr"] == "svm"
     params = classifier["params"].keys()
-    assert "C" in params
-    assert classifier["params"]["C"] == 15.4
-    assert "class_weight" in params
-    assert classifier["params"]["class_weight"] == 0.249
-    assert "gamma" in params
-    assert classifier["params"]["gamma"] == "auto"
-    assert "kernel" in params
-    assert classifier["params"]["kernel"] == "linear"
+    expected_pairs = [
+        ("C", 15.4),
+        ("class_weight", 0.249),
+        ("gamma", "auto"),
+        ("kernel", "linear"),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
+        assert classifier["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
