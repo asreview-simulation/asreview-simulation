@@ -103,8 +103,8 @@ def embedding_lstm_extractor(
         "max_sequence_length": max_sequence_length,
         "num_words": num_words,
         "padding": padding,
-        "split_ta": split_ta,
+        "split_ta": {False: 0, True: 1}[split_ta],
         "truncating": truncating,
-        "use_keywords": use_keywords,
+        "use_keywords": {False: 0, True: 1}[use_keywords],
     }
     obj.provided.extractor = True
