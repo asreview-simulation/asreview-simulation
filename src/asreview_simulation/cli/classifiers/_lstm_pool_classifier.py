@@ -55,7 +55,7 @@ name = LSTMPoolClassifier.name
     "--forward",
     "forward",
     help="Include this flag to have a forward LSTM (default is backward).",
-    is_flag=True
+    is_flag=True,
 )
 @click.option(
     "--learn_rate",
@@ -96,7 +96,20 @@ name = LSTMPoolClassifier.name
     is_flag=True,
 )
 @click.pass_obj
-def lstm_pool_classifier(obj, batch_size, class_weight, dropout, epochs, force, forward, learn_rate, lstm_out_width, lstm_pool_size, optimizer, shuffle):
+def lstm_pool_classifier(
+    obj,
+    batch_size,
+    class_weight,
+    dropout,
+    epochs,
+    force,
+    forward,
+    learn_rate,
+    lstm_out_width,
+    lstm_pool_size,
+    optimizer,
+    shuffle,
+):
     if not force:
         assert obj.provided.classifier is False, (
             "Attempted reassignment of classifier. Use the --force flag "

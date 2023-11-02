@@ -62,7 +62,7 @@ name = EmbeddingLSTM.name
     "--split_ta",
     "split_ta",
     help="Include this flag to split ta.",
-    is_flag=True
+    is_flag=True,
 )
 @click.option(
     "--truncating",
@@ -79,7 +79,18 @@ name = EmbeddingLSTM.name
     is_flag=True,
 )
 @click.pass_obj
-def embedding_lstm_extractor(obj, embedding, force, loop_sequence, max_sequence_length, num_words, padding, split_ta, truncating, use_keywords):
+def embedding_lstm_extractor(
+    obj,
+    embedding,
+    force,
+    loop_sequence,
+    max_sequence_length,
+    num_words,
+    padding,
+    split_ta,
+    truncating,
+    use_keywords,
+):
     if not force:
         assert obj.provided.extractor is False, (
             "Attempted reassignment of extractor. Use the --force flag "
@@ -94,6 +105,6 @@ def embedding_lstm_extractor(obj, embedding, force, loop_sequence, max_sequence_
         "padding": padding,
         "split_ta": split_ta,
         "truncating": truncating,
-        "use_keywords": use_keywords
+        "use_keywords": use_keywords,
     }
     obj.provided.extractor = True

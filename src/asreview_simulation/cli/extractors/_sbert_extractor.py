@@ -23,7 +23,7 @@ name = SBERT.name
     "--split_ta",
     "split_ta",
     help="Include this flag to split ta.",
-    is_flag=True
+    is_flag=True,
 )
 @click.option(
     "--transformer_model",
@@ -37,7 +37,7 @@ name = SBERT.name
     "--use_keywords",
     "use_keywords",
     help="Include this flag to use keywords.",
-    is_flag=True
+    is_flag=True,
 )
 @click.pass_obj
 def sbert_extractor(obj, force, split_ta, transformer_model, use_keywords):

@@ -31,7 +31,7 @@ name = Doc2Vec.name
     "--dm_concat",
     "dm_concat",
     help="Include this flag to concatenate word vectors.",
-    is_flag=True
+    is_flag=True,
 )
 @click.option(
     "--epochs",
@@ -60,7 +60,7 @@ name = Doc2Vec.name
     "--split_ta",
     "split_ta",
     help="Include this flag to split ta.",
-    is_flag=True
+    is_flag=True,
 )
 @click.option(
     "--use_keywords",
@@ -85,7 +85,19 @@ name = Doc2Vec.name
     type=click.INT,
 )
 @click.pass_obj
-def doc2vec_extractor(obj, dbow_words,  dm, dm_concat, epochs, force, min_count, split_ta, use_keywords, vector_size, window):
+def doc2vec_extractor(
+    obj,
+    dbow_words,
+    dm,
+    dm_concat,
+    epochs,
+    force,
+    min_count,
+    split_ta,
+    use_keywords,
+    vector_size,
+    window,
+):
     if not force:
         assert obj.provided.extractor is False, (
             "Attempted reassignment of extractor. Use the --force flag "

@@ -32,7 +32,7 @@ name = Tfidf.name
     "--split_ta",
     "split_ta",
     help="Include this flag to split ta.",
-    is_flag=True
+    is_flag=True,
 )
 @click.option(
     "--stop_words",

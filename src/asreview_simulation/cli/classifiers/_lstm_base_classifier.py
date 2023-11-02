@@ -96,7 +96,20 @@ name = LSTMBaseClassifier.name
     is_flag=True,
 )
 @click.pass_obj
-def lstm_base_classifier(obj, batch_size, class_weight, dense_width, dropout, epochs, force, forward, optimizer, learn_rate, lstm_out_width, shuffle):
+def lstm_base_classifier(
+    obj,
+    batch_size,
+    class_weight,
+    dense_width,
+    dropout,
+    epochs,
+    force,
+    forward,
+    optimizer,
+    learn_rate,
+    lstm_out_width,
+    shuffle,
+):
     if not force:
         assert obj.provided.classifier is False, (
             "Attempted reassignment of classifier. Use the --force flag "

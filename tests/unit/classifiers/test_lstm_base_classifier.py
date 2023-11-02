@@ -35,4 +35,6 @@ def test_lstm_base_classifier_default_parameterization(tmp_path):
     assert len(params) == len(expected_pairs), "Unexpected number of parameters"
     for param, expected_value in expected_pairs:
         assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
-        assert classifier["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
+        assert (
+            classifier["params"][param] == expected_value
+        ), f"Expected key '{param}' to have value '{expected_value}'."
