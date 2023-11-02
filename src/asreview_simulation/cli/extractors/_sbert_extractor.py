@@ -22,7 +22,8 @@ name = SBERT.name
 @click.option(
     "--split_ta",
     "split_ta",
-    help="hyperparameter",
+    help="Include this flag to split ta.",
+    is_flag=True
 )
 @click.option(
     "--transformer_model",
@@ -35,7 +36,8 @@ name = SBERT.name
 @click.option(
     "--use_keywords",
     "use_keywords",
-    help="hyperparameter",
+    help="Include this flag to use keywords.",
+    is_flag=True
 )
 @click.pass_obj
 def sbert_extractor(obj, force, split_ta, transformer_model, use_keywords):
@@ -46,8 +48,8 @@ def sbert_extractor(obj, force, split_ta, transformer_model, use_keywords):
         )
     obj.extractor.abbr = name
     obj.extractor.params = {
-        "split_ta": split_ta,
+        "split_ta": {False: 0, True: 1}[split_ta],
         "transformer_model": transformer_model,
-        "use_keywords": use_keywords,
+        "use_keywords": {False: 0, True: 1}[use_keywords],
     }
     obj.provided.extractor = True

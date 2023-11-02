@@ -20,5 +20,14 @@ def test_sbert_extractor_default_parameterization():
     extractor = json.loads(result.output)["extractor"]
     assert extractor["abbr"] == "sbert"
     params = extractor["params"].keys()
-    assert "transformer_model" in params
-    assert extractor["params"]["transformer_model"] == "all-mpnet-base-v2"
+    expected_pairs = [
+        ("split_ta", 0),
+        ("transformer_model", "all-mpnet-base-v2"),
+        ("use_keywords", 0),
+    ]
+    assert not (len(params) < len(expected_pairs)), "Missing parameter"
+    assert not (len(params) > len(expected_pairs)), "Unexpected extra parameter"
+
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of feature extractor."
+        assert extractor["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
