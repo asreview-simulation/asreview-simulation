@@ -20,6 +20,10 @@ def test_uncertainty_querier_default_parameterization():
     querier = json.loads(result.output)["querier"]
     assert querier["abbr"] == "uncertainty"
     params = querier["params"].keys()
-    assert len(params) == 1
-    assert "n_instances" in params
-    assert querier["params"]["n_instances"] == 1
+    expected_pairs = [
+        ("n_instances", 1),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of querier."
+        assert querier["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

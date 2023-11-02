@@ -20,5 +20,12 @@ def test_naive_bayes_classifier_default_parameterization():
     classifier = json.loads(result.output)["classifier"]
     assert classifier["abbr"] == "nb"
     params = classifier["params"].keys()
-    assert "alpha" in params
-    assert classifier["params"]["alpha"] == 3.822
+    expected_pairs = [
+        ("alpha", 3.822),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
+        assert (
+            classifier["params"][param] == expected_value
+        ), f"Expected key '{param}' to have value '{expected_value}'."

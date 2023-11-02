@@ -21,6 +21,14 @@ name = NN2LayerClassifier.name
     type=click.INT,
 )
 @click.option(
+    "--class_weight",
+    "class_weight",
+    default=30.0,
+    help="Class weights for inclusions (1's).",
+    show_default=True,
+    type=click.FLOAT,
+)
+@click.option(
     "--dense_width",
     "dense_width",
     default=128,
@@ -77,6 +85,7 @@ name = NN2LayerClassifier.name
 def nn_2_layer_classifier(
     obj,
     batch_size,
+    class_weight,
     dense_width,
     epochs,
     force,
@@ -93,6 +102,7 @@ def nn_2_layer_classifier(
     obj.classifier.abbr = name
     obj.classifier.params = {
         "batch_size": batch_size,
+        "class_weight": class_weight,
         "dense_width": dense_width,
         "epochs": epochs,
         "learn_rate": learn_rate,

@@ -20,6 +20,12 @@ name = SBERT.name
     is_flag=True,
 )
 @click.option(
+    "--split_ta",
+    "split_ta",
+    help="Include this flag to split ta.",
+    is_flag=True,
+)
+@click.option(
     "--transformer_model",
     "transformer_model",
     default="all-mpnet-base-v2",
@@ -27,13 +33,23 @@ name = SBERT.name
     show_default=True,
     type=click.Choice(["all-mpnet-base-v2"]),
 )
+@click.option(
+    "--use_keywords",
+    "use_keywords",
+    help="Include this flag to use keywords.",
+    is_flag=True,
+)
 @click.pass_obj
-def sbert_extractor(obj, force, transformer_model):
+def sbert_extractor(obj, force, split_ta, transformer_model, use_keywords):
     if not force:
         assert obj.provided.extractor is False, (
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
     obj.extractor.abbr = name
-    obj.extractor.params = {"transformer_model": transformer_model}
+    obj.extractor.params = {
+        "split_ta": {False: 0, True: 1}[split_ta],
+        "transformer_model": transformer_model,
+        "use_keywords": {False: 0, True: 1}[use_keywords],
+    }
     obj.provided.extractor = True

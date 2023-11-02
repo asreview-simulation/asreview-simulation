@@ -25,8 +25,20 @@ name = EmbeddingIdf.name
     help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
     is_flag=True,
 )
+@click.option(
+    "--split_ta",
+    "split_ta",
+    help="Include this flag to split ta.",
+    is_flag=True,
+)
+@click.option(
+    "--use_keywords",
+    "use_keywords",
+    help="Include this flag to use keywords.",
+    is_flag=True,
+)
 @click.pass_obj
-def embedding_idf_extractor(obj, embedding, force):
+def embedding_idf_extractor(obj, embedding, force, split_ta, use_keywords):
     if not force:
         assert obj.provided.extractor is False, (
             "Attempted reassignment of extractor. Use the --force flag "
@@ -35,5 +47,7 @@ def embedding_idf_extractor(obj, embedding, force):
     obj.extractor.abbr = name
     obj.extractor.params = {
         "embedding_fp": embedding or "",
+        "split_ta": {False: 0, True: 1}[split_ta],
+        "use_keywords": {False: 0, True: 1}[use_keywords],
     }
     obj.provided.extractor = True

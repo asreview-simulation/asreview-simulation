@@ -20,7 +20,13 @@ def test_tfidf_extractor_default_parameterization():
     extractor = json.loads(result.output)["extractor"]
     assert extractor["abbr"] == "tfidf"
     params = extractor["params"].keys()
-    assert "ngram_max" in params
-    assert extractor["params"]["ngram_max"] == 1
-    assert "stop_words" in params
-    assert extractor["params"]["stop_words"] == "english"
+    expected_pairs = [
+        ("ngram_max", 1),
+        ("split_ta", 0),
+        ("stop_words", "english"),
+        ("use_keywords", 0),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of feature extractor."
+        assert extractor["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

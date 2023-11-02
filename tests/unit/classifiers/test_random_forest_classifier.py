@@ -20,9 +20,14 @@ def test_random_forest_classifier_default_parameterization():
     classifier = json.loads(result.output)["classifier"]
     assert classifier["abbr"] == "rf"
     params = classifier["params"].keys()
-    assert "class_weight" in params
-    assert classifier["params"]["class_weight"] == 1
-    assert "max_features" in params
-    assert classifier["params"]["max_features"] == 10
-    assert "n_estimators" in params
-    assert classifier["params"]["n_estimators"] == 100
+    expected_pairs = [
+        ("class_weight", 1.0),
+        ("max_features", 10),
+        ("n_estimators", 100),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
+        assert (
+            classifier["params"][param] == expected_value
+        ), f"Expected key '{param}' to have value '{expected_value}'."

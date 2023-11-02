@@ -20,7 +20,13 @@ def test_logistic_classifier_default_parameterization():
     classifier = json.loads(result.output)["classifier"]
     assert classifier["abbr"] == "logistic"
     params = classifier["params"].keys()
-    assert "C" in params
-    assert classifier["params"]["C"] == 1.0
-    assert "class_weight" in params
-    assert classifier["params"]["class_weight"] == 1.0
+    expected_pairs = [
+        ("C", 1.0),
+        ("class_weight", 1.0),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
+        assert (
+            classifier["params"][param] == expected_value
+        ), f"Expected key '{param}' to have value '{expected_value}'."

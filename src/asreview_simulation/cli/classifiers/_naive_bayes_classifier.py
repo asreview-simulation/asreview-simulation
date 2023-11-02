@@ -35,5 +35,7 @@ def naive_bayes_classifier(obj, alpha, force):
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
     obj.classifier.abbr = name
-    obj.classifier.params = {"alpha": alpha}
+    obj.classifier.params = {
+        "alpha": alpha,
+    }
     obj.provided.classifier = True

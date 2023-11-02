@@ -20,11 +20,13 @@ def test_double_balancer_default_parameterization():
     balancer = json.loads(result.output)["balancer"]
     assert balancer["abbr"] == "double"
     params = balancer["params"].keys()
-    assert "a" in params
-    assert balancer["params"]["a"] == 2.155
-    assert "alpha" in params
-    assert balancer["params"]["alpha"] == 0.94
-    assert "b" in params
-    assert balancer["params"]["b"] == 0.789
-    assert "beta" in params
-    assert balancer["params"]["beta"] == 1.0
+    expected_pairs = [
+        ("a", 2.155),
+        ("alpha", 0.94),
+        ("b", 0.789),
+        ("beta", 1.0),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of balancer."
+        assert balancer["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

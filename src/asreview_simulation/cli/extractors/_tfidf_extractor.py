@@ -29,6 +29,12 @@ name = Tfidf.name
     type=click.INT,
 )
 @click.option(
+    "--split_ta",
+    "split_ta",
+    help="Include this flag to split ta.",
+    is_flag=True,
+)
+@click.option(
     "--stop_words",
     "stop_words",
     default="english",
@@ -36,13 +42,24 @@ name = Tfidf.name
     show_default=True,
     type=click.Choice(["english", "none"]),
 )
+@click.option(
+    "--use_keywords",
+    "use_keywords",
+    help="Include this flag to use keywords.",
+    is_flag=True,
+)
 @click.pass_obj
-def tfidf_extractor(obj, force, ngram_max, stop_words):
+def tfidf_extractor(obj, force, ngram_max, split_ta, stop_words, use_keywords):
     if not force:
         assert obj.provided.extractor is False, (
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
     obj.extractor.abbr = name
-    obj.extractor.params = {"ngram_max": ngram_max, "stop_words": stop_words}
+    obj.extractor.params = {
+        "ngram_max": ngram_max,
+        "split_ta": {False: 0, True: 1}[split_ta],
+        "stop_words": stop_words,
+        "use_keywords": {False: 0, True: 1}[use_keywords],
+    }
     obj.provided.extractor = True
