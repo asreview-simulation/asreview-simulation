@@ -20,6 +20,14 @@ def test_embedding_idf_extractor_default_parameterization():
     extractor = json.loads(result.output)["extractor"]
     assert extractor["abbr"] == "embedding-idf"
     params = extractor["params"].keys()
-    assert len(params) == 1
-    assert "embedding_fp" in params
-    assert extractor["params"]["embedding_fp"] == ""
+    expected_pairs = [
+        ("embedding_fp", ""),
+        ("split_ta", 0),
+        ("use_keywords", 0),
+    ]
+    assert not (len(params) < len(expected_pairs)), "Missing parameter"
+    assert not (len(params) > len(expected_pairs)), "Unexpected extra parameter"
+
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of 'fex-{extractor.abbr}'."
+        assert extractor["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

@@ -29,11 +29,13 @@ name = EmbeddingIdf.name
     "--split_ta",
     "split_ta",
     help="hyperparameter",
+    is_flag=True,
 )
 @click.option(
     "--use_keywords",
     "use_keywords",
     help="hyperparameter",
+    is_flag=True,
 )
 @click.pass_obj
 def embedding_idf_extractor(obj, embedding, force, split_ta, use_keywords):
@@ -45,7 +47,7 @@ def embedding_idf_extractor(obj, embedding, force, split_ta, use_keywords):
     obj.extractor.abbr = name
     obj.extractor.params = {
         "embedding_fp": embedding or "",
-        "split_ta": split_ta,
-        "use_keywords": use_keywords,
+        "split_ta": {False: 0, True: 1}[split_ta],
+        "use_keywords": {False: 0, True: 1}[use_keywords],
     }
     obj.provided.extractor = True
