@@ -20,4 +20,8 @@ def test_simple_balancer_default_parameterization():
     balancer = json.loads(result.output)["balancer"]
     assert balancer["abbr"] == "simple"
     params = balancer["params"].keys()
-    assert len(params) == 0
+    expected_pairs = []
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of balancer."
+        assert balancer["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
