@@ -346,6 +346,8 @@ no params
 4. update default configuration with distribution sampled from pyll programs
 5. start ReviewSimulate with sampled distribution from pyll + default
 6. rate each result with an objective function, e.g. from datatools or homemade
+7. close the feedback loop by drawing new parameterizations based on the result from previous parameterizations,
+e.g. using one of hyperopt's optimization methods
 
 ## notes
 

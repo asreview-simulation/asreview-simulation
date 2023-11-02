@@ -24,6 +24,9 @@ identifiers:
   - type: url
     value: 'https://github.com/asreview/asreview'
     description: Where the software for the parent project is being developed
+  - type: doi
+    value: 10.5281/zenodo.8042547
+    description: Collection of archived snapshots on Zenodo
 repository-code: 'https://github.com/asreview-tuning/asreview-simulation'
 abstract: >-
   Command line interface to simulate an ASReview analysis
@@ -36,8 +39,10 @@ keywords:
   - NLP
   - Natural Language Processing
   - AI
+  - CLI
+  - hyperparameters
 license: Apache-2.0
-version: 0.1.0
+version: 0.2.0
 references:
   - authors:
     - given-names: ASReview LAB developers

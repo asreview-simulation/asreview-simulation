@@ -22,7 +22,7 @@ python3 -m venv venv
 source venv/bin/activate
 
 # install asreview-simulation and its dependencies
-pip install git+https://github.com/asreview-tuning/asreview-simulation.git@0.1.0
+pip install git+https://github.com/asreview-tuning/asreview-simulation.git@0.2.0
 ```
 
 ## Quickstart
