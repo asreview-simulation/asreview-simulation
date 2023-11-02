@@ -23,7 +23,10 @@ name = NN2LayerClassifier.name
 @click.option(
     "--class_weight",
     "class_weight",
-    help="hyperparameter",
+    default=30.0,
+    help="Class weights for inclusions (1's).",
+    show_default=True,
+    type=click.FLOAT,
 )
 @click.option(
     "--dense_width",
