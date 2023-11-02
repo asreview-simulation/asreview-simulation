@@ -28,13 +28,13 @@ name = EmbeddingIdf.name
 @click.option(
     "--split_ta",
     "split_ta",
-    help="hyperparameter",
-    is_flag=True,
+    help="Include this flag to split ta.",
+    is_flag=True
 )
 @click.option(
     "--use_keywords",
     "use_keywords",
-    help="hyperparameter",
+    help="Include this flag to use keywords.",
     is_flag=True,
 )
 @click.pass_obj
