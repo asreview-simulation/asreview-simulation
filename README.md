@@ -92,11 +92,12 @@ The above command will print:
 ```shell
 Usage: asreview simulation cls-logistic [OPTIONS]
 
-  Configure the simulation to use Logistic Regression classifier
+  Configure the simulation to use Logistic Regression classifier.
 
 Options:
-  --c FLOAT             hyperparameter  [default: 1.0]
-  --class_weight FLOAT  hyperparameter  [default: 1.0]
+  --c FLOAT             Parameter inverse to the regularization strength of
+                        the model.  [default: 1.0]
+  --class_weight FLOAT  Class weight of the inclusions.  [default: 1.0]
   -f, --force           Force setting the querier configuration, even if that
                         means overwriting a previous configuration.
   -h, --help            Show this message and exit.
@@ -138,34 +139,35 @@ with the `start` command, otherwise it may appear like nothing is happening.
 Here is the list of subcommands:
 
 ```shell
-start                Start the simulation
-print-settings       Print settings
-save-settings        Save settings
-load-settings        Load settings
-sam-handpicked       Handpicked prior sampler
-sam-random           Random prior sampler
-fex-doc2vec          Doc2Vec extractor
-fex-embedding-idf    Embedding IDF extractor
-fex-embedding-lstm   Embedding LSTM extractor
-fex-sbert            SBERT extractor
-fex-tfidf            TF-IDF extractor
-cls-logistic         Logistic Regression classifier
-cls-lstm-base        LSTM Base classifier
-cls-lstm-pool        LSTM Pool classifier
-cls-nb               Naive Bayes classifier
-cls-nn-2-layer       2-layer Neural Net classifier
-cls-rf               Random Forest classifier
-cls-svm              Support Vector Machine classifier
-qry-cluster          Cluster query strategy
-qry-max              Max query strategy
-qry-max-random       Mixed query strategy (Max and Random)
-qry-max-uncertainty  Mixed query strategy (Max and Uncertainty)
-qry-random           Random query strategy
-qry-uncertainty      Uncertainty query strategy
-bal-double           Double balancer
-bal-simple           No balancer
-bal-undersample      Undersample balancer
-stp-min              'min' stopping rule
-stp-none             No stopping rule
-stp-nq               Number of queries based stopping rule
+start                  Start the simulation
+print-benchmark-names  Print benchmark names
+print-settings         Print settings
+save-settings          Save settings
+load-settings          Load settings
+sam-handpicked         Handpicked prior sampler
+sam-random             Random prior sampler
+fex-doc2vec            Doc2Vec extractor
+fex-embedding-idf      Embedding IDF extractor
+fex-embedding-lstm     Embedding LSTM extractor
+fex-sbert              SBERT extractor
+fex-tfidf              TF-IDF extractor
+cls-logistic           Logistic Regression classifier
+cls-lstm-base          LSTM Base classifier
+cls-lstm-pool          LSTM Pool classifier
+cls-nb                 Naive Bayes classifier
+cls-nn-2-layer         2-layer Neural Net classifier
+cls-rf                 Random Forest classifier
+cls-svm                Support Vector Machine classifier
+qry-cluster            Cluster query strategy
+qry-max                Max query strategy
+qry-max-random         Mixed query strategy (Max and Random)
+qry-max-uncertainty    Mixed query strategy (Max and Uncertainty)
+qry-random             Random query strategy
+qry-uncertainty        Uncertainty query strategy
+bal-double             Double balancer
+bal-simple             No balancer
+bal-undersample        Undersample balancer
+stp-min                'min' stopping rule
+stp-none               No stopping rule
+stp-nq                 Number of queries based stopping rule
 ```
