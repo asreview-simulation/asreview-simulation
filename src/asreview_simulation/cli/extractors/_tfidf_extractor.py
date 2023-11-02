@@ -31,7 +31,8 @@ name = Tfidf.name
 @click.option(
     "--split_ta",
     "split_ta",
-    help="hyperparameter",
+    help="Include this flag to split ta.",
+    is_flag=True
 )
 @click.option(
     "--stop_words",
@@ -44,7 +45,8 @@ name = Tfidf.name
 @click.option(
     "--use_keywords",
     "use_keywords",
-    help="hyperparameter",
+    help="Include this flag to use keywords.",
+    is_flag=True,
 )
 @click.pass_obj
 def tfidf_extractor(obj, force, ngram_max, split_ta, stop_words, use_keywords):
@@ -56,8 +58,8 @@ def tfidf_extractor(obj, force, ngram_max, split_ta, stop_words, use_keywords):
     obj.extractor.abbr = name
     obj.extractor.params = {
         "ngram_max": ngram_max,
-        "split_ta": split_ta,
+        "split_ta": {False: 0, True: 1}[split_ta],
         "stop_words": stop_words,
-        "use_keywords": use_keywords,
+        "use_keywords": {False: 0, True: 1}[use_keywords],
     }
     obj.provided.extractor = True
