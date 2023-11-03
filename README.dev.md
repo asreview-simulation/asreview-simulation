@@ -51,9 +51,9 @@ configuration section in `pyproject.toml` or run `pytest --markers`):
 
 | prior sampling   | feature extractor    | classifier       | querier           | balancer          | stopping   |
 |------------------|----------------------|------------------|-------------------|-------------------|------------|
-| `sam_handpicked` | `fex_doc2vec`        | `cls_logistic`   | `qry_cluster`     | `bal_double`      | `stp_min`  |
-| `sam_random`     | `fex_embeding_idf`   | `cls_lstm_base`  | `qry_max`         | `bal_simple`      | `stp_none` |
-|                  | `fex_embedding_lstm` | `cls_lstm_pool`  | `qry_max_random`  | `bal_undersample` | `stp_nq`   |
+| `sam_handpicked` | `fex_doc2vec`        | `cls_logistic`   | `qry_cluster`     | `bal_double`      | `stp_none` |
+| `sam_random`     | `fex_embeding_idf`   | `cls_lstm_base`  | `qry_max`         | `bal_simple`      | `stp_nq`   |
+|                  | `fex_embedding_lstm` | `cls_lstm_pool`  | `qry_max_random`  | `bal_undersample` | `stp_rel`  |
 |                  | `fex_sbert`          | `cls_nb`         | `qry_uncertainty` |                   |            |
 |                  | `fex_tfidf`          | `cls_nn_2_layer` | `qry_random`      |                   |            |
 |                  |                      | `cls_rf`         | `qry_uncertainty` |                   |            |

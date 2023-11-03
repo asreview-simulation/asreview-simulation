@@ -167,7 +167,7 @@ qry-uncertainty        Uncertainty query strategy
 bal-double             Double balancer
 bal-simple             No balancer
 bal-undersample        Undersample balancer
-stp-min                'min' stopping rule
 stp-none               No stopping rule
 stp-nq                 Number of queries based stopping rule
+stp-rel                Stop when relevant records are found
 ```
