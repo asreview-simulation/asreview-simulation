@@ -23,7 +23,7 @@ from asreview_simulation._private.wrangling.prep_project_directory import prep_p
     "benchmark",
     default=None,
     help="Name of the dataset that contains the fully labeled data. Precludes "
-    + f"usage of --in. For valid values, refer to the output of running 'asreview-simulation print-benchmark-names'.",
+    + "usage of --in. For valid values, refer to the output of running 'asreview-simulation print-benchmark-names'.",
     type=click.STRING,
 )
 @click.option(

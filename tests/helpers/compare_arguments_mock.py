@@ -28,6 +28,6 @@ def compare_arguments_mock(args1, kwargs1, args2, kwargs2, tmpdir):
             assert v1.config["feature_matrices"] == v2.config["feature_matrices"]
             assert v1.config["dataset_path"] == v2.config["dataset_path"]
         elif isinstance(v1, BaseModel):
-            assert v1.param == v2.param, f"Expected model parameterization to be equal."
+            assert v1.param == v2.param, "Expected model parameterization to be equal."
         else:
             assert v1 == v2, f"Expected SimulateReview's keyword argument '{k1}' to be equal."

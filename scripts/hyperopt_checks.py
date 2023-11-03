@@ -141,7 +141,7 @@ def run_hyperopt_choice_bal_cls():
         ),
     }
     nsamples = 100
-    samples = generate_samples(pyll, nsamples)
+    _ = generate_samples(pyll, nsamples)
     assert False, "needs assertions"
 
 
