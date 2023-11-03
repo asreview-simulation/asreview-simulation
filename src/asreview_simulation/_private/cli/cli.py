@@ -1,7 +1,6 @@
 import os
 from importlib.metadata import entry_points as entrypoints
 import click
-from asreview_simulation._private.cli.state import State
 from asreview_simulation._private.cli.balancers import double_balancer
 from asreview_simulation._private.cli.balancers import simple_balancer
 from asreview_simulation._private.cli.balancers import undersample_balancer
@@ -26,6 +25,7 @@ from asreview_simulation._private.cli.queriers import uncertainty_querier
 from asreview_simulation._private.cli.samplers import handpicked_prior_sampler
 from asreview_simulation._private.cli.samplers import random_prior_sampler
 from asreview_simulation._private.cli.starters import load_settings
+from asreview_simulation._private.cli.state import State
 from asreview_simulation._private.cli.stopping import min_stopping
 from asreview_simulation._private.cli.stopping import none_stopping
 from asreview_simulation._private.cli.stopping import nq_stopping
