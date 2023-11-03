@@ -1,7 +1,7 @@
 import json
 import pytest
 from click.testing import CliRunner
-from asreview_simulation.cli import cli
+from asreview_simulation._private.cli.cli import cli
 
 
 @pytest.mark.sam_random
@@ -9,7 +9,7 @@ from asreview_simulation.cli import cli
 @pytest.mark.cls_lstm_pool
 @pytest.mark.qry_max
 @pytest.mark.bal_double
-@pytest.mark.stp_min
+@pytest.mark.stp_rel
 def test_lstm_pool_classifier_default_parameterization(tmp_path):
     runner = CliRunner()
     args = [

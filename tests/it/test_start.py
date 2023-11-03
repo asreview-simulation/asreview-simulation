@@ -4,14 +4,14 @@ import pytest
 from asreview import get_data_home
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
-from asreview_simulation.cli import cli
-from tests.helpers import compare_data_csv
-from tests.helpers import compare_project_json
-from tests.helpers import compare_results_sql
-from tests.helpers import compare_settings_metadata_json
-from tests.helpers import get_model_combinatorics
-from tests.helpers import get_xfails
-from tests.helpers import unzip_simulate_results
+from asreview_simulation._private.cli.cli import cli
+from tests.helpers.compare_data_csv import compare_data_csv
+from tests.helpers.compare_project_json import compare_project_json
+from tests.helpers.compare_results_sql import compare_results_sql
+from tests.helpers.compare_settings_metadata_json import compare_settings_metadata_json
+from tests.helpers.get_model_combinatorics import get_model_combinatorics
+from tests.helpers.get_xfails import get_xfails
+from tests.helpers.unzip_simulate_results import unzip_simulate_results
 
 
 def get_data_fnames():
@@ -30,7 +30,7 @@ def get_data_fnames():
 @pytest.mark.cls_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
-@pytest.mark.stp_min
+@pytest.mark.stp_rel
 def test_with_minimal_args_on_benchmark():
     def run_asreview_simulate_cli():
         args = [
@@ -79,7 +79,7 @@ def test_with_minimal_args_on_benchmark():
 @pytest.mark.cls_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
-@pytest.mark.stp_min
+@pytest.mark.stp_rel
 @pytest.mark.parametrize("fname", get_data_fnames())
 def test_with_minimal_args_on_user_supplied_data(fname):
     def run_asreview_simulate_cli():

@@ -3,12 +3,12 @@ from tempfile import TemporaryDirectory
 import pytest
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
-from asreview_simulation.cli import cli
-from tests.helpers import compare_data_csv
-from tests.helpers import compare_project_json
-from tests.helpers import compare_results_sql
-from tests.helpers import compare_settings_metadata_json
-from tests.helpers import unzip_simulate_results
+from asreview_simulation._private.cli.cli import cli
+from tests.helpers.compare_data_csv import compare_data_csv
+from tests.helpers.compare_project_json import compare_project_json
+from tests.helpers.compare_results_sql import compare_results_sql
+from tests.helpers.compare_settings_metadata_json import compare_settings_metadata_json
+from tests.helpers.unzip_simulate_results import unzip_simulate_results
 
 
 @pytest.mark.sam_random
