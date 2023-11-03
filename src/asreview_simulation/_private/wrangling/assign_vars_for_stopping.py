@@ -20,6 +20,6 @@ def assign_vars_for_stopping(obj, as_data, n_instances):
             raise ValueError("Unknown sampler.")
     if obj.stopping.abbr == "nq":
         return obj.stopping.params["n_queries"]
-    if obj.stopping.abbr == "min":
+    if obj.stopping.abbr == "rel":
         return "min"
     raise ValueError("Unexpected value in stopping model abbreviation.")

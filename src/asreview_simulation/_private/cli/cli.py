@@ -1,38 +1,38 @@
 import os
 from importlib.metadata import entry_points as entrypoints
 import click
-from asreview_simulation._private.cli.balancers import double_balancer
-from asreview_simulation._private.cli.balancers import simple_balancer
-from asreview_simulation._private.cli.balancers import undersample_balancer
-from asreview_simulation._private.cli.classifiers import logistic_classifier
-from asreview_simulation._private.cli.classifiers import lstm_base_classifier
-from asreview_simulation._private.cli.classifiers import lstm_pool_classifier
-from asreview_simulation._private.cli.classifiers import naive_bayes_classifier
-from asreview_simulation._private.cli.classifiers import nn_2_layer_classifier
-from asreview_simulation._private.cli.classifiers import random_forest_classifier
-from asreview_simulation._private.cli.classifiers import svm_classifier
-from asreview_simulation._private.cli.extractors import doc2vec_extractor
-from asreview_simulation._private.cli.extractors import embedding_idf_extractor
-from asreview_simulation._private.cli.extractors import embedding_lstm_extractor
-from asreview_simulation._private.cli.extractors import sbert_extractor
-from asreview_simulation._private.cli.extractors import tfidf_extractor
-from asreview_simulation._private.cli.queriers import cluster_querier
-from asreview_simulation._private.cli.queriers import max_querier
-from asreview_simulation._private.cli.queriers import max_random_querier
-from asreview_simulation._private.cli.queriers import max_uncertainty_querier
-from asreview_simulation._private.cli.queriers import random_querier
-from asreview_simulation._private.cli.queriers import uncertainty_querier
-from asreview_simulation._private.cli.samplers import handpicked_prior_sampler
-from asreview_simulation._private.cli.samplers import random_prior_sampler
-from asreview_simulation._private.cli.starters import load_settings
+from asreview_simulation._private.cli.balancers.double import bal_double
+from asreview_simulation._private.cli.balancers.simple import bal_simple
+from asreview_simulation._private.cli.balancers.undersample import bal_undersample
+from asreview_simulation._private.cli.classifiers.logistic import cls_logistic
+from asreview_simulation._private.cli.classifiers.lstm_base import cls_lstm_base
+from asreview_simulation._private.cli.classifiers.lstm_pool import cls_lstm_pool
+from asreview_simulation._private.cli.classifiers.nb import cls_nb
+from asreview_simulation._private.cli.classifiers.nn_2_layer import cls_nn_2_layer
+from asreview_simulation._private.cli.classifiers.rf import cls_rf
+from asreview_simulation._private.cli.classifiers.svm import cls_svm
+from asreview_simulation._private.cli.extractors.doc2vec import fex_doc2vec
+from asreview_simulation._private.cli.extractors.embedding_idf import fex_embedding_idf
+from asreview_simulation._private.cli.extractors.embedding_lstm import fex_embedding_lstm
+from asreview_simulation._private.cli.extractors.sbert import fex_sbert
+from asreview_simulation._private.cli.extractors.tfidf import fex_tfidf
+from asreview_simulation._private.cli.queriers.cluster import qry_cluster
+from asreview_simulation._private.cli.queriers.max import qry_max
+from asreview_simulation._private.cli.queriers.max_random import qry_max_random
+from asreview_simulation._private.cli.queriers.max_uncertainty import qry_max_uncertainty
+from asreview_simulation._private.cli.queriers.random import qry_random
+from asreview_simulation._private.cli.queriers.uncertainty import qry_uncertainty
+from asreview_simulation._private.cli.samplers.handpicked import sam_handpicked
+from asreview_simulation._private.cli.samplers.random import sam_random
+from asreview_simulation._private.cli.starters.load_settings import load_settings
 from asreview_simulation._private.cli.state import State
-from asreview_simulation._private.cli.stopping import min_stopping
-from asreview_simulation._private.cli.stopping import none_stopping
-from asreview_simulation._private.cli.stopping import nq_stopping
-from asreview_simulation._private.cli.terminators import print_benchmark_names
-from asreview_simulation._private.cli.terminators import print_settings
-from asreview_simulation._private.cli.terminators import save_settings
-from asreview_simulation._private.cli.terminators import start
+from asreview_simulation._private.cli.stopping.none import stp_none
+from asreview_simulation._private.cli.stopping.nq import stp_nq
+from asreview_simulation._private.cli.stopping.rel import stp_rel
+from asreview_simulation._private.cli.terminators.print_benchmark_names import print_benchmark_names
+from asreview_simulation._private.cli.terminators.print_settings import print_settings
+from asreview_simulation._private.cli.terminators.save_settings import save_settings
+from asreview_simulation._private.cli.terminators.start import start
 
 
 class NaturalOrderGroup(click.Group):
@@ -43,9 +43,9 @@ class NaturalOrderGroup(click.Group):
 
 def _add_balancer_subcommands():
     my_balancers = [
-        double_balancer,
-        simple_balancer,
-        undersample_balancer,
+        bal_double,
+        bal_simple,
+        bal_undersample,
     ]
     try:
         other_balancers = [e.load() for e in entrypoints(group="asreview_simulation.balancers")]
@@ -61,13 +61,13 @@ def _add_balancer_subcommands():
 
 def _add_classifier_subcommands():
     my_classifiers = [
-        naive_bayes_classifier,
-        random_forest_classifier,
-        logistic_classifier,
-        lstm_base_classifier,
-        lstm_pool_classifier,
-        nn_2_layer_classifier,
-        svm_classifier,
+        cls_nb,
+        cls_rf,
+        cls_logistic,
+        cls_lstm_base,
+        cls_lstm_pool,
+        cls_nn_2_layer,
+        cls_svm,
     ]
     try:
         other_classifiers = [e.load() for e in entrypoints(group="asreview_simulation.classifiers")]
@@ -83,11 +83,11 @@ def _add_classifier_subcommands():
 
 def _add_extractor_subcommands():
     my_extractors = [
-        doc2vec_extractor,
-        tfidf_extractor,
-        embedding_idf_extractor,
-        embedding_lstm_extractor,
-        sbert_extractor,
+        fex_doc2vec,
+        fex_tfidf,
+        fex_embedding_idf,
+        fex_embedding_lstm,
+        fex_sbert,
     ]
     try:
         other_extractors = [e.load() for e in entrypoints(group="asreview_simulation.extractors")]
@@ -103,12 +103,12 @@ def _add_extractor_subcommands():
 
 def _add_querier_subcommands():
     my_queriers = [
-        cluster_querier,
-        max_querier,
-        max_random_querier,
-        max_uncertainty_querier,
-        random_querier,
-        uncertainty_querier,
+        qry_cluster,
+        qry_max,
+        qry_max_random,
+        qry_max_uncertainty,
+        qry_random,
+        qry_uncertainty,
     ]
     try:
         other_queriers = [e.load() for e in entrypoints(group="asreview_simulation.queriers")]
@@ -124,8 +124,8 @@ def _add_querier_subcommands():
 
 def _add_sampler_subcommands():
     my_samplers = [
-        random_prior_sampler,
-        handpicked_prior_sampler,
+        sam_random,
+        sam_handpicked,
     ]
     for s in _sort_commands(my_samplers):
         cli.add_command(s)
@@ -141,9 +141,9 @@ def _add_starter_subcommands():
 
 def _add_stopping_subcommands():
     my_stopping = [
-        min_stopping,
-        nq_stopping,
-        none_stopping,
+        stp_nq,
+        stp_none,
+        stp_rel,
     ]
     for t in _sort_commands(my_stopping):
         cli.add_command(t)
@@ -166,8 +166,9 @@ def _sort_commands(commands):
 
 def cli_help(cli_name="asreview-simulation"):
     return f"""
-Command line interface to simulate an ASReview analysis using a variety of classifiers, feature
-extractors, queriers, and balancers, which can all be configured to run with custom parameterizations.
+Command line interface to simulate an ASReview analysis using a variety of prior sampling strategies,
+classifiers, feature extractors, queriers, balancers, and stopping rules -- all of which can be configured
+to run with custom parameterizations.
 
 Printing this help:
 
@@ -178,9 +179,11 @@ Printing the configuration:
 $ {cli_name} print-settings
 
 Starting a simulation using the default combination of models (sam-random, bal-double, cls-nb, fex-tfidf,
-qry-max, stp-min), each using its default parameterization:
+qry-max, stp-rel), each using its default parameterization:
 
-$ {cli_name} start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
+\b
+$ {cli_name} start --benchmark benchmark:van_de_Schoot_2017 \\
+  {' ' * len(cli_name)}       --out .{os.sep}project.asreview
 
 Instead of a benchmark dataset, you can also supply your own data via the `--in` option, as follows:
 
@@ -195,12 +198,19 @@ $ {cli_name} start --in .{os.sep}myfile.xlsx --out .{os.sep}project.asreview
 Using a different classifier strategy can be accomplished by using one of the 'cls-*' subcommands
 before issuing the 'start' subcommand, e.g.:
 
-$ {cli_name} cls-logistic start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
+\b
+$ {cli_name} cls-logistic \\
+  {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 \\
+  {' ' * len(cli_name)}       --out .{os.sep}project.asreview
 
 Subcommands can be chained together, for example using the logistic classifier with
 the undersample balancer goes like this:
 
-$ {cli_name} cls-logistic bal-undersample start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
+\b
+$ {cli_name} cls-logistic \\
+  {' ' * len(cli_name)} bal-undersample \\
+  {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 \\
+  {' ' * len(cli_name)}       --out .{os.sep}project.asreview
 
 Most subcommands have their own parameterization. Check the help of a subcommand with --help or -h for short, e.g.:
 
@@ -208,18 +218,22 @@ $ {cli_name} cls-logistic --help
 
 Passing parameters to a subcommand goes like this:
 
-$ {cli_name} cls-logistic --class_weight 1.1 start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
+\b
+$ {cli_name} cls-logistic --class_weight 1.1 \\
+  {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 \\
+  {' ' * len(cli_name)}       --out .{os.sep}project.asreview
 
 By chaining individually parameterized subcommands, we can compose a variety of configurations, e.g.:
 
 \b
-$ {cli_name} sam-random --n_included 10 --n_excluded 15            \\
-  {' ' * len(cli_name)} fex-tfidf --ngram_max 2                               \\
-  {' ' * len(cli_name)} cls-nb --alpha 3.823                                  \\
-  {' ' * len(cli_name)} qry-max-random --mix_ratio 0.95 --n_instances 10      \\
+$ {cli_name} sam-random --n_included 10 --n_excluded 15 \\
+  {' ' * len(cli_name)} fex-tfidf --ngram_max 2 \\
+  {' ' * len(cli_name)} cls-nb --alpha 3.823 \\
+  {' ' * len(cli_name)} qry-max-random --mix_ratio 0.95 --n_instances 10 \\
   {' ' * len(cli_name)} bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \\
-  {' ' * len(cli_name)} stp-nq --n_queries 20                                 \\
-  {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 --out .{os.sep}project.asreview
+  {' ' * len(cli_name)} stp-nq --n_queries 20 \\
+  {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 \\
+  {' ' * len(cli_name)}       --out .{os.sep}project.asreview
 
 Chained commands are evaluated left to right; make sure to end the chain with
 the 'start' command, otherwise it may appear like nothing is happening.

@@ -1,51 +1,51 @@
-from asreview_simulation._private.pyll.get_pyll_bal_double import get_pyll_bal_double
-from asreview_simulation._private.pyll.get_pyll_bal_simple import get_pyll_bal_simple
-from asreview_simulation._private.pyll.get_pyll_bal_undersample import get_pyll_bal_undersample
-from asreview_simulation._private.pyll.get_pyll_cls_logistic import get_pyll_cls_logistic
-from asreview_simulation._private.pyll.get_pyll_cls_nb import get_pyll_cls_nb
-from asreview_simulation._private.pyll.get_pyll_cls_nn_2_layer import get_pyll_cls_nn_2_layer
-from asreview_simulation._private.pyll.get_pyll_cls_rf import get_pyll_cls_rf
-from asreview_simulation._private.pyll.get_pyll_cls_svm import get_pyll_cls_svm
-from asreview_simulation._private.pyll.get_pyll_fex_doc2vec import get_pyll_fex_doc2vec
-from asreview_simulation._private.pyll.get_pyll_fex_sbert import get_pyll_fex_sbert
-from asreview_simulation._private.pyll.get_pyll_fex_tfidf import get_pyll_fex_tfidf
-from asreview_simulation._private.pyll.get_pyll_qry_cluster import get_pyll_qry_cluster
-from asreview_simulation._private.pyll.get_pyll_qry_max import get_pyll_qry_max
-from asreview_simulation._private.pyll.get_pyll_qry_max_random import get_pyll_qry_max_random
-from asreview_simulation._private.pyll.get_pyll_qry_max_uncertainty import get_pyll_qry_max_uncertainty
-from asreview_simulation._private.pyll.get_pyll_qry_random import get_pyll_qry_random
-from asreview_simulation._private.pyll.get_pyll_qry_uncertainty import get_pyll_qry_uncertainty
-from asreview_simulation._private.pyll.get_pyll_sam_handpicked import get_pyll_sam_handpicked
-from asreview_simulation._private.pyll.get_pyll_sam_random import get_pyll_sam_random
-from asreview_simulation._private.pyll.get_pyll_stp_min import get_pyll_stp_min
-from asreview_simulation._private.pyll.get_pyll_stp_none import get_pyll_stp_none
-from asreview_simulation._private.pyll.get_pyll_stp_nq import get_pyll_stp_nq
+from asreview_simulation._private.pyll.balancers.double import bal_double
+from asreview_simulation._private.pyll.balancers.simple import bal_simple
+from asreview_simulation._private.pyll.balancers.undersample import bal_undersample
+from asreview_simulation._private.pyll.classifiers.logistic import cls_logistic
+from asreview_simulation._private.pyll.classifiers.nb import cls_nb
+from asreview_simulation._private.pyll.classifiers.nn_2_layer import cls_nn_2_layer
+from asreview_simulation._private.pyll.classifiers.rf import cls_rf
+from asreview_simulation._private.pyll.classifiers.svm import cls_svm
+from asreview_simulation._private.pyll.extractors.doc2vec import fex_doc2vec
+from asreview_simulation._private.pyll.extractors.sbert import fex_sbert
+from asreview_simulation._private.pyll.extractors.tfidf import fex_tfidf
+from asreview_simulation._private.pyll.queriers.cluster import qry_cluster
+from asreview_simulation._private.pyll.queriers.max import qry_max
+from asreview_simulation._private.pyll.queriers.max_random import qry_max_random
+from asreview_simulation._private.pyll.queriers.max_uncertainty import qry_max_uncertainty
+from asreview_simulation._private.pyll.queriers.random import qry_random
+from asreview_simulation._private.pyll.queriers.uncertainty import qry_uncertainty
+from asreview_simulation._private.pyll.samplers.handpicked import sam_handpicked
+from asreview_simulation._private.pyll.samplers.random import sam_random
+from asreview_simulation._private.pyll.stopping.none import stp_none
+from asreview_simulation._private.pyll.stopping.nq import stp_nq
+from asreview_simulation._private.pyll.stopping.rel import stp_rel
 
 
 def get_pyll(name):
     funcmap = {
-        "bal-double": get_pyll_bal_double,
-        "bal-simple": get_pyll_bal_simple,
-        "bal-undersample": get_pyll_bal_undersample,
-        "cls-logistic": get_pyll_cls_logistic,
-        "cls-nb": get_pyll_cls_nb,
-        "cls-nn-2-layer": get_pyll_cls_nn_2_layer,
-        "cls-rf": get_pyll_cls_rf,
-        "cls-svm": get_pyll_cls_svm,
-        "fex-doc2vec": get_pyll_fex_doc2vec,
-        "fex-sbert": get_pyll_fex_sbert,
-        "fex-tfidf": get_pyll_fex_tfidf,
-        "qry-cluster": get_pyll_qry_cluster,
-        "qry-max": get_pyll_qry_max,
-        "qry-max-random": get_pyll_qry_max_random,
-        "qry-max-uncertainty": get_pyll_qry_max_uncertainty,
-        "qry-random": get_pyll_qry_random,
-        "qry-uncertainty": get_pyll_qry_uncertainty,
-        "sam-handpicked": get_pyll_sam_handpicked,
-        "sam-random": get_pyll_sam_random,
-        "stp-min": get_pyll_stp_min,
-        "stp-none": get_pyll_stp_none,
-        "stp-nq": get_pyll_stp_nq,
+        "bal-double": bal_double,
+        "bal-simple": bal_simple,
+        "bal-undersample": bal_undersample,
+        "cls-logistic": cls_logistic,
+        "cls-nb": cls_nb,
+        "cls-nn-2-layer": cls_nn_2_layer,
+        "cls-rf": cls_rf,
+        "cls-svm": cls_svm,
+        "fex-doc2vec": fex_doc2vec,
+        "fex-sbert": fex_sbert,
+        "fex-tfidf": fex_tfidf,
+        "qry-cluster": qry_cluster,
+        "qry-max": qry_max,
+        "qry-max-random": qry_max_random,
+        "qry-max-uncertainty": qry_max_uncertainty,
+        "qry-random": qry_random,
+        "qry-uncertainty": qry_uncertainty,
+        "sam-handpicked": sam_handpicked,
+        "sam-random": sam_random,
+        "stp-none": stp_none,
+        "stp-nq": stp_nq,
+        "stp-rel": stp_rel,
     }
     try:
         func = funcmap[name]

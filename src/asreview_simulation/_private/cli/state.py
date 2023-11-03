@@ -113,7 +113,7 @@ class State:
             self.stopping = stopping
         else:
             self.stopping = Model(
-                abbr="min",
+                abbr="rel",
                 params={},
             )
 

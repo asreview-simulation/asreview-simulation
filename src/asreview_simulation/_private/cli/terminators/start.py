@@ -7,9 +7,9 @@ from asreview.models.classifiers import get_classifier
 from asreview.models.feature_extraction import get_feature_model
 from asreview.models.query import get_query_model
 from asreview.review.simulate import ReviewSimulate
-from asreview_simulation.lib.wrangling import assign_vars_for_prior_sampling
-from asreview_simulation.lib.wrangling import assign_vars_for_stopping
-from asreview_simulation.lib.wrangling import prep_project_directory
+from asreview_simulation._private.wrangling.assign_vars_for_prior_sampling import assign_vars_for_prior_sampling
+from asreview_simulation._private.wrangling.assign_vars_for_stopping import assign_vars_for_stopping
+from asreview_simulation._private.wrangling.prep_project_directory import prep_project_directory
 
 
 @click.command(

@@ -15,8 +15,8 @@ dependencies = [
 description = "Simulate a manual ASReview analysis"
 
 [project.optional-dependencies]
-linting = ["pre-commit"]
 doc2vec = ["gensim"]
+linting = ["pre-commit"]
 publishing = ["twine"]
 sbert = ["sentence_transformers"]
 tensorflow = ["tensorflow >= 2.0.0, < 2.10"]   # tensorflow.keras.wrappers disappeared in 2.10
@@ -26,7 +26,7 @@ testing = ["pytest"]
 asreview-simulation = "asreview_simulation._private.cli.cli:cli"
 
 [project.entry-points."asreview.entry_points"]
-simulation = "asreview_simulation.cli:SimulationEntryPoint"
+simulation = "asreview_simulation._private.cli.simulation_entry_point:SimulationEntryPoint"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -41,6 +41,9 @@ src_paths = ["src", "tests"]
 
 [tool.black]
 line_length = 120
+
+[tool.ruff]
+line-length = 120
 
 [tool.pytest.ini_options]
 # --max-fail=1 terminate testing on the first error
@@ -71,7 +74,7 @@ markers = [
     "bal_double: tests pertaining to DoubleBalance balancer",
     "bal_simple: tests pertaining to SimpleBalance balancer",
     "bal_undersample: tests pertaining to UndersampleBalance balancer",
-    "stp_min: tests pertaining to 'min' stopping rule",
     "stp_none: tests pertaining to no stopping rule",
     "stp_nq: tests pertaining to stopping rule based on number of queries",
+    "stp_rel: tests pertaining to stopping rule based on number of relevant records found",
 ]
