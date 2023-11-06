@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import hyperopt
 import matplotlib.pyplot as plt
 import numpy
-from asreview_simulation.lib.pyll import get_pyll
+from asreview_simulation.api import get_pyll
 
 
 @dataclass
