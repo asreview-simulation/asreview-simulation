@@ -18,15 +18,15 @@ def test_logistic_classifier_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     classifier = json.loads(result.output)["classifier"]
-    assert classifier["abbr"] == "logistic"
+    assert classifier["abbr"] == "cls-logistic"
     params = classifier["params"].keys()
     expected_pairs = [
-        ("C", 1.0),
+        ("c", 1.0),
         ("class_weight", 1.0),
     ]
     assert len(params) == len(expected_pairs), "Unexpected number of parameters"
     for param, expected_value in expected_pairs:
         assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
-        assert (
-            classifier["params"][param] == expected_value
-        ), f"Expected key '{param}' to have value '{expected_value}'."
+        actual_value = classifier["params"][param]
+        assert type(actual_value) == type(expected_value), f"Unexpected type for key '{param}'"
+        assert actual_value == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

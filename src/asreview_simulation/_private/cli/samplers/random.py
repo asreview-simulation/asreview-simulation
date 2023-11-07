@@ -2,13 +2,13 @@ import click
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = "random"
+name = "sam-random"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Random prior sampler",
-    name=f"sam-{name}",
+    name=name,
     short_help="Random prior sampler",
 )
 @click.option(
@@ -49,8 +49,8 @@ def sam_random(obj, force, init_seed, n_excluded, n_included):
             "Attempted reassignment of sampler. Use the --force flag "
             + "if you mean to overwrite the sampler configuration from previous steps. "
         )
-    obj.sampler.abbr = name
-    obj.sampler.params = {
+    obj.models.sampler.abbr = name
+    obj.models.sampler.params = {
         "init_seed": init_seed,
         "n_excluded": n_excluded,
         "n_included": n_included,

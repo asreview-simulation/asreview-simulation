@@ -20,7 +20,7 @@ def test_nq_stopping_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     stopping = json.loads(result.output)["stopping"]
-    assert stopping["abbr"] == "nq"
+    assert stopping["abbr"] == "stp-nq"
     params = stopping["params"].keys()
     assert "n_queries" in params
     assert stopping["params"]["n_queries"] == 25

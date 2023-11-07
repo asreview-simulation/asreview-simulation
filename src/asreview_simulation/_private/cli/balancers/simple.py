@@ -3,13 +3,13 @@ from asreview.models.balance import SimpleBalance
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = SimpleBalance.name
+name = f"bal-{SimpleBalance.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use no balancer",
-    name=f"bal-{name}",
+    name=name,
     short_help="No balancer",
 )
 @click.option(
@@ -26,6 +26,6 @@ def bal_simple(obj, force):
             "Attempted reassignment of balancer. Use the --force flag "
             + "if you mean to overwrite the balancer configuration from previous steps. "
         )
-    obj.balancer.abbr = name
-    obj.balancer.params = {}
+    obj.models.balancer.abbr = name
+    obj.models.balancer.params = {}
     obj.provided.balancer = True

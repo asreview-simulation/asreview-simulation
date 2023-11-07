@@ -3,13 +3,13 @@ from asreview.models.query import UncertaintyQuery
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = UncertaintyQuery.name
+name = f"qry-{UncertaintyQuery.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Uncertainty query strategy",
-    name=f"qry-{name}",
+    name=name,
     short_help="Uncertainty query strategy",
 )
 @click.option(
@@ -34,8 +34,8 @@ def qry_uncertainty(obj, force, n_instances):
             "Attempted reassignment of querier. Use the --force flag "
             + "if you mean to overwrite the querier configuration from previous steps. "
         )
-    obj.querier.abbr = name
-    obj.querier.params = {
+    obj.models.querier.abbr = name
+    obj.models.querier.params = {
         "n_instances": n_instances,
     }
     obj.provided.querier = True

@@ -3,13 +3,7 @@ from asreview.state.sqlstate import SQLiteState
 from tests.helpers.get_review_id import get_review_id
 
 
-def compare_results_sql(
-    p1,
-    p2,
-    test_metadata=False,
-    test_prior_records=False,
-    test_queried_records=False,
-):
+def compare_results_sql(p1, p2, test_metadata=False, test_prior_records=False, test_queried_records=False):
     state1 = SQLiteState(read_only=True)
     state1._restore(p1, get_review_id(p1))
     df1 = state1.get_dataset()

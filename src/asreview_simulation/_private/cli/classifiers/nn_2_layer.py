@@ -3,13 +3,13 @@ from asreview.models.classifiers import NN2LayerClassifier
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = NN2LayerClassifier.name
+name = f"cls-{NN2LayerClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use 2-layer Neural Net classifier",
-    name=f"cls-{name}",
+    name=name,
     short_help="2-layer Neural Net classifier",
 )
 @click.option(
@@ -99,8 +99,8 @@ def cls_nn_2_layer(
             "Attempted reassignment of classifier. Use the --force flag "
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
-    obj.classifier.abbr = name
-    obj.classifier.params = {
+    obj.models.classifier.abbr = name
+    obj.models.classifier.params = {
         "batch_size": batch_size,
         "class_weight": class_weight,
         "dense_width": dense_width,

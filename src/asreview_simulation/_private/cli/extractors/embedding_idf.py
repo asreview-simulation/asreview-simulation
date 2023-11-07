@@ -3,13 +3,13 @@ from asreview.models.feature_extraction import EmbeddingIdf
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = EmbeddingIdf.name
+name = f"fex-{EmbeddingIdf.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Embedding IDF extractor",
-    name=f"fex-{name}",
+    name=name,
     short_help="Embedding IDF extractor",
 )
 @click.option(
@@ -44,10 +44,10 @@ def fex_embedding_idf(obj, embedding, force, split_ta, use_keywords):
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
-    obj.extractor.abbr = name
-    obj.extractor.params = {
-        "embedding_fp": embedding or "",
-        "split_ta": {False: 0, True: 1}[split_ta],
-        "use_keywords": {False: 0, True: 1}[use_keywords],
+    obj.models.extractor.abbr = name
+    obj.models.extractor.params = {
+        "embedding": embedding,
+        "split_ta": split_ta,
+        "use_keywords": use_keywords,
     }
     obj.provided.extractor = True

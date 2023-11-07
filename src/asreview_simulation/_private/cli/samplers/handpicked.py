@@ -2,13 +2,13 @@ import click
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = "handpicked"
+name = "sam-handpicked"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Handpicked prior sampler. IDS: a comma separated string",
-    name=f"sam-{name}",
+    name=name,
     short_help="Handpicked prior sampler",
 )
 @click.option(
@@ -43,7 +43,7 @@ def sam_handpicked(obj, force, records, rows):
     assert not (rows is None and records is None), "Need to define either --rows or --records."
     assert not (rows is not None and records is not None), "Need to define one of --rows or --records, not both."
 
-    obj.sampler.abbr = name
+    obj.models.sampler.abbr = name
 
     if rows is not None:
         try:
@@ -51,7 +51,7 @@ def sam_handpicked(obj, force, records, rows):
         except ValueError as e:
             click.echo("\nProblem parsing row numbers.\n")
             raise e
-        obj.sampler.params = {
+        obj.models.sampler.params = {
             "rows": ids,
         }
 
@@ -61,7 +61,7 @@ def sam_handpicked(obj, force, records, rows):
         except ValueError as e:
             click.echo("\nProblem parsing record numbers.\n")
             raise e
-        obj.sampler.params = {
+        obj.models.sampler.params = {
             "records": ids,
         }
 

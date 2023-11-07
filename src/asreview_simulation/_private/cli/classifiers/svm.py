@@ -3,13 +3,13 @@ from asreview.models.classifiers import SVMClassifier
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = SVMClassifier.name
+name = f"cls-{SVMClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Support Vector Machine classifier.",
-    name=f"cls-{name}",
+    name=name,
     short_help="Support Vector Machine classifier",
 )
 @click.option(
@@ -58,9 +58,9 @@ def cls_svm(obj, c, class_weight, gamma, force, kernel):
             "Attempted reassignment of classifier. Use the --force flag "
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
-    obj.classifier.abbr = name
-    obj.classifier.params = {
-        "C": c,
+    obj.models.classifier.abbr = name
+    obj.models.classifier.params = {
+        "c": c,
         "class_weight": class_weight,
         "gamma": gamma,
         "kernel": kernel,

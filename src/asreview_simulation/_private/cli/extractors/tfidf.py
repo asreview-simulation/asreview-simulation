@@ -3,13 +3,13 @@ from asreview.models.feature_extraction import Tfidf
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = Tfidf.name
+name = f"fex-{Tfidf.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use TF-IDF extractor",
-    name=f"fex-{name}",
+    name=name,
     short_help="TF-IDF extractor",
 )
 @click.option(
@@ -55,11 +55,11 @@ def fex_tfidf(obj, force, ngram_max, split_ta, stop_words, use_keywords):
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
-    obj.extractor.abbr = name
-    obj.extractor.params = {
+    obj.models.extractor.abbr = name
+    obj.models.extractor.params = {
         "ngram_max": ngram_max,
-        "split_ta": {False: 0, True: 1}[split_ta],
+        "split_ta": split_ta,
         "stop_words": stop_words,
-        "use_keywords": {False: 0, True: 1}[use_keywords],
+        "use_keywords": use_keywords,
     }
     obj.provided.extractor = True

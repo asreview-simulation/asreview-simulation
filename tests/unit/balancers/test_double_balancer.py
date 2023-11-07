@@ -18,7 +18,7 @@ def test_double_balancer_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     balancer = json.loads(result.output)["balancer"]
-    assert balancer["abbr"] == "double"
+    assert balancer["abbr"] == "bal-double"
     params = balancer["params"].keys()
     expected_pairs = [
         ("a", 2.155),
@@ -29,4 +29,6 @@ def test_double_balancer_default_parameterization():
     assert len(params) == len(expected_pairs), "Unexpected number of parameters"
     for param, expected_value in expected_pairs:
         assert param in params, f"Expected key '{param}' to be present in parameterization of balancer."
-        assert balancer["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
+        actual_value = balancer["params"][param]
+        assert type(actual_value) == type(expected_value), f"Unexpected type for key '{param}'"
+        assert actual_value == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

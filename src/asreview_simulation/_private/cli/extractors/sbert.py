@@ -3,13 +3,13 @@ from asreview.models.feature_extraction import SBERT
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = SBERT.name
+name = f"fex-{SBERT.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use SBERT extractor.",
-    name=f"fex-{name}",
+    name=name,
     short_help="SBERT extractor",
 )
 @click.option(
@@ -46,10 +46,10 @@ def fex_sbert(obj, force, split_ta, transformer_model, use_keywords):
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
-    obj.extractor.abbr = name
-    obj.extractor.params = {
-        "split_ta": {False: 0, True: 1}[split_ta],
+    obj.models.extractor.abbr = name
+    obj.models.extractor.params = {
+        "split_ta": split_ta,
         "transformer_model": transformer_model,
-        "use_keywords": {False: 0, True: 1}[use_keywords],
+        "use_keywords": use_keywords,
     }
     obj.provided.extractor = True

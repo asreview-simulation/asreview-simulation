@@ -3,13 +3,13 @@ from asreview.models.balance import DoubleBalance
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = DoubleBalance.name
+name = f"bal-{DoubleBalance.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Double balancer",
-    name=f"bal-{name}",
+    name=name,
     short_help="Double balancer",
 )
 @click.option(
@@ -63,8 +63,8 @@ def bal_double(obj, a, alpha, b, beta, force):
             "Attempted reassignment of balancer. Use the --force flag "
             + "if you mean to overwrite the balancer configuration from previous steps. "
         )
-    obj.balancer.abbr = name
-    obj.balancer.params = {
+    obj.models.balancer.abbr = name
+    obj.models.balancer.params = {
         "a": a,
         "alpha": alpha,
         "b": b,

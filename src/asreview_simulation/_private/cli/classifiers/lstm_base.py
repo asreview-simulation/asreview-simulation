@@ -3,13 +3,13 @@ from asreview.models.classifiers import LSTMBaseClassifier
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = LSTMBaseClassifier.name
+name = f"cls-{LSTMBaseClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use LSTM Base classifier",
-    name=f"cls-{name}",
+    name=name,
     short_help="LSTM Base classifier",
 )
 @click.option(
@@ -115,14 +115,14 @@ def cls_lstm_base(
             "Attempted reassignment of classifier. Use the --force flag "
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
-    obj.classifier.abbr = name
-    obj.classifier.params = {
-        "backwards": not forward,
+    obj.models.classifier.abbr = name
+    obj.models.classifier.params = {
         "batch_size": batch_size,
         "class_weight": class_weight,
         "dense_width": dense_width,
         "dropout": dropout,
         "epochs": epochs,
+        "forward": forward,
         "optimizer": optimizer,
         "learn_rate": learn_rate,
         "lstm_out_width": lstm_out_width,

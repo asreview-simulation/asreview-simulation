@@ -3,13 +3,13 @@ from asreview.models.query import MaxUncertaintyQuery
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = MaxUncertaintyQuery.name
+name = f"qry-{MaxUncertaintyQuery.name}".replace("_", "-")
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use a Mixed query strategy (Max and Uncertainty)",
-    name=f"qry-{name}".replace("_", "-"),
+    name=name,
     short_help="Mixed query strategy (Max and Uncertainty)",
 )
 @click.option(
@@ -20,10 +20,10 @@ name = MaxUncertaintyQuery.name
     is_flag=True,
 )
 @click.option(
-    "--mix_ratio",
-    "mix_ratio",
+    "--fraction_max",
+    "fraction_max",
     default=0.95,
-    help="Mix ratio",
+    help="Fraction of mixture that is queried using the Max strategy",
     show_default=True,
     type=click.FLOAT,
 )
@@ -36,15 +36,15 @@ name = MaxUncertaintyQuery.name
     type=click.INT,
 )
 @click.pass_obj
-def qry_max_uncertainty(obj, force, mix_ratio, n_instances):
+def qry_max_uncertainty(obj, force, fraction_max, n_instances):
     if not force:
         assert obj.provided.querier is False, (
             "Attempted reassignment of querier. Use the --force flag "
             + "if you mean to overwrite the querier configuration from previous steps. "
         )
-    obj.querier.abbr = name
-    obj.querier.params = {
-        "mix_ratio": mix_ratio,
+    obj.models.querier.abbr = name
+    obj.models.querier.params = {
+        "fraction_max": fraction_max,
         "n_instances": n_instances,
     }
     obj.provided.querier = True

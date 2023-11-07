@@ -21,7 +21,7 @@ def test_with_default_settings():
         result.output
         == """{
     "balancer": {
-        "abbr": "double",
+        "abbr": "bal-double",
         "params": {
             "a": 2.155,
             "alpha": 0.94,
@@ -30,26 +30,28 @@ def test_with_default_settings():
         }
     },
     "classifier": {
-        "abbr": "nb",
+        "abbr": "cls-nb",
         "params": {
             "alpha": 3.822
         }
     },
     "extractor": {
-        "abbr": "tfidf",
+        "abbr": "fex-tfidf",
         "params": {
             "ngram_max": 1,
-            "stop_words": "english"
+            "split_ta": false,
+            "stop_words": "english",
+            "use_keywords": false
         }
     },
     "querier": {
-        "abbr": "max",
+        "abbr": "qry-max",
         "params": {
             "n_instances": 1
         }
     },
     "sampler": {
-        "abbr": "random",
+        "abbr": "sam-random",
         "params": {
             "init_seed": null,
             "n_excluded": 1,
@@ -57,7 +59,7 @@ def test_with_default_settings():
         }
     },
     "stopping": {
-        "abbr": "rel",
+        "abbr": "stp-rel",
         "params": {}
     }
 }

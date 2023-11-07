@@ -2,14 +2,14 @@ import click
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = "nq"
+name = "stp-nq"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to stop after evaluating N_QUERIES queries, "
     + "regardless of the relevance of evaluated records.",
-    name=f"stp-{name}",
+    name=name,
     short_help="Number of queries based stopping rule",
 )
 @click.option(
@@ -34,8 +34,8 @@ def stp_nq(obj, force, n_queries):
             "Attempted reassignment of stopping. Use the --force flag "
             + "if you mean to overwrite the stopping configuration from previous steps. "
         )
-    obj.stopping.abbr = name
-    obj.stopping.params = {
+    obj.models.stopping.abbr = name
+    obj.models.stopping.params = {
         "n_queries": n_queries,
     }
     obj.provided.stopping = True

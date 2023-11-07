@@ -1,5 +1,5 @@
 import click
-from asreview_simulation._private.wrangling.list_dataset_names import list_dataset_names
+from asreview_simulation._private.list_dataset_names import list_dataset_names
 
 
 @click.command(

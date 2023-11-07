@@ -2,14 +2,14 @@ import click
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = "none"
+name = "stp-none"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to stop after evaluating all records, "
     + "regardless of the relevance of evaluated records.",
-    name=f"stp-{name}",
+    name=name,
     short_help="No stopping rule",
 )
 @click.option(
@@ -26,6 +26,6 @@ def stp_none(obj, force):
             "Attempted reassignment of stopping. Use the --force flag "
             + "if you mean to overwrite the stopping configuration from previous steps. "
         )
-    obj.stopping.abbr = name
-    obj.stopping.params = {}
+    obj.models.stopping.abbr = name
+    obj.models.stopping.params = {}
     obj.provided.stopping = True

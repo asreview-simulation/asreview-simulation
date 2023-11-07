@@ -3,13 +3,13 @@ from asreview.models.feature_extraction import Doc2Vec
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = Doc2Vec.name
+name = f"fex-{Doc2Vec.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Doc2Vec extractor.",
-    name=f"fex-{name}",
+    name=name,
     short_help="Doc2Vec extractor",
 )
 @click.option(
@@ -103,15 +103,15 @@ def fex_doc2vec(
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
-    obj.extractor.abbr = name
-    obj.extractor.params = {
-        "dbow_words": {True: 1, False: 0}[dbow_words],
-        "dm": {"dbow": 0, "dm": 1, "both": 2}[dm],
-        "dm_concat": {True: 1, False: 0}[dm_concat],
+    obj.models.extractor.abbr = name
+    obj.models.extractor.params = {
+        "dbow_words": dbow_words,
+        "dm": dm,
+        "dm_concat": dm_concat,
         "epochs": epochs,
         "min_count": min_count,
-        "split_ta": {True: 1, False: 0}[split_ta],
-        "use_keywords": {True: 1, False: 0}[use_keywords],
+        "split_ta": split_ta,
+        "use_keywords": use_keywords,
         "vector_size": vector_size,
         "window": window,
     }

@@ -18,20 +18,22 @@ def test_embedding_lstm_extractor_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     extractor = json.loads(result.output)["extractor"]
-    assert extractor["abbr"] == "embedding-lstm"
+    assert extractor["abbr"] == "fex-embedding-lstm"
     params = extractor["params"].keys()
 
     expected_pairs = [
-        ("embedding_fp", ""),
+        ("embedding", None),
         ("loop_sequence", 1),
         ("max_sequence_length", 1000),
         ("num_words", 20000),
         ("padding", "post"),
-        ("split_ta", 0),
+        ("split_ta", False),
         ("truncating", "post"),
-        ("use_keywords", 0),
+        ("use_keywords", False),
     ]
     assert len(params) == len(expected_pairs), "Unexpected number of parameters"
     for param, expected_value in expected_pairs:
-        assert param in params, f"Expected key '{param}' to be present in parameterization of 'fex-{extractor.abbr}'."
-        assert extractor["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
+        assert param in params, f"Expected key '{param}' to be present in parameterization of feature extractor."
+        actual_value = extractor["params"][param] 
+        assert type(actual_value) == type(expected_value), f"Unexpected type for key '{param}'"
+        assert actual_value == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

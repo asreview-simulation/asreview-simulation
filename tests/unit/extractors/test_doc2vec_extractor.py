@@ -18,20 +18,22 @@ def test_doc2vec_extractor_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     extractor = json.loads(result.output)["extractor"]
-    assert extractor["abbr"] == "doc2vec"
+    assert extractor["abbr"] == "fex-doc2vec"
     params = extractor["params"].keys()
     expected_pairs = [
-        ("dbow_words", 0),
-        ("dm", 2),
-        ("dm_concat", 0),
+        ("dbow_words", False),
+        ("dm", "both"),
+        ("dm_concat", False),
         ("epochs", 33),
         ("min_count", 1),
-        ("split_ta", 0),
-        ("use_keywords", 0),
+        ("split_ta", False),
+        ("use_keywords", False),
         ("vector_size", 40),
         ("window", 7),
     ]
     assert len(params) == len(expected_pairs), "Unexpected number of parameters"
     for param, expected_value in expected_pairs:
         assert param in params, f"Expected key '{param}' to be present in parameterization of feature extractor."
-        assert extractor["params"][param] == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
+        actual_value = extractor["params"][param]
+        assert type(actual_value) == type(expected_value), f"Unexpected type for key '{param}'"
+        assert actual_value == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

@@ -16,7 +16,7 @@ import click
 )
 @click.pass_obj
 def print_settings(obj, pretty):
-    d = obj.asdict()
+    d = obj.models.asdict()
     if pretty:
         click.echo(json.dumps(d, indent=4, sort_keys=True))
         return

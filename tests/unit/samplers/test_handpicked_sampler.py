@@ -20,7 +20,7 @@ def test_with_records():
     ]
     result = runner.invoke(cli, args)
     sampler = json.loads(result.output)["sampler"]
-    assert sampler["abbr"] == "handpicked"
+    assert sampler["abbr"] == "sam-handpicked"
     params = sampler["params"].keys()
     assert len(params) == 1
     assert "records" in params
@@ -44,7 +44,7 @@ def test_with_rows():
     ]
     result = runner.invoke(cli, args)
     sampler = json.loads(result.output)["sampler"]
-    assert sampler["abbr"] == "handpicked"
+    assert sampler["abbr"] == "sam-handpicked"
     params = sampler["params"].keys()
     assert len(params) == 1
     assert "records" not in params

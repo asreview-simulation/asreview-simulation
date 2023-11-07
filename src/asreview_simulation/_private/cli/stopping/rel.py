@@ -2,13 +2,13 @@ import click
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = "rel"
+name = "stp-rel"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to stop once all relevant records have been found.",
-    name=f"stp-{name}",
+    name=name,
     short_help="Stop when relevant records are found",
 )
 @click.option(
@@ -25,6 +25,6 @@ def stp_rel(obj, force):
             "Attempted reassignment of stopping. Use the --force flag "
             + "if you mean to overwrite the stopping configuration from previous steps. "
         )
-    obj.stopping.abbr = name
-    obj.stopping.params = {}
+    obj.models.stopping.abbr = name
+    obj.models.stopping.params = {}
     obj.provided.stopping = True

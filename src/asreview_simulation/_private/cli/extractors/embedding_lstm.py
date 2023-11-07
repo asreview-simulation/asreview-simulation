@@ -3,13 +3,13 @@ from asreview.models.feature_extraction import EmbeddingLSTM
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = EmbeddingLSTM.name
+name = f"fex-{EmbeddingLSTM.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Embedding LSTM extractor",
-    name=f"fex-{name}",
+    name=name,
     short_help="Embedding LSTM extractor",
 )
 @click.option(
@@ -96,15 +96,15 @@ def fex_embedding_lstm(
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
-    obj.extractor.abbr = name
-    obj.extractor.params = {
-        "embedding_fp": embedding or "",
+    obj.models.extractor.abbr = name
+    obj.models.extractor.params = {
+        "embedding": embedding,
         "loop_sequence": loop_sequence,
         "max_sequence_length": max_sequence_length,
         "num_words": num_words,
         "padding": padding,
-        "split_ta": {False: 0, True: 1}[split_ta],
+        "split_ta": split_ta,
         "truncating": truncating,
-        "use_keywords": {False: 0, True: 1}[use_keywords],
+        "use_keywords": use_keywords,
     }
     obj.provided.extractor = True

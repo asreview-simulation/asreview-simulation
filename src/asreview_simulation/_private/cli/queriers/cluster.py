@@ -3,13 +3,13 @@ from asreview.models.query import ClusterQuery
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = ClusterQuery.name
+name = f"qry-{ClusterQuery.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Cluster query strategy",
-    name=f"qry-{name}",
+    name=name,
     short_help="Cluster query strategy",
 )
 @click.option(
@@ -51,8 +51,8 @@ def qry_cluster(obj, force, cluster_size, n_instances, update_interval):
             "Attempted reassignment of querier. Use the --force flag "
             + "if you mean to overwrite the querier configuration from previous steps. "
         )
-    obj.querier.abbr = name
-    obj.querier.params = {
+    obj.models.querier.abbr = name
+    obj.models.querier.params = {
         "cluster_size": cluster_size,
         "n_instances": n_instances,
         "update_interval": update_interval,

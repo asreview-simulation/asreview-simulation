@@ -3,13 +3,13 @@ from asreview.models.balance import UndersampleBalance
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = UndersampleBalance.name
+name = f"bal-{UndersampleBalance.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Undersample balancer",
-    name=f"bal-{name}",
+    name=name,
     short_help="Undersample balancer",
 )
 @click.option(
@@ -35,8 +35,8 @@ def bal_undersample(obj, force, ratio):
             "Attempted reassignment of balancer. Use the --force flag "
             + "if you mean to overwrite the balancer configuration from previous steps. "
         )
-    obj.balancer.abbr = name
-    obj.balancer.params = {
+    obj.models.balancer.abbr = name
+    obj.models.balancer.params = {
         "ratio": ratio,
     }
     obj.provided.balancer = True

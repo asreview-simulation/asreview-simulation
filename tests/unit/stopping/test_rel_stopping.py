@@ -18,6 +18,6 @@ def test_min_stopping_default_parameterization():
     ]
     result = runner.invoke(cli, args)
     stopping = json.loads(result.output)["stopping"]
-    assert stopping["abbr"] == "rel"
+    assert stopping["abbr"] == "stp-rel"
     params = stopping["params"].keys()
     assert len(params) == 0

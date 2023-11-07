@@ -58,7 +58,7 @@ def test_with_init_seed():
         ]
         with unittest.mock.patch(mocked2, autospec=True, return_value=None):
             runner.invoke(cli, args)
-            return asreview_simulation._private.cli.terminators.start.ReviewSimulate.call_args
+            return asreview_simulation._private.run.ReviewSimulate.call_args
 
     benchmark = "benchmark:van_de_Schoot_2017"
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
@@ -66,7 +66,7 @@ def test_with_init_seed():
         p1 = Path(tmpdir) / "simulate.asreview"
         p2 = Path(tmpdir) / "simulation.asreview"
         mocked1 = "asreview.entry_points.simulate.ReviewSimulate"
-        mocked2 = "asreview_simulation._private.cli.terminators.start.ReviewSimulate"
+        mocked2 = "asreview_simulation._private.run.ReviewSimulate"
 
         # run
         args1, kwargs1 = run_asreview_simulate_cli()

@@ -2,14 +2,8 @@ import os
 import shutil
 import click
 import numpy
-from asreview.models.balance import get_balance_model
-from asreview.models.classifiers import get_classifier
-from asreview.models.feature_extraction import get_feature_model
-from asreview.models.query import get_query_model
-from asreview.review.simulate import ReviewSimulate
-from asreview_simulation._private.wrangling.assign_vars_for_prior_sampling import assign_vars_for_prior_sampling
-from asreview_simulation._private.wrangling.assign_vars_for_stopping import assign_vars_for_stopping
-from asreview_simulation._private.wrangling.prep_project_directory import prep_project_directory
+from asreview_simulation._private.prep_project_directory import prep_project_directory
+from asreview_simulation._private.run import run
 
 
 @click.command(
@@ -67,54 +61,15 @@ from asreview_simulation._private.wrangling.prep_project_directory import prep_p
 )
 @click.pass_obj
 def start(obj, benchmark, input_file, no_zip, output_file, seed, write_interval):
+
+    # prep
+    random_state = numpy.random.RandomState(seed)
     project, as_data = prep_project_directory(benchmark, input_file, output_file)
 
-    random_state = numpy.random.RandomState(seed)
+    # run
+    run(obj.models, project, as_data, write_interval, random_state)
 
-    # asreview's query model does not expect n_instances as part
-    # of the obj.querier.params dict but as a separate variable
-    n_instances = obj.querier.params.pop("n_instances", 1)
-
-    # if the extractor has a parameter named 'embedding_fp', remove it
-    # from obj.extractor.params and make it a separate variable
-    embedding_fp = obj.extractor.params.pop("embedding_fp", None)
-
-    # assign model parameterizations using the data from obj
-    extractor = get_feature_model(obj.extractor.abbr, random_state=random_state, **obj.extractor.params)
-    classifier = get_classifier(obj.classifier.abbr, random_state=random_state, **obj.classifier.params)
-    querier = get_query_model(obj.querier.abbr, random_state=random_state, **obj.querier.params)
-    balancer = get_balance_model(obj.balancer.abbr, random_state=random_state, **obj.balancer.params)
-
-    if obj.classifier.abbr in ["lstm-base", "lstm-pool"]:
-        classifier.embedding_matrix = extractor.get_embedding_matrix(as_data.texts, embedding_fp)
-
-    n_papers = None
-    stop_if = assign_vars_for_stopping(obj, as_data, n_instances)
-    prior_indices, n_prior_included, n_prior_excluded, init_seed = assign_vars_for_prior_sampling(obj, as_data)
-
-    reviewer = ReviewSimulate(
-        as_data,
-        project=project,
-        model=classifier,
-        query_model=querier,
-        balance_model=balancer,
-        feature_model=extractor,
-        n_papers=n_papers,
-        n_instances=n_instances,
-        stop_if=stop_if,
-        prior_indices=prior_indices,
-        n_prior_included=n_prior_included,
-        n_prior_excluded=n_prior_excluded,
-        init_seed=init_seed,
-        write_interval=write_interval,
-    )
-
-    project.update_review(status="review")  # (has side effects on disk)
-    click.echo("Simulation started")
-    reviewer.review()
-    click.echo("Simulation finished")
-    project.mark_review_finished()  # (has side effects on disk)
-
+    # wrap-up
     p = project.project_path
     if no_zip:
         # rename the .asreview.tmp directory to just .asreview

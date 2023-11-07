@@ -3,13 +3,13 @@ from asreview.models.classifiers import LSTMPoolClassifier
 from asreview_simulation._private.cli.epilog import epilog
 
 
-name = LSTMPoolClassifier.name
+name = f"cls-{LSTMPoolClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use LSTM Pool classifier",
-    name=f"cls-{name}",
+    name=name,
     short_help="LSTM Pool classifier",
 )
 @click.option(
@@ -115,13 +115,13 @@ def cls_lstm_pool(
             "Attempted reassignment of classifier. Use the --force flag "
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
-    obj.classifier.abbr = name
-    obj.classifier.params = {
-        "backwards": not forward,
+    obj.models.classifier.abbr = name
+    obj.models.classifier.params = {
         "batch_size": batch_size,
         "class_weight": class_weight,
         "dropout": dropout,
         "epochs": epochs,
+        "forward": forward,
         "learn_rate": learn_rate,
         "lstm_out_width": lstm_out_width,
         "lstm_pool_size": lstm_pool_size,
