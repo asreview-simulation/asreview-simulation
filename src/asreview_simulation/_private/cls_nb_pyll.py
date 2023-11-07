@@ -1,0 +1,10 @@
+import hyperopt
+
+
+def cls_nb_pyll():
+    return {
+        "abbr": "nb",
+        "params": {
+            "alpha": hyperopt.hp.lognormal("alpha", 0, 1),
+        },
+    }
