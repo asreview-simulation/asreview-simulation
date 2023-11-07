@@ -3,13 +3,17 @@ from asreview.data import load_data
 from asreview.project import ASReviewProject
 
 
-def prep_project_directory(benchmark, input_file, output_file):
+def prep_project_directory(benchmark: str | None, input_file: Path | None, output_file: Path):
     # Prepare an *.asreview.tmp directory which will contain the log / state / configuration
     # of the ASReview analysis. The directory will be zipped later and renamed to *.asreview
-
-    assert output_file.endswith(".asreview"), "OUTPUT_FILE should have '.asreview' filename extension."
-    assert not Path(output_file).exists(), f"Output file '{output_file}'  already exists."
-    output_file_tmp = Path(output_file).with_suffix(".asreview.tmp")
+    if benchmark is not None:
+        assert isinstance(benchmark, str), "expected input argument 'benchmark' to be of type str"
+    if input_file is not None:
+        assert isinstance(input_file, Path), "expected input argument 'input_file' to be of type pathlib.Path"
+    assert isinstance(output_file, Path), "expected input argument 'output_file' to be of type pathlib.Path"
+    assert output_file.suffix == ".asreview", "OUTPUT_FILE should have '.asreview' filename extension."
+    assert not output_file.exists(), f"Output file '{output_file}'  already exists."
+    output_file_tmp = output_file.with_suffix(".asreview.tmp")
     assert not output_file_tmp.exists(), f"Temporary file '{output_file_tmp}'  already exists."
 
     case = input_file is None, benchmark is None

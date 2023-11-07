@@ -1,10 +1,11 @@
 from asreview.data import ASReviewData
+from asreview.project import ASReviewProject
 from asreview.review.simulate import ReviewSimulate
 from asreview_simulation._private.remove_abstraction import remove_abstraction
 from asreview_simulation._private.model_configs import ModelConfigs
 
 
-def run(models: ModelConfigs, project, as_data: ASReviewData, write_interval: int = None, seed: int = None):
+def run(models: ModelConfigs, project: ASReviewProject, as_data: ASReviewData, write_interval: int = None, seed: int = None):
 
     # prep
     kwargs = remove_abstraction(models, as_data, seed)
