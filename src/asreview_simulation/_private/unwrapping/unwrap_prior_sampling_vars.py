@@ -3,7 +3,9 @@ from asreview.data import ASReviewData
 from asreview_simulation._private.lib.model_configs import ModelConfigs
 
 
-def unwrap_prior_sampling_vars(models: ModelConfigs, as_data: ASReviewData) -> (int | None, int | None, int | None, int | None):
+def unwrap_prior_sampling_vars(
+    models: ModelConfigs, as_data: ASReviewData
+) -> (int | None, int | None, int | None, int | None):
     if models.sam.abbr == "sam-handpicked":
         prior_rows = models.sam.params.get("rows", None)
         prior_records = models.sam.params.get("records", None)

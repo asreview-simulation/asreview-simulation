@@ -1,13 +1,12 @@
-from asreview.data import ASReviewData
 import numpy
+from asreview.data import ASReviewData
 from asreview_simulation._private.lib.model_configs import ModelConfigs
+from asreview_simulation._private.unwrapping.instantiate_unwrapped_model import instantiate_unwrapped_model
 from asreview_simulation._private.unwrapping.unwrap_prior_sampling_vars import unwrap_prior_sampling_vars
 from asreview_simulation._private.unwrapping.unwrap_stopping_vars import unwrap_stopping_vars
-from asreview_simulation._private.unwrapping.instantiate_unwrapped_model import instantiate_unwrapped_model
 
 
 def get_review_simulate_kwargs(models: ModelConfigs, as_data: ASReviewData, seed: int = None):
-
     # asreview's query model does not expect n_instances as part
     # of the models.querier.params dict but as a separate variable
     n_instances = models.qry.params.pop("n_instances", 1)
@@ -43,5 +42,5 @@ def get_review_simulate_kwargs(models: ModelConfigs, as_data: ASReviewData, seed
         "prior_indices": prior_indices,
         "n_prior_included": n_prior_included,
         "n_prior_excluded": n_prior_excluded,
-        "init_seed": init_seed
+        "init_seed": init_seed,
     }

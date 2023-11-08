@@ -26,6 +26,6 @@ def test_naive_bayes_classifier_default_parameterization():
     assert len(params) == len(expected_pairs), "Unexpected number of parameters"
     for param, expected_value in expected_pairs:
         assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
-        actual_value = classifier["params"][param] 
+        actual_value = classifier["params"][param]
         assert type(actual_value) == type(expected_value), f"Unexpected type for key '{param}'"
         assert actual_value == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

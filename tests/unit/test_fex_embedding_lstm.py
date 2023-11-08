@@ -34,6 +34,6 @@ def test_embedding_lstm_extractor_default_parameterization():
     assert len(params) == len(expected_pairs), "Unexpected number of parameters"
     for param, expected_value in expected_pairs:
         assert param in params, f"Expected key '{param}' to be present in parameterization of feature extractor."
-        actual_value = extractor["params"][param] 
+        actual_value = extractor["params"][param]
         assert type(actual_value) == type(expected_value), f"Unexpected type for key '{param}'"
         assert actual_value == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

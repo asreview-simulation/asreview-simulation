@@ -35,7 +35,8 @@ def load_settings_subcommand(obj, settings_file):
             "extractor",
             "querier",
             "sampler",
-            "stopping"], f"Unexpected key '{key}' found in model settings from '{settings_file.name}'."
+            "stopping",
+        ], f"Unexpected key '{key}' found in model settings from '{settings_file.name}'."
 
     if "balancer" in settings.keys():
         try:

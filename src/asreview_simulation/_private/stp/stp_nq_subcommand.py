@@ -1,6 +1,6 @@
 import click
 from asreview_simulation._private.cli_epilog import epilog
-from asreview_simulation._private.stp.stp_nq_config import get_stp_nq_config 
+from asreview_simulation._private.stp.stp_nq_config import get_stp_nq_config
 
 
 default_params = get_stp_nq_config().params

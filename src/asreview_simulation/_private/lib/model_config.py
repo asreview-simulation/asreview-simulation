@@ -6,5 +6,5 @@ class ModelConfig:
     def asdict(self):
         return {
             "abbr": self.abbr,
-            "params": self.params
+            "params": self.params,
         }

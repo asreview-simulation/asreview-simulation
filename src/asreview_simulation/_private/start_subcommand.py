@@ -60,7 +60,6 @@ from asreview_simulation._private.lib.run import run
 )
 @click.pass_obj
 def start_subcommand(obj, benchmark, input_file, no_zip, output_file, seed, write_interval):
-
     # prep
     project, as_data = prep_project_directory(benchmark, input_file, output_file)
 

@@ -1,9 +1,9 @@
 import os
 from tempfile import TemporaryDirectory
-from asreview_simulation.api import ModelConfigs
-from asreview_simulation.api import run
-from asreview_simulation.api import prep_project_directory
 from asreview_simulation.api import list_dataset_names
+from asreview_simulation.api import ModelConfigs
+from asreview_simulation.api import prep_project_directory
+from asreview_simulation.api import run
 
 
 def run_use_case():
