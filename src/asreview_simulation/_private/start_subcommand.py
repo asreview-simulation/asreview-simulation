@@ -1,8 +1,8 @@
 import os
 import shutil
 import click
-from asreview_simulation._private.prep_project_directory import prep_project_directory
-from asreview_simulation._private.run import run
+from asreview_simulation._private.lib.prep_project_directory import prep_project_directory
+from asreview_simulation._private.lib.run import run
 
 
 @click.command(

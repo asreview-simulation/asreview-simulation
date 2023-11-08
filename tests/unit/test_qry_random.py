@@ -17,7 +17,7 @@ def test_random_querier_default_parameterization():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    querier = json.loads(result.output)["querier"]
+    querier = json.loads(result.output)["qry"]
     assert querier["abbr"] == "qry-random"
     params = querier["params"].keys()
     expected_pairs = [

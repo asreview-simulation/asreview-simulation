@@ -19,7 +19,7 @@ def test_with_records():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    sampler = json.loads(result.output)["sampler"]
+    sampler = json.loads(result.output)["sam"]
     assert sampler["abbr"] == "sam-handpicked"
     params = sampler["params"].keys()
     assert len(params) == 1
@@ -43,7 +43,7 @@ def test_with_rows():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    sampler = json.loads(result.output)["sampler"]
+    sampler = json.loads(result.output)["sam"]
     assert sampler["abbr"] == "sam-handpicked"
     params = sampler["params"].keys()
     assert len(params) == 1

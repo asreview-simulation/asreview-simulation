@@ -17,7 +17,7 @@ def test_naive_bayes_classifier_default_parameterization():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    classifier = json.loads(result.output)["classifier"]
+    classifier = json.loads(result.output)["cls"]
     assert classifier["abbr"] == "cls-nb"
     params = classifier["params"].keys()
     expected_pairs = [

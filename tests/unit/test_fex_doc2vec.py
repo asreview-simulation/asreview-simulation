@@ -17,7 +17,7 @@ def test_doc2vec_extractor_default_parameterization():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    extractor = json.loads(result.output)["extractor"]
+    extractor = json.loads(result.output)["fex"]
     assert extractor["abbr"] == "fex-doc2vec"
     params = extractor["params"].keys()
     expected_pairs = [

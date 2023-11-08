@@ -17,7 +17,7 @@ def test_embedding_lstm_extractor_default_parameterization():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    extractor = json.loads(result.output)["extractor"]
+    extractor = json.loads(result.output)["fex"]
     assert extractor["abbr"] == "fex-embedding-lstm"
     params = extractor["params"].keys()
 

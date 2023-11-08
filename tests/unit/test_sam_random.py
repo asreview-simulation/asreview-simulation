@@ -17,7 +17,7 @@ def test_random_sampler_default_parameterization():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    sampler = json.loads(result.output)["sampler"]
+    sampler = json.loads(result.output)["sam"]
     assert sampler["abbr"] == "sam-random"
     params = sampler["params"].keys()
     assert "n_included" in params

@@ -17,7 +17,7 @@ def test_none_stopping_default_parameterization():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    stopping = json.loads(result.output)["stopping"]
+    stopping = json.loads(result.output)["stp"]
     assert stopping["abbr"] == "stp-none"
     params = stopping["params"].keys()
     assert len(params) == 0

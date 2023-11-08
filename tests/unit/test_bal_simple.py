@@ -17,7 +17,7 @@ def test_simple_balancer_default_parameterization():
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    balancer = json.loads(result.output)["balancer"]
+    balancer = json.loads(result.output)["bal"]
     assert balancer["abbr"] == "bal-simple"
     params = balancer["params"].keys()
     expected_pairs = []

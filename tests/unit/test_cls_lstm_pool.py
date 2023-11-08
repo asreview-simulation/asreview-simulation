@@ -17,7 +17,7 @@ def test_lstm_pool_classifier_default_parameterization(tmp_path):
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    classifier = json.loads(result.output)["classifier"]
+    classifier = json.loads(result.output)["cls"]
     assert classifier["abbr"] == "cls-lstm-pool"
     params = classifier["params"].keys()
     expected_pairs = [

@@ -20,7 +20,7 @@ def test_with_default_settings():
     assert (
         result.output
         == """{
-    "balancer": {
+    "bal": {
         "abbr": "bal-double",
         "params": {
             "a": 2.155,
@@ -29,13 +29,13 @@ def test_with_default_settings():
             "beta": 1.0
         }
     },
-    "classifier": {
+    "cls": {
         "abbr": "cls-nb",
         "params": {
             "alpha": 3.822
         }
     },
-    "extractor": {
+    "fex": {
         "abbr": "fex-tfidf",
         "params": {
             "ngram_max": 1,
@@ -44,13 +44,13 @@ def test_with_default_settings():
             "use_keywords": false
         }
     },
-    "querier": {
+    "qry": {
         "abbr": "qry-max",
         "params": {
             "n_instances": 1
         }
     },
-    "sampler": {
+    "sam": {
         "abbr": "sam-random",
         "params": {
             "init_seed": null,
@@ -58,7 +58,7 @@ def test_with_default_settings():
             "n_included": 1
         }
     },
-    "stopping": {
+    "stp": {
         "abbr": "stp-rel",
         "params": {}
     }

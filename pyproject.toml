@@ -23,10 +23,10 @@ tensorflow = ["tensorflow >= 2.0.0, < 2.10"]   # tensorflow.keras.wrappers disap
 testing = ["pytest"]
 
 [project.scripts]
-asreview-simulation = "asreview_simulation._private.cli.cli:cli"
+asreview-simulation = "asreview_simulation._private.cli:cli"
 
 [project.entry-points."asreview.entry_points"]
-simulation = "asreview_simulation._private.cli.simulation_entry_point:SimulationEntryPoint"
+simulation = "asreview_simulation._private.entry_point:SimulationEntryPoint"
 
 [tool.setuptools.packages.find]
 where = ["src"]
