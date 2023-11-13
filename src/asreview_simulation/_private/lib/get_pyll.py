@@ -108,7 +108,7 @@ def star_pyll():
         "fex": get_pyll("fex-*"),
         "qry": get_pyll("qry-*"),
         "sam": get_pyll("sam-*"),
-        "stp": get_pyll("stp-*")
+        "stp": get_pyll("stp-*"),
     }
 
 
