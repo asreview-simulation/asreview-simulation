@@ -1,7 +1,7 @@
 import click
 from asreview.models.balance import UndersampleBalance
-from asreview_simulation._private.lib.bal.bal_undersample_config import get_bal_undersample_config
 from asreview_simulation._private.cli.cli_epilog import epilog
+from asreview_simulation._private.lib.bal.bal_undersample_config import get_bal_undersample_config
 
 
 default_params = get_bal_undersample_config().params

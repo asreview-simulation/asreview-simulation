@@ -1,7 +1,7 @@
 import pytest
 from asreview.models.base import BaseModel as ASReviewBaseModel
-from asreview_simulation.api import get_pyll
 from asreview_simulation.api import draw_sample
+from asreview_simulation.api import get_pyll
 from asreview_simulation.api.unwrapping import instantiate_unwrapped_model
 
 
