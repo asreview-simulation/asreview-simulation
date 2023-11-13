@@ -86,7 +86,7 @@ def run_hyperopt_1d_randint_like_fex_doc2vec_dm():
 
 
 def run_hyperopt_choice_all_models():
-    pyll = get_pyll("*"),
+    pyll = get_pyll("*")
     _ = generate_samples(pyll, n=100)
     assert False, "needs assertions"
 
