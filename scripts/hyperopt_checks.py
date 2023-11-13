@@ -85,7 +85,7 @@ def run_hyperopt_1d_randint_like_fex_doc2vec_dm():
     plt.draw()
 
 
-def run_hyperopt_choice_bal_cls():
+def run_hyperopt_choice_all_models():
     pyll = {
         "bal": hyperopt.hp.choice(
             "bal",
@@ -99,6 +99,8 @@ def run_hyperopt_choice_bal_cls():
             "cls",
             [
                 get_pyll("cls-logistic"),
+                get_pyll("cls-lstm-base"),
+                get_pyll("cls-lstm-pool"),
                 get_pyll("cls-nb"),
                 get_pyll("cls-nn-2-layer"),
                 get_pyll("cls-rf"),
@@ -109,6 +111,8 @@ def run_hyperopt_choice_bal_cls():
             "fex",
             [
                 get_pyll("fex-doc2vec"),
+                get_pyll("fex-embedding-idf"),
+                get_pyll("fex-embedding-lstm"),
                 get_pyll("fex-sbert"),
                 get_pyll("fex-tfidf"),
             ],
@@ -134,9 +138,9 @@ def run_hyperopt_choice_bal_cls():
         "stp": hyperopt.hp.choice(
             "stp",
             [
-                get_pyll("stp-min"),
                 get_pyll("stp-none"),
                 get_pyll("stp-nq"),
+                get_pyll("stp-rel"),
             ],
         ),
     }
@@ -150,5 +154,5 @@ if __name__ == "__main__":
     run_hyperopt_2d_uniform()
     run_hyperopt_1d_uniformint_like_fex_tfidf()
     run_hyperopt_1d_randint_like_fex_doc2vec_dm()
-    run_hyperopt_choice_bal_cls()
+    run_hyperopt_choice_all_models()
     plt.show()
