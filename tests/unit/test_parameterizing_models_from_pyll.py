@@ -24,8 +24,8 @@ def get_abbrs():
         "fex-tfidf",
         "qry-cluster",
         "qry-max",
-        # "qry-max-random",
-        # "qry-max-uncertainty",
+        "qry-max-random",
+        "qry-max-uncertainty",
         "qry-random",
         "qry-uncertainty",
     ]

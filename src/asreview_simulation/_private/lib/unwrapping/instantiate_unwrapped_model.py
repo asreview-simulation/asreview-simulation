@@ -22,7 +22,6 @@ from asreview_simulation._private.lib.qry.qry_uncertainty_unwrap import instanti
 
 
 def instantiate_unwrapped_model(model, random_state):
-    # TODO qry-max-random, qry-max-uncertainty
     mapping = {
         "bal-double": instantiate_unwrapped_bal_double,
         "bal-simple": instantiate_unwrapped_bal_simple,
