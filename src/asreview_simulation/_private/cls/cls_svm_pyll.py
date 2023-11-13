@@ -3,7 +3,7 @@ import hyperopt
 
 def cls_svm_pyll():
     return {
-        "abbr": "svm",
+        "abbr": "cls-svm",
         "params": {
             "c": hyperopt.hp.lognormal("c", 0, 2),
             "class_weight": hyperopt.hp.lognormal("class_weight", 0, 1),

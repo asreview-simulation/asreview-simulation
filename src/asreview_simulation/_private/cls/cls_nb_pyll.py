@@ -3,7 +3,7 @@ import hyperopt
 
 def cls_nb_pyll():
     return {
-        "abbr": "nb",
+        "abbr": "cls-nb",
         "params": {
             "alpha": hyperopt.hp.lognormal("alpha", 0, 1),
         },

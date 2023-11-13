@@ -1,5 +1,5 @@
 def bal_simple_pyll():
     return {
-        "abbr": "simple",
+        "abbr": "bal-simple",
         "params": {},
     }

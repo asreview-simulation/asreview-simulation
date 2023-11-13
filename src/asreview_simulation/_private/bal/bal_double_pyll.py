@@ -3,7 +3,7 @@ import hyperopt
 
 def bal_double_pyll():
     return {
-        "abbr": "double",
+        "abbr": "bal-double",
         "params": {
             "a": hyperopt.hp.lognormal("a", 0, 1),
             "alpha": hyperopt.hp.uniform("alpha", 0, 2),

@@ -1,5 +1,5 @@
 def stp_rel_pyll():
     return {
-        "abbr": "rel",
+        "abbr": "stp-rel",
         "params": {},
     }

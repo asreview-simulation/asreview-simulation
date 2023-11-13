@@ -1,13 +1,12 @@
 import hyperopt
 
 
-def fex_tfidf_pyll():
+def fex_embedding_idf_pyll():
     return {
-        "abbr": "fex-tfidf",
+        "abbr": "fex-embedding-idf",
         "params": {
-            "ngram_max": hyperopt.hp.choice("ngram_max", range(1, 4, 1)),
+            "embedding": hyperopt.hp.choice("embedding", [None]),               # TODO
             "split_ta": hyperopt.hp.choice("split_ta", [True, False]),
-            "stop_words": hyperopt.hp.choice("stop_words", ["english", "none"]),
             "use_keywords": hyperopt.hp.choice("use_keywords", [True, False]),
         },
     }
