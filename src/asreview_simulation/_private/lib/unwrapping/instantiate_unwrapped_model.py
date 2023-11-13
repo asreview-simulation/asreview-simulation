@@ -13,6 +13,7 @@ from asreview_simulation._private.lib.fex.fex_embedding_idf_unwrap import instan
 from asreview_simulation._private.lib.fex.fex_embedding_lstm_unwrap import instantiate_unwrapped_fex_embedding_lstm
 from asreview_simulation._private.lib.fex.fex_sbert_unwrap import instantiate_unwrapped_fex_sbert
 from asreview_simulation._private.lib.fex.fex_tfidf_unwrap import instantiate_unwrapped_fex_tfidf
+from asreview_simulation._private.lib.model_config import ModelConfig
 from asreview_simulation._private.lib.qry.qry_cluster_unwrap import instantiate_unwrapped_qry_cluster
 from asreview_simulation._private.lib.qry.qry_max_random_unwrap import instantiate_unwrapped_qry_max_random
 from asreview_simulation._private.lib.qry.qry_max_uncertainty_unwrap import instantiate_unwrapped_qry_max_uncertainty
@@ -21,7 +22,8 @@ from asreview_simulation._private.lib.qry.qry_random_unwrap import instantiate_u
 from asreview_simulation._private.lib.qry.qry_uncertainty_unwrap import instantiate_unwrapped_qry_uncertainty
 
 
-def instantiate_unwrapped_model(model, random_state):
+def instantiate_unwrapped_model(model: ModelConfig, random_state):
+    assert isinstance(model, ModelConfig), "Input argument 'model' needs to be an instance of ModelConfig"
     mapping = {
         "bal-double": instantiate_unwrapped_bal_double,
         "bal-simple": instantiate_unwrapped_bal_simple,
