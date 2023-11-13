@@ -1,7 +1,7 @@
 import click
 from asreview.models.balance import DoubleBalance
 from asreview_simulation._private.bal.bal_double_config import get_bal_double_config
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 
 
 default_params = get_bal_double_config().params

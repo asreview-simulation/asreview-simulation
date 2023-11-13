@@ -2,11 +2,15 @@ from asreview_simulation._private.bal.bal_double_pyll import bal_double_pyll
 from asreview_simulation._private.bal.bal_simple_pyll import bal_simple_pyll
 from asreview_simulation._private.bal.bal_undersample_pyll import bal_undersample_pyll
 from asreview_simulation._private.cls.cls_logistic_pyll import cls_logistic_pyll
+from asreview_simulation._private.cls.cls_lstm_base_pyll import cls_lstm_base_pyll
+from asreview_simulation._private.cls.cls_lstm_pool_pyll import cls_lstm_pool_pyll
 from asreview_simulation._private.cls.cls_nb_pyll import cls_nb_pyll
 from asreview_simulation._private.cls.cls_nn_2_layer_pyll import cls_nn_2_layer_pyll
 from asreview_simulation._private.cls.cls_rf_pyll import cls_rf_pyll
 from asreview_simulation._private.cls.cls_svm_pyll import cls_svm_pyll
 from asreview_simulation._private.fex.fex_doc2vec_pyll import fex_doc2vec_pyll
+from asreview_simulation._private.fex.fex_embedding_idf_pyll import fex_embedding_idf_pyll
+from asreview_simulation._private.fex.fex_embedding_lstm_pyll import fex_embedding_lstm_pyll
 from asreview_simulation._private.fex.fex_sbert_pyll import fex_sbert_pyll
 from asreview_simulation._private.fex.fex_tfidf_pyll import fex_tfidf_pyll
 from asreview_simulation._private.qry.qry_cluster_pyll import qry_cluster_pyll
@@ -28,11 +32,15 @@ def get_pyll(name):
         "bal-simple": bal_simple_pyll,
         "bal-undersample": bal_undersample_pyll,
         "cls-logistic": cls_logistic_pyll,
+        "cls-lstm-base": cls_lstm_base_pyll,
+        "cls-lstm-pool": cls_lstm_pool_pyll,
         "cls-nb": cls_nb_pyll,
         "cls-nn-2-layer": cls_nn_2_layer_pyll,
         "cls-rf": cls_rf_pyll,
         "cls-svm": cls_svm_pyll,
         "fex-doc2vec": fex_doc2vec_pyll,
+        "fex-embedding-idf": fex_embedding_idf_pyll,
+        "fex-embedding-lstm": fex_embedding_lstm_pyll,
         "fex-sbert": fex_sbert_pyll,
         "fex-tfidf": fex_tfidf_pyll,
         "qry-cluster": qry_cluster_pyll,

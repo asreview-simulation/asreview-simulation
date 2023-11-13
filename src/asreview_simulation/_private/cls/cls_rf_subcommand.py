@@ -1,6 +1,6 @@
 import click
 from asreview.models.classifiers import RandomForestClassifier
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.cls.cls_rf_config import get_cls_rf_config
 
 

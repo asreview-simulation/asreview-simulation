@@ -1,6 +1,6 @@
 import click
 from asreview.models.feature_extraction import Tfidf
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.fex.fex_tfidf_config import get_fex_tfidf_config
 
 

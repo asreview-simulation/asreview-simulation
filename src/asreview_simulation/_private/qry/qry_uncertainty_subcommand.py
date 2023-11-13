@@ -1,6 +1,6 @@
 import click
 from asreview.models.query import UncertaintyQuery
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.qry.qry_uncertainty_config import get_qry_uncertainty_config
 
 

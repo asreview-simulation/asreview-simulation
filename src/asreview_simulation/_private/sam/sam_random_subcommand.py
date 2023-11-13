@@ -1,5 +1,5 @@
 import click
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.sam.sam_random_config import get_sam_random_config
 
 

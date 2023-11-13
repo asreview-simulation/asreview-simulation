@@ -1,6 +1,6 @@
 import click
 from asreview.models.classifiers import NN2LayerClassifier
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.cls.cls_nn_2_layer_config import get_cls_nn_2_layer_config
 
 

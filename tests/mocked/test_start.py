@@ -7,7 +7,7 @@ from asreview import get_data_home
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
 import asreview_simulation
-from asreview_simulation._private.cli import cli
+from asreview_simulation._private.cli.cli import cli
 from tests.helpers.compare_arguments_mock import compare_arguments_mock
 from tests.helpers.get_model_combinatorics import get_model_combinatorics
 from tests.helpers.get_xfails_mocked import get_xfails_mocked

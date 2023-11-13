@@ -1,7 +1,7 @@
 import hyperopt
 
 
-def cls_lstm_pool():
+def cls_lstm_pool_pyll():
     return {
         "abbr": "cls-lstm-pool",
         "params": {

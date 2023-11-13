@@ -1,6 +1,6 @@
 import pytest
 from click.testing import CliRunner
-from asreview_simulation._private.cli import cli
+from asreview_simulation._private.cli.cli import cli
 
 
 @pytest.mark.sam_random

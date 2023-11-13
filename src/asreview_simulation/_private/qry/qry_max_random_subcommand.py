@@ -1,6 +1,6 @@
 import click
 from asreview.models.query import MaxRandomQuery
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.qry.qry_max_random_config import get_qry_max_random_config
 
 

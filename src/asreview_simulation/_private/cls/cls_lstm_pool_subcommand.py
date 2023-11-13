@@ -1,6 +1,6 @@
 import click
 from asreview.models.classifiers import LSTMPoolClassifier
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.cls.cls_lstm_pool_config import get_cls_lstm_pool_config
 
 

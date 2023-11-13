@@ -1,6 +1,6 @@
 import click
 from asreview.models.balance import SimpleBalance
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 
 
 name = f"bal-{SimpleBalance.name}"

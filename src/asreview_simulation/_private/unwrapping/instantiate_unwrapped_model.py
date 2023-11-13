@@ -15,6 +15,8 @@ from asreview_simulation._private.fex.fex_sbert_unwrap import instantiate_unwrap
 from asreview_simulation._private.fex.fex_tfidf_unwrap import instantiate_unwrapped_fex_tfidf
 from asreview_simulation._private.qry.qry_cluster_unwrap import instantiate_unwrapped_qry_cluster
 from asreview_simulation._private.qry.qry_max_unwrap import instantiate_unwrapped_qry_max
+from asreview_simulation._private.qry.qry_max_random_unwrap import instantiate_unwrapped_qry_max_random
+from asreview_simulation._private.qry.qry_max_uncertainty_unwrap import instantiate_unwrapped_qry_max_uncertainty
 from asreview_simulation._private.qry.qry_random_unwrap import instantiate_unwrapped_qry_random
 from asreview_simulation._private.qry.qry_uncertainty_unwrap import instantiate_unwrapped_qry_uncertainty
 
@@ -39,6 +41,8 @@ def instantiate_unwrapped_model(model, random_state):
         "fex-tfidf": instantiate_unwrapped_fex_tfidf,
         "qry-cluster": instantiate_unwrapped_qry_cluster,
         "qry-max": instantiate_unwrapped_qry_max,
+        "qry-max-random": instantiate_unwrapped_qry_max_random,
+        "qry-max-uncertainty": instantiate_unwrapped_qry_max_uncertainty,
         "qry-random": instantiate_unwrapped_qry_random,
         "qry-uncertainty": instantiate_unwrapped_qry_uncertainty,
     }

@@ -1,6 +1,6 @@
 import click
 from asreview.models.feature_extraction import SBERT
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.fex.fex_sbert_config import get_fex_sbert_config
 
 

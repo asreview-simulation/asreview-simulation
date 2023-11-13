@@ -1,7 +1,7 @@
 import hyperopt
 
 
-def cls_lstm_base():
+def cls_lstm_base_pyll():
     return {
         "abbr": "cls-lstm-base",
         "params": {

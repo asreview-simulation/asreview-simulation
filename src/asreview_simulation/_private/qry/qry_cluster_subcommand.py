@@ -1,6 +1,6 @@
 import click
 from asreview.models.query import ClusterQuery
-from asreview_simulation._private.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.qry.qry_cluster_config import get_qry_cluster_config
 
 
