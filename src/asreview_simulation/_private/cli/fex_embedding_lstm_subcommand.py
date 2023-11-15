@@ -22,6 +22,15 @@ name = f"fex-{EmbeddingLSTM.name}"
     type=click.Path(exists=True),
 )
 @click.option(
+    "--fill",
+    "fill",
+    default=default_params["fill"],
+    help="What to do when a sequence is too short. \"loop\": loop the sequence; \"append-zeros\": pad rig"
+    + "ht side with zeros; \"prepend-zeros\": pad left side with zeros",
+    show_default=True,
+    type=click.Choice(["loop", "append-zeros", "prepend-zeros"]),
+)
+@click.option(
     "-f",
     "--force",
     "force",
@@ -29,19 +38,11 @@ name = f"fex-{EmbeddingLSTM.name}"
     is_flag=True,
 )
 @click.option(
-    "--loop_sequence",
-    "loop_sequence",
-    default=default_params["loop_sequence"],
-    help="Instead of zeros at the start/end of sequence loop it.",
-    show_default=True,
-    type=click.INT,
-)
-@click.option(
     "--max_sequence_length",
     "max_sequence_length",
     default=default_params["max_sequence_length"],
-    help="Maximum length of the sequence. Shorter gets truncated. Longer sequences get either "
-    + "padded with zeros or looped.",
+    help="Maximum length of the sequence. Longer gets truncated, according to the value of --truncating. Shorte"
+    + "r sequences get either looped or padded with zeros, according to the value of --fill.",
     show_default=True,
     type=click.INT,
 )
@@ -52,14 +53,6 @@ name = f"fex-{EmbeddingLSTM.name}"
     help="Maximum number of unique words to be processed.",
     show_default=True,
     type=click.INT,
-)
-@click.option(
-    "--padding",
-    "padding",
-    default=default_params["padding"],
-    help="Which side should be padded.",
-    show_default=True,
-    type=click.Choice(["pre", "post"]),
 )
 @click.option(
     "--split_ta",
