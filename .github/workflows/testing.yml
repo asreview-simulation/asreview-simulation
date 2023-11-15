@@ -149,6 +149,10 @@ jobs:
         shell: bash
         run: pytest tests/unit
 
+      - name: Run api tests
+        shell: bash
+        run: pytest tests/api
+
       - if: ${{ matrix.tensorflow == 'with-tf' }}
         name: Run mocked tests (with tensorflow)
         shell: bash
@@ -176,3 +180,7 @@ jobs:
         # fex_embedding_lstm needs tensorflow
         # fex_sbert takes too long and causes ci timeout errors
         run: pytest -m 'not cls_lstm_base and not cls_lstm_pool and not cls_nn_2_layer and not fex_embedding_lstm and not fex_sbert' tests/it
+
+      - name: Run use case tests
+        shell: bash
+        run: pytest tests/use_cases
