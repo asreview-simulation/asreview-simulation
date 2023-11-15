@@ -23,10 +23,9 @@ def test_embedding_lstm_extractor_default_parameterization():
 
     expected_pairs = [
         ("embedding", None),
-        ("loop_sequence", 1),
+        ("fill", "loop"),
         ("max_sequence_length", 1000),
         ("num_words", 20000),
-        ("padding", "post"),
         ("split_ta", False),
         ("truncating", "post"),
         ("use_keywords", False),
