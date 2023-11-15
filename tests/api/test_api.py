@@ -22,6 +22,7 @@ expected = {
     "asreview_simulation.api": {
         "CompleteConfig",
         "draw_sample",
+        "get_abbrs",
         "get_pyll",
         "list_dataset_names",
         "PartialConfig",
