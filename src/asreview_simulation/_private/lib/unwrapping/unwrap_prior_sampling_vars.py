@@ -1,10 +1,10 @@
 from asreview.compat import convert_id_to_idx
 from asreview.data import ASReviewData
-from asreview_simulation._private.lib.model_configs import ModelConfigs
+from asreview_simulation._private.lib.config import CompleteConfig
 
 
 def unwrap_prior_sampling_vars(
-    models: ModelConfigs, as_data: ASReviewData
+    models: CompleteConfig, as_data: ASReviewData
 ) -> (int | None, int | None, int | None, int | None):
     if models.sam.abbr == "sam-handpicked":
         prior_rows = models.sam.params.get("rows", None)

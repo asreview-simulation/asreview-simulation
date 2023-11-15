@@ -1,9 +1,9 @@
 from math import ceil
 from asreview.data import ASReviewData
-from asreview_simulation._private.lib.model_configs import ModelConfigs
+from asreview_simulation._private.lib.config import CompleteConfig
 
 
-def unwrap_stopping_vars(models: ModelConfigs, as_data: ASReviewData, n_instances: int):
+def unwrap_stopping_vars(models: CompleteConfig, as_data: ASReviewData, n_instances: int):
     if models.stp.abbr == "stp-none":
         if models.sam.abbr == "sam-handpicked":
             records = models.sam.params.get("records", None)
