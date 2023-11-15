@@ -1,7 +1,7 @@
 import pytest
-from asreview_simulation.api import PartialConfig
-from asreview_simulation.api import get_abbrs
 from asreview_simulation._private.lib.get_default_params import get_default_params
+from asreview_simulation.api import get_abbrs
+from asreview_simulation.api import PartialConfig
 
 
 @pytest.mark.parametrize("abbr", get_abbrs())
@@ -53,5 +53,3 @@ def test_raising_construct_partial_config_from_positional_args_abbr_only_wrong_t
 def test_raising_construct_partial_config_from_positional_args_wrong_type():
     with pytest.raises(AssertionError):
         PartialConfig("bal-double", 12345)
-
-
