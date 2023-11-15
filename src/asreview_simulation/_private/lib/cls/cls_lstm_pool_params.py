@@ -1,9 +1,5 @@
-from asreview_simulation._private.lib.model_config import ModelConfig
-
-
-def get_cls_lstm_pool_config():
-    abbr = "cls-lstm-pool"
-    params = {
+def get_cls_lstm_pool_params():
+    return {
         "batch_size": 32,
         "class_weight": 30.0,
         "dropout": 0.4,
@@ -15,4 +11,3 @@ def get_cls_lstm_pool_config():
         "optimizer": "rmsprop",
         "shuffle": False,
     }
-    return ModelConfig(abbr=abbr, params=params)

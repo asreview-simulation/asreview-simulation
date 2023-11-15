@@ -1,9 +1,5 @@
-from asreview_simulation._private.lib.model_config import ModelConfig
-
-
-def get_fex_embedding_lstm_config():
-    abbr = "fex-embedding-lstm"
-    params = {
+def get_fex_embedding_lstm_params():
+    return {
         "embedding": None,
         "fill": "loop",
         "max_sequence_length": 1000,
@@ -12,4 +8,3 @@ def get_fex_embedding_lstm_config():
         "truncating": "post",
         "use_keywords": False,
     }
-    return ModelConfig(abbr=abbr, params=params)
