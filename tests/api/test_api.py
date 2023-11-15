@@ -11,29 +11,28 @@ def get_modules():
 
 
 def get_names(module):
-    return [name for name in dir(module) if not name.startswith("__")]
+    return {name for name in dir(module) if not name.startswith("__")}
 
 
 expected = {
-    "asreview_simulation": [
+    "asreview_simulation": {
         "_private",
         "api",
-    ],
-    "asreview_simulation.api": [
-        "ModelConfig",
-        "ModelConfigs",
+    },
+    "asreview_simulation.api": {
+        "CompleteConfig",
         "draw_sample",
-        "get_default_config",
         "get_pyll",
         "list_dataset_names",
+        "PartialConfig",
         "prep_project_directory",
         "run",
         "unwrapping",
-    ],
-    "asreview_simulation.api.unwrapping": [
+    },
+    "asreview_simulation.api.unwrapping": {
         "get_review_simulate_kwargs",
         "instantiate_unwrapped_model",
-    ],
+    },
 }
 
 
