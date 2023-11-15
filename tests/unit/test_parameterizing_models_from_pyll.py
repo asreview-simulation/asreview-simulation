@@ -3,8 +3,8 @@ from asreview.models.balance.base import BaseModel as ASReviewBaseModelBal
 from asreview.models.classifiers.base import BaseModel as ASReviewBaseModelCls
 from asreview.models.feature_extraction.base import BaseModel as ASReviewBaseModelFex
 from asreview.models.query.base import BaseModel as ASReviewBaseModelQry
-from asreview_simulation.api import get_abbrs
 from asreview_simulation.api import draw_sample
+from asreview_simulation.api import get_abbrs
 from asreview_simulation.api import get_pyll
 from asreview_simulation.api.unwrapping import instantiate_unwrapped_model
 
