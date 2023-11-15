@@ -3,7 +3,7 @@ from asreview.models.feature_extraction.embedding_lstm import EmbeddingLSTM
 
 def instantiate_unwrapped_fex_embedding_lstm(params, _random_state):
     mapped_params = {
-        "loop_sequence":  {"loop": 1, "append-zeros": 0, "prepend-zeros": 0}[params["fill"]],
+        "loop_sequence": {"loop": 1, "append-zeros": 0, "prepend-zeros": 0}[params["fill"]],
         "max_sequence_length": params["max_sequence_length"],
         "num_words": params["num_words"],
         "padding": {"loop": "post", "append-zeros": "post", "prepend-zeros": "pre"}[params["fill"]],

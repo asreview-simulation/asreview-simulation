@@ -1,8 +1,8 @@
 import os
-import pytest
 from tempfile import TemporaryDirectory
-from asreview_simulation.api import list_dataset_names
+import pytest
 from asreview_simulation.api import CompleteConfig
+from asreview_simulation.api import list_dataset_names
 from asreview_simulation.api import PartialConfig
 from asreview_simulation.api import prep_project_directory
 from asreview_simulation.api import run

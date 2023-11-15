@@ -21,7 +21,15 @@ class PartialConfig:
 
 
 class CompleteConfig:
-    def __init__(self, bal: PartialConfig = None, cls: PartialConfig = None, fex: PartialConfig = None, qry: PartialConfig = None, sam: PartialConfig = None, stp: PartialConfig = None):
+    def __init__(
+        self,
+        bal: PartialConfig = None,
+        cls: PartialConfig = None,
+        fex: PartialConfig = None,
+        qry: PartialConfig = None,
+        sam: PartialConfig = None,
+        stp: PartialConfig = None,
+    ):
         self.bal = bal or PartialConfig("bal-double")
         self.cls = cls or PartialConfig("cls-nb")
         self.fex = fex or PartialConfig("fex-tfidf")

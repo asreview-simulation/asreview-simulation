@@ -6,7 +6,11 @@ from asreview_simulation._private.lib.unwrapping.get_review_simulate_kwargs impo
 
 
 def run(
-    models: CompleteConfig, project: ASReviewProject, as_data: ASReviewData, write_interval: int = None, seed: int = None
+    models: CompleteConfig,
+    project: ASReviewProject,
+    as_data: ASReviewData,
+    write_interval: int = None,
+    seed: int = None,
 ) -> None:
     # prep
     kwargs = get_review_simulate_kwargs(models, as_data, seed)

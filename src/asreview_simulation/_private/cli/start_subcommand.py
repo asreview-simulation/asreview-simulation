@@ -60,7 +60,6 @@ from asreview_simulation._private.lib.run import run
 )
 @click.pass_obj
 def start_subcommand(obj, benchmark, input_file, no_zip, output_file, seed, write_interval):
-
     if input_file is None and benchmark is None:
         raise ValueError("Neither '--in' nor '--benchmark' was specified.")
     if input_file is not None and benchmark is not None:

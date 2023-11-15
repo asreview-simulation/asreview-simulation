@@ -25,8 +25,8 @@ name = f"fex-{EmbeddingLSTM.name}"
     "--fill",
     "fill",
     default=default_params["fill"],
-    help="What to do when a sequence is too short. \"loop\": loop the sequence; \"append-zeros\": pad rig"
-    + "ht side with zeros; \"prepend-zeros\": pad left side with zeros",
+    help='What to do when a sequence is too short. "loop": loop the sequence; "append-zeros": pad rig'
+    + 'ht side with zeros; "prepend-zeros": pad left side with zeros',
     show_default=True,
     type=click.Choice(["loop", "append-zeros", "prepend-zeros"]),
 )

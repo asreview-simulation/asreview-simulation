@@ -1,10 +1,12 @@
 from pathlib import Path
+from asreview.data import ASReviewData
 from asreview.data import load_data
 from asreview.project import ASReviewProject
-from asreview.data import ASReviewData
 
 
-def prep_project_directory(benchmark: str | None = None, input_file: str | None = None, output_file: str | None = None) -> (ASReviewProject, ASReviewData):
+def prep_project_directory(
+    benchmark: str | None = None, input_file: str | None = None, output_file: str | None = None
+) -> (ASReviewProject, ASReviewData):
     # Prepare an *.asreview.tmp directory which will contain the log / state / configuration
     # of the ASReview analysis. The directory will be zipped later and renamed to *.asreview
     assert (benchmark is None) != (input_file is None), "Need to specify either 'benchmark' or 'input_file'"
