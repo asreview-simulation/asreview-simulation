@@ -1,10 +1,10 @@
 import click
 from asreview.models.classifiers import RandomForestClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.cls.cls_rf_config import get_cls_rf_config
+from asreview_simulation._private.lib.cls.cls_rf_params import get_cls_rf_params
 
 
-default_params = get_cls_rf_config().params
+default_params = get_cls_rf_params()
 name = f"cls-{RandomForestClassifier.name}"
 
 

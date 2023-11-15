@@ -1,10 +1,10 @@
 import click
 from asreview.models.classifiers import SVMClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.cls.cls_svm_config import get_cls_svm_config
+from asreview_simulation._private.lib.cls.cls_svm_params import get_cls_svm_params
 
 
-default_params = get_cls_svm_config().params
+default_params = get_cls_svm_params()
 name = f"cls-{SVMClassifier.name}"
 
 

@@ -1,10 +1,10 @@
 import click
 from asreview.models.classifiers import NN2LayerClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.cls.cls_nn_2_layer_config import get_cls_nn_2_layer_config
+from asreview_simulation._private.lib.cls.cls_nn_2_layer_params import get_cls_nn_2_layer_params
 
 
-default_params = get_cls_nn_2_layer_config().params
+default_params = get_cls_nn_2_layer_params()
 name = f"cls-{NN2LayerClassifier.name}"
 
 

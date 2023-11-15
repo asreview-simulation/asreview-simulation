@@ -1,10 +1,10 @@
 import click
 from asreview.models.query import UncertaintyQuery
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.qry.qry_uncertainty_config import get_qry_uncertainty_config
+from asreview_simulation._private.lib.qry.qry_uncertainty_params import get_qry_uncertainty_params
 
 
-default_params = get_qry_uncertainty_config().params
+default_params = get_qry_uncertainty_params()
 name = f"qry-{UncertaintyQuery.name}"
 
 

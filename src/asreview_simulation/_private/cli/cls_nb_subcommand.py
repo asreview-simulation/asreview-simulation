@@ -1,10 +1,10 @@
 import click
 from asreview.models.classifiers import NaiveBayesClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.cls.cls_nb_config import get_cls_nb_config
+from asreview_simulation._private.lib.cls.cls_nb_params import get_cls_nb_params
 
 
-default_params = get_cls_nb_config().params
+default_params = get_cls_nb_params()
 name = f"cls-{NaiveBayesClassifier.name}"
 
 

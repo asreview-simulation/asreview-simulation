@@ -1,10 +1,10 @@
 import click
 from asreview.models.classifiers import LSTMBaseClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.cls.cls_lstm_base_config import get_cls_lstm_base_config
+from asreview_simulation._private.lib.cls.cls_lstm_base_params import get_cls_lstm_base_params
 
 
-default_params = get_cls_lstm_base_config().params
+default_params = get_cls_lstm_base_params()
 name = f"cls-{LSTMBaseClassifier.name}"
 
 

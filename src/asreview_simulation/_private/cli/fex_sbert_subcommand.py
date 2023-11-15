@@ -1,10 +1,10 @@
 import click
 from asreview.models.feature_extraction import SBERT
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.fex.fex_sbert_config import get_fex_sbert_config
+from asreview_simulation._private.lib.fex.fex_sbert_params import get_fex_sbert_params
 
 
-default_params = get_fex_sbert_config().params
+default_params = get_fex_sbert_params()
 name = f"fex-{SBERT.name}"
 
 

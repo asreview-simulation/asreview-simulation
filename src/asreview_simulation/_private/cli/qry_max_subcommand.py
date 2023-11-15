@@ -1,10 +1,10 @@
 import click
 from asreview.models.query import MaxQuery
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.qry.qry_max_config import get_qry_max_config
+from asreview_simulation._private.lib.qry.qry_max_params import get_qry_max_params
 
 
-default_params = get_qry_max_config().params
+default_params = get_qry_max_params()
 name = f"qry-{MaxQuery.name}"
 
 

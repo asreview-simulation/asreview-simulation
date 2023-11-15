@@ -1,10 +1,10 @@
 import click
 from asreview.models.feature_extraction import Tfidf
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.fex.fex_tfidf_config import get_fex_tfidf_config
+from asreview_simulation._private.lib.fex.fex_tfidf_params import get_fex_tfidf_params
 
 
-default_params = get_fex_tfidf_config().params
+default_params = get_fex_tfidf_params()
 name = f"fex-{Tfidf.name}"
 
 

@@ -1,10 +1,10 @@
 import click
 from asreview.models.query import ClusterQuery
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.qry.qry_cluster_config import get_qry_cluster_config
+from asreview_simulation._private.lib.qry.qry_cluster_params import get_qry_cluster_params
 
 
-default_params = get_qry_cluster_config().params
+default_params = get_qry_cluster_params()
 name = f"qry-{ClusterQuery.name}"
 
 

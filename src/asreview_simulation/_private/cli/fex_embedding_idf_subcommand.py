@@ -1,10 +1,10 @@
 import click
 from asreview.models.feature_extraction import EmbeddingIdf
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.fex.fex_embedding_idf_config import get_fex_embedding_idf_config
+from asreview_simulation._private.lib.fex.fex_embedding_idf_params import get_fex_embedding_idf_params
 
 
-default_params = get_fex_embedding_idf_config().params
+default_params = get_fex_embedding_idf_params()
 name = f"fex-{EmbeddingIdf.name}"
 
 

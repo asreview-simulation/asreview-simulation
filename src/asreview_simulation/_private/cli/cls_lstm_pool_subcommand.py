@@ -1,10 +1,10 @@
 import click
 from asreview.models.classifiers import LSTMPoolClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.cls.cls_lstm_pool_config import get_cls_lstm_pool_config
+from asreview_simulation._private.lib.cls.cls_lstm_pool_params import get_cls_lstm_pool_params
 
 
-default_params = get_cls_lstm_pool_config().params
+default_params = get_cls_lstm_pool_params()
 name = f"cls-{LSTMPoolClassifier.name}"
 
 

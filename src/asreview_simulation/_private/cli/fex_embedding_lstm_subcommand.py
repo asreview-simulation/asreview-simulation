@@ -1,10 +1,10 @@
 import click
 from asreview.models.feature_extraction import EmbeddingLSTM
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.fex.fex_embedding_lstm_config import get_fex_embedding_lstm_config
+from asreview_simulation._private.lib.fex.fex_embedding_lstm_params import get_fex_embedding_lstm_params
 
 
-default_params = get_fex_embedding_lstm_config().params
+default_params = get_fex_embedding_lstm_params()
 name = f"fex-{EmbeddingLSTM.name}"
 
 
@@ -80,11 +80,10 @@ name = f"fex-{EmbeddingLSTM.name}"
 def fex_embedding_lstm_subcommand(
     obj,
     embedding,
+    fill,
     force,
-    loop_sequence,
     max_sequence_length,
     num_words,
-    padding,
     split_ta,
     truncating,
     use_keywords,
@@ -97,10 +96,9 @@ def fex_embedding_lstm_subcommand(
     obj.models.fex.abbr = name
     obj.models.fex.params = {
         "embedding": embedding,
-        "loop_sequence": loop_sequence,
+        "fill": fill,
         "max_sequence_length": max_sequence_length,
         "num_words": num_words,
-        "padding": padding,
         "split_ta": split_ta,
         "truncating": truncating,
         "use_keywords": use_keywords,

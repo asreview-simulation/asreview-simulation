@@ -1,10 +1,10 @@
 import click
 from asreview.models.query import RandomQuery
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.qry.qry_max_random_config import get_qry_max_random_config
+from asreview_simulation._private.lib.qry.qry_max_random_params import get_qry_max_random_params
 
 
-default_params = get_qry_max_random_config().params
+default_params = get_qry_max_random_params()
 name = f"qry-{RandomQuery.name}"
 
 

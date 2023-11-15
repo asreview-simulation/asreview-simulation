@@ -1,10 +1,10 @@
 import click
 from asreview.models.classifiers import LogisticClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.cls.cls_logistic_config import get_cls_logistic_config
+from asreview_simulation._private.lib.cls.cls_logistic_params import get_cls_logistic_params
 
 
-default_params = get_cls_logistic_config().params
+default_params = get_cls_logistic_params()
 name = f"cls-{LogisticClassifier.name}"
 
 

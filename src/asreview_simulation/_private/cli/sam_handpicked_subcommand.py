@@ -1,9 +1,9 @@
 import click
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.sam.sam_handpicked_config import get_sam_handpicked_config
+from asreview_simulation._private.lib.sam.sam_handpicked_params import get_sam_handpicked_params
 
 
-default_params = get_sam_handpicked_config().params
+default_params = get_sam_handpicked_params()
 name = "sam-handpicked"
 
 

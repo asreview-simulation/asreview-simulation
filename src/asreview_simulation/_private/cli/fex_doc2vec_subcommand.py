@@ -1,10 +1,10 @@
 import click
 from asreview.models.feature_extraction import Doc2Vec
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.fex.fex_doc2vec_config import get_fex_doc2vec_config
+from asreview_simulation._private.lib.fex.fex_doc2vec_params import get_fex_doc2vec_params
 
 
-default_params = get_fex_doc2vec_config().params
+default_params = get_fex_doc2vec_params()
 name = f"fex-{Doc2Vec.name}"
 
 
