@@ -1,4 +1,5 @@
 import os
+import pytest
 from tempfile import TemporaryDirectory
 from asreview_simulation.api import list_dataset_names
 from asreview_simulation.api import CompleteConfig
@@ -7,7 +8,13 @@ from asreview_simulation.api import prep_project_directory
 from asreview_simulation.api import run
 
 
-def run_use_case():
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_svm
+@pytest.mark.qry_max_random
+@pytest.mark.bal_double
+@pytest.mark.stp_nq
+def test_use_case_1():
     # make partial config using default parameter values given the model name
     cls = PartialConfig("cls-svm")
 
@@ -23,11 +30,7 @@ def run_use_case():
 
     benchmark = list_dataset_names()[4]
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
-        out_file = f"{tmpdir}{os.sep}simulate.asreview"
-        project, as_data = prep_project_directory(benchmark, input_file=None, output_file=out_file)
+        output_file = f"{tmpdir}{os.sep}simulate.asreview"
+        project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
         run(models, project, as_data)
-        print("done")
-
-
-if __name__ == "__main__":
-    run_use_case()
+        assert True
