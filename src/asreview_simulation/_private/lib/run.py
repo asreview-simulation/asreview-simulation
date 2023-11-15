@@ -1,12 +1,12 @@
 from asreview.data import ASReviewData
 from asreview.project import ASReviewProject
 from asreview.review.simulate import ReviewSimulate
-from asreview_simulation._private.lib.model_configs import ModelConfigs
+from asreview_simulation._private.lib.config import CompleteConfig
 from asreview_simulation._private.lib.unwrapping.get_review_simulate_kwargs import get_review_simulate_kwargs
 
 
 def run(
-    models: ModelConfigs, project: ASReviewProject, as_data: ASReviewData, write_interval: int = None, seed: int = None
+    models: CompleteConfig, project: ASReviewProject, as_data: ASReviewData, write_interval: int = None, seed: int = None
 ):
     # prep
     kwargs = get_review_simulate_kwargs(models, as_data, seed)
