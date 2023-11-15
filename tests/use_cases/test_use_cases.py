@@ -2,6 +2,8 @@ import os
 from tempfile import TemporaryDirectory
 import pytest
 from asreview_simulation.api import CompleteConfig
+from asreview_simulation.api import draw_sample
+from asreview_simulation.api import get_pyll
 from asreview_simulation.api import list_dataset_names
 from asreview_simulation.api import PartialConfig
 from asreview_simulation.api import prep_project_directory
@@ -24,9 +26,13 @@ def test_use_case_1():
     # make partial config using keyword arguments
     stp = PartialConfig(abbr="stp-nq", params={"n_queries": 10})
 
+    # use pyll program to draw a parameterization for 'bal'
+    pyll = get_pyll("bal-double")
+    bal = draw_sample(pyll)
+
     # construct a complete config from partial configs -- implicitly use default model choice
     # and parameterization for models not included as argument (i.e. bal, stp, sam)
-    models = CompleteConfig(cls=cls, qry=qry, stp=stp)
+    models = CompleteConfig(cls=cls, qry=qry, stp=stp, bal=bal)
 
     benchmark = list_dataset_names()[4]
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
