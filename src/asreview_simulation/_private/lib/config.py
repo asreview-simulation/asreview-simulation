@@ -18,7 +18,7 @@ class PartialConfig:
     def __eq__(self, other):
         cond1 = self.abbr == other.abbr
         cond2 = set(self.params) == set(other.params)
-        cond3 = [self.params[k] == other.params[k] for k in self.params.keys()].count(False) == 0
+        cond3 = False not in {self.params[k] == other.params[k] for k in self.params.keys()}
         return cond1 and cond2 and cond3
 
     def asdict(self) -> dict:
@@ -51,6 +51,16 @@ class CompleteConfig:
         assert self.qry.abbr.startswith("qry"), "Expected input argument 'qry' to contain a query model."
         assert self.sam.abbr.startswith("sam"), "Expected input argument 'sam' to contain a prior sampling model."
         assert self.stp.abbr.startswith("stp"), "Expected input argument 'stp' to contain a stopping model."
+
+    def __eq__(self, other):
+        return False not in {
+            self.bal == other.bal,
+            self.cls == other.cls,
+            self.fex == other.fex,
+            self.qry == other.qry,
+            self.sam == other.sam,
+            self.stp == other.stp,
+        }
 
     def asdict(self) -> dict:
         return {
