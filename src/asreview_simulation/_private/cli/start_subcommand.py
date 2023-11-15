@@ -60,8 +60,14 @@ from asreview_simulation._private.lib.run import run
 )
 @click.pass_obj
 def start_subcommand(obj, benchmark, input_file, no_zip, output_file, seed, write_interval):
+
+    if input_file is None and benchmark is None:
+        raise ValueError("Neither '--in' nor '--benchmark' was specified.")
+    if input_file is not None and benchmark is not None:
+        raise ValueError("Expected either '--in' or '--benchmark' to be specified, found both.")
+
     # prep
-    project, as_data = prep_project_directory(benchmark, input_file, output_file)
+    project, as_data = prep_project_directory(benchmark=benchmark, input_file=input_file, output_file=output_file)
 
     # run
     run(obj.models, project, as_data, write_interval, seed)
