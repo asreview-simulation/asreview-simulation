@@ -5,7 +5,7 @@ from asreview_simulation.api import PartialConfig
 
 def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, PartialConfig]:
     valid_keys = {"bal", "cls", "fex", "qry", "sam", "stp"}
-    assert type(pyll) == dict, "Expected input argument pyll to be of type 'dict'."
+    assert isinstance(pyll, dict), "Expected input argument pyll to be of type 'dict'."
     for key in pyll.keys():
         assert key in valid_keys, f"Unexpected key '{key}' in keys of input argument 'pyll'."
     sample = hyperopt.rand.pyll.stochastic.sample(pyll)
