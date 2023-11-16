@@ -101,20 +101,8 @@ def stp_star_pyll():
     )
 
 
-def star_pyll():
-    return {
-        "bal": get_pyll("bal-*"),
-        "cls": get_pyll("cls-*"),
-        "fex": get_pyll("fex-*"),
-        "qry": get_pyll("qry-*"),
-        "sam": get_pyll("sam-*"),
-        "stp": get_pyll("stp-*"),
-    }
-
-
-def get_pyll(name):
+def get_pyll(name: str):
     funcmap = {
-        "*": star_pyll,
         "bal-*": bal_star_pyll,
         "bal-double": bal_double_pyll,
         "bal-simple": bal_simple_pyll,
