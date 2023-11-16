@@ -49,6 +49,7 @@ def instantiate_unwrapped_model(model: PartialConfig, random_state):
     }
     try:
         return mapping[model.abbr](model.params, random_state)
-    except KeyError as e:
+    except KeyError:
         abbrs = "\n".join([key for key in mapping.keys()])
-        raise f"Undefined behavior for model name f{model.abbr}. Valid model names are: f{abbrs}" from e
+        msg = f"Undefined behavior for model name f{model.abbr}. Valid model names are: f{abbrs}"
+        raise KeyError(msg)
