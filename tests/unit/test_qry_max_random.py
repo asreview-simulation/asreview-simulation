@@ -22,6 +22,6 @@ def test_max_random_querier_default_parameterization():
     params = querier["params"].keys()
     assert len(params) == 2
     assert "fraction_max" in params
-    assert querier["params"]["fraction_max"] == 0.95
+    assert querier["params"]["fraction_max"] == pytest.approx(0.95)
     assert "n_instances" in params
     assert querier["params"]["n_instances"] == 1
