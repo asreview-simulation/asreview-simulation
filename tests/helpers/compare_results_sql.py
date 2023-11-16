@@ -35,4 +35,4 @@ def compare_results_sql(p1, p2, test_metadata=False, test_prior_records=False, t
         results2 = df2.loc[df2.query_strategy != "prior", columns].values
         assert numpy.array_equal(results1, results2), "queried records not the same in results.sql"
     if test_metadata is False and test_prior_records is False and test_queried_records is False:
-        raise "You probably wanted to test at least some aspects of the SQL file."
+        raise Exception("You probably wanted to test at least some aspects of the SQL file.")
