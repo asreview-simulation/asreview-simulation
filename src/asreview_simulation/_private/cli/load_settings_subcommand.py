@@ -17,79 +17,96 @@ import click
 )
 @click.pass_obj
 def load_settings_subcommand(obj, settings_file):
-    assert obj.provided.balancer is False, "Attempted reassignment of balancer model configuration"
-    assert obj.provided.classifier is False, "Attempted reassignment of classifier model configuration"
-    assert obj.provided.extractor is False, "Attempted reassignment of extractor model configuration"
-    assert obj.provided.querier is False, "Attempted reassignment of querier model configuration"
-    assert obj.provided.sampler is False, "Attempted reassignment of sampler model configuration"
-    assert obj.provided.stopping is False, "Attempted reassignment of stopping model configuration"
+    def assert_keys_are_valid():
+        for key in settings.keys():
+            assert key in [
+                "bal",
+                "cls",
+                "fex",
+                "qry",
+                "sam",
+                "stp",
+            ], f"Unexpected key '{key}' found in model settings from '{settings_file.name}'."
 
+    def assert_none_provided():
+        assert obj.provided.bal is False, "Attempted reassignment of balancer model configuration"
+        assert obj.provided.cls is False, "Attempted reassignment of classifier model configuration"
+        assert obj.provided.fex is False, "Attempted reassignment of extractor model configuration"
+        assert obj.provided.qry is False, "Attempted reassignment of querier model configuration"
+        assert obj.provided.sam is False, "Attempted reassignment of sampler model configuration"
+        assert obj.provided.stp is False, "Attempted reassignment of stopping model configuration"
+
+    def assign_balancer():
+        if "bal" in settings.keys():
+            try:
+                obj.models.bal.abbr = settings["bal"]["abbr"]
+                obj.models.bal.params = settings["bal"]["params"]
+                obj.provided.bal = True
+            except KeyError as e:
+                print_keyerror_msg("balancer")
+                raise e
+
+    def assign_classifier():
+        if "classifier" in settings.keys():
+            try:
+                obj.models.cls.abbr = settings["cls"]["abbr"]
+                obj.models.cls.params = settings["cls"]["params"]
+                obj.provided.cls = True
+            except KeyError as e:
+                print_keyerror_msg("classifier")
+                raise e
+
+    def assign_extractor():
+        if "extractor" in settings.keys():
+            try:
+                obj.models.fex.abbr = settings["fex"]["abbr"]
+                obj.models.fex.params = settings["fex"]["params"]
+                obj.provided.fex = True
+            except KeyError as e:
+                print_keyerror_msg("extractor")
+                raise e
+
+    def assign_querier():
+        if "querier" in settings.keys():
+            try:
+                obj.models.qry.abbr = settings["qry"]["abbr"]
+                obj.models.qry.params = settings["qry"]["params"]
+                obj.provided.qry = True
+            except KeyError as e:
+                print_keyerror_msg("querier")
+                raise e
+
+    def assign_sampler():
+        if "sampler" in settings.keys():
+            try:
+                obj.models.sam.abbr = settings["sam"]["abbr"]
+                obj.models.sam.params = settings["sam"]["params"]
+                obj.provided.sam = True
+            except KeyError as e:
+                print_keyerror_msg("sampler")
+                raise e
+
+    def assign_stopping():
+        if "stopping" in settings.keys():
+            try:
+                obj.models.stp.abbr = settings["stp"]["abbr"]
+                obj.models.stp.params = settings["stp"]["params"]
+                obj.provided.stp = True
+            except KeyError as e:
+                print_keyerror_msg("stopping")
+                raise e
+
+    def print_keyerror_msg(model_type):
+        print(f"Expected {model_type} settings to include a model abbreviation and the corresponding parameterization.")
+
+    assert_none_provided()
     click.echo(f"Loading configuration from file '{settings_file.name}'...")
     with open(settings_file.name) as fid:
         settings = json.load(fid)
-
-    for key in settings.keys():
-        assert key in [
-            "balancer",
-            "classifier",
-            "extractor",
-            "querier",
-            "sampler",
-            "stopping",
-        ], f"Unexpected key '{key}' found in model settings from '{settings_file.name}'."
-
-    if "balancer" in settings.keys():
-        try:
-            obj.models.balancer.abbr = settings["balancer"]["abbr"]
-            obj.models.balancer.params = settings["balancer"]["params"]
-            obj.provided.balancer = True
-        except KeyError as e:
-            print("Expected balancer settings to include a model abbreviation and the corresponding parameterization.")
-            raise e
-
-    if "classifier" in settings.keys():
-        try:
-            obj.models.classifier.abbr = settings["classifier"]["abbr"]
-            obj.models.classifier.params = settings["classifier"]["params"]
-            obj.provided.classifier = True
-        except KeyError as e:
-            print(
-                "Expected classifier settings to include a model abbreviation and the corresponding parameterization."
-            )
-            raise e
-
-    if "extractor" in settings.keys():
-        try:
-            obj.models.extractor.abbr = settings["extractor"]["abbr"]
-            obj.models.extractor.params = settings["extractor"]["params"]
-            obj.provided.extractor = True
-        except KeyError as e:
-            print("Expected extractor settings to include a model abbreviation and the corresponding parameterization.")
-            raise e
-
-    if "querier" in settings.keys():
-        try:
-            obj.models.querier.abbr = settings["querier"]["abbr"]
-            obj.models.querier.params = settings["querier"]["params"]
-            obj.provided.querier = True
-        except KeyError as e:
-            print("Expected querier settings to include a model abbreviation and the corresponding parameterization.")
-            raise e
-
-    if "sampler" in settings.keys():
-        try:
-            obj.models.sampler.abbr = settings["sampler"]["abbr"]
-            obj.models.sampler.params = settings["sampler"]["params"]
-            obj.provided.sampler = True
-        except KeyError as e:
-            print("Expected sampler settings to include a model abbreviation and the corresponding parameterization.")
-            raise e
-
-    if "stopping" in settings.keys():
-        try:
-            obj.models.stopping.abbr = settings["stopping"]["abbr"]
-            obj.models.stopping.params = settings["stopping"]["params"]
-            obj.provided.stopping = True
-        except KeyError as e:
-            print("Expected stopping settings to include a model abbreviation and the corresponding parameterization.")
-            raise e
+    assert_keys_are_valid()
+    assign_balancer()
+    assign_classifier()
+    assign_extractor()
+    assign_querier()
+    assign_sampler()
+    assign_stopping()
