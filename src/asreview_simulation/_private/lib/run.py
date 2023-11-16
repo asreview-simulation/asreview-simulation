@@ -11,7 +11,7 @@ def run(
     as_data: ASReviewData,
     write_interval: int = None,
     seed: int = None,
-) -> None:
+) -> ASReviewProject:
     # prep
     kwargs = get_review_simulate_kwargs(models, as_data, seed)
     reviewer = ReviewSimulate(as_data, project=project, **kwargs, write_interval=write_interval)
@@ -20,3 +20,5 @@ def run(
     project.update_review(status="review")  # (has side effects on disk)
     reviewer.review()
     project.mark_review_finished()  # (has side effects on disk)
+
+    return project

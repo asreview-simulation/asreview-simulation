@@ -41,5 +41,5 @@ def test_use_case_1():
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
         output_file = f"{tmpdir}{os.sep}simulate.asreview"
         project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
-        run(models, project, as_data)
-        assert True
+        project = run(models, project, as_data)
+        assert project.reviews[0]["status"] == "finished"
