@@ -24,7 +24,7 @@ def prep_project_directory(
     output_file_tmp = Path(output_file).with_suffix(".asreview.tmp")
     assert not Path(output_file_tmp).exists(), f"Temporary file '{output_file_tmp}'  already exists."
 
-    if input_file is None:
+    if benchmark is not None:
         # Use --benchmark as the source
         as_data = load_data(benchmark)
         if benchmark.startswith("benchmark:"):
@@ -33,7 +33,7 @@ def prep_project_directory(
             dataset_path = f"{benchmark}.csv"
         if len(as_data) == 0:
             raise ValueError("Choose a benchmark dataset with at least one record.")
-    elif benchmark is None:
+    elif input_file is not None:
         # Use --in as the source
         as_data = load_data(input_file)
         dataset_path = str(Path(input_file).with_suffix(".csv").name)
