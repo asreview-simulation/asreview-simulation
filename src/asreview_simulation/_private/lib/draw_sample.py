@@ -1,8 +1,9 @@
+from typing import Dict
 import hyperopt
 from asreview_simulation.api import PartialConfig
 
 
-def draw_sample(pyll) -> dict[str, PartialConfig]:
+def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, PartialConfig]:
     valid_keys = {"bal", "cls", "fex", "qry", "sam", "stp"}
     assert type(pyll) == dict, "Expected input argument pyll to be of type 'dict'."
     for key in pyll.keys():

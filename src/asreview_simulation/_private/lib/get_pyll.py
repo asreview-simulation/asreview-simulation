@@ -101,7 +101,7 @@ def stp_star_pyll():
     )
 
 
-def get_pyll(name: str):
+def get_pyll(name: str) -> hyperopt.base.pyll.Apply:
     funcmap = {
         "bal-*": bal_star_pyll,
         "bal-double": bal_double_pyll,

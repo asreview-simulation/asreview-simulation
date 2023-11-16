@@ -1,4 +1,4 @@
-def get_abbrs():
+def get_abbrs() -> [str]:
     return [
         "bal-double",
         "bal-simple",
