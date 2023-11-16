@@ -34,7 +34,7 @@ def test_use_case_1():
     drawn = draw_sample(pyll)
 
     # construct a complete config from partial configs -- implicitly use default model choice
-    # and parameterization for models not included as argument (i.e. stp, sam)
+    # and parameterization for models not included as argument (i.e. sam)
     models = CompleteConfig(cls=cls, qry=qry, stp=stp, **drawn)
 
     benchmark = list_dataset_names()[4]
