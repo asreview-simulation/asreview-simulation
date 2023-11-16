@@ -1,8 +1,9 @@
+from typing import Optional
 from asreview_simulation._private.lib.get_default_params import get_default_params
 
 
 class PartialConfig:
-    def __init__(self, abbr: str, params: dict | None = None):
+    def __init__(self, abbr: str, params: Optional[dict] = None):
         assert type(abbr) == str, "Expected input argument 'abbr' to be of type 'str'"
         default_params = get_default_params(abbr)
         self.abbr = abbr
