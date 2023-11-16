@@ -1,5 +1,64 @@
 import json
 import click
+from asreview_simulation._private.lib.config import PartialConfig
+
+
+def assign_balancer(settings):
+    if "bal" in settings.keys():
+        try:
+            return PartialConfig(abbr=settings["bal"]["abbr"], params=settings["bal"]["params"]), True
+        except KeyError as e:
+            print_keyerror_msg("balancer")
+            raise e
+
+
+def assign_classifier(settings):
+    if "cls" in settings.keys():
+        try:
+            return PartialConfig(abbr=settings["cls"]["abbr"], params=settings["cls"]["params"]), True
+        except KeyError as e:
+            print_keyerror_msg("classifier")
+            raise e
+
+
+def assign_extractor(settings):
+    if "fex" in settings.keys():
+        try:
+            return PartialConfig(abbr=settings["fex"]["abbr"], params=settings["fex"]["params"]), True
+        except KeyError as e:
+            print_keyerror_msg("extractor")
+            raise e
+
+
+def assign_querier(settings):
+    if "qry" in settings.keys():
+        try:
+            return PartialConfig(abbr=settings["qry"]["abbr"], params=settings["qry"]["params"]), True
+        except KeyError as e:
+            print_keyerror_msg("querier")
+            raise e
+
+
+def assign_sampler(settings):
+    if "sam" in settings.keys():
+        try:
+            return PartialConfig(abbr=settings["sam"]["abbr"], params=settings["sam"]["params"]), True
+        except KeyError as e:
+            print_keyerror_msg("sampler")
+            raise e
+
+
+def assign_stopping(settings):
+    if "stp" in settings.keys():
+        try:
+            return PartialConfig(abbr=settings["stp"]["abbr"], params=settings["stp"]["params"]), True
+        except KeyError as e:
+            print_keyerror_msg("stopping")
+            raise e
+
+
+def print_keyerror_msg(model_type):
+    print(f"Expected {model_type} settings to include a model abbreviation and the corresponding parameterization.")
 
 
 @click.command(
@@ -36,77 +95,15 @@ def load_settings_subcommand(obj, settings_file):
         assert obj.provided.sam is False, "Attempted reassignment of sampler model configuration"
         assert obj.provided.stp is False, "Attempted reassignment of stopping model configuration"
 
-    def assign_balancer():
-        if "bal" in settings.keys():
-            try:
-                obj.models.bal.abbr = settings["bal"]["abbr"]
-                obj.models.bal.params = settings["bal"]["params"]
-                obj.provided.bal = True
-            except KeyError as e:
-                print_keyerror_msg("balancer")
-                raise e
-
-    def assign_classifier():
-        if "classifier" in settings.keys():
-            try:
-                obj.models.cls.abbr = settings["cls"]["abbr"]
-                obj.models.cls.params = settings["cls"]["params"]
-                obj.provided.cls = True
-            except KeyError as e:
-                print_keyerror_msg("classifier")
-                raise e
-
-    def assign_extractor():
-        if "extractor" in settings.keys():
-            try:
-                obj.models.fex.abbr = settings["fex"]["abbr"]
-                obj.models.fex.params = settings["fex"]["params"]
-                obj.provided.fex = True
-            except KeyError as e:
-                print_keyerror_msg("extractor")
-                raise e
-
-    def assign_querier():
-        if "querier" in settings.keys():
-            try:
-                obj.models.qry.abbr = settings["qry"]["abbr"]
-                obj.models.qry.params = settings["qry"]["params"]
-                obj.provided.qry = True
-            except KeyError as e:
-                print_keyerror_msg("querier")
-                raise e
-
-    def assign_sampler():
-        if "sampler" in settings.keys():
-            try:
-                obj.models.sam.abbr = settings["sam"]["abbr"]
-                obj.models.sam.params = settings["sam"]["params"]
-                obj.provided.sam = True
-            except KeyError as e:
-                print_keyerror_msg("sampler")
-                raise e
-
-    def assign_stopping():
-        if "stopping" in settings.keys():
-            try:
-                obj.models.stp.abbr = settings["stp"]["abbr"]
-                obj.models.stp.params = settings["stp"]["params"]
-                obj.provided.stp = True
-            except KeyError as e:
-                print_keyerror_msg("stopping")
-                raise e
-
-    def print_keyerror_msg(model_type):
-        print(f"Expected {model_type} settings to include a model abbreviation and the corresponding parameterization.")
-
     assert_none_provided()
     click.echo(f"Loading configuration from file '{settings_file.name}'...")
     with open(settings_file.name) as fid:
         settings = json.load(fid)
     assert_keys_are_valid()
-    assign_balancer()
-    assign_classifier()
-    assign_extractor()
-    assign_querier()
-    assign_sampler()
-    assign_stopping()
+
+    obj.models.bal, obj.provided.bal = assign_balancer(settings)
+    obj.models.cls, obj.provided.cls = assign_classifier(settings)
+    obj.models.fex, obj.provided.fex = assign_extractor(settings)
+    obj.models.qry, obj.provided.qry = assign_querier(settings)
+    obj.models.sam, obj.provided.sam = assign_sampler(settings)
+    obj.models.stp, obj.provided.stp = assign_stopping(settings)
