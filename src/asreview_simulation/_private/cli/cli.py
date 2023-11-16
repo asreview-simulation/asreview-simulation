@@ -41,7 +41,7 @@ class NaturalOrderGroup(click.Group):
         return self.commands.keys()
 
 
-def _add_balancer_subcommands():
+def add_balancer_subcommands():
     my_balancers = [
         bal_double_subcommand,
         bal_simple_subcommand,
@@ -50,16 +50,13 @@ def _add_balancer_subcommands():
     try:
         other_balancers = [e.load() for e in entrypoints(group="asreview_simulation.balancers")]
     except Exception as e:
-        print(
-            "Something went wrong loading a module from entrypoint group "
-            + f"'asreview_simulation.balancers'. The error message was: {e}\nContinuing..."
-        )
+        print(get_error_msg("balancers", e))
         other_balancers = []
-    for b in _sort_commands(my_balancers + other_balancers):
+    for b in sort_commands(my_balancers + other_balancers):
         cli.add_command(b)
 
 
-def _add_classifier_subcommands():
+def add_classifier_subcommands():
     my_classifiers = [
         cls_nb_subcommand,
         cls_rf_subcommand,
@@ -72,16 +69,13 @@ def _add_classifier_subcommands():
     try:
         other_classifiers = [e.load() for e in entrypoints(group="asreview_simulation.classifiers")]
     except Exception as e:
-        print(
-            "Something went wrong loading a module from entrypoint group "
-            + f"'asreview_simulation.classifiers'. The error message was: {e}\nContinuing..."
-        )
+        print(get_error_msg("classifiers", e))
         other_classifiers = []
-    for c in _sort_commands(my_classifiers + other_classifiers):
+    for c in sort_commands(my_classifiers + other_classifiers):
         cli.add_command(c)
 
 
-def _add_extractor_subcommands():
+def add_extractor_subcommands():
     my_extractors = [
         fex_doc2vec_subcommand,
         fex_tfidf_subcommand,
@@ -92,16 +86,13 @@ def _add_extractor_subcommands():
     try:
         other_extractors = [e.load() for e in entrypoints(group="asreview_simulation.extractors")]
     except Exception as e:
-        print(
-            "Something went wrong loading a module from entrypoint group "
-            + f"'asreview_simulation.extractors'. The error message was: {e}\nContinuing..."
-        )
+        print(get_error_msg("extractors", e))
         other_extractors = []
-    for e in _sort_commands(my_extractors + other_extractors):
+    for e in sort_commands(my_extractors + other_extractors):
         cli.add_command(e)
 
 
-def _add_querier_subcommands():
+def add_querier_subcommands():
     my_queriers = [
         qry_cluster_subcommand,
         qry_max_subcommand,
@@ -113,43 +104,40 @@ def _add_querier_subcommands():
     try:
         other_queriers = [e.load() for e in entrypoints(group="asreview_simulation.queriers")]
     except Exception as e:
-        print(
-            "Something went wrong loading a module from entrypoint group "
-            + f"'asreview_simulation.queriers'. The error message was: {e}\nContinuing..."
-        )
+        print(get_error_msg("queriers", e))
         other_queriers = []
-    for q in _sort_commands(my_queriers + other_queriers):
+    for q in sort_commands(my_queriers + other_queriers):
         cli.add_command(q)
 
 
-def _add_sampler_subcommands():
+def add_sampler_subcommands():
     my_samplers = [
         sam_random_subcommand,
         sam_handpicked_subcommand,
     ]
-    for s in _sort_commands(my_samplers):
+    for s in sort_commands(my_samplers):
         cli.add_command(s)
 
 
-def _add_starter_subcommands():
+def add_starter_subcommands():
     my_starters = [
         load_settings_subcommand,
     ]
-    for s in _sort_commands(my_starters):
+    for s in sort_commands(my_starters):
         cli.add_command(s)
 
 
-def _add_stopping_subcommands():
+def add_stopping_subcommands():
     my_stopping = [
         stp_nq_subcommand,
         stp_none_subcommand,
         stp_rel_subcommand,
     ]
-    for t in _sort_commands(my_stopping):
+    for t in sort_commands(my_stopping):
         cli.add_command(t)
 
 
-def _add_terminator_subcommands():
+def add_terminator_subcommands():
     my_terminators = [
         start_subcommand,
         print_benchmark_names_subcommand,
@@ -160,7 +148,14 @@ def _add_terminator_subcommands():
         cli.add_command(t)
 
 
-def _sort_commands(commands):
+def get_error_msg(group_name, err):
+    return (
+        f"Something went wrong loading a module from entrypoint group 'asreview_simulation.{group_name}'. Th"
+        + f"e error message was: {err}\nContinuing..."
+    )
+
+
+def sort_commands(commands):
     return sorted(commands, key=lambda command: command.name)
 
 
@@ -257,11 +252,11 @@ def cli(ctx):
         ctx.obj = State()
 
 
-_add_terminator_subcommands()
-_add_starter_subcommands()
-_add_sampler_subcommands()
-_add_extractor_subcommands()
-_add_classifier_subcommands()
-_add_querier_subcommands()
-_add_balancer_subcommands()
-_add_stopping_subcommands()
+add_terminator_subcommands()
+add_starter_subcommands()
+add_sampler_subcommands()
+add_extractor_subcommands()
+add_classifier_subcommands()
+add_querier_subcommands()
+add_balancer_subcommands()
+add_stopping_subcommands()
