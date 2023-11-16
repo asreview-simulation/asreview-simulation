@@ -5,12 +5,12 @@ from asreview_simulation._private.lib.get_default_params import get_default_para
 
 class PartialConfig:
     def __init__(self, abbr: str, params: Optional[Dict] = None):
-        assert type(abbr) == str, "Expected input argument 'abbr' to be of type 'str'"
+        assert isinstance(abbr, str), "Expected input argument 'abbr' to be of type 'str'"
         default_params = get_default_params(abbr)
         self.abbr = abbr
         self.params = default_params
         if params is not None:
-            assert type(params) == dict, "Expected input argument 'params' to be of type 'dict'"
+            assert isinstance(params, dict), "Expected input argument 'params' to be of type 'dict'"
             valid_keys = default_params.keys()
             provided_keys = params.keys()
             for key in provided_keys:
