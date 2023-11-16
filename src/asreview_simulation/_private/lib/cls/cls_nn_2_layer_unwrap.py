@@ -1,7 +1,7 @@
 from asreview.models.classifiers.nn_2_layer import NN2LayerClassifier
 
 
-def instantiate_unwrapped_cls_nn_2_layer(params, random_state):
+def instantiate_unwrapped_cls_nn_2_layer(params, _random_state):
     mapped_params = {
         "batch_size": params["batch_size"],
         "class_weight": params["class_weight"],
