@@ -29,7 +29,7 @@ def test_use_case_1():
     # use pyll programs to draw a parameterization for 'bal' and 'fex'
     pyll = {
         "bal": get_pyll("bal-double"),
-        "fex": get_pyll("fex-tfidf")
+        "fex": get_pyll("fex-tfidf"),
     }
     drawn = draw_sample(pyll)
 

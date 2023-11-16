@@ -13,8 +13,7 @@ def draw_sample(pyll) -> dict[str, PartialConfig]:
         abbr = sample[key]["abbr"]
         params = sample[key]["params"]
         pair = {
-            key: PartialConfig(abbr=abbr, params=params)
+            key: PartialConfig(abbr=abbr, params=params),
         }
         d.update(pair)
     return d
-
