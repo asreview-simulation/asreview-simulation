@@ -89,11 +89,11 @@ These tests are simple, quick to run, and mostly focus on whether the `asreview-
 state (`obj`) in the correct way. The idea of the "unit" in unit testing is that when the test fails, there is just one
 thing that could have gone wrong. This is in contrast to other types of test, e.g. integration testing (see below).
 
-## `tests/api`
+### `tests/api`
 
 These tests help safeguard against accidentally changing the api.
 
-## `tests/use_cases`
+### `tests/use_cases`
 
 These tests are used to automate running some use cases.
 
