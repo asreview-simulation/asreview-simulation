@@ -1,7 +1,7 @@
 from asreview.datasets import DatasetManager
 
 
-def list_dataset_names() -> [str]:
+def get_dataset_names() -> [str]:
     dataset_names = list()
     for group in DatasetManager().list():
         for dataset in group["datasets"]:

@@ -1,5 +1,5 @@
 import click
-from asreview_simulation._private.lib.list_dataset_names import list_dataset_names
+from asreview_simulation._private.lib.get_dataset_names import get_dataset_names
 
 
 @click.command(
@@ -8,5 +8,5 @@ from asreview_simulation._private.lib.list_dataset_names import list_dataset_nam
     short_help="Print benchmark names",
 )
 def print_benchmark_names_subcommand():
-    s = "\n".join([name for name in list_dataset_names()])
+    s = "\n".join([name for name in get_dataset_names()])
     click.echo(s)
