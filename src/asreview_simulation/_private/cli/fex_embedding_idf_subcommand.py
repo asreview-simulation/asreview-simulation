@@ -2,6 +2,7 @@ import click
 from asreview.models.feature_extraction import EmbeddingIdf
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.fex.fex_embedding_idf_params import get_fex_embedding_idf_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_fex_embedding_idf_params()
@@ -49,10 +50,10 @@ def fex_embedding_idf_subcommand(obj, embedding, force, split_ta, use_keywords):
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
-    obj.models.fex.abbr = name
-    obj.models.fex.params = {
+    params = {
         "embedding": embedding,
         "split_ta": split_ta,
         "use_keywords": use_keywords,
     }
+    obj.models.fex = OneModelConfig(abbr=name, params=params)
     obj.provided.fex = True

@@ -1,6 +1,7 @@
 import click
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.sam.sam_handpicked_params import get_sam_handpicked_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_sam_handpicked_params()
@@ -45,17 +46,18 @@ def sam_handpicked_subcommand(obj, force, records, rows):
     assert not (rows is None and records is None), "Need to define either --rows or --records."
     assert not (rows is not None and records is not None), "Need to define one of --rows or --records, not both."
 
-    obj.models.sam.abbr = name
-
     if rows is not None:
         try:
             ids = [int(elem.strip()) for elem in rows.split(",")]
         except ValueError as e:
             click.echo("\nProblem parsing row numbers.\n")
             raise e
-        obj.models.sam.params = {
+        params = {
+            "records": None,
             "rows": ids,
         }
+        obj.models.sam = OneModelConfig(abbr=name, params=params)
+        obj.provided.sam = True
 
     if records is not None:
         try:
@@ -63,8 +65,9 @@ def sam_handpicked_subcommand(obj, force, records, rows):
         except ValueError as e:
             click.echo("\nProblem parsing record numbers.\n")
             raise e
-        obj.models.sam.params = {
+        params = {
             "records": ids,
+            "rows": None
         }
-
-    obj.provided.sam = True
+        obj.models.sam = OneModelConfig(abbr=name, params=params)
+        obj.provided.sam = True

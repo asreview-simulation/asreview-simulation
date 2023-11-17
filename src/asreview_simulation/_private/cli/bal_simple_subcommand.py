@@ -1,6 +1,7 @@
 import click
 from asreview.models.balance import SimpleBalance
 from asreview_simulation._private.cli.cli_epilog import epilog
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 name = f"bal-{SimpleBalance.name}"
@@ -26,6 +27,6 @@ def bal_simple_subcommand(obj, force):
             "Attempted reassignment of balancer. Use the --force flag "
             + "if you mean to overwrite the balancer configuration from previous steps. "
         )
-    obj.models.bal.abbr = name
-    obj.models.bal.params = {}
+    params = {}
+    obj.models.bal = OneModelConfig(abbr=name, params=params)
     obj.provided.bal = True

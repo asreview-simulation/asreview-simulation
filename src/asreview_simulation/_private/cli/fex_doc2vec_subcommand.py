@@ -2,6 +2,7 @@ import click
 from asreview.models.feature_extraction import Doc2Vec
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.fex.fex_doc2vec_params import get_fex_doc2vec_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_fex_doc2vec_params()
@@ -109,8 +110,7 @@ def fex_doc2vec_subcommand(
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
-    obj.models.fex.abbr = name
-    obj.models.fex.params = {
+    params = {
         "dbow_words": dbow_words,
         "dm": dm,
         "dm_concat": dm_concat,
@@ -121,4 +121,5 @@ def fex_doc2vec_subcommand(
         "vector_size": vector_size,
         "window": window,
     }
+    obj.models.fex = OneModelConfig(abbr=name, params=params)
     obj.provided.fex = True

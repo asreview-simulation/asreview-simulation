@@ -22,10 +22,16 @@ def test_with_records():
     sampler = json.loads(result.output)["sam"]
     assert sampler["abbr"] == "sam-handpicked"
     params = sampler["params"].keys()
-    assert len(params) == 1
-    assert "records" in params
-    assert "rows" not in params
-    assert sampler["params"]["records"] == [1, 2, 3]
+    expected_pairs = [
+        ("records", [1, 2, 3]),
+        ("rows", None),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
+        actual_value = sampler["params"][param]
+        assert type(actual_value) == type(expected_value), f"Unexpected type for key '{param}'"
+        assert actual_value == expected_value, f"Expected key '{param}' to have value '{expected_value}'."
 
 
 @pytest.mark.sam_handpicked
@@ -46,7 +52,13 @@ def test_with_rows():
     sampler = json.loads(result.output)["sam"]
     assert sampler["abbr"] == "sam-handpicked"
     params = sampler["params"].keys()
-    assert len(params) == 1
-    assert "records" not in params
-    assert "rows" in params
-    assert sampler["params"]["rows"] == [1, 2, 3]
+    expected_pairs = [
+        ("records", None),
+        ("rows", [1, 2, 3]),
+    ]
+    assert len(params) == len(expected_pairs), "Unexpected number of parameters"
+    for param, expected_value in expected_pairs:
+        assert param in params, f"Expected key '{param}' to be present in parameterization of classifier."
+        actual_value = sampler["params"][param]
+        assert type(actual_value) == type(expected_value), f"Unexpected type for key '{param}'"
+        assert actual_value == expected_value, f"Expected key '{param}' to have value '{expected_value}'."

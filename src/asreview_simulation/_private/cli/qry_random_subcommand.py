@@ -2,6 +2,7 @@ import click
 from asreview.models.query import RandomQuery
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.qry.qry_max_random_params import get_qry_max_random_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_qry_max_random_params()
@@ -36,8 +37,8 @@ def qry_random_subcommand(obj, force, n_instances):
             "Attempted reassignment of querier. Use the --force flag "
             + "if you mean to overwrite the querier configuration from previous steps. "
         )
-    obj.models.qry.abbr = name
-    obj.models.qry.params = {
+    params = {
         "n_instances": n_instances,
     }
+    obj.models.qry = OneModelConfig(abbr=name, params=params)
     obj.provided.qry = True

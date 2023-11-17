@@ -2,6 +2,7 @@ import click
 from asreview.models.balance import UndersampleBalance
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.bal.bal_undersample_params import get_bal_undersample_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_bal_undersample_params()
@@ -37,8 +38,8 @@ def bal_undersample_subcommand(obj, force, ratio):
             "Attempted reassignment of balancer. Use the --force flag "
             + "if you mean to overwrite the balancer configuration from previous steps. "
         )
-    obj.models.bal.abbr = name
-    obj.models.bal.params = {
+    params = {
         "ratio": ratio,
     }
+    obj.models.bal = OneModelConfig(abbr=name, params=params)
     obj.provided.bal = True

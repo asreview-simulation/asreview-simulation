@@ -1,6 +1,7 @@
 import click
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.stp.stp_nq_params import get_stp_nq_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_stp_nq_params()
@@ -36,8 +37,8 @@ def stp_nq_subcommand(obj, force, n_queries):
             "Attempted reassignment of stopping. Use the --force flag "
             + "if you mean to overwrite the stopping configuration from previous steps. "
         )
-    obj.models.stp.abbr = name
-    obj.models.stp.params = {
+    params = {
         "n_queries": n_queries,
     }
+    obj.models.stp = OneModelConfig(abbr=name, params=params)
     obj.provided.stp = True

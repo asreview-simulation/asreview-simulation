@@ -2,6 +2,7 @@ import click
 from asreview.models.classifiers import SVMClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.cls.cls_svm_params import get_cls_svm_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_cls_svm_params()
@@ -60,11 +61,11 @@ def cls_svm_subcommand(obj, c, class_weight, gamma, force, kernel):
             "Attempted reassignment of classifier. Use the --force flag "
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
-    obj.models.cls.abbr = name
-    obj.models.cls.params = {
+    params = {
         "c": c,
         "class_weight": class_weight,
         "gamma": gamma,
         "kernel": kernel,
     }
+    obj.models.cls = OneModelConfig(abbr=name, params=params)
     obj.provided.cls = True

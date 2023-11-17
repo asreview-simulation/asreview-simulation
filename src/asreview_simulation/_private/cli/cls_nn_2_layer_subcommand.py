@@ -2,6 +2,7 @@ import click
 from asreview.models.classifiers import NN2LayerClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.cls.cls_nn_2_layer_params import get_cls_nn_2_layer_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_cls_nn_2_layer_params()
@@ -102,8 +103,7 @@ def cls_nn_2_layer_subcommand(
             "Attempted reassignment of classifier. Use the --force flag "
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
-    obj.models.cls.abbr = name
-    obj.models.cls.params = {
+    params = {
         "batch_size": batch_size,
         "class_weight": class_weight,
         "dense_width": dense_width,
@@ -113,4 +113,5 @@ def cls_nn_2_layer_subcommand(
         "regularization": regularization,
         "shuffle": shuffle,
     }
+    obj.models.cls = OneModelConfig(abbr=name, params=params)
     obj.provided.cls = True

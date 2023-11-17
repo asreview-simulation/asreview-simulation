@@ -2,6 +2,7 @@ import click
 from asreview.models.feature_extraction import Tfidf
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.fex.fex_tfidf_params import get_fex_tfidf_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_fex_tfidf_params()
@@ -59,11 +60,11 @@ def fex_tfidf_subcommand(obj, force, ngram_max, split_ta, stop_words, use_keywor
             "Attempted reassignment of extractor. Use the --force flag "
             + "if you mean to overwrite the extractor configuration from previous steps. "
         )
-    obj.models.fex.abbr = name
-    obj.models.fex.params = {
+    params = {
         "ngram_max": ngram_max,
         "split_ta": split_ta,
         "stop_words": stop_words,
         "use_keywords": use_keywords,
     }
+    obj.models.fex = OneModelConfig(abbr=name, params=params)
     obj.provided.fex = True

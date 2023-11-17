@@ -2,6 +2,7 @@ import click
 from asreview.models.query import ClusterQuery
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.qry.qry_cluster_params import get_qry_cluster_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_qry_cluster_params()
@@ -53,10 +54,10 @@ def qry_cluster_subcommand(obj, force, cluster_size, n_instances, update_interva
             "Attempted reassignment of querier. Use the --force flag "
             + "if you mean to overwrite the querier configuration from previous steps. "
         )
-    obj.models.qry.abbr = name
-    obj.models.qry.params = {
+    params = {
         "cluster_size": cluster_size,
         "n_instances": n_instances,
         "update_interval": update_interval,
     }
+    obj.models.qry = OneModelConfig(abbr=name, params=params)
     obj.provided.qry = True

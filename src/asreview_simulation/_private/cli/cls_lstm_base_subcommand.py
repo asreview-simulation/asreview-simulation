@@ -2,6 +2,7 @@ import click
 from asreview.models.classifiers import LSTMBaseClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.cls.cls_lstm_base_params import get_cls_lstm_base_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_cls_lstm_base_params()
@@ -119,8 +120,7 @@ def cls_lstm_base_subcommand(
             "Attempted reassignment of classifier. Use the --force flag "
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
-    obj.models.cls.abbr = name
-    obj.models.cls.params = {
+    params = {
         "batch_size": batch_size,
         "class_weight": class_weight,
         "dense_width": dense_width,
@@ -132,4 +132,5 @@ def cls_lstm_base_subcommand(
         "lstm_out_width": lstm_out_width,
         "shuffle": shuffle,
     }
+    obj.models.cls = OneModelConfig(abbr=name, params=params)
     obj.provided.cls = True

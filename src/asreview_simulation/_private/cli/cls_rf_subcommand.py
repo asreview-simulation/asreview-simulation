@@ -2,6 +2,7 @@ import click
 from asreview.models.classifiers import RandomForestClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.cls.cls_rf_params import get_cls_rf_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_cls_rf_params()
@@ -52,10 +53,10 @@ def cls_rf_subcommand(obj, class_weight, force, max_features, n_estimators):
             "Attempted reassignment of classifier. Use the --force flag "
             + "if you mean to overwrite the classifier configuration from previous steps. "
         )
-    obj.models.cls.abbr = name
-    obj.models.cls.params = {
+    params = {
         "class_weight": class_weight,
         "max_features": max_features,
         "n_estimators": n_estimators,
     }
+    obj.models.cls = OneModelConfig(abbr=name, params=params)
     obj.provided.cls = True

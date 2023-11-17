@@ -2,6 +2,7 @@ import click
 from asreview.models.balance import DoubleBalance
 from asreview_simulation._private.cli.cli_epilog import epilog
 from asreview_simulation._private.lib.bal.bal_double_params import get_bal_double_params
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_bal_double_params()
@@ -65,11 +66,11 @@ def bal_double_subcommand(obj, a, alpha, b, beta, force):
             "Attempted reassignment of balancer. Use the --force flag "
             + "if you mean to overwrite the balancer configuration from previous steps. "
         )
-    obj.models.bal.abbr = name
-    obj.models.bal.params = {
+    params = {
         "a": a,
         "alpha": alpha,
         "b": b,
         "beta": beta,
     }
+    obj.models.bal = OneModelConfig(abbr=name, params=params)
     obj.provided.bal = True
