@@ -2,7 +2,6 @@ from asreview_simulation._private.lib.all_model_config import AllModelConfig
 
 
 class Provided:
-
     _errmsg = "Expected a bool"
 
     def __init__(self):

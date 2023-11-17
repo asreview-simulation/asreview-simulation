@@ -3,7 +3,6 @@ from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 class AllModelConfig:
-
     _errmsg = "Expected an instance of OneModelConfig"
 
     def __init__(
