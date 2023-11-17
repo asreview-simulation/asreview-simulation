@@ -16,14 +16,14 @@ from asreview_simulation.api import run
 @pytest.mark.qry_max_random
 @pytest.mark.bal_double
 @pytest.mark.stp_nq
-def test_use_case_1():
-    # make one model config using default parameter values given the model name
+def test_use_case():
+    # make classifier model config using default parameter values given the model name
     cls = OneModelConfig("cls-svm")
 
-    # make one model config using positional arguments, partial params dict
+    # make query model config using positional arguments, partial params dict
     qry = OneModelConfig("qry-max-random", {"fraction_max": 0.90})
 
-    # make one model config using keyword arguments
+    # make stopping model config using keyword arguments
     stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
 
     # use pyll programs to draw a parameterization for 'bal' and 'fex'
@@ -37,7 +37,10 @@ def test_use_case_1():
     # and parameterization for models not included as argument (i.e. sam)
     models = AllModelConfig(cls=cls, qry=qry, stp=stp, **drawn)
 
+    # arbitrarily pick a benchmark dataset
     benchmark = list_dataset_names()[4]
+
+    # create a temporary directory and start the simulation
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
         output_file = f"{tmpdir}{os.sep}simulate.asreview"
         project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
