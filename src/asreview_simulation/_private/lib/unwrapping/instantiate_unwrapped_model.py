@@ -8,7 +8,7 @@ from asreview_simulation._private.lib.cls.cls_nb_unwrap import instantiate_unwra
 from asreview_simulation._private.lib.cls.cls_nn_2_layer_unwrap import instantiate_unwrapped_cls_nn_2_layer
 from asreview_simulation._private.lib.cls.cls_rf_unwrap import instantiate_unwrapped_cls_rf
 from asreview_simulation._private.lib.cls.cls_svm_unwrap import instantiate_unwrapped_cls_svm
-from asreview_simulation._private.lib.config import PartialConfig
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 from asreview_simulation._private.lib.fex.fex_doc2vec_unwrap import instantiate_unwrapped_fex_doc2vec
 from asreview_simulation._private.lib.fex.fex_embedding_idf_unwrap import instantiate_unwrapped_fex_embedding_idf
 from asreview_simulation._private.lib.fex.fex_embedding_lstm_unwrap import instantiate_unwrapped_fex_embedding_lstm
@@ -22,8 +22,8 @@ from asreview_simulation._private.lib.qry.qry_random_unwrap import instantiate_u
 from asreview_simulation._private.lib.qry.qry_uncertainty_unwrap import instantiate_unwrapped_qry_uncertainty
 
 
-def instantiate_unwrapped_model(model: PartialConfig, random_state):
-    assert isinstance(model, PartialConfig), "Input argument 'model' needs to be an instance of PartialConfig"
+def instantiate_unwrapped_model(model: OneModelConfig, random_state):
+    assert isinstance(model, OneModelConfig), "Input argument 'model' needs to be an instance of OneModelConfig"
     mapping = {
         "bal-double": instantiate_unwrapped_bal_double,
         "bal-simple": instantiate_unwrapped_bal_simple,

@@ -1,9 +1,9 @@
 from typing import Dict
 import hyperopt
-from asreview_simulation.api import PartialConfig
+from asreview_simulation.api import OneModelConfig
 
 
-def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, PartialConfig]:
+def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, OneModelConfig]:
     valid_keys = {"bal", "cls", "fex", "qry", "sam", "stp"}
     assert isinstance(pyll, dict), "Expected input argument pyll to be of type 'dict'."
     for key in pyll.keys():
@@ -14,7 +14,7 @@ def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, PartialC
         abbr = sample[key]["abbr"]
         params = sample[key]["params"]
         pair = {
-            key: PartialConfig(abbr=abbr, params=params),
+            key: OneModelConfig(abbr=abbr, params=params),
         }
         d.update(pair)
     return d

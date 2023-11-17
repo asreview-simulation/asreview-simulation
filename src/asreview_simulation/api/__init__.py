@@ -1,5 +1,5 @@
-from asreview_simulation._private.lib.config import CompleteConfig
-from asreview_simulation._private.lib.config import PartialConfig
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
+from asreview_simulation._private.lib.all_model_config import AllModelConfig
 from asreview_simulation._private.lib.draw_sample import draw_sample
 from asreview_simulation._private.lib.get_abbrs import get_abbrs
 from asreview_simulation._private.lib.get_pyll import get_pyll
@@ -10,12 +10,12 @@ from asreview_simulation.api import unwrapping
 
 
 __all__ = [
-    "CompleteConfig",
+    "AllModelConfig",
     "draw_sample",
     "get_abbrs",
     "get_pyll",
     "list_dataset_names",
-    "PartialConfig",
+    "OneModelConfig",
     "prep_project_directory",
     "run",
     "unwrapping",

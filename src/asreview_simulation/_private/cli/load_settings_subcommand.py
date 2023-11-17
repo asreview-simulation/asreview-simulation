@@ -1,12 +1,12 @@
 import json
 import click
-from asreview_simulation._private.lib.config import PartialConfig
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 def assign_balancer(settings):
     if "bal" in settings.keys():
         try:
-            return PartialConfig(abbr=settings["bal"]["abbr"], params=settings["bal"]["params"]), True
+            return OneModelConfig(abbr=settings["bal"]["abbr"], params=settings["bal"]["params"]), True
         except KeyError as e:
             print_keyerror_msg("balancer")
             raise e
@@ -15,7 +15,7 @@ def assign_balancer(settings):
 def assign_classifier(settings):
     if "cls" in settings.keys():
         try:
-            return PartialConfig(abbr=settings["cls"]["abbr"], params=settings["cls"]["params"]), True
+            return OneModelConfig(abbr=settings["cls"]["abbr"], params=settings["cls"]["params"]), True
         except KeyError as e:
             print_keyerror_msg("classifier")
             raise e
@@ -24,7 +24,7 @@ def assign_classifier(settings):
 def assign_extractor(settings):
     if "fex" in settings.keys():
         try:
-            return PartialConfig(abbr=settings["fex"]["abbr"], params=settings["fex"]["params"]), True
+            return OneModelConfig(abbr=settings["fex"]["abbr"], params=settings["fex"]["params"]), True
         except KeyError as e:
             print_keyerror_msg("extractor")
             raise e
@@ -33,7 +33,7 @@ def assign_extractor(settings):
 def assign_querier(settings):
     if "qry" in settings.keys():
         try:
-            return PartialConfig(abbr=settings["qry"]["abbr"], params=settings["qry"]["params"]), True
+            return OneModelConfig(abbr=settings["qry"]["abbr"], params=settings["qry"]["params"]), True
         except KeyError as e:
             print_keyerror_msg("querier")
             raise e
@@ -42,7 +42,7 @@ def assign_querier(settings):
 def assign_sampler(settings):
     if "sam" in settings.keys():
         try:
-            return PartialConfig(abbr=settings["sam"]["abbr"], params=settings["sam"]["params"]), True
+            return OneModelConfig(abbr=settings["sam"]["abbr"], params=settings["sam"]["params"]), True
         except KeyError as e:
             print_keyerror_msg("sampler")
             raise e
@@ -51,7 +51,7 @@ def assign_sampler(settings):
 def assign_stopping(settings):
     if "stp" in settings.keys():
         try:
-            return PartialConfig(abbr=settings["stp"]["abbr"], params=settings["stp"]["params"]), True
+            return OneModelConfig(abbr=settings["stp"]["abbr"], params=settings["stp"]["params"]), True
         except KeyError as e:
             print_keyerror_msg("stopping")
             raise e

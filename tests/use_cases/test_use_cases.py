@@ -1,11 +1,11 @@
 import os
 from tempfile import TemporaryDirectory
 import pytest
-from asreview_simulation.api import CompleteConfig
+from asreview_simulation.api import AllModelConfig
 from asreview_simulation.api import draw_sample
 from asreview_simulation.api import get_pyll
 from asreview_simulation.api import list_dataset_names
-from asreview_simulation.api import PartialConfig
+from asreview_simulation.api import OneModelConfig
 from asreview_simulation.api import prep_project_directory
 from asreview_simulation.api import run
 
@@ -17,14 +17,14 @@ from asreview_simulation.api import run
 @pytest.mark.bal_double
 @pytest.mark.stp_nq
 def test_use_case_1():
-    # make partial config using default parameter values given the model name
-    cls = PartialConfig("cls-svm")
+    # make one model config using default parameter values given the model name
+    cls = OneModelConfig("cls-svm")
 
-    # make partial config using positional arguments, partial params dict
-    qry = PartialConfig("qry-max-random", {"fraction_max": 0.90})
+    # make one model config using positional arguments, partial params dict
+    qry = OneModelConfig("qry-max-random", {"fraction_max": 0.90})
 
-    # make partial config using keyword arguments
-    stp = PartialConfig(abbr="stp-nq", params={"n_queries": 10})
+    # make one model config using keyword arguments
+    stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
 
     # use pyll programs to draw a parameterization for 'bal' and 'fex'
     pyll = {
@@ -33,9 +33,9 @@ def test_use_case_1():
     }
     drawn = draw_sample(pyll)
 
-    # construct a complete config from partial configs -- implicitly use default model choice
+    # construct an all model config from one model configs -- implicitly use default model choice
     # and parameterization for models not included as argument (i.e. sam)
-    models = CompleteConfig(cls=cls, qry=qry, stp=stp, **drawn)
+    models = AllModelConfig(cls=cls, qry=qry, stp=stp, **drawn)
 
     benchmark = list_dataset_names()[4]
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:

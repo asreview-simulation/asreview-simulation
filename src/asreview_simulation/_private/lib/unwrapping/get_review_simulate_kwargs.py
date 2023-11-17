@@ -1,12 +1,12 @@
 import numpy
 from asreview.data import ASReviewData
-from asreview_simulation._private.lib.config import CompleteConfig
+from asreview_simulation._private.lib.all_model_config import AllModelConfig
 from asreview_simulation._private.lib.unwrapping.instantiate_unwrapped_model import instantiate_unwrapped_model
 from asreview_simulation._private.lib.unwrapping.unwrap_prior_sampling_vars import unwrap_prior_sampling_vars
 from asreview_simulation._private.lib.unwrapping.unwrap_stopping_vars import unwrap_stopping_vars
 
 
-def get_review_simulate_kwargs(models: CompleteConfig, as_data: ASReviewData, seed: int = None) -> dict:
+def get_review_simulate_kwargs(models: AllModelConfig, as_data: ASReviewData, seed: int = None) -> dict:
     # asreview's query model does not expect n_instances as part
     # of the models.querier.params dict but as a separate variable
     n_instances = models.qry.params.pop("n_instances", 1)
