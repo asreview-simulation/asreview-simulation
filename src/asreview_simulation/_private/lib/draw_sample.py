@@ -1,6 +1,6 @@
 from typing import Dict
 import hyperopt
-from asreview_simulation.api import OneModelConfig
+from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, OneModelConfig]:
