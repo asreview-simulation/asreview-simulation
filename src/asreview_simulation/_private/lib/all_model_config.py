@@ -1,16 +1,27 @@
+from typing import Optional
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 class AllModelConfig:
     def __init__(
         self,
-        bal: OneModelConfig = None,
-        cls: OneModelConfig = None,
-        fex: OneModelConfig = None,
-        qry: OneModelConfig = None,
-        sam: OneModelConfig = None,
-        stp: OneModelConfig = None,
+        bal: Optional[OneModelConfig] = None,
+        cls: Optional[OneModelConfig] = None,
+        fex: Optional[OneModelConfig] = None,
+        qry: Optional[OneModelConfig] = None,
+        sam: Optional[OneModelConfig] = None,
+        stp: Optional[OneModelConfig] = None,
     ):
+
+        # initialize the private attributes:
+        self._bal = None
+        self._cls = None
+        self._fex = None
+        self._qry = None
+        self._sam = None
+        self._stp = None
+
+        # use the setter methods to assign constructor arguments to private attributes
         self.bal = bal or OneModelConfig("bal-double")
         self.cls = cls or OneModelConfig("cls-nb")
         self.fex = fex or OneModelConfig("fex-tfidf")
@@ -18,29 +29,82 @@ class AllModelConfig:
         self.sam = sam or OneModelConfig("sam-random")
         self.stp = stp or OneModelConfig("stp-rel")
 
-        assert self.bal.abbr.startswith("bal"), "Expected input argument 'bal' to contain a balancer model."
-        assert self.cls.abbr.startswith("cls"), "Expected input argument 'cls' to contain a classifier model."
-        assert self.fex.abbr.startswith("fex"), "Expected input argument 'fex' to contain a feature extraction model."
-        assert self.qry.abbr.startswith("qry"), "Expected input argument 'qry' to contain a query model."
-        assert self.sam.abbr.startswith("sam"), "Expected input argument 'sam' to contain a prior sampling model."
-        assert self.stp.abbr.startswith("stp"), "Expected input argument 'stp' to contain a stopping model."
-
     def __eq__(self, other):
         return False not in {
-            self.bal == other.bal,
-            self.cls == other.cls,
-            self.fex == other.fex,
-            self.qry == other.qry,
-            self.sam == other.sam,
-            self.stp == other.stp,
+            self._bal == other._bal,
+            self._cls == other._cls,
+            self._fex == other._fex,
+            self._qry == other._qry,
+            self._sam == other._sam,
+            self._stp == other._stp,
         }
 
     def as_dict(self) -> dict:
         return {
-            "bal": self.bal.as_dict(),
-            "cls": self.cls.as_dict(),
-            "fex": self.fex.as_dict(),
-            "qry": self.qry.as_dict(),
-            "sam": self.sam.as_dict(),
-            "stp": self.stp.as_dict(),
+            "bal": self._bal.as_dict(),
+            "cls": self._cls.as_dict(),
+            "fex": self._fex.as_dict(),
+            "qry": self._qry.as_dict(),
+            "sam": self._sam.as_dict(),
+            "stp": self._stp.as_dict(),
         }
+
+    @property
+    def bal(self) -> OneModelConfig:
+        return self._bal
+
+    @bal.setter
+    def bal(self, bal: OneModelConfig):
+        assert isinstance(bal, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert bal.abbr.startswith("bal"), "Expected a balancer model."
+        self._bal = bal
+
+    @property
+    def cls(self) -> OneModelConfig:
+        return self._cls
+
+    @cls.setter
+    def cls(self, cls: OneModelConfig):
+        assert isinstance(cls, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert cls.abbr.startswith("cls"), "Expected a classifier model."
+        self._cls = cls
+
+    @property
+    def fex(self) -> OneModelConfig:
+        return self._fex
+
+    @fex.setter
+    def fex(self, fex: OneModelConfig):
+        assert isinstance(fex, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert fex.abbr.startswith("fex"), "Expected a feature extraction model."
+        self._fex = fex
+
+    @property
+    def qry(self) -> OneModelConfig:
+        return self._qry
+
+    @qry.setter
+    def qry(self, qry: OneModelConfig):
+        assert isinstance(qry, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert qry.abbr.startswith("qry"), "Expected a query model."
+        self._qry = qry
+
+    @property
+    def sam(self) -> OneModelConfig:
+        return self._sam
+
+    @sam.setter
+    def sam(self, sam: OneModelConfig):
+        assert isinstance(sam, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert sam.abbr.startswith("sam"), "Expected a sampler model."
+        self._sam = sam
+
+    @property
+    def stp(self) -> OneModelConfig:
+        return self._stp
+
+    @stp.setter
+    def stp(self, stp: OneModelConfig):
+        assert isinstance(stp, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert stp.abbr.startswith("stp"), "Expected a stopping model."
+        self._stp = stp
