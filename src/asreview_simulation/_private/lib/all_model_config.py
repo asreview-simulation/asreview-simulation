@@ -35,12 +35,12 @@ class AllModelConfig:
             self.stp == other.stp,
         }
 
-    def asdict(self) -> dict:
+    def as_dict(self) -> dict:
         return {
-            "bal": self.bal.asdict(),
-            "cls": self.cls.asdict(),
-            "fex": self.fex.asdict(),
-            "qry": self.qry.asdict(),
-            "sam": self.sam.asdict(),
-            "stp": self.stp.asdict(),
+            "bal": self.bal.as_dict(),
+            "cls": self.cls.as_dict(),
+            "fex": self.fex.as_dict(),
+            "qry": self.qry.as_dict(),
+            "sam": self.sam.as_dict(),
+            "stp": self.stp.as_dict(),
         }

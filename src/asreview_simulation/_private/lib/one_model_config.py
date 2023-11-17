@@ -23,7 +23,7 @@ class OneModelConfig:
         cond3 = False not in {self._params[k] == other._params[k] for k in self._params.keys()}
         return cond1 and cond2 and cond3
 
-    def asdict(self) -> dict:
+    def as_dict(self) -> dict:
         return {
             "abbr": self._abbr,
             "params": self._params,

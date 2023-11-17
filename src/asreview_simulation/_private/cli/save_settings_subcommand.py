@@ -23,7 +23,7 @@ import click
 )
 @click.pass_obj
 def save_settings_subcommand(obj, filename, pretty):
-    d = obj.models.asdict()
+    d = obj.models.as_dict()
     if pretty:
         with filename as f:
             s = json.dumps(d, indent=4, sort_keys=True)
