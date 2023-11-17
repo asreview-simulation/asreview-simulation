@@ -3,6 +3,9 @@ from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
 class AllModelConfig:
+
+    _errmsg = "Expected an instance of OneModelConfig"
+
     def __init__(
         self,
         bal: Optional[OneModelConfig] = None,
@@ -54,7 +57,7 @@ class AllModelConfig:
 
     @bal.setter
     def bal(self, bal: OneModelConfig):
-        assert isinstance(bal, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert isinstance(bal, OneModelConfig), AllModelConfig._errmsg
         assert bal.abbr.startswith("bal"), "Expected a balancer model."
         self._bal = bal
 
@@ -64,7 +67,7 @@ class AllModelConfig:
 
     @cls.setter
     def cls(self, cls: OneModelConfig):
-        assert isinstance(cls, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert isinstance(cls, OneModelConfig), AllModelConfig._errmsg
         assert cls.abbr.startswith("cls"), "Expected a classifier model."
         self._cls = cls
 
@@ -74,7 +77,7 @@ class AllModelConfig:
 
     @fex.setter
     def fex(self, fex: OneModelConfig):
-        assert isinstance(fex, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert isinstance(fex, OneModelConfig), AllModelConfig._errmsg
         assert fex.abbr.startswith("fex"), "Expected a feature extraction model."
         self._fex = fex
 
@@ -84,7 +87,7 @@ class AllModelConfig:
 
     @qry.setter
     def qry(self, qry: OneModelConfig):
-        assert isinstance(qry, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert isinstance(qry, OneModelConfig), AllModelConfig._errmsg
         assert qry.abbr.startswith("qry"), "Expected a query model."
         self._qry = qry
 
@@ -94,7 +97,7 @@ class AllModelConfig:
 
     @sam.setter
     def sam(self, sam: OneModelConfig):
-        assert isinstance(sam, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert isinstance(sam, OneModelConfig), AllModelConfig._errmsg
         assert sam.abbr.startswith("sam"), "Expected a sampler model."
         self._sam = sam
 
@@ -104,6 +107,6 @@ class AllModelConfig:
 
     @stp.setter
     def stp(self, stp: OneModelConfig):
-        assert isinstance(stp, OneModelConfig), "Expected an instance of OneModelConfig"
+        assert isinstance(stp, OneModelConfig), AllModelConfig._errmsg
         assert stp.abbr.startswith("stp"), "Expected a stopping model."
         self._stp = stp
