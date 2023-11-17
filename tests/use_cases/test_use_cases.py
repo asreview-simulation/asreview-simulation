@@ -3,8 +3,8 @@ from tempfile import TemporaryDirectory
 import pytest
 from asreview_simulation.api import AllModelConfig
 from asreview_simulation.api import draw_sample
+from asreview_simulation.api import get_dataset_names
 from asreview_simulation.api import get_pyll
-from asreview_simulation.api import list_dataset_names
 from asreview_simulation.api import OneModelConfig
 from asreview_simulation.api import prep_project_directory
 from asreview_simulation.api import run
@@ -38,7 +38,7 @@ def test_use_case():
     models = AllModelConfig(cls=cls, qry=qry, stp=stp, **drawn)
 
     # arbitrarily pick a benchmark dataset
-    benchmark = list_dataset_names()[4]
+    benchmark = get_dataset_names()[4]
 
     # create a temporary directory and start the simulation
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
