@@ -39,14 +39,14 @@ class AllModelConfig:
             self._stp == other._stp,
         }
 
-    def as_dict(self) -> dict:
+    def as_dict(self, recurse=True) -> dict:
         return {
-            "bal": self._bal.as_dict(),
-            "cls": self._cls.as_dict(),
-            "fex": self._fex.as_dict(),
-            "qry": self._qry.as_dict(),
-            "sam": self._sam.as_dict(),
-            "stp": self._stp.as_dict(),
+            "bal": self._bal.as_dict() if recurse else self._bal,
+            "cls": self._cls.as_dict() if recurse else self._cls,
+            "fex": self._fex.as_dict() if recurse else self._fex,
+            "qry": self._qry.as_dict() if recurse else self._qry,
+            "sam": self._sam.as_dict() if recurse else self._stp,
+            "stp": self._stp.as_dict() if recurse else self._sam,
         }
 
     @property
