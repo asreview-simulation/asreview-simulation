@@ -47,10 +47,11 @@ def add_balancer_subcommands():
         bal_simple_subcommand,
         bal_undersample_subcommand,
     ]
+    group = "asreview_simulation.bal"
     try:
-        other_balancers = [e.load() for e in entrypoints(group="asreview_simulation.balancers")]
+        other_balancers = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
-        print(get_error_msg("balancers", e))
+        print(get_error_msg(group, e))
         other_balancers = []
     for b in sort_commands(my_balancers + other_balancers):
         cli.add_command(b)
@@ -66,10 +67,11 @@ def add_classifier_subcommands():
         cls_nn_2_layer_subcommand,
         cls_svm_subcommand,
     ]
+    group = "asreview_simulation.cls"
     try:
-        other_classifiers = [e.load() for e in entrypoints(group="asreview_simulation.classifiers")]
+        other_classifiers = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
-        print(get_error_msg("classifiers", e))
+        print(get_error_msg(group, e))
         other_classifiers = []
     for c in sort_commands(my_classifiers + other_classifiers):
         cli.add_command(c)
@@ -83,10 +85,11 @@ def add_extractor_subcommands():
         fex_embedding_lstm_subcommand,
         fex_sbert_subcommand,
     ]
+    group = "asreview_simulation.fex"
     try:
-        other_extractors = [e.load() for e in entrypoints(group="asreview_simulation.extractors")]
+        other_extractors = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
-        print(get_error_msg("extractors", e))
+        print(get_error_msg(group, e))
         other_extractors = []
     for e in sort_commands(my_extractors + other_extractors):
         cli.add_command(e)
@@ -101,10 +104,11 @@ def add_querier_subcommands():
         qry_random_subcommand,
         qry_uncertainty_subcommand,
     ]
+    group = "asreview_simulation.qry"
     try:
-        other_queriers = [e.load() for e in entrypoints(group="asreview_simulation.queriers")]
+        other_queriers = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
-        print(get_error_msg("queriers", e))
+        print(get_error_msg(group, e))
         other_queriers = []
     for q in sort_commands(my_queriers + other_queriers):
         cli.add_command(q)
@@ -115,7 +119,13 @@ def add_sampler_subcommands():
         sam_random_subcommand,
         sam_handpicked_subcommand,
     ]
-    for s in sort_commands(my_samplers):
+    group = "asreview_simulation.sam"
+    try:
+        other_samplers = [e.load() for e in entrypoints(group=group)]
+    except Exception as e:
+        print(get_error_msg(group, e))
+        other_samplers = []
+    for s in sort_commands(my_samplers + other_samplers):
         cli.add_command(s)
 
 
@@ -133,8 +143,14 @@ def add_stopping_subcommands():
         stp_none_subcommand,
         stp_rel_subcommand,
     ]
-    for t in sort_commands(my_stopping):
-        cli.add_command(t)
+    group = "asreview_simulation.stp"
+    try:
+        other_stopping = [e.load() for e in entrypoints(group=group)]
+    except Exception as e:
+        print(get_error_msg(group, e))
+        other_stopping = []
+    for s in sort_commands(my_stopping + other_stopping):
+        cli.add_command(s)
 
 
 def add_terminator_subcommands():
@@ -150,7 +166,7 @@ def add_terminator_subcommands():
 
 def get_error_msg(group_name, err):
     return (
-        f"Something went wrong loading a module from entrypoint group 'asreview_simulation.{group_name}'. Th"
+        f"Something went wrong loading a module from entrypoint group '{group_name}'. Th"
         + f"e error message was: {err}\nContinuing..."
     )
 
