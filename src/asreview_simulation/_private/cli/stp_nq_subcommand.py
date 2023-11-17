@@ -1,7 +1,7 @@
 import click
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.stp.stp_nq_params import get_stp_nq_params
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
+from asreview_simulation._private.lib.stp.stp_nq_params import get_stp_nq_params
 
 
 default_params = get_stp_nq_params()

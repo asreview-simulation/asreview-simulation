@@ -1,7 +1,7 @@
 import click
 from asreview_simulation._private.cli.cli_epilog import epilog
-from asreview_simulation._private.lib.sam.sam_handpicked_params import get_sam_handpicked_params
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
+from asreview_simulation._private.lib.sam.sam_handpicked_params import get_sam_handpicked_params
 
 
 default_params = get_sam_handpicked_params()
@@ -67,7 +67,7 @@ def sam_handpicked_subcommand(obj, force, records, rows):
             raise e
         params = {
             "records": ids,
-            "rows": None
+            "rows": None,
         }
         obj.models.sam = OneModelConfig(abbr=name, params=params)
         obj.provided.sam = True

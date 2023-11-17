@@ -12,7 +12,6 @@ class AllModelConfig:
         sam: Optional[OneModelConfig] = None,
         stp: Optional[OneModelConfig] = None,
     ):
-
         # initialize the private attributes:
         self._bal = None
         self._cls = None
