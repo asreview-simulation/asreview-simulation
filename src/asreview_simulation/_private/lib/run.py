@@ -1,7 +1,9 @@
+from typing import Optional
 from asreview.data import ASReviewData
 from asreview.project import ASReviewProject
 from asreview.review.simulate import ReviewSimulate
 from asreview_simulation._private.lib.all_model_config import AllModelConfig
+from asreview_simulation._private.lib.calc_ofn_score import calc_ofn_score
 from asreview_simulation._private.lib.unwrapping.get_review_simulate_kwargs import get_review_simulate_kwargs
 
 
@@ -11,7 +13,7 @@ def run(
     as_data: ASReviewData,
     write_interval: int = None,
     seed: int = None,
-) -> ASReviewProject:
+) -> Optional[float]:
     # prep
     kwargs = get_review_simulate_kwargs(models, as_data, seed)
     reviewer = ReviewSimulate(as_data, project=project, **kwargs, write_interval=write_interval)
@@ -21,4 +23,4 @@ def run(
     reviewer.review()
     project.mark_review_finished()  # (has side effects on disk)
 
-    return project
+    return calc_ofn_score(models.ofn, project.project_path)

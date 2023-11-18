@@ -1,5 +1,6 @@
 import click
 from asreview_simulation._private.cli.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_msgs import dont_reassign_sam_msg
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
 from asreview_simulation._private.lib.sam.sam_handpicked_params import get_sam_handpicked_params
 
@@ -18,7 +19,7 @@ name = "sam-handpicked"
     "-f",
     "--force",
     "force",
-    help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
+    help="Force setting the 'sam' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -38,10 +39,7 @@ name = "sam-handpicked"
 @click.pass_obj
 def sam_handpicked_subcommand(obj, force, records, rows):
     if not force:
-        assert obj.provided.sam is False, (
-            "Attempted reassignment of sampler. Use the --force flag "
-            + "if you mean to overwrite the sampler configuration from previous steps. "
-        )
+        assert obj.provided.sam is False, dont_reassign_sam_msg
 
     assert not (rows is None and records is None), "Need to define either --rows or --records."
     assert not (rows is not None and records is not None), "Need to define one of --rows or --records, not both."

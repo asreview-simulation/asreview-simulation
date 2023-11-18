@@ -16,15 +16,15 @@ name = "stp-rel"
     "-f",
     "--force",
     "force",
-    help="Force setting the stopping configuration, even if that me" + "ans overwriting a previous configuration.",
+    help="Force setting the 'stp' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.pass_obj
 def stp_rel_subcommand(obj, force):
     if not force:
         assert obj.provided.stp is False, (
-            "Attempted reassignment of stopping. Use the --force flag "
-            + "if you mean to overwrite the stopping configuration from previous steps. "
+            "Attempted reassignment of 'stp' model. Use the --force flag "
+            + "if you mean to overwrite the configuration from previous steps. "
         )
     params = {}
     obj.models.stp = OneModelConfig(abbr=name, params=params)

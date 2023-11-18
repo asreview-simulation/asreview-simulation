@@ -17,6 +17,8 @@ from asreview_simulation._private.cli.fex_embedding_idf_subcommand import fex_em
 from asreview_simulation._private.cli.fex_embedding_lstm_subcommand import fex_embedding_lstm_subcommand
 from asreview_simulation._private.cli.fex_sbert_subcommand import fex_sbert_subcommand
 from asreview_simulation._private.cli.fex_tfidf_subcommand import fex_tfidf_subcommand
+from asreview_simulation._private.cli.ofn_none_subcommand import ofn_none_subcommand
+from asreview_simulation._private.cli.ofn_wss_subcommand import ofn_wss_subcommand
 from asreview_simulation._private.cli.load_settings_subcommand import load_settings_subcommand
 from asreview_simulation._private.cli.print_benchmark_names_subcommand import print_benchmark_names_subcommand
 from asreview_simulation._private.cli.print_settings_subcommand import print_settings_subcommand
@@ -41,24 +43,24 @@ class NaturalOrderGroup(click.Group):
         return self.commands.keys()
 
 
-def add_balancer_subcommands():
-    my_balancers = [
+def add_bal_subcommands():
+    my_bals = [
         bal_double_subcommand,
         bal_simple_subcommand,
         bal_undersample_subcommand,
     ]
     group = "asreview_simulation.bal"
     try:
-        other_balancers = [e.load() for e in entrypoints(group=group)]
+        other_bals = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
         print(get_error_msg(group, e))
-        other_balancers = []
-    for b in sort_commands(my_balancers + other_balancers):
+        other_bals = []
+    for b in sort_commands(my_bals + other_bals):
         cli.add_command(b)
 
 
-def add_classifier_subcommands():
-    my_classifiers = [
+def add_cls_subcommands():
+    my_clss = [
         cls_nb_subcommand,
         cls_rf_subcommand,
         cls_logistic_subcommand,
@@ -69,16 +71,16 @@ def add_classifier_subcommands():
     ]
     group = "asreview_simulation.cls"
     try:
-        other_classifiers = [e.load() for e in entrypoints(group=group)]
+        other_clss = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
         print(get_error_msg(group, e))
-        other_classifiers = []
-    for c in sort_commands(my_classifiers + other_classifiers):
+        other_clss = []
+    for c in sort_commands(my_clss + other_clss):
         cli.add_command(c)
 
 
-def add_extractor_subcommands():
-    my_extractors = [
+def add_fex_subcommands():
+    my_fexs = [
         fex_doc2vec_subcommand,
         fex_tfidf_subcommand,
         fex_embedding_idf_subcommand,
@@ -87,16 +89,31 @@ def add_extractor_subcommands():
     ]
     group = "asreview_simulation.fex"
     try:
-        other_extractors = [e.load() for e in entrypoints(group=group)]
+        other_fexs = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
         print(get_error_msg(group, e))
-        other_extractors = []
-    for e in sort_commands(my_extractors + other_extractors):
+        other_fexs = []
+    for e in sort_commands(my_fexs + other_fexs):
         cli.add_command(e)
 
 
-def add_querier_subcommands():
-    my_queriers = [
+def add_ofn_subcommands():
+    my_ofns = [
+        ofn_none_subcommand,
+        ofn_wss_subcommand,
+    ]
+    group = "asreview_simulation.ofn"
+    try:
+        other_ofns = [e.load() for e in entrypoints(group=group)]
+    except Exception as e:
+        print(get_error_msg(group, e))
+        other_ofns = []
+    for o in sort_commands(my_ofns + other_ofns):
+        cli.add_command(o)
+
+
+def add_qry_subcommands():
+    my_qrys = [
         qry_cluster_subcommand,
         qry_max_subcommand,
         qry_max_random_subcommand,
@@ -106,26 +123,26 @@ def add_querier_subcommands():
     ]
     group = "asreview_simulation.qry"
     try:
-        other_queriers = [e.load() for e in entrypoints(group=group)]
+        other_qrys = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
         print(get_error_msg(group, e))
-        other_queriers = []
-    for q in sort_commands(my_queriers + other_queriers):
+        other_qrys = []
+    for q in sort_commands(my_qrys + other_qrys):
         cli.add_command(q)
 
 
-def add_sampler_subcommands():
-    my_samplers = [
+def add_sam_subcommands():
+    my_sams = [
         sam_random_subcommand,
         sam_handpicked_subcommand,
     ]
     group = "asreview_simulation.sam"
     try:
-        other_samplers = [e.load() for e in entrypoints(group=group)]
+        other_sams = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
         print(get_error_msg(group, e))
-        other_samplers = []
-    for s in sort_commands(my_samplers + other_samplers):
+        other_sams = []
+    for s in sort_commands(my_sams + other_sams):
         cli.add_command(s)
 
 
@@ -137,19 +154,19 @@ def add_starter_subcommands():
         cli.add_command(s)
 
 
-def add_stopping_subcommands():
-    my_stopping = [
+def add_stp_subcommands():
+    my_stps = [
         stp_nq_subcommand,
         stp_none_subcommand,
         stp_rel_subcommand,
     ]
     group = "asreview_simulation.stp"
     try:
-        other_stopping = [e.load() for e in entrypoints(group=group)]
+        other_stps = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
         print(get_error_msg(group, e))
-        other_stopping = []
-    for s in sort_commands(my_stopping + other_stopping):
+        other_stps = []
+    for s in sort_commands(my_stps + other_stps):
         cli.add_command(s)
 
 
@@ -270,9 +287,10 @@ def cli(ctx):
 
 add_terminator_subcommands()
 add_starter_subcommands()
-add_sampler_subcommands()
-add_extractor_subcommands()
-add_classifier_subcommands()
-add_querier_subcommands()
-add_balancer_subcommands()
-add_stopping_subcommands()
+add_sam_subcommands()
+add_fex_subcommands()
+add_cls_subcommands()
+add_qry_subcommands()
+add_bal_subcommands()
+add_stp_subcommands()
+add_ofn_subcommands()

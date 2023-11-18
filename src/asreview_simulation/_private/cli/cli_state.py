@@ -8,6 +8,7 @@ class Provided:
         self._bal = False
         self._cls = False
         self._fex = False
+        self._ofn = False
         self._qry = False
         self._sam = False
         self._stp = False
@@ -38,6 +39,15 @@ class Provided:
     def fex(self, fex: bool):
         assert isinstance(fex, bool), Provided._errmsg
         self._fex = fex
+
+    @property
+    def ofn(self) -> bool:
+        return self._ofn
+
+    @ofn.setter
+    def ofn(self, ofn: bool):
+        assert isinstance(ofn, bool), Provided._errmsg
+        self._ofn = ofn
 
     @property
     def qry(self) -> bool:

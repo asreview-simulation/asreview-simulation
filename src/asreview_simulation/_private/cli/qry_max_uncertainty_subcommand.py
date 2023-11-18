@@ -1,6 +1,7 @@
 import click
 from asreview.models.query import MaxUncertaintyQuery
 from asreview_simulation._private.cli.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_msgs import dont_reassign_qry_msg
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
 from asreview_simulation._private.lib.qry.qry_max_uncertainty_params import get_qry_max_uncertainty_params
 
@@ -19,7 +20,7 @@ name = f"qry-{MaxUncertaintyQuery.name}".replace("_", "-")
     "-f",
     "--force",
     "force",
-    help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
+    help="Force setting the 'qry' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -41,10 +42,7 @@ name = f"qry-{MaxUncertaintyQuery.name}".replace("_", "-")
 @click.pass_obj
 def qry_max_uncertainty_subcommand(obj, force, fraction_max, n_instances):
     if not force:
-        assert obj.provided.qry is False, (
-            "Attempted reassignment of querier. Use the --force flag "
-            + "if you mean to overwrite the querier configuration from previous steps. "
-        )
+        assert obj.provided.qry is False, dont_reassign_qry_msg
     params = {
         "fraction_max": fraction_max,
         "n_instances": n_instances,

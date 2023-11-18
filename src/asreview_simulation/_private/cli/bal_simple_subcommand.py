@@ -1,6 +1,7 @@
 import click
 from asreview.models.balance import SimpleBalance
 from asreview_simulation._private.cli.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_msgs import dont_reassign_bal_msg
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
 
@@ -17,16 +18,13 @@ name = f"bal-{SimpleBalance.name}"
     "-f",
     "--force",
     "force",
-    help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
+    help="Force setting the 'bal' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.pass_obj
 def bal_simple_subcommand(obj, force):
     if not force:
-        assert obj.provided.bal is False, (
-            "Attempted reassignment of balancer. Use the --force flag "
-            + "if you mean to overwrite the balancer configuration from previous steps. "
-        )
+        assert obj.provided.bal is False, dont_reassign_bal_msg
     params = {}
     obj.models.bal = OneModelConfig(abbr=name, params=params)
     obj.provided.bal = True

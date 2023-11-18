@@ -13,6 +13,8 @@ from asreview_simulation._private.lib.fex.fex_embedding_idf_params import get_fe
 from asreview_simulation._private.lib.fex.fex_embedding_lstm_params import get_fex_embedding_lstm_params
 from asreview_simulation._private.lib.fex.fex_sbert_params import get_fex_sbert_params
 from asreview_simulation._private.lib.fex.fex_tfidf_params import get_fex_tfidf_params
+from asreview_simulation._private.lib.ofn.ofn_none_params import get_ofn_none_params
+from asreview_simulation._private.lib.ofn.ofn_wss_params import get_ofn_wss_params
 from asreview_simulation._private.lib.qry.qry_cluster_params import get_qry_cluster_params
 from asreview_simulation._private.lib.qry.qry_max_params import get_qry_max_params
 from asreview_simulation._private.lib.qry.qry_max_random_params import get_qry_max_random_params
@@ -43,6 +45,8 @@ def get_default_params(name: str) -> dict:
         "fex-embedding-lstm": get_fex_embedding_lstm_params,
         "fex-sbert": get_fex_sbert_params,
         "fex-tfidf": get_fex_tfidf_params,
+        "ofn-none": get_ofn_none_params,
+        "ofn-wss": get_ofn_wss_params,
         "qry-cluster": get_qry_cluster_params,
         "qry-max": get_qry_max_params,
         "qry-max-random": get_qry_max_random_params,

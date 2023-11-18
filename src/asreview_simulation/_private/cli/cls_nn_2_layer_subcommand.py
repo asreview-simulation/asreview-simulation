@@ -1,6 +1,7 @@
 import click
 from asreview.models.classifiers import NN2LayerClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_msgs import dont_reassign_cls_msg
 from asreview_simulation._private.lib.cls.cls_nn_2_layer_params import get_cls_nn_2_layer_params
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
@@ -51,7 +52,7 @@ name = f"cls-{NN2LayerClassifier.name}"
     "-f",
     "--force",
     "force",
-    help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
+    help="Force setting the 'cls' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -99,10 +100,7 @@ def cls_nn_2_layer_subcommand(
     shuffle,
 ):
     if not force:
-        assert obj.provided.cls is False, (
-            "Attempted reassignment of classifier. Use the --force flag "
-            + "if you mean to overwrite the classifier configuration from previous steps. "
-        )
+        assert obj.provided.cls is False, dont_reassign_cls_msg
     params = {
         "batch_size": batch_size,
         "class_weight": class_weight,

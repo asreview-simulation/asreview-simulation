@@ -1,6 +1,7 @@
 import click
 from asreview.models.feature_extraction import Doc2Vec
 from asreview_simulation._private.cli.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_msgs import dont_reassign_fex_msg
 from asreview_simulation._private.lib.fex.fex_doc2vec_params import get_fex_doc2vec_params
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
@@ -50,7 +51,7 @@ name = f"fex-{Doc2Vec.name}"
     "-f",
     "--force",
     "force",
-    help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
+    help="Force setting the 'fex' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -106,10 +107,7 @@ def fex_doc2vec_subcommand(
     window,
 ):
     if not force:
-        assert obj.provided.fex is False, (
-            "Attempted reassignment of extractor. Use the --force flag "
-            + "if you mean to overwrite the extractor configuration from previous steps. "
-        )
+        assert obj.provided.fex is False, dont_reassign_fex_msg
     params = {
         "dbow_words": dbow_words,
         "dm": dm,

@@ -1,6 +1,7 @@
 import click
 from asreview.models.classifiers import SVMClassifier
 from asreview_simulation._private.cli.cli_epilog import epilog
+from asreview_simulation._private.cli.cli_msgs import dont_reassign_cls_msg
 from asreview_simulation._private.lib.cls.cls_svm_params import get_cls_svm_params
 from asreview_simulation._private.lib.one_model_config import OneModelConfig
 
@@ -35,7 +36,7 @@ name = f"cls-{SVMClassifier.name}"
     "-f",
     "--force",
     "force",
-    help="Force setting the querier configuration, even if that me" + "ans overwriting a previous configuration.",
+    help="Force setting the 'cls' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -57,10 +58,7 @@ name = f"cls-{SVMClassifier.name}"
 @click.pass_obj
 def cls_svm_subcommand(obj, c, class_weight, gamma, force, kernel):
     if not force:
-        assert obj.provided.cls is False, (
-            "Attempted reassignment of classifier. Use the --force flag "
-            + "if you mean to overwrite the classifier configuration from previous steps. "
-        )
+        assert obj.provided.cls is False, dont_reassign_cls_msg
     params = {
         "c": c,
         "class_weight": class_weight,
