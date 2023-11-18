@@ -16,6 +16,7 @@ def get_abbrs() -> [str]:
         "fex-sbert",
         "fex-tfidf",
         "ofn-none",
+        "ofn-wss",
         "qry-cluster",
         "qry-max",
         "qry-max-random",
