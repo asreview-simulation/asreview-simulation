@@ -251,7 +251,7 @@ the 'start' command, otherwise it may appear like nothing is happening.
 
 Please report any issues at:
 
-https://github.com/asreview-tuning/asreview-simulation/issues.
+https://github.com/asreview-simulation/asreview-simulation/issues.
 """
 
 

@@ -9,9 +9,9 @@ custom parameterizations.
 | Badge &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; | Description                                                                                                            |
 |-------|---------------------------------------------------------------------------------------------------------------------------|
 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8042547.svg)](https://doi.org/10.5281/zenodo.8042547) | Persistent identifier for archived snapshots of the software                                                           |
-| [![linting](https://github.com/asreview-tuning/asreview-simulation/actions/workflows/linting.yml/badge.svg)](https://github.com/asreview-tuning/asreview-simulation/actions/workflows/linting.yml) | Linting (`isort`,  `black`, and `ruff`, via `pre-commit`)                                                                 |
-| [![testing](https://github.com/asreview-tuning/asreview-simulation/actions/workflows/testing.yml/badge.svg)](https://github.com/asreview-tuning/asreview-simulation/actions/workflows/testing.yml) | Unit tests, mocked tests, and integration tests on combinations of operating system, ASReview version, and Python version |
-| [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-tuning_asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-tuning_asreview-simulation) | Static code analysis report |
+| [![linting](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/linting.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/linting.yml) | Linting (`isort`,  `black`, and `ruff`, via `pre-commit`)                                                                 |
+| [![testing](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/testing.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/testing.yml) | Unit tests, mocked tests, and integration tests on combinations of operating system, ASReview version, and Python version |
+| [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation_asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-simulation_asreview-simulation) | Static code analysis report |
 
 ## Install
 
@@ -23,7 +23,7 @@ python3 -m venv venv
 source venv/bin/activate
 
 # install asreview-simulation and its dependencies
-pip install git+https://github.com/asreview-tuning/asreview-simulation.git@0.2.0
+pip install git+https://github.com/asreview-simulation/asreview-simulation.git@0.2.0
 ```
 
 ## Quickstart
@@ -109,7 +109,7 @@ Options:
 
   Please report any issues at:
 
-  https://github.com/asreview-tuning/asreview-simulation/issues.
+  https://github.com/asreview-simulation/asreview-simulation/issues.
 ```
 
 Passing parameters to a subcommand goes like this:

@@ -4,7 +4,7 @@
 
 ```shell
 mkdir <a directory>
-git clone https://github.com/asreview-tuning/asreview-simulation .
+git clone https://github.com/asreview-simulation/asreview-simulation .
 python3 -m venv venv
 source venv/bin/activate
 pip install --editable .
@@ -136,7 +136,7 @@ deposition before making it final by pressing the "Publish" button on Zenodo.
 ## Publishing: GitHub
 
 Click the "Draft a new release" button on the releases page
-[https://github.com/asreview-tuning/asreview-simulation/releases](https://github.com/asreview-tuning/asreview-simulation/releases).
+[https://github.com/asreview-simulation/asreview-simulation/releases](https://github.com/asreview-simulation/asreview-simulation/releases).
 Making a release is not set up to also trigger the zenodraft workflow.
 
 ## Publishing: PyPI
