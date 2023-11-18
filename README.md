@@ -11,7 +11,7 @@ custom parameterizations.
 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8042547.svg)](https://doi.org/10.5281/zenodo.8042547) | Persistent identifier for archived snapshots of the software                                                           |
 | [![linting](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/linting.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/linting.yml) | Linting (`isort`,  `black`, and `ruff`, via `pre-commit`)                                                                 |
 | [![testing](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/testing.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/testing.yml) | Unit tests, mocked tests, and integration tests on combinations of operating system, ASReview version, and Python version |
-| [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation_asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-simulation_asreview-simulation) | Static code analysis report |
+| [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-simulation) | Static code analysis report |
 
 ## Install
 
