@@ -14,7 +14,7 @@ name = "stp-nq"
     help="Configure the simulation to stop after evaluating N_QUERIES queries, "
     + "regardless of the relevance of evaluated records.",
     name=name,
-    short_help="Number of queries based stopping rule",
+    short_help="Stop after a predefined number of queries",
 )
 @click.option(
     "-f",

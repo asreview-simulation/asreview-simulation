@@ -19,7 +19,7 @@ name = "ofn-wss"
     "--at_perc",
     "at_perc",
     default=default_params["at_perc"],
-    help="At what fraction the WSS should be calculated",
+    help="At what percentage recall the WSS should be calculated",
     type=click.INT,
 )
 @click.option(

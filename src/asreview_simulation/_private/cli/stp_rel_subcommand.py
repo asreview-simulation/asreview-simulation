@@ -10,7 +10,7 @@ name = "stp-rel"
     epilog=epilog,
     help="Configure the simulation to stop once all relevant records have been found.",
     name=name,
-    short_help="Stop when relevant records are found",
+    short_help="Stop once all the relevant records have been found",
 )
 @click.option(
     "-f",
