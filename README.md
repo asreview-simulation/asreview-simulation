@@ -1,17 +1,17 @@
 # asreview-simulation
 
 Command line interface to simulate an [ASReview](https://pypi.org/project/asreview) analysis using a variety
-of classifiers, feature extractors, queriers, and balancers, which can all be configured to run with
-custom parameterizations.
+of prior sampling strategies, classifiers, feature extractors, queriers, balancers, and stopping rules, all of which can
+be configured to run with custom parameterizations.
 
 ## Status
 
-| Badge &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; | Description                                                                                                            |
-|-------|---------------------------------------------------------------------------------------------------------------------------|
-| [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8042547.svg)](https://doi.org/10.5281/zenodo.8042547) | Persistent identifier for archived snapshots of the software                                                           |
+| Badge &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                                                                                                                                         | Description                                                                                                               |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8042547.svg)](https://doi.org/10.5281/zenodo.8042547)                                                                                                  | Persistent identifier for archived snapshots of the software                                                              |
 | [![linting](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/linting.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/linting.yml) | Linting (`isort`,  `black`, and `ruff`, via `pre-commit`)                                                                 |
 | [![testing](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/testing.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/testing.yml) | Unit tests, mocked tests, and integration tests on combinations of operating system, ASReview version, and Python version |
-| [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-simulation) | Static code analysis report |
+| [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-simulation)                            | Static code analysis report                                                                                               |
 
 ## Install
 
@@ -26,7 +26,7 @@ source venv/bin/activate
 pip install git+https://github.com/asreview-simulation/asreview-simulation.git@0.2.0
 ```
 
-## Quickstart
+## Command line interface (CLI)
 
 Print the help:
 
@@ -128,7 +128,7 @@ asreview simulation \
     sam-random --n_included 10 --n_excluded 15            \
     fex-tfidf --ngram_max 2                               \
     cls-nb --alpha 3.823                                  \
-    qry-max-random --mix_ratio 0.95 --n_instances 10      \
+    qry-max-random --fraction_max 0.90 --n_instances 10   \
     bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \
     stp-nq --n_queries 20                                 \
     start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
@@ -169,6 +169,46 @@ bal-double             Double balancer
 bal-simple             No balancer
 bal-undersample        Undersample balancer
 stp-none               No stopping rule
-stp-nq                 Number of queries based stopping rule
-stp-rel                Stop when relevant records are found
+stp-nq                 Stop after a predefined number of queries
+stp-rel                Stop once all the relevant records have been found
+ofn-none               No objective function
+ofn-wss                WSS objective function
 ```
+
+## Application Programming Interface (API)
+
+For a full overview of the API, see `tests/api/test_api.py`. Here is an example:
+
+```python
+import os
+import tempfile
+from asreviewcontrib.simulation.api import AllModelConfig
+from asreviewcontrib.simulation.api import OneModelConfig
+from asreviewcontrib.simulation.api import prep_project_directory
+from asreviewcontrib.simulation.api import run
+
+
+# make a classifier model config using default parameter values given the model name
+cls = OneModelConfig("cls-svm")
+
+# make a query model config using positional arguments, and a partial params dict
+qry = OneModelConfig("qry-max-random", {"fraction_max": 0.90})
+
+# make a stopping model config using keyword arguments
+stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
+
+# construct an all model config from one model configs -- implicitly use default model choice
+# and parameterization for models not included as argument (i.e. sam, fex, bal, ofn)
+models = AllModelConfig(cls=cls, qry=qry, stp=stp)
+
+# arbitrarily pick a benchmark dataset
+benchmark = "benchmark:Cohen_2006_ADHD"
+
+# create a temporary directory and start the simulation
+tmpdir = tempfile.mkdtemp(prefix="asreview-simulation.", dir=".")
+output_file = f"{tmpdir}{os.sep}project.asreview"
+project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
+run(models, project, as_data)
+```
+
+For more examples, refer to `tests/use_cases/test_use_cases.py`.
