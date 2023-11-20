@@ -1,7 +1,7 @@
 import pytest
-from asreview_simulation._private.lib.get_default_params import get_default_params
-from asreview_simulation.api import get_abbrs
-from asreview_simulation.api import OneModelConfig
+from asreviewcontrib.simulation._private.lib.get_default_params import get_default_params
+from asreviewcontrib.simulation.api import get_abbrs
+from asreviewcontrib.simulation.api import OneModelConfig
 
 
 @pytest.mark.parametrize("abbr", get_abbrs())

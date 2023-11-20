@@ -1,13 +1,13 @@
 import os
 from tempfile import TemporaryDirectory
 import pytest
-from asreview_simulation.api import AllModelConfig
-from asreview_simulation.api import draw_sample
-from asreview_simulation.api import get_dataset_names
-from asreview_simulation.api import get_pyll
-from asreview_simulation.api import OneModelConfig
-from asreview_simulation.api import prep_project_directory
-from asreview_simulation.api import run
+from asreviewcontrib.simulation.api import AllModelConfig
+from asreviewcontrib.simulation.api import draw_sample
+from asreviewcontrib.simulation.api import get_dataset_names
+from asreviewcontrib.simulation.api import get_pyll
+from asreviewcontrib.simulation.api import OneModelConfig
+from asreviewcontrib.simulation.api import prep_project_directory
+from asreviewcontrib.simulation.api import run
 
 
 @pytest.mark.sam_random

@@ -4,7 +4,7 @@ import pytest
 from asreview import get_data_home
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
-from asreview_simulation._private.cli.cli import cli
+from asreviewcontrib.simulation._private.cli.cli import cli
 from tests.helpers.compare_data_csv import compare_data_csv
 from tests.helpers.compare_project_json import compare_project_json
 from tests.helpers.compare_results_sql import compare_results_sql

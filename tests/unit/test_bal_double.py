@@ -1,7 +1,7 @@
 import json
 import pytest
 from click.testing import CliRunner
-from asreview_simulation._private.cli.cli import cli
+from asreviewcontrib.simulation._private.cli.cli import cli
 
 
 @pytest.mark.sam_random

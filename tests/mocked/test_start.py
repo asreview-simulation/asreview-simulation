@@ -6,8 +6,8 @@ import pytest
 from asreview import get_data_home
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
-import asreview_simulation
-from asreview_simulation._private.cli.cli import cli
+import asreviewcontrib
+from asreviewcontrib.simulation._private.cli.cli import cli
 from tests.helpers.compare_arguments_mock import compare_arguments_mock
 from tests.helpers.get_model_combinatorics import get_model_combinatorics
 from tests.helpers.get_xfails_mocked import get_xfails_mocked
@@ -43,7 +43,7 @@ def test_minimal_args():
         ]
         with unittest.mock.patch(mocked2, autospec=True, return_value=None):
             runner.invoke(cli, args)
-            return asreview_simulation._private.lib.run.ReviewSimulate.call_args
+            return asreviewcontrib.simulation._private.lib.run.ReviewSimulate.call_args
 
     benchmark = "benchmark:van_de_Schoot_2017"
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
@@ -51,7 +51,7 @@ def test_minimal_args():
         p1 = Path(tmpdir) / "simulate.asreview"
         p2 = Path(tmpdir) / "simulation.asreview"
         mocked1 = "asreview.entry_points.simulate.ReviewSimulate"
-        mocked2 = "asreview_simulation._private.lib.run.ReviewSimulate"
+        mocked2 = "asreviewcontrib.simulation._private.lib.run.ReviewSimulate"
 
         # run
         args1, kwargs1 = run_asreview_simulate_cli()
@@ -156,7 +156,7 @@ def test_with_model_combinations(parameterization):
         runner = CliRunner()
         with unittest.mock.patch(mocked2, autospec=True, return_value=None):
             runner.invoke(cli, args)
-            return asreview_simulation._private.lib.run.ReviewSimulate.call_args
+            return asreviewcontrib.simulation._private.lib.run.ReviewSimulate.call_args
 
     xfail, reason = get_xfails_mocked(parameterization)
     if xfail:
@@ -170,7 +170,7 @@ def test_with_model_combinations(parameterization):
         p1 = Path(tmpdir) / "simulate.asreview"
         p2 = Path(tmpdir) / "simulation.asreview"
         mocked1 = "asreview.entry_points.simulate.ReviewSimulate"
-        mocked2 = "asreview_simulation._private.lib.run.ReviewSimulate"
+        mocked2 = "asreviewcontrib.simulation._private.lib.run.ReviewSimulate"
 
         # run
         args1, kwargs1 = run_asreview_simulate_cli()
