@@ -67,7 +67,7 @@ def test_use_case_some_models_nondefault():
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
 @pytest.mark.ofn_wss
-def test_use_case_some_model_nondefault_some_models_drawn():
+def test_use_case_some_models_nondefault_some_models_drawn():
     # make classifier model config using default parameter values given the model name
     cls = OneModelConfig("cls-svm")
 
