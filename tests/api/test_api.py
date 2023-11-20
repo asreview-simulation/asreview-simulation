@@ -1,10 +1,9 @@
 import pytest
-import asreviewcontrib
+import asreviewcontrib.simulation
 
 
 def get_modules():
     return [
-        asreviewcontrib,
         asreviewcontrib.simulation,
         asreviewcontrib.simulation.api,
         asreviewcontrib.simulation.api.unwrapping,
@@ -16,9 +15,6 @@ def get_names(module):
 
 
 expected = {
-    "asreviewcontrib": {
-        "simulation",
-    },
     "asreviewcontrib.simulation": {
         "_private",
         "api",
