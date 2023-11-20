@@ -78,4 +78,6 @@ markers = [
     "stp_none: tests pertaining to no stopping rule",
     "stp_nq: tests pertaining to stopping rule based on number of queries",
     "stp_rel: tests pertaining to stopping rule based on number of relevant records found",
+    "ofn_none: tests pertaining to no objective function",
+    "ofn_wss: tests pertaining to wss objective function",
 ]
