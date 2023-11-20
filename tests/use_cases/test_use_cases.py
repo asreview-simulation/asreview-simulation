@@ -72,10 +72,13 @@ def test_use_case_some_model_nondefault_some_models_drawn():
     cls = OneModelConfig("cls-svm")
 
     # make query model config using positional arguments
-    qry = OneModelConfig("qry-max-random", {
-        "n_instances": 10,
-        "fraction_max": 0.90,
-    })
+    qry = OneModelConfig(
+        "qry-max-random",
+        {
+            "n_instances": 10,
+            "fraction_max": 0.90,
+        },
+    )
 
     # make stopping model config using keyword arguments
     stp = OneModelConfig(abbr="stp-rel")
