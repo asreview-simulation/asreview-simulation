@@ -1,4 +1,4 @@
 def get_ofn_wss_params():
     return {
-        "at_perc": 95
+        "at_perc": 95,
     }

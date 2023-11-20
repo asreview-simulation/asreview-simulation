@@ -6,4 +6,6 @@ def calc_ofn_score(ofn, project_path):
     return {
         "ofn-none": ofn_none_fun,
         "ofn-wss": ofn_wss_fun,
-    }[ofn.abbr](project_path, **ofn.params)
+    }[
+        ofn.abbr
+    ](project_path, **ofn.params)

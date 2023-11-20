@@ -10,13 +10,17 @@ from asreviewcontrib.simulation._private.lib.cls.cls_rf_unwrap import instantiat
 from asreviewcontrib.simulation._private.lib.cls.cls_svm_unwrap import instantiate_unwrapped_cls_svm
 from asreviewcontrib.simulation._private.lib.fex.fex_doc2vec_unwrap import instantiate_unwrapped_fex_doc2vec
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_unwrap import instantiate_unwrapped_fex_embedding_idf
-from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_unwrap import instantiate_unwrapped_fex_embedding_lstm
+from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_unwrap import (
+    instantiate_unwrapped_fex_embedding_lstm,
+)
 from asreviewcontrib.simulation._private.lib.fex.fex_sbert_unwrap import instantiate_unwrapped_fex_sbert
 from asreviewcontrib.simulation._private.lib.fex.fex_tfidf_unwrap import instantiate_unwrapped_fex_tfidf
 from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.qry.qry_cluster_unwrap import instantiate_unwrapped_qry_cluster
 from asreviewcontrib.simulation._private.lib.qry.qry_max_random_unwrap import instantiate_unwrapped_qry_max_random
-from asreviewcontrib.simulation._private.lib.qry.qry_max_uncertainty_unwrap import instantiate_unwrapped_qry_max_uncertainty
+from asreviewcontrib.simulation._private.lib.qry.qry_max_uncertainty_unwrap import (
+    instantiate_unwrapped_qry_max_uncertainty,
+)
 from asreviewcontrib.simulation._private.lib.qry.qry_max_unwrap import instantiate_unwrapped_qry_max
 from asreviewcontrib.simulation._private.lib.qry.qry_random_unwrap import instantiate_unwrapped_qry_random
 from asreviewcontrib.simulation._private.lib.qry.qry_uncertainty_unwrap import instantiate_unwrapped_qry_uncertainty
