@@ -17,6 +17,7 @@ from tests.helpers.unzip_simulate_results import unzip_simulate_results
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_nq
+@pytest.mark.ofn_none
 def test_with_init_seed():
     def run_asreview_simulate_cli():
         args = [
