@@ -27,8 +27,7 @@ name = f"fex-{Tfidf.name}"
     "--ngram_max",
     "ngram_max",
     default=default_params["ngram_max"],
-    help="Use n-grams up to ngram_max. For example in the case of ngram_max=2, "
-    + "monograms and bigrams could be used.",
+    help="Use n-grams up to ngram_max. For example in the case of ngram_max=2, monograms and bigrams could be used.",
     show_default=True,
     type=click.INT,
 )

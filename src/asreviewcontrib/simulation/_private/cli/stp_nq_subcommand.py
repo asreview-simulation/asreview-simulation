@@ -11,8 +11,7 @@ name = "stp-nq"
 
 @click.command(
     epilog=epilog,
-    help="Configure the simulation to stop after evaluating N_QUERIES queries, "
-    + "regardless of the relevance of evaluated records.",
+    help="Configure the simulation to stop after evaluating N_QUERIES queries, regardless of the relevance of evaluated records.",
     name=name,
     short_help="Stop after a predefined number of queries",
 )

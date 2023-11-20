@@ -9,8 +9,7 @@ name = "stp-none"
 
 @click.command(
     epilog=epilog,
-    help="Configure the simulation to stop after evaluating all records, "
-    + "regardless of the relevance of evaluated records.",
+    help="Configure the simulation to stop after evaluating all records, regardless of the relevance of evaluated records.",
     name=name,
     short_help="No stopping rule",
 )
