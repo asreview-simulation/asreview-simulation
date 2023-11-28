@@ -11,7 +11,8 @@ dependencies = [
     "click ~= 8.0",
     "asreview >= 1.0.0, < 1.3",
     "hyperopt >= 0.2.7, < 0.3",
-    "asreview-insights >= 1.0.0, <2.0"
+    "asreview-insights >= 1.0.0, <2.0",
+    "matplotlib >= 3.3.0, <4.0",
 ]
 description = "Simulate a manual ASReview analysis"
 
