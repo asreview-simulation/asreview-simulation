@@ -29,6 +29,14 @@ class OneModelConfig:
             "params": self._params,
         }
 
+    def flattened(self):
+        d = {}
+        for param in self.params.keys():
+            k = "/".join([self.abbr, param])
+            v = self.params[param]
+            d.update({k: v})
+        return d
+
     @property
     def abbr(self):
         return self._abbr

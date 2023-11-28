@@ -55,6 +55,17 @@ class AllModelConfig:
             "stp": self._stp.as_dict() if recurse else self._sam,
         }
 
+    def flattened(self) -> dict:
+        d = {}
+        d.update(self.bal.flattened())
+        d.update(self.cls.flattened())
+        d.update(self.fex.flattened())
+        d.update(self.ofn.flattened())
+        d.update(self.qry.flattened())
+        d.update(self.sam.flattened())
+        d.update(self.stp.flattened())
+        return d
+
     @property
     def bal(self) -> OneModelConfig:
         return self._bal
