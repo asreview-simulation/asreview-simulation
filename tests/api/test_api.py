@@ -6,6 +6,7 @@ def get_modules():
     return [
         asreviewcontrib.simulation,
         asreviewcontrib.simulation.api,
+        asreviewcontrib.simulation.api.plotting,
         asreviewcontrib.simulation.api.unwrapping,
     ]
 
@@ -26,9 +27,14 @@ expected = {
         "get_dataset_names",
         "get_pyll",
         "OneModelConfig",
+        "plotting",
         "prep_project_directory",
         "run",
         "unwrapping",
+    },
+    "asreviewcontrib.simulation.api.plotting": {
+        "Padding",
+        "plot_trellis",
     },
     "asreviewcontrib.simulation.api.unwrapping": {
         "get_review_simulate_kwargs",
