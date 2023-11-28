@@ -1,13 +1,14 @@
 import os
-from pprint import pprint
 from tempfile import TemporaryDirectory
 import pytest
+from matplotlib import pyplot as plt
 from asreviewcontrib.simulation.api import AllModelConfig
 from asreviewcontrib.simulation.api import draw_sample
 from asreviewcontrib.simulation.api import get_pyll
 from asreviewcontrib.simulation.api import OneModelConfig
 from asreviewcontrib.simulation.api import prep_project_directory
 from asreviewcontrib.simulation.api import run
+from asreviewcontrib.simulation.api.plotting import plot_trellis
 
 
 # arbitrary choice of benchmark
@@ -122,9 +123,10 @@ def test_use_case_some_models_drawn_100_samples():
         "fex": get_pyll("fex-tfidf"),
     }
 
-    eval_results = []
-    nsamples = 100
-    for _ in range(nsamples):
+    n_samples = 10
+    results = []
+
+    for _ in range(n_samples):
         # use pyll programs to draw a parameterization for 'bal' and 'fex'
         drawn = draw_sample(pyll)
 
@@ -139,6 +141,48 @@ def test_use_case_some_models_drawn_100_samples():
             wss = run(models, project, as_data)
             assert wss is not None
 
-        eval_results.append((models.as_dict(), wss))
-    eval_results.sort(key=lambda eval_result: eval_result[1])
-    pprint(eval_results)
+        results.append((models, wss))
+
+
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.cls_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_rel
+@pytest.mark.ofn_wss
+def test_trellis():
+    # use wss @ 90% recall as objective function
+    fixed = {
+        "ofn": OneModelConfig(abbr="ofn-wss", params={"at_pct": 90}),
+    }
+
+    pyll = {
+        "bal": get_pyll("bal-double"),
+        "fex": get_pyll("fex-tfidf"),
+    }
+
+    n_samples = 100
+    results = []
+
+    for _ in range(n_samples):
+        # use pyll programs to draw a parameterization for 'bal' and 'fex'
+        drawn = draw_sample(pyll)
+
+        # construct an all model config from one model configs -- implicitly use default model choice
+        # and parameterization for models not included as argument
+        models = AllModelConfig(**fixed, **drawn)
+        results.append((models, -1))
+
+    plt.figure()
+    plot_trellis(results, [
+        "bal-double/a",
+        "bal-double/alpha",
+        "bal-double/b",
+        "bal-double/beta",
+        "fex-tfidf/ngram_max",
+        "fex-tfidf/split_ta",
+        "fex-tfidf/stop_words",
+        "fex-tfidf/use_keywords",
+    ], scatter_kwargs={"marker": "+", "c": "k"})
+    plt.show()
