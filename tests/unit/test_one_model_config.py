@@ -74,3 +74,14 @@ def test_raising_construct_one_model_config_from_positional_args_wrong_type():
     # type should raise an AsssertionError
     with pytest.raises(AssertionError):
         OneModelConfig("bal-double", 12345)
+
+
+def test_flattened():
+    model = OneModelConfig("fex-tfidf")
+    flattened = model.flattened()
+    assert isinstance(flattened, dict)
+    assert len(flattened) == 4
+    assert "fex-tfidf/ngram_max" in flattened.keys()
+    assert "fex-tfidf/split_ta" in flattened.keys()
+    assert "fex-tfidf/stop_words" in flattened.keys()
+    assert "fex-tfidf/use_keywords" in flattened.keys()
