@@ -1,17 +1,77 @@
+from functools import cache
 from typing import List
 from typing import Tuple
 from typing import Dict
 from typing import Optional
 from typing import Any
+import numpy as np
 from matplotlib import pyplot as plt
+from scipy.interpolate import griddata
 from asreviewcontrib.simulation._private.lib.all_model_config import AllModelConfig
 from asreviewcontrib.simulation._private.lib.plotting.padding import Padding
+
+
+class _DataDict:
+    def __init__(self, values: Dict[str, List[Any]]):
+        self._values = values
+
+    def get_keys(self) -> List[str]:
+        return sorted(self.values.keys())
+
+    @property
+    @cache
+    def types(self) -> Dict[str, type]:
+        d = {}
+        for param in self._values.keys():
+            d.update({param: type(self._values[param][0])})
+        return d
+
+    @property
+    def values(self):
+        return self._values
+
+
+class TrellisHandles:
+    def __init__(
+        self,
+        axes_handles: List[List[Optional[plt.Axes]]],
+        show_params: List[str]
+     ):
+        self._axes = axes_handles
+        self._show_params = show_params
+
+    def get_axes_by_row_name(self, row_name=None) -> List[plt.Axes]:
+        assert row_name is not None, "Need a name to identify the row of subaxes"
+        assert row_name in self.show_params, f"{row_name} is not a valid name"
+        irow = self.show_params.index(row_name)
+        return [col for col in self.axes[irow] if col is not None]
+
+    def get_axes_by_col_name(self, col_name=None) -> List[plt.Axes]:
+        assert col_name is not None, "Need a name to identify the column of subaxes"
+        assert col_name in self.show_params, f"{col_name} is not a valid name"
+        icol = self.show_params.index(col_name)
+        return [row[icol] for row in self.axes if row[icol] is not None]
+
+    def get_axes_by_names(self, row_name=None, col_name=None) -> plt.Axes:
+        r = self.get_axes_by_row_name(row_name)
+        c = self.get_axes_by_col_name(col_name)
+        intersection = set(r) and set(c)
+        assert len(intersection) != 0, "No axes at that position."
+        return list(intersection)[0]
+
+    @property
+    def axes(self):
+        return self._axes
+
+    @property
+    def show_params(self):
+        return self._show_params
 
 
 def _calc_data_dict(
     data: List[Tuple[AllModelConfig, float]],
     param_names: List[str]
-) -> Tuple[Dict[str, List[Any]], List[float]]:
+) -> Tuple[_DataDict, List[float]]:
     """Manipulate the data such that it becomes easy to access all values pertaining to
     a given parameter, as opposed to all values pertaining to a given sample."""
 
@@ -19,7 +79,7 @@ def _calc_data_dict(
     d = {}
     for param_name in param_names:
         d.update({param_name: [flat[param_name] for flat, _ in flatteneds]})
-    return d, [score for _, score in flatteneds]
+    return _DataDict(d), [score for _, score in flatteneds]
 
 
 def _calc_rect(
@@ -46,36 +106,61 @@ def _calc_rect(
 
 
 def _plot_response_surface(handles: List[List[Optional[plt.Axes]]],
-                           data_dict: Dict[str, List[Optional[Any]]],
-                           scores: List[Any]):
+                           data_dict: _DataDict,
+                           scores: List[float]):
     """Visualize the data as a rasterized image by interpolating from available
     points sampled in a given axes."""
-    raise NotImplementedError
+    show_params = data_dict.get_keys()
+    nbins = 100
+    for irow, row_name in enumerate(show_params):
+        for icol, col_name in enumerate(show_params):
+            if icol > irow:
+                ax = handles[irow][icol]
+                plt.axes(ax)
+                if not data_dict.types[row_name] in [int, bool, float]:
+                    continue
+                if not data_dict.types[col_name] in [int, bool, float]:
+                    continue
+                xv = [float(elem) for elem in data_dict.values[col_name]]
+                yv = [float(elem) for elem in data_dict.values[row_name]]
+                # manipulate xv, yv and scores to fit the function signature of griddata
+                points = np.array([[xi, yi] for xi, yi in zip(xv, yv)])
+                values = np.array(scores)
+                xv_target = np.linspace(*ax.get_xlim(), nbins)
+                yv_target = np.linspace(*ax.get_ylim(), nbins)
+                estimation_points = [[[xi, yi] for xi in xv_target] for yi in yv_target]
+                estimated_scores = griddata(points, values, estimation_points, method="linear")
+                ax.imshow(estimated_scores, aspect="auto", extent=(*ax.get_xlim(), *ax.get_ylim()), origin="lower")
 
 
 def _plot_scatter(
     handles: List[List[Optional[plt.Axes]]],
-    data_dict: Dict[str, List[Optional[Any]]],
-    show_params: List[str],
-    scatter_kwargs
+    data_dict: _DataDict,
+    scatter_kwargs=None
 ) -> None:
     """Visualize the data as scatter plots in the axes that should
     have been prepared previously."""
 
+    scatter_kwargs = scatter_kwargs or {
+        "marker": "+",
+        "c": "k",
+    }
+    show_params = data_dict.get_keys()
     for irow, row_name in enumerate(show_params):
         for icol, col_name in enumerate(show_params):
             if icol > irow:
                 plt.axes(handles[irow][icol])
-                plt.scatter(data_dict[col_name], data_dict[row_name], **scatter_kwargs)
+                plt.scatter(data_dict.values[col_name], data_dict.values[row_name], **scatter_kwargs)
 
 
 def _prep_axes(
-    show_params: List[str],
+    data_dict: _DataDict,
     inner: Padding,
     outer: Padding
 ) -> List[List[Optional[plt.Axes]]]:
     """Prepare a grid of axes in preparation of any plotting that happens later on."""
 
+    show_params = data_dict.get_keys()
     n = len(show_params)
     handles = [[None] * n for _ in range(n)]
     for irow, _ in enumerate(show_params):
@@ -106,16 +191,16 @@ def plot_trellis(
     show_params: List[str] = None,
     outer_padding: Padding = None,
     inner_padding: Padding = None,
-    show_scatter=True,
     scatter_kwargs: dict = None,
     show_response_surface=True
-) -> List[List[Optional[plt.Axes]]]:
+) -> TrellisHandles:
     """Visualize each combination of 2 parameters out of a user-provided list of parameters."""
 
-    # verify that all the data rows are samples in the same parameter space
+    assert len(data) >= 1, "Need at least one sample"
     expected_params = data[0][0].flattened().keys()
     for irow, row in enumerate(data):
         actual_params = row[0].flattened().keys()
+        # verify that all the data rows are samples in the same parameter space
         assert set(actual_params) == set(expected_params), f"Data row {irow} has unexpected key set"
 
     # verify that the parameters selected for plotting are in fact all present
@@ -130,13 +215,12 @@ def plot_trellis(
     scatter_kwargs = scatter_kwargs or {}
 
     # prepare the grid of axes
-    axes_handles = _prep_axes(show_params, inner=inner, outer=outer)
+    axes_handles = _prep_axes(data_dict, inner=inner, outer=outer)
 
     # visualize the data
-    if show_scatter:
-        _plot_scatter(axes_handles, data_dict, show_params, scatter_kwargs)
+    _plot_scatter(axes_handles, data_dict, scatter_kwargs)
 
     if show_response_surface:
         _plot_response_surface(axes_handles, data_dict, scores)
 
-    return axes_handles
+    return TrellisHandles(axes_handles, show_params)
