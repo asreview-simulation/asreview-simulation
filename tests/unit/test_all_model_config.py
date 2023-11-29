@@ -18,6 +18,6 @@ def test_flattened():
         "qry-max/n_instances": 1,
         "sam-random/init_seed": None,
         "sam-random/n_excluded": 1,
-        "sam-random/n_included": 1
+        "sam-random/n_included": 1,
     }
     assert actual == expected

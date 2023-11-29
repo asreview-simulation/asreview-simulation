@@ -145,16 +145,19 @@ def test_use_case_some_models_drawn_100_samples():
         results.append((models, wss))
 
     plt.figure()
-    plot_trellis(results, [
-        "bal-double/a",
-        "bal-double/alpha",
-        "bal-double/b",
-        "bal-double/beta",
-        "fex-tfidf/ngram_max",
-        "fex-tfidf/split_ta",
-        "fex-tfidf/stop_words",
-        "fex-tfidf/use_keywords",
-    ])
+    plot_trellis(
+        results,
+        [
+            "bal-double/a",
+            "bal-double/alpha",
+            "bal-double/b",
+            "bal-double/beta",
+            "fex-tfidf/ngram_max",
+            "fex-tfidf/split_ta",
+            "fex-tfidf/stop_words",
+            "fex-tfidf/use_keywords",
+        ],
+    )
     plt.show()
 
 
@@ -189,15 +192,17 @@ def test_trellis():
         results.append((models, random()))
 
     plt.figure()
-    handles = plot_trellis(results, [
-        "bal-double/a",
-        "bal-double/alpha",
-        "bal-double/b",
-        "bal-double/beta",
-        "fex-tfidf/ngram_max",
-        "fex-tfidf/split_ta",
-        "fex-tfidf/stop_words",
-        "fex-tfidf/use_keywords",
-    ])
+    plot_trellis(
+        results,
+        [
+            "bal-double/a",
+            "bal-double/alpha",
+            "bal-double/b",
+            "bal-double/beta",
+            "fex-tfidf/ngram_max",
+            "fex-tfidf/split_ta",
+            "fex-tfidf/stop_words",
+            "fex-tfidf/use_keywords",
+        ],
+    )
     plt.show()
-    print()

@@ -1,9 +1,9 @@
 from functools import cache
-from typing import List
-from typing import Tuple
-from typing import Dict
-from typing import Optional
 from typing import Any
+from typing import Dict
+from typing import List
+from typing import Optional
+from typing import Tuple
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.interpolate import griddata
@@ -35,24 +35,24 @@ class TrellisHandles:
     def __init__(
         self,
         axes_handles: List[List[Optional[plt.Axes]]],
-        show_params: List[str]
-     ):
+        show_params: List[str],
+    ):
         self._axes = axes_handles
         self._show_params = show_params
 
-    def get_axes_by_row_name(self, row_name=None) -> List[plt.Axes]:
+    def get_axes_by_row_name(self, row_name: str = None) -> List[plt.Axes]:
         assert row_name is not None, "Need a name to identify the row of subaxes"
         assert row_name in self.show_params, f"{row_name} is not a valid name"
         irow = self.show_params.index(row_name)
         return [col for col in self.axes[irow] if col is not None]
 
-    def get_axes_by_col_name(self, col_name=None) -> List[plt.Axes]:
+    def get_axes_by_col_name(self, col_name: str = None) -> List[plt.Axes]:
         assert col_name is not None, "Need a name to identify the column of subaxes"
         assert col_name in self.show_params, f"{col_name} is not a valid name"
         icol = self.show_params.index(col_name)
         return [row[icol] for row in self.axes if row[icol] is not None]
 
-    def get_axes_by_names(self, row_name=None, col_name=None) -> plt.Axes:
+    def get_axes_by_names(self, row_name: str = None, col_name: str = None) -> plt.Axes:
         r = self.get_axes_by_row_name(row_name)
         c = self.get_axes_by_col_name(col_name)
         intersection = set(r) and set(c)
@@ -70,7 +70,7 @@ class TrellisHandles:
 
 def _calc_data_dict(
     data: List[Tuple[AllModelConfig, float]],
-    param_names: List[str]
+    param_names: List[str],
 ) -> Tuple[_DataDict, List[float]]:
     """Manipulate the data such that it becomes easy to access all values pertaining to
     a given parameter, as opposed to all values pertaining to a given sample."""
@@ -87,7 +87,7 @@ def _calc_rect(
     outer_padding: Padding = None,
     icol: int = None,
     irow: int = None,
-    n: int = None
+    n: int = None,
 ) -> Tuple[float, float, float, float]:
     """Given some information about padding, calculate the coordinates that a given
     axes would occupy given its row index, column index, and the number of axes on
@@ -101,13 +101,15 @@ def _calc_rect(
         outer_padding.left + (icol - 1) * cell_width + inner_padding.left * cell_width,
         outer_padding.bottom + irow * cell_height + inner_padding.bottom * cell_height,
         (1.0 - inner_padding.left - inner_padding.right) * cell_width,
-        (1.0 - inner_padding.top - inner_padding.bottom) * cell_height
+        (1.0 - inner_padding.top - inner_padding.bottom) * cell_height,
     )
 
 
-def _plot_response_surface(handles: List[List[Optional[plt.Axes]]],
-                           data_dict: _DataDict,
-                           scores: List[float]):
+def _plot_response_surface(
+    handles: List[List[Optional[plt.Axes]]],
+    data_dict: _DataDict,
+    scores: List[float],
+):
     """Visualize the data as a rasterized image by interpolating from available
     points sampled in a given axes."""
     show_params = data_dict.get_keys()
@@ -117,9 +119,9 @@ def _plot_response_surface(handles: List[List[Optional[plt.Axes]]],
             if icol > irow:
                 ax = handles[irow][icol]
                 plt.axes(ax)
-                if not data_dict.types[row_name] in [int, bool, float]:
+                if data_dict.types[row_name] not in [int, bool, float]:
                     continue
-                if not data_dict.types[col_name] in [int, bool, float]:
+                if data_dict.types[col_name] not in [int, bool, float]:
                     continue
                 xv = [float(elem) for elem in data_dict.values[col_name]]
                 yv = [float(elem) for elem in data_dict.values[row_name]]
@@ -136,7 +138,7 @@ def _plot_response_surface(handles: List[List[Optional[plt.Axes]]],
 def _plot_scatter(
     handles: List[List[Optional[plt.Axes]]],
     data_dict: _DataDict,
-    scatter_kwargs=None
+    scatter_kwargs=None,
 ) -> None:
     """Visualize the data as scatter plots in the axes that should
     have been prepared previously."""
@@ -156,7 +158,7 @@ def _plot_scatter(
 def _prep_axes(
     data_dict: _DataDict,
     inner: Padding,
-    outer: Padding
+    outer: Padding,
 ) -> List[List[Optional[plt.Axes]]]:
     """Prepare a grid of axes in preparation of any plotting that happens later on."""
 
@@ -192,7 +194,7 @@ def plot_trellis(
     outer_padding: Padding = None,
     inner_padding: Padding = None,
     scatter_kwargs: dict = None,
-    show_response_surface=True
+    show_response_surface=True,
 ) -> TrellisHandles:
     """Visualize each combination of 2 parameters out of a user-provided list of parameters."""
 
