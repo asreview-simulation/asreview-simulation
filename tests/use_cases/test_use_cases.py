@@ -1,4 +1,5 @@
 import os
+from random import random
 from tempfile import TemporaryDirectory
 import pytest
 from matplotlib import pyplot as plt
@@ -51,7 +52,7 @@ def test_use_case_some_models_nondefault():
     # make stopping model config using keyword arguments
     stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
 
-    # construct an all model config from one model configs -- implicitly use default model choice
+    # construct an all-model config from one-model configs -- implicitly use default model choice
     # and parameterization for models not included as argument (i.e. sam, fex, bal, ofn)
     models = AllModelConfig(cls=cls, qry=qry, stp=stp)
 
@@ -95,7 +96,7 @@ def test_use_case_some_models_nondefault_some_models_drawn():
     }
     drawn = draw_sample(pyll)
 
-    # construct an all model config from one model configs -- implicitly use default model choice
+    # construct an all-model config from one-model configs -- implicitly use default model choice
     # and parameterization for models not included as argument (i.e. sam)
     models = AllModelConfig(cls=cls, qry=qry, stp=stp, ofn=ofn, **drawn)
 
@@ -123,14 +124,14 @@ def test_use_case_some_models_drawn_100_samples():
         "fex": get_pyll("fex-tfidf"),
     }
 
-    n_samples = 10
+    n_samples = 100
     results = []
 
     for _ in range(n_samples):
         # use pyll programs to draw a parameterization for 'bal' and 'fex'
         drawn = draw_sample(pyll)
 
-        # construct an all model config from one model configs -- implicitly use default model choice
+        # construct an all-model config from one-model configs -- implicitly use default model choice
         # and parameterization for models not included as argument
         models = AllModelConfig(ofn=ofn, **drawn)
 
@@ -142,6 +143,19 @@ def test_use_case_some_models_drawn_100_samples():
             assert wss is not None
 
         results.append((models, wss))
+
+    plt.figure()
+    plot_trellis(results, [
+        "bal-double/a",
+        "bal-double/alpha",
+        "bal-double/b",
+        "bal-double/beta",
+        "fex-tfidf/ngram_max",
+        "fex-tfidf/split_ta",
+        "fex-tfidf/stop_words",
+        "fex-tfidf/use_keywords",
+    ])
+    plt.show()
 
 
 @pytest.mark.sam_random
@@ -169,13 +183,13 @@ def test_trellis():
         # use pyll programs to draw a parameterization for 'bal' and 'fex'
         drawn = draw_sample(pyll)
 
-        # construct an all model config from one model configs -- implicitly use default model choice
+        # construct an all-model config from one-model configs -- implicitly use default model choice
         # and parameterization for models not included as argument
         models = AllModelConfig(**fixed, **drawn)
-        results.append((models, -1))
+        results.append((models, random()))
 
     plt.figure()
-    plot_trellis(results, [
+    handles = plot_trellis(results, [
         "bal-double/a",
         "bal-double/alpha",
         "bal-double/b",
@@ -184,5 +198,6 @@ def test_trellis():
         "fex-tfidf/split_ta",
         "fex-tfidf/stop_words",
         "fex-tfidf/use_keywords",
-    ], scatter_kwargs={"marker": "+", "c": "k"})
+    ])
     plt.show()
+    print()
