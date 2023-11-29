@@ -8,6 +8,20 @@ from asreviewcontrib.simulation._private.lib.all_model_config import AllModelCon
 from asreviewcontrib.simulation._private.lib.plotting.padding import Padding
 
 
+def _calc_data_dict(
+    data: List[Tuple[AllModelConfig, float]],
+    param_names: List[str]
+) -> Tuple[Dict[str, List[Any]], List[float]]:
+    """Manipulate the data such that it becomes easy to access all values pertaining to
+    a given parameter, as opposed to all values pertaining to a given sample."""
+
+    flatteneds = [(models.flattened(), score) for models, score in data]
+    d = {}
+    for param_name in param_names:
+        d.update({param_name: [flat[param_name] for flat, _ in flatteneds]})
+    return d, [score for _, score in flatteneds]
+
+
 def _calc_rect(
     inner_padding: Padding = None,
     outer_padding: Padding = None,
@@ -15,6 +29,9 @@ def _calc_rect(
     irow: int = None,
     n: int = None
 ) -> Tuple[float, float, float, float]:
+    """Given some information about padding, calculate the coordinates that a given
+    axes would occupy given its row index, column index, and the number of axes on
+    each row and column."""
 
     inner_padding = inner_padding or Padding()
     outer_padding = outer_padding or Padding()
@@ -28,11 +45,36 @@ def _calc_rect(
     )
 
 
+def _plot_response_surface(handles: List[List[Optional[plt.Axes]]],
+                           data_dict: Dict[str, List[Optional[Any]]],
+                           scores: List[Any]):
+    """Visualize the data as a rasterized image by interpolating from available
+    points sampled in a given axes."""
+    raise NotImplementedError
+
+
+def _plot_scatter(
+    handles: List[List[Optional[plt.Axes]]],
+    data_dict: Dict[str, List[Optional[Any]]],
+    show_params: List[str],
+    scatter_kwargs
+) -> None:
+    """Visualize the data as scatter plots in the axes that should
+    have been prepared previously."""
+
+    for irow, row_name in enumerate(show_params):
+        for icol, col_name in enumerate(show_params):
+            if icol > irow:
+                plt.axes(handles[irow][icol])
+                plt.scatter(data_dict[col_name], data_dict[row_name], **scatter_kwargs)
+
+
 def _prep_axes(
     show_params: List[str],
     inner: Padding,
     outer: Padding
 ) -> List[List[Optional[plt.Axes]]]:
+    """Prepare a grid of axes in preparation of any plotting that happens later on."""
 
     n = len(show_params)
     handles = [[None] * n for _ in range(n)]
@@ -59,39 +101,6 @@ def _prep_axes(
     return handles
 
 
-def _plot_scatter(
-    handles: List[List[Optional[plt.Axes]]],
-    data_dict: Dict[str, List[Optional[Any]]],
-    show_params: List[str],
-    scatter_kwargs
-) -> None:
-
-    for irow, row_name in enumerate(show_params):
-        for icol, col_name in enumerate(show_params):
-            if icol > irow:
-                plt.axes(handles[irow][icol])
-                plt.scatter(data_dict[col_name], data_dict[row_name], **scatter_kwargs)
-
-
-def _plot_response_surface(handles: List[List[Optional[plt.Axes]]],
-                           data_dict: Dict[str, List[Optional[Any]]],
-                           scores: List[Any]):
-    pass
-    # raise NotImplementedError
-
-
-def _calc_data_dict(
-    data: List[Tuple[AllModelConfig, float]],
-    param_names: List[str]
-) -> Tuple[Dict[str, List[Any]], List[float]]:
-
-    flatteneds = [(models.flattened(), score) for models, score in data]
-    d = {}
-    for param_name in param_names:
-        d.update({param_name: [flat[param_name] for flat, _ in flatteneds]})
-    return d, [score for _, score in flatteneds]
-
-
 def plot_trellis(
     data: List[Tuple[AllModelConfig, float]],
     show_params: List[str] = None,
@@ -101,6 +110,7 @@ def plot_trellis(
     scatter_kwargs: dict = None,
     show_response_surface=True
 ) -> List[List[Optional[plt.Axes]]]:
+    """Visualize each combination of 2 parameters out of a user-provided list of parameters."""
 
     # verify that all the data rows are samples in the same parameter space
     expected_params = data[0][0].flattened().keys()
