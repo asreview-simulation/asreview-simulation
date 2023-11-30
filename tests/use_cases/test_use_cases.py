@@ -144,21 +144,22 @@ def test_use_case_some_models_drawn_100_samples():
 
         results.append((models, wss))
 
-    plt.figure()
-    plot_trellis(
-        results,
-        [
-            "bal-double/a",
-            "bal-double/alpha",
-            "bal-double/b",
-            "bal-double/beta",
-            "fex-tfidf/ngram_max",
-            "fex-tfidf/split_ta",
-            "fex-tfidf/stop_words",
-            "fex-tfidf/use_keywords",
-        ],
-    )
-    plt.show()
+    if "PYTEST_CURRENT_TEST" not in os.environ:
+        plt.figure()
+        plot_trellis(
+            results,
+            [
+                "bal-double/a",
+                "bal-double/alpha",
+                "bal-double/b",
+                "bal-double/beta",
+                "fex-tfidf/ngram_max",
+                "fex-tfidf/split_ta",
+                "fex-tfidf/stop_words",
+                "fex-tfidf/use_keywords",
+            ],
+        )
+        plt.show()
 
 
 @pytest.mark.sam_random
@@ -191,18 +192,19 @@ def test_trellis():
         models = AllModelConfig(**fixed, **drawn)
         results.append((models, random()))
 
-    plt.figure()
-    plot_trellis(
-        results,
-        [
-            "bal-double/a",
-            "bal-double/alpha",
-            "bal-double/b",
-            "bal-double/beta",
-            "fex-tfidf/ngram_max",
-            "fex-tfidf/split_ta",
-            "fex-tfidf/stop_words",
-            "fex-tfidf/use_keywords",
-        ],
-    )
-    plt.show()
+    if "PYTEST_CURRENT_TEST" not in os.environ:
+        plt.figure()
+        plot_trellis(
+            results,
+            [
+                "bal-double/a",
+                "bal-double/alpha",
+                "bal-double/b",
+                "bal-double/beta",
+                "fex-tfidf/ngram_max",
+                "fex-tfidf/split_ta",
+                "fex-tfidf/stop_words",
+                "fex-tfidf/use_keywords",
+            ],
+        )
+        plt.show()
