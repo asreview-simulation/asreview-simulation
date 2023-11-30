@@ -12,17 +12,35 @@ from asreviewcontrib.simulation._private.lib.plotting.padding import Padding
 
 
 class _DataDict:
-    def __init__(self, values: Dict[str, List[Any]]):
+    def __init__(self, values: Dict[str, List[Any]], show_params: List[str]):
         self._values = values
+        self._shown_params = show_params
 
     @cached_property
-    def get_keys(self) -> List[str]:
-        return sorted(self.values.keys())
+    def constant_params(self) -> List[str]:
+        the_list = list()
+        for param in self.params:
+            is_constant = len(set(self._values[param])) == 1
+            if is_constant:
+                the_list.append(param)
+        return the_list
+
+    @cached_property
+    def variable_params(self) -> List[str]:
+        return sorted(set(self.params) - set(self.constant_params))
+
+    @cached_property
+    def params(self) -> List[str]:
+        return sorted(self._values.keys())
+
+    @cached_property
+    def shown_params(self) -> List[str]:
+        return self._shown_params
 
     @cached_property
     def types(self) -> Dict[str, type]:
         d = {}
-        for param in self._values.keys():
+        for param in self.params:
             d.update({param: type(self._values[param][0])})
         return d
 
@@ -42,22 +60,25 @@ class TrellisHandles:
 
     def get_axes_by_row_name(self, row_name: str = None) -> List[plt.Axes]:
         assert row_name is not None, "Need a name to identify the row of subaxes"
-        assert row_name in self.show_params, f"{row_name} is not a valid name"
+        assert row_name in self.show_params[:-1], f"{row_name} is not a valid name for a row"
         irow = self.show_params.index(row_name)
         return [col for col in self.axes[irow] if col is not None]
 
     def get_axes_by_col_name(self, col_name: str = None) -> List[plt.Axes]:
         assert col_name is not None, "Need a name to identify the column of subaxes"
-        assert col_name in self.show_params, f"{col_name} is not a valid name"
+        assert col_name in self.show_params[1:], f"{col_name} is not a valid name for a column"
         icol = self.show_params.index(col_name)
         return [row[icol] for row in self.axes if row[icol] is not None]
 
     def get_axes_by_names(self, row_name: str = None, col_name: str = None) -> plt.Axes:
-        r = self.get_axes_by_row_name(row_name)
-        c = self.get_axes_by_col_name(col_name)
-        intersection = set(r) and set(c)
-        assert len(intersection) != 0, "No axes at that position."
-        return list(intersection)[0]
+        assert row_name is not None, "Need a name to identify the row of subaxes"
+        assert row_name in self.show_params[:-1], f"{row_name} is not a valid name for a row"
+        assert col_name is not None, "Need a name to identify the column of subaxes"
+        assert col_name in self.show_params[1:], f"{col_name} is not a valid name for a column"
+        irow = self.show_params.index(row_name)
+        icol = self.show_params.index(col_name)
+        assert icol > irow, "No axes at that position."
+        return self._axes[irow][icol]
 
     @property
     def axes(self):
@@ -70,16 +91,16 @@ class TrellisHandles:
 
 def _calc_data_dict(
     data: List[Tuple[AllModelConfig, float]],
-    param_names: List[str],
+    show_params: List[str],
 ) -> Tuple[_DataDict, List[float]]:
     """Manipulate the data such that it becomes easy to access all values pertaining to
     a given parameter, as opposed to all values pertaining to a given sample."""
 
-    flatteneds = [(models.flattened(), score) for models, score in data]
+    params = data[0][0].flattened().keys()
     d = {}
-    for param_name in param_names:
-        d.update({param_name: [flat[param_name] for flat, _ in flatteneds]})
-    return _DataDict(d), [score for _, score in flatteneds]
+    for param in params:
+        d.update({param: [models.flattened()[param] for models, _ in data]})
+    return _DataDict(d, show_params), [score for _, score in data]
 
 
 def _calc_rect(
@@ -112,10 +133,9 @@ def _plot_response_surface(
 ):
     """Visualize the data as a rasterized image by interpolating from available
     points sampled in a given axes."""
-    show_params = data_dict.get_keys()
     nbins = 100
-    for irow, row_name in enumerate(show_params):
-        for icol, col_name in enumerate(show_params):
+    for irow, row_name in enumerate(data_dict.shown_params):
+        for icol, col_name in enumerate(data_dict.shown_params):
             if icol > irow:
                 ax = handles[irow][icol]
                 plt.axes(ax)
@@ -147,9 +167,8 @@ def _plot_scatter(
         "marker": "+",
         "c": "k",
     }
-    show_params = data_dict.get_keys()
-    for irow, row_name in enumerate(show_params):
-        for icol, col_name in enumerate(show_params):
+    for irow, row_name in enumerate(data_dict.shown_params):
+        for icol, col_name in enumerate(data_dict.shown_params):
             if icol > irow:
                 plt.axes(handles[irow][icol])
                 plt.scatter(data_dict.values[col_name], data_dict.values[row_name], **scatter_kwargs)
@@ -162,21 +181,20 @@ def _prep_axes(
 ) -> List[List[Optional[plt.Axes]]]:
     """Prepare a grid of axes in preparation of any plotting that happens later on."""
 
-    show_params = data_dict.get_keys()
-    n = len(show_params)
+    n = len(data_dict.shown_params)
     handles = [[None] * n for _ in range(n)]
-    for irow, _ in enumerate(show_params):
-        for icol, _ in enumerate(show_params):
+    for irow, _ in enumerate(data_dict.shown_params):
+        for icol, _ in enumerate(data_dict.shown_params):
             if icol > irow:
                 rect = _calc_rect(inner, outer, icol=icol, irow=irow, n=n)
                 kwargs = {}
                 if irow == 0:
-                    kwargs.update({"xlabel": show_params[icol]})
+                    kwargs.update({"xlabel": data_dict.shown_params[icol]})
                 else:
                     kwargs.update({"xticklabels": []})
 
                 if icol - 1 == irow:
-                    kwargs.update({"ylabel": show_params[irow]})
+                    kwargs.update({"ylabel": data_dict.shown_params[irow]})
                 else:
                     kwargs.update({"yticklabels": []})
 
@@ -188,6 +206,27 @@ def _prep_axes(
     return handles
 
 
+def _plot_text(data_dict: _DataDict, trellis_handles: TrellisHandles):
+    s = ""
+    for param in data_dict.constant_params:
+        s += f"{param}: {data_dict.values[param][0]}\n"
+    params_left = data_dict.shown_params[:2]
+    bottom_left_axes = trellis_handles.get_axes_by_names(*params_left)
+    bottom_left_bbox = bottom_left_axes.get_position()
+
+    params_right = data_dict.shown_params[-2:]
+    top_right_axes = trellis_handles.get_axes_by_names(*params_right)
+    top_right_bbox = top_right_axes.get_position()
+
+    h = top_right_bbox.y1 - 0.1
+
+    rect = bottom_left_bbox.x0, 0.1, 0.1, h
+    ax = plt.axes(rect)
+    ax.set_ylim(1, 0)
+    ax.set_axis_off()
+    plt.text(0, 0, s, verticalalignment="top")
+
+
 def plot_trellis(
     data: List[Tuple[AllModelConfig, float]],
     show_params: List[str] = None,
@@ -195,6 +234,7 @@ def plot_trellis(
     inner_padding: Padding = None,
     scatter_kwargs: dict = None,
     show_response_surface=True,
+    show_text=True,
 ) -> TrellisHandles:
     """Visualize each combination of 2 parameters out of a user-provided list of parameters."""
 
@@ -219,10 +259,15 @@ def plot_trellis(
     # prepare the grid of axes
     axes_handles = _prep_axes(data_dict, inner=inner, outer=outer)
 
+    trellis_handles = TrellisHandles(axes_handles, show_params)
+
     # visualize the data
     _plot_scatter(axes_handles, data_dict, scatter_kwargs)
 
     if show_response_surface:
         _plot_response_surface(axes_handles, data_dict, scores)
 
-    return TrellisHandles(axes_handles, show_params)
+    if show_text:
+        _plot_text(data_dict, trellis_handles)
+
+    return trellis_handles
