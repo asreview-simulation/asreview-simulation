@@ -117,7 +117,10 @@ def test_use_case_some_models_nondefault_some_models_drawn():
 @pytest.mark.ofn_wss
 def test_use_case_some_models_drawn_100_samples():
     # use wss @ 90% recall as objective function
-    ofn = OneModelConfig(abbr="ofn-wss", params={"at_pct": 90})
+    fixed = {
+        "ofn": OneModelConfig(abbr="ofn-wss", params={"at_pct": 90}),
+        "qry": OneModelConfig(abbr="qry-max", params={"n_instances": 10}),
+    }
 
     pyll = {
         "bal": get_pyll("bal-double"),
@@ -133,7 +136,7 @@ def test_use_case_some_models_drawn_100_samples():
 
         # construct an all-model config from one-model configs -- implicitly use default model choice
         # and parameterization for models not included as argument
-        models = AllModelConfig(ofn=ofn, **drawn)
+        models = AllModelConfig(**fixed, **drawn)
 
         # create a temporary directory and start the simulation
         with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
