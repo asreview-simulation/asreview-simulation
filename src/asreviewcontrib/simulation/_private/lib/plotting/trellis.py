@@ -1,4 +1,4 @@
-from functools import cache
+from functools import cached_property
 from typing import Any
 from typing import Dict
 from typing import List
@@ -15,18 +15,18 @@ class _DataDict:
     def __init__(self, values: Dict[str, List[Any]]):
         self._values = values
 
+    @cached_property
     def get_keys(self) -> List[str]:
         return sorted(self.values.keys())
 
-    @property
-    @cache
+    @cached_property
     def types(self) -> Dict[str, type]:
         d = {}
         for param in self._values.keys():
             d.update({param: type(self._values[param][0])})
         return d
 
-    @property
+    @cached_property
     def values(self):
         return self._values
 
