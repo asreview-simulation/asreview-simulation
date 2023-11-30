@@ -103,7 +103,7 @@ def make_fixtures(tmpdir, rows):
     ids=[f"{pct}%" for pct in range(0, 101, 20)],
 )
 def test_recall_absolute(at_pct, expected):
-    with TemporaryDirectory(prefix="tmp.ofn-testing.", dir=".") as tmpdir:
+    with TemporaryDirectory(prefix="tmp.ofn-testing.") as tmpdir:
         p = make_fixtures(tmpdir, get_rows())
         kwargs = get_kwargs(absolute=True)
         with open_state(os.sep.join(p.parts)) as s:
@@ -124,7 +124,7 @@ def test_recall_absolute(at_pct, expected):
     ids=[f"{pct}%" for pct in range(0, 101, 20)],
 )
 def test_recall_relative(at_pct, expected):
-    with TemporaryDirectory(prefix="tmp.ofn-testing.", dir=".") as tmpdir:
+    with TemporaryDirectory(prefix="tmp.ofn-testing.") as tmpdir:
         p = make_fixtures(tmpdir, get_rows())
         with open_state(os.sep.join(p.parts)) as s:
             kwargs = get_kwargs()
@@ -148,7 +148,7 @@ def test_recall_relative(at_pct, expected):
 def test_wss_absolute(at_pct, expected):
     if at_pct in {"0%"}:
         pytest.xfail(reason="interpolation problem in 'asreview-insights' package")
-    with TemporaryDirectory(prefix="tmp.ofn-testing.", dir=".") as tmpdir:
+    with TemporaryDirectory(prefix="tmp.ofn-testing.") as tmpdir:
         p = make_fixtures(tmpdir, get_rows())
         with open_state(os.sep.join(p.parts)) as s:
             kwargs = get_kwargs(absolute=True)
@@ -172,7 +172,7 @@ def test_wss_absolute(at_pct, expected):
 def test_wss_relative(at_pct, expected):
     if at_pct in {"0%"}:
         pytest.xfail(reason="interpolation problem in 'asreview-insights' package")
-    with TemporaryDirectory(prefix="tmp.ofn-testing.", dir=".") as tmpdir:
+    with TemporaryDirectory(prefix="tmp.ofn-testing.") as tmpdir:
         p = make_fixtures(tmpdir, get_rows())
         with open_state(os.sep.join(p.parts)) as s:
             kwargs = get_kwargs()
