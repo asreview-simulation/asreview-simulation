@@ -1,3 +1,5 @@
+import os
+import shutil
 from typing import Optional
 from asreview.data import ASReviewData
 from asreview.project import ASReviewProject
@@ -13,6 +15,7 @@ def run(
     as_data: ASReviewData,
     write_interval: int = None,
     seed: int = None,
+    no_zip: bool = False,
 ) -> Optional[float]:
     # prep
     kwargs = get_review_simulate_kwargs(models, as_data, seed)
@@ -22,5 +25,15 @@ def run(
     project.update_review(status="review")  # (has side effects on disk)
     reviewer.review()
     project.mark_review_finished()  # (has side effects on disk)
+
+    # wrap-up
+    p = project.project_path
+    if no_zip:
+        # rename the .asreview.tmp directory to just .asreview
+        os.rename(p, p.with_suffix(""))
+    else:
+        # zip the results
+        project.export(p.with_suffix(""))
+        shutil.rmtree(p)
 
     return calc_ofn_score(models.ofn, project.project_path)

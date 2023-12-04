@@ -69,17 +69,7 @@ def start_subcommand(obj, benchmark, input_file, no_zip, output_file, seed, writ
     project, as_data = prep_project_directory(benchmark=benchmark, input_file=input_file, output_file=output_file)
 
     # run
-    obj_score = run(obj.models, project, as_data, write_interval, seed)
+    obj_score = run(obj.models, project, as_data, write_interval=write_interval, seed=seed, no_zip=no_zip)
 
-    if obj_score is not None:
+    if obj.models.abbr != "ofn-none":
         click.echo(f"{obj_score}")
-
-    # wrap-up
-    p = project.project_path
-    if no_zip:
-        # rename the .asreview.tmp directory to just .asreview
-        os.rename(p, p.with_suffix(""))
-    else:
-        # zip the results
-        project.export(p.with_suffix(""))
-        shutil.rmtree(p)
