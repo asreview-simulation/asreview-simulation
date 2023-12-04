@@ -3,7 +3,7 @@ from tempfile import TemporaryDirectory
 import pytest
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
-from asreview_simulation._private.cli.cli import cli
+from asreviewcontrib.simulation._private.cli.cli import cli
 from tests.helpers.compare_data_csv import compare_data_csv
 from tests.helpers.compare_project_json import compare_project_json
 from tests.helpers.compare_results_sql import compare_results_sql
@@ -17,6 +17,7 @@ from tests.helpers.unzip_simulate_results import unzip_simulate_results
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_nq
+@pytest.mark.ofn_none
 def test_with_init_seed():
     def run_asreview_simulate_cli():
         args = [

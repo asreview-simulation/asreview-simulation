@@ -1,12 +1,13 @@
 import pytest
-import asreview_simulation
+import asreviewcontrib.simulation
 
 
 def get_modules():
     return [
-        asreview_simulation,
-        asreview_simulation.api,
-        asreview_simulation.api.unwrapping,
+        asreviewcontrib.simulation,
+        asreviewcontrib.simulation.api,
+        asreviewcontrib.simulation.api.plotting,
+        asreviewcontrib.simulation.api.unwrapping,
     ]
 
 
@@ -15,22 +16,27 @@ def get_names(module):
 
 
 expected = {
-    "asreview_simulation": {
+    "asreviewcontrib.simulation": {
         "_private",
         "api",
     },
-    "asreview_simulation.api": {
+    "asreviewcontrib.simulation.api": {
         "AllModelConfig",
         "draw_sample",
         "get_abbrs",
         "get_dataset_names",
         "get_pyll",
         "OneModelConfig",
+        "plotting",
         "prep_project_directory",
         "run",
         "unwrapping",
     },
-    "asreview_simulation.api.unwrapping": {
+    "asreviewcontrib.simulation.api.plotting": {
+        "Padding",
+        "plot_trellis",
+    },
+    "asreviewcontrib.simulation.api.unwrapping": {
         "get_review_simulate_kwargs",
         "instantiate_unwrapped_model",
     },

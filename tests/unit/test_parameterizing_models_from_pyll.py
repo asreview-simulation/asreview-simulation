@@ -1,9 +1,9 @@
 import pytest
 from asreview.models.base import BaseModel
-from asreview_simulation.api import draw_sample
-from asreview_simulation.api import get_abbrs
-from asreview_simulation.api import get_pyll
-from asreview_simulation.api.unwrapping import instantiate_unwrapped_model
+from asreviewcontrib.simulation.api import draw_sample
+from asreviewcontrib.simulation.api import get_abbrs
+from asreviewcontrib.simulation.api import get_pyll
+from asreviewcontrib.simulation.api.unwrapping import instantiate_unwrapped_model
 
 
 @pytest.mark.parametrize("abbr", [model for model in get_abbrs() if model.startswith("bal")])

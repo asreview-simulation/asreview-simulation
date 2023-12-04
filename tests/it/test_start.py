@@ -4,7 +4,7 @@ import pytest
 from asreview import get_data_home
 from asreview.entry_points import SimulateEntryPoint
 from click.testing import CliRunner
-from asreview_simulation._private.cli.cli import cli
+from asreviewcontrib.simulation._private.cli.cli import cli
 from tests.helpers.compare_data_csv import compare_data_csv
 from tests.helpers.compare_project_json import compare_project_json
 from tests.helpers.compare_results_sql import compare_results_sql
@@ -31,6 +31,7 @@ def get_data_fnames():
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
+@pytest.mark.ofn_none
 def test_with_minimal_args_on_benchmark():
     def run_asreview_simulate_cli():
         args = [
@@ -80,6 +81,7 @@ def test_with_minimal_args_on_benchmark():
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
+@pytest.mark.ofn_none
 @pytest.mark.parametrize("fname", get_data_fnames())
 def test_with_minimal_args_on_user_supplied_data(fname):
     def run_asreview_simulate_cli():
@@ -126,6 +128,7 @@ def test_with_minimal_args_on_user_supplied_data(fname):
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_nq
+@pytest.mark.ofn_none
 @pytest.mark.parametrize("parameterization", get_model_combinatorics())
 def test_with_model_combinations(parameterization):
     """

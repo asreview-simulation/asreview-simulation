@@ -1,6 +1,6 @@
 import pytest
 from click.testing import CliRunner
-from asreview_simulation._private.cli.cli import cli
+from asreviewcontrib.simulation._private.cli.cli import cli
 
 
 @pytest.mark.sam_random
@@ -9,6 +9,7 @@ from asreview_simulation._private.cli.cli import cli
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
+@pytest.mark.ofn_none
 def test_with_default_settings():
     runner = CliRunner()
     args = [
@@ -43,6 +44,10 @@ def test_with_default_settings():
             "stop_words": "english",
             "use_keywords": false
         }
+    },
+    "ofn": {
+        "abbr": "ofn-none",
+        "params": {}
     },
     "qry": {
         "abbr": "qry-max",

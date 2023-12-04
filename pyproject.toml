@@ -10,7 +10,9 @@ requires-python = ">=3.8"
 dependencies = [
     "click ~= 8.0",
     "asreview >= 1.0.0, < 1.3",
-    "hyperopt >= 0.2.7, < 0.3"
+    "hyperopt >= 0.2.7, < 0.3",
+    "asreview-insights >= 1.0.0, <2.0",
+    "matplotlib >= 3.3.0, <4.0",
 ]
 description = "Simulate a manual ASReview analysis"
 
@@ -23,10 +25,10 @@ tensorflow = ["tensorflow >= 2.0.0, < 2.10"]   # tensorflow.keras.wrappers disap
 testing = ["pytest"]
 
 [project.scripts]
-asreview-simulation = "asreview_simulation._private.cli.cli:cli"
+asreview-simulation = "asreviewcontrib.simulation._private.cli.cli:cli"
 
 [project.entry-points."asreview.entry_points"]
-simulation = "asreview_simulation._private.cli.entry_point:SimulationEntryPoint"
+simulation = "asreviewcontrib.simulation._private.cli.entry_point:SimulationEntryPoint"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -34,16 +36,16 @@ where = ["src"]
 [tool.isort]
 force_alphabetical_sort_within_sections = true
 force_single_line = true
-line_length = 120
+line_length = 130
 lines_after_imports = 2
 lines_between_sections = 0
 src_paths = ["src", "tests"]
 
 [tool.black]
-line_length = 120
+line_length = 130
 
 [tool.ruff]
-line-length = 120
+line-length = 130
 
 [tool.pytest.ini_options]
 # --max-fail=1 terminate testing on the first error
@@ -77,4 +79,6 @@ markers = [
     "stp_none: tests pertaining to no stopping rule",
     "stp_nq: tests pertaining to stopping rule based on number of queries",
     "stp_rel: tests pertaining to stopping rule based on number of relevant records found",
+    "ofn_none: tests pertaining to no objective function",
+    "ofn_wss: tests pertaining to wss objective function",
 ]
