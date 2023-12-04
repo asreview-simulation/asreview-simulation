@@ -1,4 +1,4 @@
-name: testing
+name: testing-dbg
 
 on:
   workflow_dispatch:
