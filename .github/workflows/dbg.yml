@@ -7,7 +7,6 @@ jobs:
   test:
     name: asr${{ matrix.asreview-version }}-${{ matrix.tensorflow }}-py${{ matrix.python-version }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    needs: setup
     strategy:
       fail-fast: false
       matrix:
