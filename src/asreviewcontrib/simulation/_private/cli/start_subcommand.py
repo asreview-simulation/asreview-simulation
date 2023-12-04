@@ -1,5 +1,3 @@
-import os
-import shutil
 import click
 from asreviewcontrib.simulation._private.lib.prep_project_directory import prep_project_directory
 from asreviewcontrib.simulation._private.lib.run import run
