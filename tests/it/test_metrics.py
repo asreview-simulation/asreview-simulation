@@ -65,7 +65,7 @@ def make_fixtures(tmpdir, rows):
         fid.write(
             """
 {
-  "id": "",
+  "id": "project",
   "reviews": [
     {
       "id": "123"
@@ -85,8 +85,8 @@ def make_fixtures(tmpdir, rows):
         )
 
     # zip the project directory, remove the zip file extension
-    shutil.make_archive(os.sep.join(p.parts), "zip", p_tmp)
-    os.rename(f"{os.sep.join(p.parts)}.zip", os.sep.join(p.parts))
+    shutil.make_archive(f"{p}", "zip", p_tmp)
+    os.rename(f"{p}.zip", f"{p}")
     return p
 
 
@@ -106,7 +106,7 @@ def test_recall_absolute(at_pct, expected):
     with TemporaryDirectory(prefix="tmp.ofn-testing.") as tmpdir:
         p = make_fixtures(tmpdir, get_rows())
         kwargs = get_kwargs(absolute=True)
-        with open_state(os.sep.join(p.parts)) as s:
+        with open_state(f"{p}") as s:
             actual = calc_recall(s, int(at_pct[:-1]) / 100, **kwargs)
             assert actual == expected
 
@@ -126,7 +126,7 @@ def test_recall_absolute(at_pct, expected):
 def test_recall_relative(at_pct, expected):
     with TemporaryDirectory(prefix="tmp.ofn-testing.") as tmpdir:
         p = make_fixtures(tmpdir, get_rows())
-        with open_state(os.sep.join(p.parts)) as s:
+        with open_state(f"{p}") as s:
             kwargs = get_kwargs()
             actual = calc_recall(s, int(at_pct[:-1]) / 100, **kwargs)
             assert actual == pytest.approx(expected)
@@ -150,7 +150,7 @@ def test_wss_absolute(at_pct, expected):
         pytest.xfail(reason="interpolation problem in 'asreview-insights' package")
     with TemporaryDirectory(prefix="tmp.ofn-testing.") as tmpdir:
         p = make_fixtures(tmpdir, get_rows())
-        with open_state(os.sep.join(p.parts)) as s:
+        with open_state(f"{p}") as s:
             kwargs = get_kwargs(absolute=True)
             actual = calc_wss(s, int(at_pct[:-1]) / 100, **kwargs)
             assert actual == expected
@@ -174,7 +174,7 @@ def test_wss_relative(at_pct, expected):
         pytest.xfail(reason="interpolation problem in 'asreview-insights' package")
     with TemporaryDirectory(prefix="tmp.ofn-testing.") as tmpdir:
         p = make_fixtures(tmpdir, get_rows())
-        with open_state(os.sep.join(p.parts)) as s:
+        with open_state(f"{p}") as s:
             kwargs = get_kwargs()
             actual = calc_wss(s, int(at_pct[:-1]) / 100, **kwargs)
             assert actual == pytest.approx(expected)
