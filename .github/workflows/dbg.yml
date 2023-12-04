@@ -49,4 +49,4 @@ jobs:
 
       - name: Run dbg test
         shell: bash
-        run: pytest -rP tests/it/test_metrics.py::test_recall_absolute[0%]
+        run: pytest -rP tests/it/test_recall_absolute.py
