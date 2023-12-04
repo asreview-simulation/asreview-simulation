@@ -36,4 +36,4 @@ def run(
         project.export(p.with_suffix(""))
         shutil.rmtree(p)
 
-    return calc_ofn_score(models.ofn, project.project_path)
+    return calc_ofn_score(models.ofn, p.with_suffix(""))
