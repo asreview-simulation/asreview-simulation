@@ -47,6 +47,10 @@ jobs:
           python3 -m pip install asreview==${{ matrix.asreview-version }}
           python3 -m pip install .[testing]
 
-      - name: Run dbg test
+      - name: Run dbg test 1
         shell: bash
         run: pytest -rP tests/it/test_recall_absolute.py
+
+      - name: Run dbg test 2
+        shell: bash
+        run: pytest -rP tests/it/test_metrics.py
