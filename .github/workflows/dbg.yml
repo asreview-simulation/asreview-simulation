@@ -1,0 +1,53 @@
+name: testing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: asr${{ matrix.asreview-version }}-${{ matrix.tensorflow }}-py${{ matrix.python-version }}-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: setup
+    strategy:
+      fail-fast: false
+      matrix:
+        asreview-version: [ '1.0.4', '1.1.1', '1.2.1' ]
+        os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest']
+        python-version: [ '3.8', '3.9', '3.10', '3.11']
+        include:
+          # On python >= 3.11, pip complains that tensorflow wants to be >= 2.10,
+          # but asreview <= 1.2.1 wants tensorflow to be < 2.10
+          - python-version: '3.8'
+            tensorflow: 'with-tf'
+          - python-version: '3.9'
+            tensorflow: 'with-tf'
+          - python-version: '3.10'
+            tensorflow: 'with-tf'
+          - python-version: '3.11'
+            tensorflow: 'without-tf'
+    steps:
+
+      - name: Get a copy of the code
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Show python info
+        shell: bash
+        run: |
+          which python
+          python --version
+
+      - name: Install dbg dependencies
+        shell: bash
+        run: |
+          python3 -m pip install --upgrade pip wheel setuptools
+          python3 -m pip install asreview==${{ matrix.asreview-version }}
+          python3 -m pip install .[testing]
+
+      - name: Run dbg test
+        shell: bash
+        run: pytest -rP tests/it/test_metrics.py::test_recall_absolute[0%]
