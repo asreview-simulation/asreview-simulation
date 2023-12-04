@@ -15,6 +15,6 @@ def test_recall_absolute():
         project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
         run(models, project, as_data)
 
-        with open_state(f"{output_file}.tmp") as s:
+        with open_state(output_file) as s:
             actual = calc_recall(s, 0)
             assert actual is not None
