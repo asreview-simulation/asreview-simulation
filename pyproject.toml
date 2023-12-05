@@ -22,7 +22,7 @@ linting = ["pre-commit"]
 publishing = ["twine"]
 sbert = ["sentence_transformers"]
 tensorflow = ["tensorflow >= 2.0.0, < 2.10"]   # tensorflow.keras.wrappers disappeared in 2.10
-testing = ["pytest"]
+testing = ["pytest", "pytest-cov"]
 
 [project.scripts]
 asreview-simulation = "asreviewcontrib.simulation._private.cli.cli:cli"

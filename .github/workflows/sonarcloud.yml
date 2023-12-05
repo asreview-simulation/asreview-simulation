@@ -6,8 +6,80 @@ on:
     - cron: 42 4 * * 2     #  04:42 on Tuesdays
 
 jobs:
+  setup:
+    name: download
+    strategy:
+    runs-on: "ubuntu-latest"
+    steps:
+
+      - name: Create $HOME/asr_data directory with embedding file in it
+        shell: bash
+        run: |
+          mkdir $HOME/asr_data
+          cd $HOME/asr_data
+          curl https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz -o cc.en.300.vec.gz
+          7z e cc.en.300.vec.gz
+          mv cc.en.300.vec fasttext.cc.en.300.vec
+
+      - name: Commit embedding data to cache
+        uses: actions/cache/save@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: cachekey-${{ matrix.os }}-${{ github.run_id }}
+
+
+  coverage:
+    name: asr${{ matrix.asreview-version }}-${{ matrix.tensorflow }}-py${{ matrix.python-version }}-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: setup
+    strategy:
+      matrix:
+        asreview-version: [ "1.2.1" ]
+        os: [ "ubuntu-latest" ]
+        python-version: [ "3.10" ]
+        include:
+          # On python >= 3.11, pip complains that tensorflow wants to be >= 2.10,
+          # but asreview <= 1.2.1 wants tensorflow to be < 2.10
+          - python-version: "3.10"
+            tensorflow: "with-tf"
+    steps:
+
+      - name: Retrieve embedding data from cache
+        uses: actions/cache/restore@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: cachekey-${{ matrix.os }}-${{ github.run_id }}
+          fail-on-cache-miss: true
+
+      - name: Get a copy of the code
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Show Python info
+        shell: bash
+        run: |
+          which python
+          python --version
+
+      - name: Install dependencies (with tensorflow)
+        shell: bash
+        run: |
+          python3 -m pip install --upgrade pip wheel setuptools
+          python3 -m pip install asreview==${{ matrix.asreview-version }}
+          python3 -m pip install .[doc2vec,sbert,tensorflow,testing]
+
+      - name: Run unit tests
+        shell: bash
+        run: pytest --cov=src/ tests/unit
+
+
   sonarcloud:
     name: SonarCloud
+    needs: coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
