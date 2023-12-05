@@ -74,9 +74,9 @@ jobs:
           python3 -m pip install asreview==${{ matrix.asreview-version }}
           python3 -m pip install .[doc2vec,sbert,tensorflow,testing]
 
-      - name: Run unit tests
+      - name: Calculate unit test coverage
         shell: bash
-        run: pytest --cov=src/ tests/unit
+        run: pytest --cov=src/ --cov-report=xml:.coverage-reports/coverage.xml tests/unit
 
   sonarcloud:
     name: publish
