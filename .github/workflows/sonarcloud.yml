@@ -34,7 +34,7 @@ jobs:
 
   coverage:
     # name: asr${{ env.ASREVIEW_VERSION }}-with-tf-py${{ env.PYTHON_VERSION }}-${{ env.OS }}
-    runs-on: ${{ env.OS }}
+    runs-on: $OS
     needs: setup
     steps:
 
