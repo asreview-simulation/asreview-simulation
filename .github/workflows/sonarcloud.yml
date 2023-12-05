@@ -80,6 +80,8 @@ jobs:
           coverage run --debug=trace --branch --source=asreviewcontrib.simulation --data-file=.coverage-reports/coverage -m pytest tests/unit/
           coverage report --data-file=.coverage-reports/coverage
           coverage xml --data-file=.coverage-reports/coverage -o .coverage-reports/coverage.xml
+          # change absolute paths to relative paths
+          sed 's!<source>.*/src</source>!<source>./src</source>!g' .coverage-reports/coverage.xml
           tree .coverage-reports
 
       - name: SonarCloud Scan
