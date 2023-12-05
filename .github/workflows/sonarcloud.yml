@@ -35,18 +35,18 @@ jobs:
   coverage:
     # name: asr${{ env.ASREVIEW_VERSION }}-with-tf-py${{ env.PYTHON_VERSION }}-${{ env.OS }}
     runs-on: ${{ env.OS }}
-    # needs: setup
-    # steps:
+    needs: setup
+    steps:
 
-    #   - name: Retrieve embedding data from cache
-    #     uses: actions/cache/restore@v3.3.2
-    #     with:
-    #       path: ~/asr_data/fasttext.cc.en.300.vec
-    #       key: cachekey-${{ github.run_id }}
-    #       fail-on-cache-miss: true
+      - name: Retrieve embedding data from cache
+        uses: actions/cache/restore@v3.3.2
+        with:
+          path: ~/asr_data/fasttext.cc.en.300.vec
+          key: cachekey-${{ github.run_id }}
+          fail-on-cache-miss: true
 
-    #   - name: Get a copy of the code
-    #     uses: actions/checkout@v3
+      - name: Get a copy of the code
+        uses: actions/checkout@v3
 
     #   - name: Set up Python ${{ env.PYTHON_VERSION }}
     #     uses: actions/setup-python@v4
