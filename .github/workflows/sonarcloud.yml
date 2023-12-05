@@ -9,7 +9,7 @@ jobs:
   setup:
     name: download
     strategy:
-    runs-on: "ubuntu-latest"
+    runs-on: 'ubuntu-latest'
     steps:
 
       - name: Create $HOME/asr_data directory with embedding file in it
@@ -34,14 +34,14 @@ jobs:
     needs: setup
     strategy:
       matrix:
-        asreview-version: [ "1.2.1" ]
-        os: [ "ubuntu-latest" ]
-        python-version: [ "3.10" ]
+        asreview-version: [ '1.2.1' ]
+        os: [ 'ubuntu-latest' ]
+        python-version: [ '3.10' ]
         include:
           # On python >= 3.11, pip complains that tensorflow wants to be >= 2.10,
           # but asreview <= 1.2.1 wants tensorflow to be < 2.10
-          - python-version: "3.10"
-            tensorflow: "with-tf"
+          - python-version: '3.10'
+            tensorflow: 'with-tf'
     steps:
 
       - name: Retrieve embedding data from cache
