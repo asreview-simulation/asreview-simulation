@@ -28,35 +28,29 @@ jobs:
 
 
   coverage:
-    name: asr${{ matrix.asreview-version }}-${{ matrix.tensorflow }}-py${{ matrix.python-version }}-${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    env:
+      ASREVIEW_VERSION: '1.2.1'
+      PYTHON_VERSION: '3.10'
+      OS: 'ubuntu-latest'
+    name: asr$ASREVIEW_VERSION-with-tf-py$PYTHON_VERSION-$OS
+    runs-on: $OS
     needs: setup
-    strategy:
-      matrix:
-        asreview-version: [ '1.2.1' ]
-        os: [ 'ubuntu-latest' ]
-        python-version: [ '3.10' ]
-        include:
-          # On python >= 3.11, pip complains that tensorflow wants to be >= 2.10,
-          # but asreview <= 1.2.1 wants tensorflow to be < 2.10
-          - python-version: '3.10'
-            tensorflow: 'with-tf'
     steps:
 
       - name: Retrieve embedding data from cache
         uses: actions/cache/restore@v3.3.2
         with:
           path: ~/asr_data/fasttext.cc.en.300.vec
-          key: cachekey-${{ matrix.os }}-${{ github.run_id }}
+          key: cachekey-$OS-${{ github.run_id }}
           fail-on-cache-miss: true
 
       - name: Get a copy of the code
         uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python $PYTHON_VERSION
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: $PYTHON_VERSION
 
       - name: Show Python info
         shell: bash
@@ -64,11 +58,11 @@ jobs:
           which python
           python --version
 
-      - name: Install dependencies (with tensorflow)
+      - name: Install dependencies
         shell: bash
         run: |
           python3 -m pip install --upgrade pip wheel setuptools
-          python3 -m pip install asreview==${{ matrix.asreview-version }}
+          python3 -m pip install asreview==$ASREVIEW_VERSION
           python3 -m pip install .[doc2vec,sbert,tensorflow,testing]
 
       - name: Run unit tests
@@ -77,7 +71,7 @@ jobs:
 
 
   sonarcloud:
-    name: SonarCloud
+    name: publish
     needs: coverage
     runs-on: ubuntu-latest
     steps:
