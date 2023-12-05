@@ -216,16 +216,12 @@ def _prep_axes(
         if irow == 0:
             kwargs.update({"xlabel": col_name})
         else:
-            kwargs.update({
-                "sharex": handles[0][icol],
-            })
+            kwargs.update({"sharex": handles[0][icol]})
 
         if icol - 1 == irow:
             kwargs.update({"ylabel": row_name})
         else:
-            kwargs.update({
-                "sharey": handles[irow][icol - 1],
-            })
+            kwargs.update({"sharey": handles[irow][icol - 1]})
 
         # construct the axes at the location defined by 'rect'
         ax = plt.axes(rect, **kwargs)
@@ -235,11 +231,9 @@ def _prep_axes(
 
         # hide xticklabels and yticklabels for axes that are in the middle
         if irow > 0:
-            for label in ax.get_xticklabels():
-                label.set_visible(False)
+            ax.tick_params(labelbottom=False, labeltop=False)
         if icol > irow + 1:
-            for label in ax.get_yticklabels():
-                label.set_visible(False)
+            ax.tick_params(labelleft=False, labelright=False)
 
         # assign axes handle to return arument so users can manipulate them if need be
         handles[irow][icol] = ax
