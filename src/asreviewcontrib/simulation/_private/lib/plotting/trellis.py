@@ -126,6 +126,16 @@ def _calc_rect(
     )
 
 
+def _get_row_col_quads(data_dict: _DataDict):
+    r = []
+    for irow, row_name in enumerate(data_dict.shown_params):
+        for icol, col_name in enumerate(data_dict.shown_params):
+            if icol > irow:
+                t = irow, row_name, icol, col_name
+                r.append(t)
+    return r
+
+
 def _plot_response_surface(
     handles: List[List[Optional[plt.Axes]]],
     data_dict: _DataDict,
@@ -134,25 +144,23 @@ def _plot_response_surface(
     """Visualize the data as a rasterized image by interpolating from available
     points sampled in a given axes."""
     nbins = 100
-    for irow, row_name in enumerate(data_dict.shown_params):
-        for icol, col_name in enumerate(data_dict.shown_params):
-            if icol > irow:
-                ax = handles[irow][icol]
-                plt.axes(ax)
-                if data_dict.types[row_name] not in [int, bool, float]:
-                    continue
-                if data_dict.types[col_name] not in [int, bool, float]:
-                    continue
-                xv = [float(elem) for elem in data_dict.values[col_name]]
-                yv = [float(elem) for elem in data_dict.values[row_name]]
-                # manipulate xv, yv and scores to fit the function signature of griddata
-                points = np.array([[xi, yi] for xi, yi in zip(xv, yv)])
-                values = np.array(scores)
-                xv_target = np.linspace(*ax.get_xlim(), nbins)
-                yv_target = np.linspace(*ax.get_ylim(), nbins)
-                estimation_points = [[[xi, yi] for xi in xv_target] for yi in yv_target]
-                estimated_scores = griddata(points, values, estimation_points, method="linear")
-                ax.imshow(estimated_scores, aspect="auto", extent=(*ax.get_xlim(), *ax.get_ylim()), origin="lower")
+    for irow, row_name, icol, col_name in _get_row_col_quads(data_dict):
+        ax = handles[irow][icol]
+        plt.axes(ax)
+        if data_dict.types[row_name] not in [int, bool, float]:
+            continue
+        if data_dict.types[col_name] not in [int, bool, float]:
+            continue
+        xv = [float(elem) for elem in data_dict.values[col_name]]
+        yv = [float(elem) for elem in data_dict.values[row_name]]
+        # manipulate xv, yv and scores to fit the function signature of griddata
+        points = np.array([[xi, yi] for xi, yi in zip(xv, yv)])
+        values = np.array(scores)
+        xv_target = np.linspace(*ax.get_xlim(), nbins)
+        yv_target = np.linspace(*ax.get_ylim(), nbins)
+        estimation_points = [[[xi, yi] for xi in xv_target] for yi in yv_target]
+        estimated_scores = griddata(points, values, estimation_points, method="linear")
+        ax.imshow(estimated_scores, aspect="auto", extent=(*ax.get_xlim(), *ax.get_ylim()), origin="lower")
 
 
 def _plot_scatter(
@@ -167,11 +175,9 @@ def _plot_scatter(
         "marker": "+",
         "c": "k",
     }
-    for irow, row_name in enumerate(data_dict.shown_params):
-        for icol, col_name in enumerate(data_dict.shown_params):
-            if icol > irow:
-                plt.axes(handles[irow][icol])
-                plt.scatter(data_dict.values[col_name], data_dict.values[row_name], **scatter_kwargs)
+    for irow, row_name, icol, col_name in _get_row_col_quads(data_dict):
+        plt.axes(handles[irow][icol])
+        plt.scatter(data_dict.values[col_name], data_dict.values[row_name], **scatter_kwargs)
 
 
 def _prep_axes(
@@ -183,26 +189,24 @@ def _prep_axes(
 
     n = len(data_dict.shown_params)
     handles = [[None] * n for _ in range(n)]
-    for irow, _ in enumerate(data_dict.shown_params):
-        for icol, _ in enumerate(data_dict.shown_params):
-            if icol > irow:
-                rect = _calc_rect(inner, outer, icol=icol, irow=irow, n=n)
-                kwargs = {}
-                if irow == 0:
-                    kwargs.update({"xlabel": data_dict.shown_params[icol]})
-                else:
-                    kwargs.update({"xticklabels": []})
+    for irow, row_name, icol, col_name in _get_row_col_quads(data_dict):
+        rect = _calc_rect(inner, outer, icol=icol, irow=irow, n=n)
+        kwargs = {}
+        if irow == 0:
+            kwargs.update({"xlabel": col_name})
+        else:
+            kwargs.update({"xticklabels": []})
 
-                if icol - 1 == irow:
-                    kwargs.update({"ylabel": data_dict.shown_params[irow]})
-                else:
-                    kwargs.update({"yticklabels": []})
+        if icol - 1 == irow:
+            kwargs.update({"ylabel": row_name})
+        else:
+            kwargs.update({"yticklabels": []})
 
-                ax = plt.axes(rect, **kwargs)
-                ax.xaxis.grid(True, linestyle="dashed")
-                ax.yaxis.grid(True, linestyle="dashed")
-                ax.set_axisbelow(True)
-                handles[irow][icol] = ax
+        ax = plt.axes(rect, **kwargs)
+        ax.xaxis.grid(True, linestyle="dashed")
+        ax.yaxis.grid(True, linestyle="dashed")
+        ax.set_axisbelow(True)
+        handles[irow][icol] = ax
     return handles
 
 
