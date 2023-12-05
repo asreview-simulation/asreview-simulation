@@ -180,6 +180,27 @@ def _plot_scatter(
         plt.scatter(data_dict.values[col_name], data_dict.values[row_name], **scatter_kwargs)
 
 
+def _plot_text(data_dict: _DataDict, trellis_handles: TrellisHandles):
+    s = ""
+    for param in data_dict.constant_params:
+        s += f"{param}: {data_dict.values[param][0]}\n"
+    params_left = data_dict.shown_params[:2]
+    bottom_left_axes = trellis_handles.get_axes_by_names(*params_left)
+    bottom_left_bbox = bottom_left_axes.get_position()
+
+    params_right = data_dict.shown_params[-2:]
+    top_right_axes = trellis_handles.get_axes_by_names(*params_right)
+    top_right_bbox = top_right_axes.get_position()
+
+    h = top_right_bbox.y1 - 0.1
+
+    rect = bottom_left_bbox.x0, 0.1, 0.1, h
+    ax = plt.axes(rect)
+    ax.set_ylim(1, 0)
+    ax.set_axis_off()
+    plt.text(0, 0, s, verticalalignment="top")
+
+
 def _prep_axes(
     data_dict: _DataDict,
     inner: Padding,
@@ -208,27 +229,6 @@ def _prep_axes(
         ax.set_axisbelow(True)
         handles[irow][icol] = ax
     return handles
-
-
-def _plot_text(data_dict: _DataDict, trellis_handles: TrellisHandles):
-    s = ""
-    for param in data_dict.constant_params:
-        s += f"{param}: {data_dict.values[param][0]}\n"
-    params_left = data_dict.shown_params[:2]
-    bottom_left_axes = trellis_handles.get_axes_by_names(*params_left)
-    bottom_left_bbox = bottom_left_axes.get_position()
-
-    params_right = data_dict.shown_params[-2:]
-    top_right_axes = trellis_handles.get_axes_by_names(*params_right)
-    top_right_bbox = top_right_axes.get_position()
-
-    h = top_right_bbox.y1 - 0.1
-
-    rect = bottom_left_bbox.x0, 0.1, 0.1, h
-    ax = plt.axes(rect)
-    ax.set_ylim(1, 0)
-    ax.set_axis_off()
-    plt.text(0, 0, s, verticalalignment="top")
 
 
 def plot_trellis(
