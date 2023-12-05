@@ -77,7 +77,7 @@ jobs:
       - name: Calculate unit test coverage
         shell: bash
         run: |
-          coverage run --debug=trace --branch --source=src/ --data-file=.coverage-reports/coverage -m pytest tests/unit/
+          coverage run --debug=trace --branch --source=asreviewcontrib.simulation --data-file=.coverage-reports/coverage -m pytest tests/unit/
           coverage report --data-file=.coverage-reports/coverage
           tree .coverage-reports
 
