@@ -5,6 +5,11 @@ on:
   schedule:
     - cron: 42 4 * * 2     #  04:42 on Tuesdays
 
+env:
+  ASREVIEW_VERSION: '1.2.1'
+  PYTHON_VERSION: '3.10'
+  OS: 'ubuntu-latest'
+
 jobs:
   setup:
     name: download
@@ -28,10 +33,6 @@ jobs:
 
 
   coverage:
-    env:
-      ASREVIEW_VERSION: '1.2.1'
-      PYTHON_VERSION: '3.10'
-      OS: 'ubuntu-latest'
     name: asr${{ env.ASREVIEW_VERSION }}-with-tf-py${{ env.PYTHON_VERSION }}-${{ env.OS }}
     runs-on: ${{ env.OS }}
     needs: setup
