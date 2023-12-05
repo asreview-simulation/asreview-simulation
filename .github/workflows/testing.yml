@@ -123,7 +123,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Show python info
+      - name: Show Python info
         shell: bash
         run: |
           which python
