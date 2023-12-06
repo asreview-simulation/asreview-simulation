@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           python3 -m pip install --upgrade pip wheel setuptools
-          python3 -m pip install .[linting]
+          python3 -m pip install .[dev]
       - name: Test
         shell: bash
         run: pre-commit run --all-files
