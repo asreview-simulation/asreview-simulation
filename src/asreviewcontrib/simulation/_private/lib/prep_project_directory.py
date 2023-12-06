@@ -8,8 +8,8 @@ from asreview.project import ASReviewProject
 def prep_project_directory(
     benchmark: Optional[str] = None, input_file: Optional[str] = None, output_file: Optional[str] = None
 ) -> (ASReviewProject, ASReviewData):
-    # Prepare an *.asreview.tmp directory which will contain the log / state / configuration
-    # of the ASReview analysis. The directory will be zipped later and renamed to *.asreview
+    """Prepare an *.asreview.tmp directory which will contain the log / state / configuration
+    of the ASReview analysis. The directory will be zipped later and renamed to *.asreview"""
     assert (benchmark is None) != (input_file is None), "Need to specify either 'benchmark' or 'input_file'"
     if benchmark is not None:
         assert isinstance(benchmark, str), "expected input argument 'benchmark' to be of type str"

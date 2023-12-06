@@ -12,11 +12,11 @@ from asreviewcontrib.simulation.api import unwrapping
 
 __all__ = [
     "AllModelConfig",
+    "OneModelConfig",
     "draw_sample",
     "get_abbrs",
     "get_dataset_names",
     "get_pyll",
-    "OneModelConfig",
     "plotting",
     "prep_project_directory",
     "run",
