@@ -13,9 +13,7 @@ pip install --editable .
 There are various sets of dependencies that you should install depending on the work you're planning to do. 
 
 ```shell
-pip install --editable .[testing]
-pip install --editable .[linting]
-pip install --editable .[publishing]
+pip install --editable .[dev]
 pip install --editable .[doc2vec]
 pip install --editable .[sbert]
 pip install --editable .[tensorflow]
@@ -24,7 +22,7 @@ pip install --editable .[tensorflow]
 You can combine subsets of these into one command like so, e.g.:
 
 ```shell
-pip install --editable .[linting,testing]
+pip install --editable .[sbert,doc2vec]
 ```
 
 ## Linting
@@ -32,7 +30,7 @@ pip install --editable .[linting,testing]
 Running pre-commit on unstaged files
 
 ```
-pip install --editable .[linting]
+pip install --editable .[dev]
 pre-commit run --all-files
 ```
 
@@ -42,7 +40,7 @@ There are various types of test: unit tests, tests that use mocking, and integra
 subdirectory. The tests can be run locally with:
 
 ```shell
-pip install --editable .[testing]
+pip install --editable .[dev]
 pytest -v
 ```
 
@@ -133,7 +131,23 @@ coverage report
 coverage html --directory=./html
 ```
 
+### Generating API documentation
+
+
+
+```shell
+# install dev dependencies, notably pdoc
+pip install --editable .[dev]
+
+# use pdoc to generate api docs for module asreviewcontrib.simulation.api and put it in ./docs
+pdoc -o docs asreviewcontrib.simulation.api
+```
+
 ## Publishing: Preparation
+
+```shell
+pip install --editable .[dev]
+```
 
 TODO
 
