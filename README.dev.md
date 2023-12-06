@@ -127,7 +127,7 @@ coverage run --branch --source=asreviewcontrib.simulation -m pytest tests/unit/
 # print a report in the terminal:
 coverage report
 
-# write a html report to ./html
+# write an html report to ./html
 coverage html --directory=./html
 ```
 
