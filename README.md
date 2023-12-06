@@ -12,6 +12,7 @@ be configured to run with custom parameterizations.
 | [![linting](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/linting.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/linting.yml) | Linting (`isort`,  `black`, and `ruff`, via `pre-commit`)                                                                 |
 | [![testing](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/testing.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/testing.yml) | Unit tests, mocked tests, and integration tests on combinations of operating system, ASReview version, and Python version |
 | [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-simulation)                            | Static code analysis report                                                                                               |
+| [![Code coverage](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=coverage)](https://sonarcloud.io/summary/overall?id=asreview-simulation)                             | Code coverage report                                                                                                      |
 
 ## Install
 
