@@ -17,6 +17,60 @@ def run(
     seed: int = None,
     no_zip: bool = False,
 ) -> Optional[float]:
+    """
+    Args:
+        config: The choice of 7 types of model and their parameterization.
+        project: The `ASReviewProject` object, see https://asreview.readthedocs.io
+        as_data: The `ASReviewData` object, see https://asreview.readthedocs.io
+        write_interval: Interval measured in number of queries at which to
+        write the state from memory to the state file.
+        seed: Random seed for the simulation
+        no_zip: Whether to forgo compressing the project temporary directory into a
+        zipped archive once the simulation ends.
+
+    Returns:
+        The objective score or `None`.
+
+    Example usage:
+
+    ```python
+    import os
+    import tempfile
+    from asreviewcontrib.simulation.api import Config
+    from asreviewcontrib.simulation.api import OneModelConfig
+    from asreviewcontrib.simulation.api import prep_project_directory
+    from asreviewcontrib.simulation.api import run
+
+    # make a classifier model config using default parameter values given the model name
+    cls = OneModelConfig("cls-svm")
+
+    # make a query model config using positional arguments, and a partial params dict
+    qry = OneModelConfig("qry-max-random", {"fraction_max": 0.90})
+
+    # make a stopping model config using keyword arguments
+    stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
+
+    # construct an all model config from one model configs -- implicitly use default
+    # model choice and parameterization for models not included as argument (i.e. sam,
+    # fex, bal, ofn)
+    config = Config(cls=cls, qry=qry, stp=stp)
+
+    # arbitrarily pick a benchmark dataset
+    benchmark = "benchmark:Cohen_2006_ADHD"
+
+    # create a temporary directory
+    tmpdir = tempfile.mkdtemp(prefix="asreview-simulation.", dir=".")
+    output_file = f"{tmpdir}{os.sep}project.asreview"
+
+    # prepare the directory that holds the state of the simulation
+    project, as_data = prep_project_directory(benchmark=benchmark,
+                                              output_file=output_file)
+
+    # start the simulation
+    run(config, project, as_data)
+    ```
+    """
+
     # prep
     kwargs = get_review_simulate_kwargs(config, as_data, seed)
     reviewer = ReviewSimulate(as_data, project=project, **kwargs, write_interval=write_interval)

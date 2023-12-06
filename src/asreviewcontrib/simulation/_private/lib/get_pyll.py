@@ -30,6 +30,10 @@ from asreviewcontrib.simulation._private.lib.stp.stp_rel_pyll import stp_rel_pyl
 
 
 def get_pyll(name: str) -> hyperopt.base.pyll.Apply:
+    """Return the Pyll program `dict` for a given model identified by the input argument
+    `name`. Pyll programs define the sample space for a given model or combination of
+    models. They are a concept from the `hyperopt` library, refer to
+    https://hyperopt.github.io/hyperopt/ for more details."""
     funcmap = {
         "bal-double": bal_double_pyll,
         "bal-simple": bal_simple_pyll,

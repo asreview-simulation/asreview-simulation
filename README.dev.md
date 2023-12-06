@@ -133,15 +133,22 @@ coverage html --directory=./html
 
 ### Generating API documentation
 
+The project uses code comments compliant with Google Docstrings
+(https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings) to document its API.
 
+HTML documentation may be generated from these code comments using the `pdoc` command line tool,
+as follows:
 
 ```shell
 # install dev dependencies, notably pdoc
 pip install --editable .[dev]
 
 # use pdoc to generate api docs for module asreviewcontrib.simulation.api and put it in ./docs
-pdoc -o docs asreviewcontrib.simulation.api
+pdoc --docformat google -o docs asreviewcontrib.simulation.api
 ```
+
+A GitHub Action named `apidocs` has been configured to generate the API documentation and host it
+on GitHub Pages https://asreview-simulation.github.io/asreview-simulation.
 
 ## Publishing: Preparation
 

@@ -4,6 +4,29 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, OneModelConfig]:
+    """Convenience function around `hyperopt.rand.pyll.stochastic.sample` to draw
+    a random sample given a Pyll program `dict`, i.e. input argument `pyll`. The returned object
+    can be directly passed into `Config`'s constructor by using keyword unpacking `**`.
+
+    ```python
+    fixed = {
+        "ofn": OneModelConfig(abbr="ofn-wss", params={"at_pct": 90}),
+        "qry": OneModelConfig(abbr="qry-max", params={"n_instances": 10}),
+    }
+
+    pyll = {
+        "bal": get_pyll("bal-double"),
+        "fex": get_pyll("fex-tfidf"),
+    }
+
+    # use pyll programs to draw a parameterization for 'bal' and 'fex'
+    drawn = draw_sample(pyll)
+
+    # construct an all-model config from one-model configs -- implicitly use default
+    # model choice and parameterization for models not included as argument
+    config = Config(**fixed, **drawn)
+    ```
+    """
     valid_keys = {"bal", "cls", "fex", "ofn", "qry", "sam", "stp"}
     assert isinstance(pyll, dict), "Expected input argument pyll to be of type 'dict'."
     for key in pyll.keys():
