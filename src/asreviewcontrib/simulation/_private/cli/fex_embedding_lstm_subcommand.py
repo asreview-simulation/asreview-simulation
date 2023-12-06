@@ -2,8 +2,8 @@ import click
 from asreview.models.feature_extraction import EmbeddingLSTM
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_fex_msg
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_params import get_fex_embedding_lstm_params
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_fex_embedding_lstm_params()
@@ -101,5 +101,5 @@ def fex_embedding_lstm_subcommand(
         "truncating": truncating,
         "use_keywords": use_keywords,
     }
-    obj.models.fex = OneModelConfig(abbr=name, params=params)
+    obj.config.fex = OneModelConfig(abbr=name, params=params)
     obj.provided.fex = True

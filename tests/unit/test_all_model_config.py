@@ -1,9 +1,9 @@
-from asreviewcontrib.simulation.api import AllModelConfig
+from asreviewcontrib.simulation.api import Config
 
 
 def test_flattened():
-    models = AllModelConfig()
-    actual = models.flattened()
+    config = Config()
+    actual = config.flattened()
     assert isinstance(actual, dict)
     expected = {
         "bal-double/a": 2.155,

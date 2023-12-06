@@ -67,7 +67,7 @@ def start_subcommand(obj, benchmark, input_file, no_zip, output_file, seed, writ
     project, as_data = prep_project_directory(benchmark=benchmark, input_file=input_file, output_file=output_file)
 
     # run
-    obj_score = run(obj.models, project, as_data, write_interval=write_interval, seed=seed, no_zip=no_zip)
+    obj_score = run(obj.config, project, as_data, write_interval=write_interval, seed=seed, no_zip=no_zip)
 
-    if obj.models.ofn.abbr != "ofn-none":
+    if obj.config.ofn.abbr != "ofn-none":
         click.echo(f"{obj_score}")

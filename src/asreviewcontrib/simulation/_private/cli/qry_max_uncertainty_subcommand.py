@@ -2,7 +2,7 @@ import click
 from asreview.models.query import MaxUncertaintyQuery
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_qry_msg
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.qry.qry_max_uncertainty_params import get_qry_max_uncertainty_params
 
 
@@ -47,5 +47,5 @@ def qry_max_uncertainty_subcommand(obj, force, fraction_max, n_instances):
         "fraction_max": fraction_max,
         "n_instances": n_instances,
     }
-    obj.models.qry = OneModelConfig(abbr=name, params=params)
+    obj.config.qry = OneModelConfig(abbr=name, params=params)
     obj.provided.qry = True

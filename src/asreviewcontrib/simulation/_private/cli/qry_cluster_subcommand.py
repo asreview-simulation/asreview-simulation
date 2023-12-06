@@ -2,7 +2,7 @@ import click
 from asreview.models.query import ClusterQuery
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_qry_msg
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.qry.qry_cluster_params import get_qry_cluster_params
 
 
@@ -57,5 +57,5 @@ def qry_cluster_subcommand(obj, force, cluster_size, n_instances, update_interva
         "n_instances": n_instances,
         "update_interval": update_interval,
     }
-    obj.models.qry = OneModelConfig(abbr=name, params=params)
+    obj.config.qry = OneModelConfig(abbr=name, params=params)
     obj.provided.qry = True

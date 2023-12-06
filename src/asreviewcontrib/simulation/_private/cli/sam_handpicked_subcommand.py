@@ -1,7 +1,7 @@
 import click
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_sam_msg
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.sam.sam_handpicked_params import get_sam_handpicked_params
 
 
@@ -54,7 +54,7 @@ def sam_handpicked_subcommand(obj, force, records, rows):
             "records": None,
             "rows": ids,
         }
-        obj.models.sam = OneModelConfig(abbr=name, params=params)
+        obj.config.sam = OneModelConfig(abbr=name, params=params)
         obj.provided.sam = True
 
     if records is not None:
@@ -67,5 +67,5 @@ def sam_handpicked_subcommand(obj, force, records, rows):
             "records": ids,
             "rows": None,
         }
-        obj.models.sam = OneModelConfig(abbr=name, params=params)
+        obj.config.sam = OneModelConfig(abbr=name, params=params)
         obj.provided.sam = True

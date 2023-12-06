@@ -3,7 +3,7 @@ from asreview.models.balance import DoubleBalance
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_bal_msg
 from asreviewcontrib.simulation._private.lib.bal.bal_double_params import get_bal_double_params
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_bal_double_params()
@@ -70,5 +70,5 @@ def bal_double_subcommand(obj, a, alpha, b, beta, force):
         "b": b,
         "beta": beta,
     }
-    obj.models.bal = OneModelConfig(abbr=name, params=params)
+    obj.config.bal = OneModelConfig(abbr=name, params=params)
     obj.provided.bal = True

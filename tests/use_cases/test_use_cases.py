@@ -3,7 +3,7 @@ from random import random
 from tempfile import TemporaryDirectory
 import pytest
 from matplotlib import pyplot as plt
-from asreviewcontrib.simulation.api import AllModelConfig
+from asreviewcontrib.simulation.api import Config
 from asreviewcontrib.simulation.api import draw_sample
 from asreviewcontrib.simulation.api import get_pyll
 from asreviewcontrib.simulation.api import OneModelConfig
@@ -26,13 +26,13 @@ benchmark = "benchmark:Cohen_2006_ADHD"
 def test_use_case_all_models_default():
     # construct an all-model config using the default model choise for each flavor of
     # model, and the default parameterization for each flavor
-    models = AllModelConfig()
+    config = Config()
 
     # create a temporary directory and start the simulation
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
         output_file = f"{tmpdir}{os.sep}project.asreview"
         project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
-        run(models, project, as_data)
+        run(config, project, as_data)
 
 
 @pytest.mark.sam_random
@@ -54,13 +54,13 @@ def test_use_case_some_models_nondefault():
 
     # construct an all-model config from one-model configs -- implicitly use default model choice
     # and parameterization for models not included as argument (i.e. sam, fex, bal, ofn)
-    models = AllModelConfig(cls=cls, qry=qry, stp=stp)
+    config = Config(cls=cls, qry=qry, stp=stp)
 
     # create a temporary directory and start the simulation
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
         output_file = f"{tmpdir}{os.sep}project.asreview"
         project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
-        run(models, project, as_data)
+        run(config, project, as_data)
 
 
 @pytest.mark.sam_random
@@ -98,13 +98,13 @@ def test_use_case_some_models_nondefault_some_models_drawn():
 
     # construct an all-model config from one-model configs -- implicitly use default model choice
     # and parameterization for models not included as argument (i.e. sam)
-    models = AllModelConfig(cls=cls, qry=qry, stp=stp, ofn=ofn, **drawn)
+    config = Config(cls=cls, qry=qry, stp=stp, ofn=ofn, **drawn)
 
     # create a temporary directory and start the simulation
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
         output_file = f"{tmpdir}{os.sep}project.asreview"
         project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
-        wss = run(models, project, as_data)
+        wss = run(config, project, as_data)
         assert wss is not None
 
 
@@ -136,16 +136,16 @@ def test_use_case_some_models_drawn_100_samples():
 
         # construct an all-model config from one-model configs -- implicitly use default model choice
         # and parameterization for models not included as argument
-        models = AllModelConfig(**fixed, **drawn)
+        config = Config(**fixed, **drawn)
 
         # create a temporary directory and start the simulation
         with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
             output_file = f"{tmpdir}{os.sep}project.asreview"
             project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
-            wss = run(models, project, as_data)
+            wss = run(config, project, as_data)
             assert wss is not None
 
-        results.append((models, wss))
+        results.append((config, wss))
 
     if "PYTEST_CURRENT_TEST" not in os.environ:
         plt.figure()
@@ -192,8 +192,8 @@ def test_trellis():
 
         # construct an all-model config from one-model configs -- implicitly use default model choice
         # and parameterization for models not included as argument
-        models = AllModelConfig(**fixed, **drawn)
-        results.append((models, random()))
+        config = Config(**fixed, **drawn)
+        results.append((config, random()))
 
     if "PYTEST_CURRENT_TEST" not in os.environ:
         plt.figure()

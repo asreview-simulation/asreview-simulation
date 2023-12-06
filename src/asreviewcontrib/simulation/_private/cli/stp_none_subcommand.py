@@ -1,7 +1,7 @@
 import click
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_stp_msg
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 name = "stp-none"
@@ -25,5 +25,5 @@ def stp_none_subcommand(obj, force):
     if not force:
         assert obj.provided.stp is False, dont_reassign_stp_msg
     params = {}
-    obj.models.stp = OneModelConfig(abbr=name, params=params)
+    obj.config.stp = OneModelConfig(abbr=name, params=params)
     obj.provided.stp = True

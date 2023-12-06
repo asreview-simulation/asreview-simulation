@@ -1,7 +1,7 @@
 import click
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_sam_msg
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.sam.sam_random_params import get_sam_random_params
 
 
@@ -55,5 +55,5 @@ def sam_random_subcommand(obj, force, init_seed, n_excluded, n_included):
         "n_excluded": n_excluded,
         "n_included": n_included,
     }
-    obj.models.sam = OneModelConfig(abbr=name, params=params)
+    obj.config.sam = OneModelConfig(abbr=name, params=params)
     obj.provided.sam = True

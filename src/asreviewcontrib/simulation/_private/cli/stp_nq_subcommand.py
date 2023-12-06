@@ -1,7 +1,7 @@
 import click
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_stp_msg
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.stp.stp_nq_params import get_stp_nq_params
 
 
@@ -37,5 +37,5 @@ def stp_nq_subcommand(obj, force, n_queries):
     params = {
         "n_queries": n_queries,
     }
-    obj.models.stp = OneModelConfig(abbr=name, params=params)
+    obj.config.stp = OneModelConfig(abbr=name, params=params)
     obj.provided.stp = True

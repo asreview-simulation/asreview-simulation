@@ -3,7 +3,7 @@ from asreview.models.classifiers import RandomForestClassifier
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_cls_msg
 from asreviewcontrib.simulation._private.lib.cls.cls_rf_params import get_cls_rf_params
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_cls_rf_params()
@@ -56,5 +56,5 @@ def cls_rf_subcommand(obj, class_weight, force, max_features, n_estimators):
         "max_features": max_features,
         "n_estimators": n_estimators,
     }
-    obj.models.cls = OneModelConfig(abbr=name, params=params)
+    obj.config.cls = OneModelConfig(abbr=name, params=params)
     obj.provided.cls = True

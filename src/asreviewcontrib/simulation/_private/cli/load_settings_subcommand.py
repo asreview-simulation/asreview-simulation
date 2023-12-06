@@ -7,7 +7,7 @@ from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_ofn_m
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_qry_msg
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_sam_msg
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_stp_msg
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 def assign_bal(settings):
@@ -119,10 +119,10 @@ def load_settings_subcommand(obj, settings_file):
         settings = json.load(fid)
     assert_keys_are_valid()
 
-    obj.models.bal, obj.provided.bal = assign_bal(settings)
-    obj.models.cls, obj.provided.cls = assign_cls(settings)
-    obj.models.fex, obj.provided.fex = assign_fex(settings)
-    obj.models.obj, obj.provided.obj = assign_ofn(settings)
-    obj.models.qry, obj.provided.qry = assign_qry(settings)
-    obj.models.sam, obj.provided.sam = assign_sam(settings)
-    obj.models.stp, obj.provided.stp = assign_stp(settings)
+    obj.config.bal, obj.provided.bal = assign_bal(settings)
+    obj.config.cls, obj.provided.cls = assign_cls(settings)
+    obj.config.fex, obj.provided.fex = assign_fex(settings)
+    obj.config.obj, obj.provided.obj = assign_ofn(settings)
+    obj.config.qry, obj.provided.qry = assign_qry(settings)
+    obj.config.sam, obj.provided.sam = assign_sam(settings)
+    obj.config.stp, obj.provided.stp = assign_stp(settings)

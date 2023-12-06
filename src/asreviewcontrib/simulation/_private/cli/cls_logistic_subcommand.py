@@ -3,7 +3,7 @@ from asreview.models.classifiers import LogisticClassifier
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_cls_msg
 from asreviewcontrib.simulation._private.lib.cls.cls_logistic_params import get_cls_logistic_params
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_cls_logistic_params()
@@ -47,5 +47,5 @@ def cls_logistic_subcommand(obj, c, class_weight, force):
         "c": c,
         "class_weight": class_weight,
     }
-    obj.models.cls = OneModelConfig(abbr=name, params=params)
+    obj.config.cls = OneModelConfig(abbr=name, params=params)
     obj.provided.cls = True

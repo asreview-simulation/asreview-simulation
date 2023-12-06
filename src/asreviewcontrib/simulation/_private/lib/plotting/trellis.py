@@ -7,7 +7,7 @@ from typing import Tuple
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.interpolate import griddata
-from asreviewcontrib.simulation._private.lib.all_model_config import AllModelConfig
+from asreviewcontrib.simulation._private.lib.config import Config
 from asreviewcontrib.simulation._private.lib.plotting.padding import Padding
 
 
@@ -90,7 +90,7 @@ class TrellisHandles:
 
 
 def _calc_data_dict(
-    data: List[Tuple[AllModelConfig, float]],
+    data: List[Tuple[Config, float]],
     show_params: List[str],
 ) -> Tuple[_DataDict, List[float]]:
     """Manipulate the data such that it becomes easy to access all values pertaining to
@@ -241,7 +241,7 @@ def _prep_axes(
 
 
 def plot_trellis(
-    data: List[Tuple[AllModelConfig, float]],
+    data: List[Tuple[Config, float]],
     show_params: List[str] = None,
     outer_padding: Padding = None,
     inner_padding: Padding = None,

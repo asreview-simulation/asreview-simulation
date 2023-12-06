@@ -1,4 +1,4 @@
-from asreviewcontrib.simulation._private.lib.all_model_config import AllModelConfig
+from asreviewcontrib.simulation._private.lib.config import Config
 
 
 class Provided:
@@ -79,5 +79,5 @@ class Provided:
 
 class State:
     def __init__(self):
-        self.models = AllModelConfig()
+        self.config = Config()
         self.provided = Provided()

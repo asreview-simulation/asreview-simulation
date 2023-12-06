@@ -3,7 +3,7 @@ from asreview.models.balance import UndersampleBalance
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_bal_msg
 from asreviewcontrib.simulation._private.lib.bal.bal_undersample_params import get_bal_undersample_params
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_bal_undersample_params()
@@ -39,5 +39,5 @@ def bal_undersample_subcommand(obj, force, ratio):
     params = {
         "ratio": ratio,
     }
-    obj.models.bal = OneModelConfig(abbr=name, params=params)
+    obj.config.bal = OneModelConfig(abbr=name, params=params)
     obj.provided.bal = True

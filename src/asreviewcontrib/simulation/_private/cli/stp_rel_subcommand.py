@@ -1,6 +1,6 @@
 import click
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 name = "stp-rel"
@@ -27,5 +27,5 @@ def stp_rel_subcommand(obj, force):
             + "if you mean to overwrite the configuration from previous steps. "
         )
     params = {}
-    obj.models.stp = OneModelConfig(abbr=name, params=params)
+    obj.config.stp = OneModelConfig(abbr=name, params=params)
     obj.provided.stp = True

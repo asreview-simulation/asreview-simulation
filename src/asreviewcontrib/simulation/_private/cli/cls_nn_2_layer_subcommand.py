@@ -3,7 +3,7 @@ from asreview.models.classifiers import NN2LayerClassifier
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_cls_msg
 from asreviewcontrib.simulation._private.lib.cls.cls_nn_2_layer_params import get_cls_nn_2_layer_params
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_cls_nn_2_layer_params()
@@ -111,5 +111,5 @@ def cls_nn_2_layer_subcommand(
         "regularization": regularization,
         "shuffle": shuffle,
     }
-    obj.models.cls = OneModelConfig(abbr=name, params=params)
+    obj.config.cls = OneModelConfig(abbr=name, params=params)
     obj.provided.cls = True

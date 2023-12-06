@@ -2,8 +2,8 @@ import click
 from asreview.models.feature_extraction import EmbeddingIdf
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_fex_msg
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_params import get_fex_embedding_idf_params
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_fex_embedding_idf_params()
@@ -53,5 +53,5 @@ def fex_embedding_idf_subcommand(obj, embedding, force, split_ta, use_keywords):
         "split_ta": split_ta,
         "use_keywords": use_keywords,
     }
-    obj.models.fex = OneModelConfig(abbr=name, params=params)
+    obj.config.fex = OneModelConfig(abbr=name, params=params)
     obj.provided.fex = True

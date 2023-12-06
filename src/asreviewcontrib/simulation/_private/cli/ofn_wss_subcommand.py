@@ -1,8 +1,8 @@
 import click
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_ofn_msg
+from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.ofn.ofn_wss_params import get_ofn_wss_params
-from asreviewcontrib.simulation._private.lib.one_model_config import OneModelConfig
 
 
 default_params = get_ofn_wss_params()
@@ -38,5 +38,5 @@ def ofn_wss_subcommand(obj, at_pct, force):
     params = {
         "at_pct": at_pct,
     }
-    obj.models.ofn = OneModelConfig(abbr=name, params=params)
+    obj.config.ofn = OneModelConfig(abbr=name, params=params)
     obj.provided.ofn = True
