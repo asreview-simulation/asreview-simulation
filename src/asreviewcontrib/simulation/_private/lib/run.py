@@ -19,14 +19,20 @@ def run(
 ) -> Optional[float]:
     """
     Args:
-        config: The choice of 7 types of model and their parameterization.
-        project: The `ASReviewProject` object, see https://asreview.readthedocs.io
-        as_data: The `ASReviewData` object, see https://asreview.readthedocs.io
-        write_interval: Interval measured in number of queries at which to
-        write the state from memory to the state file.
-        seed: Random seed for the simulation
-        no_zip: Whether to forgo compressing the project temporary directory into a
-        zipped archive once the simulation ends.
+        config:
+            The choice of 7 types of model and their parameterization.
+        project:
+            The `ASReviewProject` object, see https://asreview.readthedocs.io
+        as_data:
+            The `ASReviewData` object, see https://asreview.readthedocs.io
+        write_interval:
+            Interval measured in number of queries at which to
+            write the state from memory to the state file.
+        seed:
+            Random seed for the simulation
+        no_zip:
+            Whether to forgo compressing the project temporary directory into a
+            zipped archive once the simulation ends.
 
     Returns:
         The objective score or `None`.
