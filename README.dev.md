@@ -127,6 +127,9 @@ coverage report
 coverage html --directory=./html
 ```
 
+In addition to calculating code coverage locally, there is also a GitHub Action named "sonarcloud" that runs
+the analysis and uploads the results to SonarCloud: https://sonarcloud.io/component_measures?id=asreview-simulation&metric=coverage&view=list
+
 ## Publishing: Preparation
 
 TODO
