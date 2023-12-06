@@ -6,6 +6,7 @@ from asreviewcontrib.simulation._private.lib.get_default_params import get_defau
 class OneModelConfig:
     """Stores the configuration for one model, e.g. the balancer, the stopping model,
     or the objective function model."""
+
     def __init__(self, abbr: str, params: Optional[Dict] = None):
         """Constructor method. Some example usages:
 

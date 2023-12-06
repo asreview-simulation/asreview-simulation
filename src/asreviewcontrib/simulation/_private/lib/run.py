@@ -4,8 +4,8 @@ from typing import Optional
 from asreview.data import ASReviewData
 from asreview.project import ASReviewProject
 from asreview.review.simulate import ReviewSimulate
-from asreviewcontrib.simulation._private.lib.config import Config
 from asreviewcontrib.simulation._private.lib.calc_ofn_score import calc_ofn_score
+from asreviewcontrib.simulation._private.lib.config import Config
 from asreviewcontrib.simulation._private.lib.unwrapping.get_review_simulate_kwargs import get_review_simulate_kwargs
 
 
