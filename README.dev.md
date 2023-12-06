@@ -112,6 +112,21 @@ simulation using `asreview simulation [subcommands with options] start`, then co
 generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and
 `reviews/<id>/settings_metadata.json`, but not `feature_matrices/<extractor-method>_feature_matrix.npz` at the moment).
 
+### Coverage calculation
+
+Unit test coverage can be calculated and reported by:
+
+```shell
+# collect the data:
+coverage run --branch --source=asreviewcontrib.simulation -m pytest tests/unit/
+
+# print a report in the terminal:
+coverage report
+
+# write a html report to ./html
+coverage html --directory=./html
+```
+
 ## Publishing: Preparation
 
 TODO

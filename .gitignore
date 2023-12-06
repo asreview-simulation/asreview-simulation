@@ -4,5 +4,8 @@
 
 build
 venv
-.coverage-reports
 
+# coverage-related
+.coverage-reports
+.coverage
+coverage.xml
