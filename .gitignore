@@ -9,3 +9,8 @@ venv
 .coverage-reports
 .coverage
 coverage.xml
+
+
+# generated documentation
+docs
+
