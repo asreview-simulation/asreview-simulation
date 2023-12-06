@@ -185,7 +185,7 @@ For a full overview of the API, see `tests/api/test_api.py`. Here is an example:
 ```python
 import os
 import tempfile
-from asreviewcontrib.simulation.api import AllModelConfig
+from asreviewcontrib.simulation.api import Config
 from asreviewcontrib.simulation.api import OneModelConfig
 from asreviewcontrib.simulation.api import prep_project_directory
 from asreviewcontrib.simulation.api import run
@@ -202,7 +202,7 @@ stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
 
 # construct an all model config from one model configs -- implicitly use default model choice
 # and parameterization for models not included as argument (i.e. sam, fex, bal, ofn)
-models = AllModelConfig(cls=cls, qry=qry, stp=stp)
+config = Config(cls=cls, qry=qry, stp=stp)
 
 # arbitrarily pick a benchmark dataset
 benchmark = "benchmark:Cohen_2006_ADHD"
@@ -211,7 +211,7 @@ benchmark = "benchmark:Cohen_2006_ADHD"
 tmpdir = tempfile.mkdtemp(prefix="asreview-simulation.", dir=".")
 output_file = f"{tmpdir}{os.sep}project.asreview"
 project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
-run(models, project, as_data)
+run(config, project, as_data)
 ```
 
 For more examples, refer to `tests/use_cases/test_use_cases.py`.
