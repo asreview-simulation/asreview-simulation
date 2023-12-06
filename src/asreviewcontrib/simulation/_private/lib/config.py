@@ -1,5 +1,7 @@
+from typing import Any
 from typing import Dict
 from typing import Optional
+from typing import Union
 from asreviewcontrib.simulation._private.lib.get_default_params import get_default_params
 
 
@@ -44,22 +46,23 @@ class OneModelConfig:
                 assert key in valid_keys, f"Can't update parameters for model '{self._abbr}' using unknown key '{key}'."
                 self._params[key] = params[key]
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         """Test whether this instance of `OneModelConfig` is exactly equal to the `other` instance
         with respect to the set of key names and their values."""
+        assert isinstance(other, OneModelConfig), "Can only compare to objects of equal type."
         cond1 = self._abbr == other._abbr
         cond2 = set(self._params) == set(other._params)
         cond3 = False not in {self._params[k] == other._params[k] for k in self._params.keys()}
         return cond1 and cond2 and cond3
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> Dict[str, Any]:
         """Returns the model configuration as a `dict`."""
         return {
             "abbr": self._abbr,
             "params": self._params,
         }
 
-    def flattened(self):
+    def flattened(self) -> Dict[str, Any]:
         """Returns a flattened version of the model configuration as a `dict` whose keys consist
         of the name of the model and the name of its parameters."""
         d = {}
@@ -75,7 +78,7 @@ class OneModelConfig:
         return self._abbr
 
     @property
-    def params(self) -> dict:
+    def params(self) -> Dict[str, Any]:
         """Read-only property that returns the model parameterization."""
         return self._params
 
@@ -158,7 +161,10 @@ class Config:
         self.sam = sam or OneModelConfig("sam-random")
         self.stp = stp or OneModelConfig("stp-rel")
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
+        """Tests whether all of `self`'s 7 model configurations are equal to those
+        of the `other` instance."""
+        assert isinstance(other, Config), "Can only compare to objects of equal type."
         return False not in {
             self._bal == other._bal,
             self._cls == other._cls,
@@ -169,7 +175,11 @@ class Config:
             self._stp == other._stp,
         }
 
-    def as_dict(self, recurse=True) -> dict:
+    def as_dict(self, recurse=True) -> Union[Dict[str, OneModelConfig], Dict[str, Dict[str, Any]]]:
+        """Returns a `dict` representation of the 7 different model configurations. When `recurse`
+        is `True` (as is the default), each of the 7 `OneModelConfig`s are themselves also turned
+        into a `dict` using their `.as_dict()` method; if `recurse` is `False`, the returned object
+        is a `dict` whose values are of class `OneModelConfig`."""
         return {
             "bal": self._bal.as_dict() if recurse else self._bal,
             "cls": self._cls.as_dict() if recurse else self._cls,
@@ -180,7 +190,9 @@ class Config:
             "stp": self._stp.as_dict() if recurse else self._sam,
         }
 
-    def flattened(self) -> dict:
+    def flattened(self) -> Dict[str, Any]:
+        """Returns a flattened version of the 7 model configurations as a `dict` whose keys consist
+        of the name of the model and the name of its parameters."""
         d = {}
         d.update(self.bal.flattened())
         d.update(self.cls.flattened())
@@ -193,7 +205,7 @@ class Config:
 
     @property
     def bal(self) -> OneModelConfig:
-        """Returns the configuration for the balancer model."""
+        """Sets/gets the configuration for the balancer model."""
         return self._bal
 
     @bal.setter
@@ -204,7 +216,7 @@ class Config:
 
     @property
     def cls(self) -> OneModelConfig:
-        """Returns the configuration for the classifier model."""
+        """Sets/gets the configuration for the classifier model."""
         return self._cls
 
     @cls.setter
@@ -215,7 +227,7 @@ class Config:
 
     @property
     def fex(self) -> OneModelConfig:
-        """Returns the configuration for the feature extraction model."""
+        """Sets/gets the configuration for the feature extraction model."""
         return self._fex
 
     @fex.setter
@@ -226,7 +238,7 @@ class Config:
 
     @property
     def ofn(self) -> OneModelConfig:
-        """Returns the configuration for the objective function model."""
+        """Sets/gets the configuration for the objective function model."""
         return self._ofn
 
     @ofn.setter
@@ -237,7 +249,7 @@ class Config:
 
     @property
     def qry(self) -> OneModelConfig:
-        """Returns the configuration for the query model."""
+        """Sets/gets the configuration for the query model."""
         return self._qry
 
     @qry.setter
@@ -248,7 +260,7 @@ class Config:
 
     @property
     def sam(self) -> OneModelConfig:
-        """Returns the configuration for the sampling model."""
+        """Sets/gets the configuration for the sampling model."""
         return self._sam
 
     @sam.setter
@@ -259,7 +271,7 @@ class Config:
 
     @property
     def stp(self) -> OneModelConfig:
-        """Returns the configuration for the stopping model."""
+        """Sets/gets the configuration for the stopping model."""
         return self._stp
 
     @stp.setter
