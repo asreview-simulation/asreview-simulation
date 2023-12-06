@@ -75,8 +75,8 @@ pytest -m 'cls_logistic or cls_rf' -v
 # etc
 ```
 
-Besides running locally, they can also be run on GitHub infrastructure by manually triggering the GitHub action
-workflow `.github/workflows/testing.yml`. The workflow tests whether the tests pass for all combinations of operating
+Besides running locally, they can also be run on GitHub infrastructure by manually triggering the GitHub Action
+workflow `testing`. The workflow tests whether the tests pass for all combinations of operating
 system (Windows, Linux, MacOS), asreview version (1.0.4, 1.1.1, 1.2.1), and python version (3.8, 3.9, 3.10, 3.11).
 
 Currently, the `testing` workflow on GitHub skips any tests that require TensorFlow on Python >= 3.11 (tests marked
@@ -112,9 +112,15 @@ simulation using `asreview simulation [subcommands with options] start`, then co
 generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and
 `reviews/<id>/settings_metadata.json`, but not `feature_matrices/<extractor-method>_feature_matrix.npz` at the moment).
 
-### Coverage calculation
+### Static analysis and coverage calculation
 
-Unit test coverage can be calculated and reported by:
+The project has been set up to use [SonarCloud](https://sonarcloud.io) to perform static analysis on the code base via
+a GitHub Action named `sonarcloud`. The analysis runs on a weekly schedule but can also be triggered manually.
+The results can be inspected at SonarCloud: https://sonarcloud.io/summary/overall?id=asreview-simulation. The same GitHub
+Action also calculates code coverage and uploads the results to SonarCloud:
+https://sonarcloud.io/component_measures?id=asreview-simulation&metric=coverage&view=list.
+
+In addition to the GitHub Action, unit test coverage can be calculated and reported locally using:
 
 ```shell
 # collect the data:
@@ -126,9 +132,6 @@ coverage report
 # write a html report to ./html
 coverage html --directory=./html
 ```
-
-In addition to calculating code coverage locally, there is also a GitHub Action named "sonarcloud" that runs
-the analysis and uploads the results to SonarCloud: https://sonarcloud.io/component_measures?id=asreview-simulation&metric=coverage&view=list
 
 ## Publishing: Preparation
 
