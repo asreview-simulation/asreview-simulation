@@ -81,6 +81,17 @@ class OneModelConfig:
 
 
 class Config:
+    """Stores the configuration for all 7 types of model necessary to run an ASReview simulation. Specifically, these are:
+
+    1. the sampling model `sam`
+    2. the feature extraction model `fex`
+    3. the classifier model `cls`
+    4. the query model `qry`
+    5. the balancer model `bal`
+    6. the stopping model `stp`
+    7. the objective function model `ofn`
+    """
+
     _errmsg = "Expected an instance of OneModelConfig"
 
     def __init__(
