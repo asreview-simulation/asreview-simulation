@@ -4,9 +4,20 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, OneModelConfig]:
-    """Convenience function around `hyperopt.rand.pyll.stochastic.sample` to draw
-    a random sample given a Pyll program `dict`, i.e. input argument `pyll`. The returned object
-    can be directly passed into `Config`'s constructor by using keyword unpacking `**`.
+    """
+    Args:
+        pyll:
+            The Pyll program `dict`.
+
+    Returns:
+        A dictionary with model type abbreviation for each key (`bal`, `fex`,
+        `stp`, etc), and the corresponding parameterization as randomly drawn
+        by `hyperopt.rand.pyll.stochastic.sample`.
+
+    Convenience function around `hyperopt.rand.pyll.stochastic.sample` to draw
+    a random sample given a Pyll program `dict`, i.e. input argument `pyll`. The returned
+    object can be directly passed into `Config`'s constructor by using keyword unpacking
+    `**`, for example like so:
 
     ```python
     fixed = {

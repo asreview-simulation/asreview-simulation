@@ -37,6 +37,9 @@ def run(
     Returns:
         The objective score or `None`.
 
+    Runs the ASReview simulation with the provided choice of models and their
+    parameterization (i.e., input argument `config`).
+
     Example usage:
 
     ```python

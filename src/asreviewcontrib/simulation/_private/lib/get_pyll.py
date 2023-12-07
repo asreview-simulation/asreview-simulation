@@ -29,11 +29,18 @@ from asreviewcontrib.simulation._private.lib.stp.stp_nq_pyll import stp_nq_pyll
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_pyll import stp_rel_pyll
 
 
-def get_pyll(name: str) -> hyperopt.base.pyll.Apply:
-    """Return the Pyll program `dict` for a given model identified by the input argument
-    `name`. Pyll programs define the sample space for a given model or combination of
-    models. They are a concept from the `hyperopt` library, refer to
-    https://hyperopt.github.io/hyperopt/ for more details."""
+def get_pyll(abbr: str) -> hyperopt.base.pyll.Apply:
+    """
+    Args:
+        abbr:
+            The model abbreviation.
+
+    Returns:
+        The Pyll program `dict` for a given model identified by the input argument
+        `abbr`. Pyll programs define the sample space for a given model or combination of
+        models. They are a concept from the `hyperopt` library, refer to
+        https://hyperopt.github.io/hyperopt/ for more details.
+    """
     funcmap = {
         "bal-double": bal_double_pyll,
         "bal-simple": bal_simple_pyll,
@@ -65,9 +72,9 @@ def get_pyll(name: str) -> hyperopt.base.pyll.Apply:
         "stp-rel": stp_rel_pyll,
     }
     try:
-        func = funcmap[name]
+        func = funcmap[abbr]
     except KeyError as e:
-        names = "\n".join(list(funcmap.keys()))
-        print(f"'{name}' is not a valid name for a model. Valid names are:\n{names}")
+        abbrs = "\n".join(list(funcmap.keys()))
+        print(f"'{abbr}' is not a valid name for a model. Valid names are:\n{abbrs}")
         raise e
     return func()

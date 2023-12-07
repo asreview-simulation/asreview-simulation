@@ -10,7 +10,14 @@ class OneModelConfig:
     or the objective function model."""
 
     def __init__(self, abbr: str, params: Optional[Dict] = None):
-        """Constructor method. Some example usages:
+        """
+        Args:
+            abbr:
+                The model abbreviation.
+            params:
+                The model parameters.
+
+        Constructor method. Some example usages:
 
         1. Default parameter values given the choice for `bal-simple`.
             ```python
@@ -84,16 +91,7 @@ class OneModelConfig:
 
 
 class Config:
-    """Stores the configuration for all 7 types of model necessary to run an ASReview simulation. Specifically, these are:
-
-    1. the sampling model `sam`
-    2. the feature extraction model `fex`
-    3. the classifier model `cls`
-    4. the query model `qry`
-    5. the balancer model `bal`
-    6. the stopping model `stp`
-    7. the objective function model `ofn`
-    """
+    """Stores the configuration for all 7 types of model necessary to run an ASReview simulation."""
 
     _errmsg = "Expected an instance of OneModelConfig"
 
@@ -107,7 +105,24 @@ class Config:
         sam: Optional[OneModelConfig] = None,
         stp: Optional[OneModelConfig] = None,
     ):
-        """Constructor method. Some example usages:
+        """
+        Args:
+            bal:
+                The balancer model.
+            cls:
+                The classification model.
+            fex:
+                The feature extraction model.
+            ofn:
+                The objective function model.
+            qry:
+                The query model.
+            sam:
+                The prior sampling model.
+            stp:
+                The stopping model.
+
+        Constructor method. Some example usages:
 
         1. Default choice for each model type, default configuration for each model.
             ```python

@@ -8,8 +8,28 @@ from asreview.project import ASReviewProject
 def prep_project_directory(
     benchmark: Optional[str] = None, input_file: Optional[str] = None, output_file: Optional[str] = None
 ) -> (ASReviewProject, ASReviewData):
-    """Prepare an `*.asreview.tmp` directory which will contain the log / state / configuration
-    of the ASReview analysis."""
+    """
+    Args:
+        benchmark:
+            The name of the benchmark data set. You can retrieve the list of recognized
+            names using `get_dataset_names`. The function expects either `benchmark` or
+            `input_file` to be defined.
+        input_file:
+            The name of the input file. This can be a relative path from the working
+            directory, or an absolute path. The function expects either `benchmark` or
+            `input_file` to be defined. The target file should be a valid input file
+            for ASReview, see https://asreview.readthedocs.io for more information.
+        output_file:
+            Where the results from the simulation will be written.
+
+    Returns:
+        A 2-tuple of `(project, as_data)` where `project` is the `ASReviewProject` object,
+        and `as_data` is the `ASReviewData` object, see https://asreview.readthedocs.io
+        for more information on these.
+
+    Prepare an `*.asreview.tmp` directory which will contain the log / state / configuration
+    of the ASReview simulation.
+    """
     assert (benchmark is None) != (input_file is None), "Need to specify either 'benchmark' or 'input_file'"
     if benchmark is not None:
         assert isinstance(benchmark, str), "expected input argument 'benchmark' to be of type str"
