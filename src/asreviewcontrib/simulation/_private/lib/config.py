@@ -124,7 +124,7 @@ class Config:
             bal:
                 The configuration for the balancer model.
             clr:
-                The configuration for the classification model.
+                The configuration for the classifier model.
             fex:
                 The configuration for the feature extraction model.
             ofn:
@@ -176,7 +176,7 @@ class Config:
                     ),
                     "stp": OneModelConfig(abbr="stp-nq"),
                 }
-                config = Config(*custom)
+                config = Config(**custom)
                 ```
         """
 
