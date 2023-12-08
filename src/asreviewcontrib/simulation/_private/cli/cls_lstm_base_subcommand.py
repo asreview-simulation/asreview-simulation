@@ -1,13 +1,13 @@
 import click
 from asreview.models.classifiers import LSTMBaseClassifier
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
-from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_cls_msg
-from asreviewcontrib.simulation._private.lib.cls.cls_lstm_base_params import get_cls_lstm_base_params
+from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_clr_msg
+from asreviewcontrib.simulation._private.lib.clr.clr_lstm_base_params import get_clr_lstm_base_params
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
-default_params = get_cls_lstm_base_params()
-name = f"cls-{LSTMBaseClassifier.name}"
+default_params = get_clr_lstm_base_params()
+name = f"clr-{LSTMBaseClassifier.name}"
 
 
 @click.command(
@@ -60,7 +60,7 @@ name = f"cls-{LSTMBaseClassifier.name}"
     "-f",
     "--force",
     "force",
-    help="Force setting the 'cls' configuration, even if that means overwriting a previous configuration.",
+    help="Force setting the 'clr' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -102,7 +102,7 @@ name = f"cls-{LSTMBaseClassifier.name}"
     is_flag=True,
 )
 @click.pass_obj
-def cls_lstm_base_subcommand(
+def clr_lstm_base_subcommand(
     obj,
     batch_size,
     class_weight,
@@ -117,7 +117,7 @@ def cls_lstm_base_subcommand(
     shuffle,
 ):
     if not force:
-        assert obj.provided.cls is False, dont_reassign_cls_msg
+        assert obj.provided.clr is False, dont_reassign_clr_msg
     params = {
         "batch_size": batch_size,
         "class_weight": class_weight,
@@ -130,5 +130,5 @@ def cls_lstm_base_subcommand(
         "lstm_out_width": lstm_out_width,
         "shuffle": shuffle,
     }
-    obj.config.cls = OneModelConfig(abbr=name, params=params)
-    obj.provided.cls = True
+    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.provided.clr = True

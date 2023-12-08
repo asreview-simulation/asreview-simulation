@@ -1,13 +1,13 @@
 from asreviewcontrib.simulation._private.lib.bal.bal_double_unwrap import instantiate_unwrapped_bal_double
 from asreviewcontrib.simulation._private.lib.bal.bal_simple_unwrap import instantiate_unwrapped_bal_simple
 from asreviewcontrib.simulation._private.lib.bal.bal_undersample_unwrap import instantiate_unwrapped_bal_undersample
-from asreviewcontrib.simulation._private.lib.cls.cls_logistic_unwrap import instantiate_unwrapped_cls_logistic
-from asreviewcontrib.simulation._private.lib.cls.cls_lstm_base_unwrap import instantiate_unwrapped_cls_lstm_base
-from asreviewcontrib.simulation._private.lib.cls.cls_lstm_pool_unwrap import instantiate_unwrapped_cls_lstm_pool
-from asreviewcontrib.simulation._private.lib.cls.cls_nb_unwrap import instantiate_unwrapped_cls_nb
-from asreviewcontrib.simulation._private.lib.cls.cls_nn_2_layer_unwrap import instantiate_unwrapped_cls_nn_2_layer
-from asreviewcontrib.simulation._private.lib.cls.cls_rf_unwrap import instantiate_unwrapped_cls_rf
-from asreviewcontrib.simulation._private.lib.cls.cls_svm_unwrap import instantiate_unwrapped_cls_svm
+from asreviewcontrib.simulation._private.lib.clr.clr_logistic_unwrap import instantiate_unwrapped_clr_logistic
+from asreviewcontrib.simulation._private.lib.clr.clr_lstm_base_unwrap import instantiate_unwrapped_clr_lstm_base
+from asreviewcontrib.simulation._private.lib.clr.clr_lstm_pool_unwrap import instantiate_unwrapped_clr_lstm_pool
+from asreviewcontrib.simulation._private.lib.clr.clr_nb_unwrap import instantiate_unwrapped_clr_nb
+from asreviewcontrib.simulation._private.lib.clr.clr_nn_2_layer_unwrap import instantiate_unwrapped_clr_nn_2_layer
+from asreviewcontrib.simulation._private.lib.clr.clr_rf_unwrap import instantiate_unwrapped_clr_rf
+from asreviewcontrib.simulation._private.lib.clr.clr_svm_unwrap import instantiate_unwrapped_clr_svm
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 from asreviewcontrib.simulation._private.lib.fex.fex_doc2vec_unwrap import instantiate_unwrapped_fex_doc2vec
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_unwrap import instantiate_unwrapped_fex_embedding_idf
@@ -28,13 +28,13 @@ def instantiate_unwrapped_model(model: OneModelConfig, random_state):
         "bal-double": instantiate_unwrapped_bal_double,
         "bal-simple": instantiate_unwrapped_bal_simple,
         "bal-undersample": instantiate_unwrapped_bal_undersample,
-        "cls-logistic": instantiate_unwrapped_cls_logistic,
-        "cls-lstm-base": instantiate_unwrapped_cls_lstm_base,
-        "cls-lstm-pool": instantiate_unwrapped_cls_lstm_pool,
-        "cls-nb": instantiate_unwrapped_cls_nb,
-        "cls-nn-2-layer": instantiate_unwrapped_cls_nn_2_layer,
-        "cls-rf": instantiate_unwrapped_cls_rf,
-        "cls-svm": instantiate_unwrapped_cls_svm,
+        "clr-logistic": instantiate_unwrapped_clr_logistic,
+        "clr-lstm-base": instantiate_unwrapped_clr_lstm_base,
+        "clr-lstm-pool": instantiate_unwrapped_clr_lstm_pool,
+        "clr-nb": instantiate_unwrapped_clr_nb,
+        "clr-nn-2-layer": instantiate_unwrapped_clr_nn_2_layer,
+        "clr-rf": instantiate_unwrapped_clr_rf,
+        "clr-svm": instantiate_unwrapped_clr_svm,
         "fex-doc2vec": instantiate_unwrapped_fex_doc2vec,
         "fex-embedding-idf": instantiate_unwrapped_fex_embedding_idf,
         "fex-embedding-lstm": instantiate_unwrapped_fex_embedding_lstm,

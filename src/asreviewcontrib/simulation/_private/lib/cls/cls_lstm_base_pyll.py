@@ -1,9 +1,9 @@
 import hyperopt
 
 
-def cls_lstm_base_pyll():
+def clr_lstm_base_pyll():
     return {
-        "abbr": "cls-lstm-base",
+        "abbr": "clr-lstm-base",
         "params": {
             "batch_size": hyperopt.hp.choice("batch_size", [32]),  # TODO
             "class_weight": hyperopt.hp.choice("class_weight", [30.0]),  # TODO

@@ -1,4 +1,4 @@
-def get_cls_rf_params():
+def get_clr_rf_params():
     return {
         "class_weight": 1.0,
         "max_features": 10,

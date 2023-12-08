@@ -1,13 +1,13 @@
 import click
 from asreview.models.classifiers import NaiveBayesClassifier
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
-from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_cls_msg
-from asreviewcontrib.simulation._private.lib.cls.cls_nb_params import get_cls_nb_params
+from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_clr_msg
+from asreviewcontrib.simulation._private.lib.clr.clr_nb_params import get_clr_nb_params
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
-default_params = get_cls_nb_params()
-name = f"cls-{NaiveBayesClassifier.name}"
+default_params = get_clr_nb_params()
+name = f"clr-{NaiveBayesClassifier.name}"
 
 
 @click.command(
@@ -28,15 +28,15 @@ name = f"cls-{NaiveBayesClassifier.name}"
     "-f",
     "--force",
     "force",
-    help="Force setting the 'cls' configuration, even if that means overwriting a previous configuration.",
+    help="Force setting the 'clr' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.pass_obj
-def cls_nb_subcommand(obj, alpha, force):
+def clr_nb_subcommand(obj, alpha, force):
     if not force:
-        assert obj.provided.cls is False, dont_reassign_cls_msg
+        assert obj.provided.clr is False, dont_reassign_clr_msg
     params = {
         "alpha": alpha,
     }
-    obj.config.cls = OneModelConfig(abbr=name, params=params)
-    obj.provided.cls = True
+    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.provided.clr = True

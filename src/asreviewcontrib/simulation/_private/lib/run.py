@@ -54,7 +54,7 @@ def run(
 
         # make a classifier model config using default parameter values
         # given the model name
-        cls = OneModelConfig("cls-svm")
+        clr = OneModelConfig("clr-svm")
 
         # make a query model config using positional arguments, and a
         # partial params dict
@@ -66,7 +66,7 @@ def run(
         # construct an all model config from one model configs -- implicitly
         # use default model choice and parameterization for models not
         # included as argument (i.e. sam, fex, bal, ofn)
-        config = Config(cls=cls, qry=qry, stp=stp)
+        config = Config(clr=clr, qry=qry, stp=stp)
 
         # arbitrarily pick a benchmark dataset
         benchmark = "benchmark:Cohen_2006_ADHD"

@@ -1,13 +1,13 @@
 import click
 from asreview.models.classifiers import RandomForestClassifier
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
-from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_cls_msg
-from asreviewcontrib.simulation._private.lib.cls.cls_rf_params import get_cls_rf_params
+from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_clr_msg
+from asreviewcontrib.simulation._private.lib.clr.clr_rf_params import get_clr_rf_params
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
-default_params = get_cls_rf_params()
-name = f"cls-{RandomForestClassifier.name}"
+default_params = get_clr_rf_params()
+name = f"clr-{RandomForestClassifier.name}"
 
 
 @click.command(
@@ -28,7 +28,7 @@ name = f"cls-{RandomForestClassifier.name}"
     "-f",
     "--force",
     "force",
-    help="Force setting the 'cls' configuration, even if that means overwriting a previous configuration.",
+    help="Force setting the 'clr' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -48,13 +48,13 @@ name = f"cls-{RandomForestClassifier.name}"
     type=click.INT,
 )
 @click.pass_obj
-def cls_rf_subcommand(obj, class_weight, force, max_features, n_estimators):
+def clr_rf_subcommand(obj, class_weight, force, max_features, n_estimators):
     if not force:
-        assert obj.provided.cls is False, dont_reassign_cls_msg
+        assert obj.provided.clr is False, dont_reassign_clr_msg
     params = {
         "class_weight": class_weight,
         "max_features": max_features,
         "n_estimators": n_estimators,
     }
-    obj.config.cls = OneModelConfig(abbr=name, params=params)
-    obj.provided.cls = True
+    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.provided.clr = True

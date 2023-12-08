@@ -1,13 +1,13 @@
 from asreviewcontrib.simulation._private.lib.bal.bal_double_params import get_bal_double_params
 from asreviewcontrib.simulation._private.lib.bal.bal_simple_params import get_bal_simple_params
 from asreviewcontrib.simulation._private.lib.bal.bal_undersample_params import get_bal_undersample_params
-from asreviewcontrib.simulation._private.lib.cls.cls_logistic_params import get_cls_logistic_params
-from asreviewcontrib.simulation._private.lib.cls.cls_lstm_base_params import get_cls_lstm_base_params
-from asreviewcontrib.simulation._private.lib.cls.cls_lstm_pool_params import get_cls_lstm_pool_params
-from asreviewcontrib.simulation._private.lib.cls.cls_nb_params import get_cls_nb_params
-from asreviewcontrib.simulation._private.lib.cls.cls_nn_2_layer_params import get_cls_nn_2_layer_params
-from asreviewcontrib.simulation._private.lib.cls.cls_rf_params import get_cls_rf_params
-from asreviewcontrib.simulation._private.lib.cls.cls_svm_params import get_cls_svm_params
+from asreviewcontrib.simulation._private.lib.clr.clr_logistic_params import get_clr_logistic_params
+from asreviewcontrib.simulation._private.lib.clr.clr_lstm_base_params import get_clr_lstm_base_params
+from asreviewcontrib.simulation._private.lib.clr.clr_lstm_pool_params import get_clr_lstm_pool_params
+from asreviewcontrib.simulation._private.lib.clr.clr_nb_params import get_clr_nb_params
+from asreviewcontrib.simulation._private.lib.clr.clr_nn_2_layer_params import get_clr_nn_2_layer_params
+from asreviewcontrib.simulation._private.lib.clr.clr_rf_params import get_clr_rf_params
+from asreviewcontrib.simulation._private.lib.clr.clr_svm_params import get_clr_svm_params
 from asreviewcontrib.simulation._private.lib.fex.fex_doc2vec_params import get_fex_doc2vec_params
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_params import get_fex_embedding_idf_params
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_params import get_fex_embedding_lstm_params
@@ -33,13 +33,13 @@ def get_default_params(name: str) -> dict:
         "bal-double": get_bal_double_params,
         "bal-simple": get_bal_simple_params,
         "bal-undersample": get_bal_undersample_params,
-        "cls-logistic": get_cls_logistic_params,
-        "cls-lstm-base": get_cls_lstm_base_params,
-        "cls-lstm-pool": get_cls_lstm_pool_params,
-        "cls-nb": get_cls_nb_params,
-        "cls-nn-2-layer": get_cls_nn_2_layer_params,
-        "cls-rf": get_cls_rf_params,
-        "cls-svm": get_cls_svm_params,
+        "clr-logistic": get_clr_logistic_params,
+        "clr-lstm-base": get_clr_lstm_base_params,
+        "clr-lstm-pool": get_clr_lstm_pool_params,
+        "clr-nb": get_clr_nb_params,
+        "clr-nn-2-layer": get_clr_nn_2_layer_params,
+        "clr-rf": get_clr_rf_params,
+        "clr-svm": get_clr_svm_params,
         "fex-doc2vec": get_fex_doc2vec_params,
         "fex-embedding-idf": get_fex_embedding_idf_params,
         "fex-embedding-lstm": get_fex_embedding_lstm_params,

@@ -47,7 +47,7 @@ def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, OneModel
         config = Config(**fixed, **drawn)
         ```
     """
-    valid_keys = {"bal", "cls", "fex", "ofn", "qry", "sam", "stp"}
+    valid_keys = {"bal", "clr", "fex", "ofn", "qry", "sam", "stp"}
     assert isinstance(pyll, dict), "Expected input argument pyll to be of type 'dict'."
     for key in pyll.keys():
         assert key in valid_keys, f"Unexpected key '{key}' in keys of input argument 'pyll'."

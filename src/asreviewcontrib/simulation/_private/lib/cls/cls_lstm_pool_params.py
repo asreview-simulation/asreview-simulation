@@ -1,4 +1,4 @@
-def get_cls_lstm_pool_params():
+def get_clr_lstm_pool_params():
     return {
         "batch_size": 32,
         "class_weight": 30.0,

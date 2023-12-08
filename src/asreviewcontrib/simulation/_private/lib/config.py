@@ -112,7 +112,7 @@ class Config:
     def __init__(
         self,
         bal: Optional[OneModelConfig] = None,
-        cls: Optional[OneModelConfig] = None,
+        clr: Optional[OneModelConfig] = None,
         fex: Optional[OneModelConfig] = None,
         ofn: Optional[OneModelConfig] = None,
         qry: Optional[OneModelConfig] = None,
@@ -123,7 +123,7 @@ class Config:
         Args:
             bal:
                 The configuration for the balancer model.
-            cls:
+            clr:
                 The configuration for the classification model.
             fex:
                 The configuration for the feature extraction model.
@@ -182,7 +182,7 @@ class Config:
 
         # initialize the private attributes:
         self._bal = None
-        self._cls = None
+        self._clr = None
         self._fex = None
         self._ofn = None
         self._qry = None
@@ -191,7 +191,7 @@ class Config:
 
         # use the setter methods to assign constructor arguments to private attributes
         self.bal = bal or OneModelConfig("bal-double")
-        self.cls = cls or OneModelConfig("cls-nb")
+        self.clr = clr or OneModelConfig("clr-nb")
         self.fex = fex or OneModelConfig("fex-tfidf")
         self.ofn = ofn or OneModelConfig("ofn-none")
         self.qry = qry or OneModelConfig("qry-max")
@@ -204,7 +204,7 @@ class Config:
         assert isinstance(other, Config), "Can only compare to objects of equal type."
         return False not in {
             self._bal == other._bal,
-            self._cls == other._cls,
+            self._clr == other._clr,
             self._fex == other._fex,
             self._ofn == other._ofn,
             self._qry == other._qry,
@@ -223,7 +223,7 @@ class Config:
         """
         return {
             "bal": self._bal.as_dict() if recurse else self._bal,
-            "cls": self._cls.as_dict() if recurse else self._cls,
+            "clr": self._clr.as_dict() if recurse else self._clr,
             "fex": self._fex.as_dict() if recurse else self._fex,
             "ofn": self._ofn.as_dict() if recurse else self._ofn,
             "qry": self._qry.as_dict() if recurse else self._qry,
@@ -240,7 +240,7 @@ class Config:
         """
         d = {}
         d.update(self.bal.flattened())
-        d.update(self.cls.flattened())
+        d.update(self.clr.flattened())
         d.update(self.fex.flattened())
         d.update(self.ofn.flattened())
         d.update(self.qry.flattened())
@@ -261,16 +261,16 @@ class Config:
         self._bal = bal
 
     @property
-    def cls(self) -> OneModelConfig:
+    def clr(self) -> OneModelConfig:
         """The configuration for the classifier model."""
-        return self._cls
+        return self._clr
 
-    @cls.setter
-    def cls(self, cls: OneModelConfig):
+    @clr.setter
+    def clr(self, clr: OneModelConfig):
         """The configuration for the classifier model."""
-        assert isinstance(cls, OneModelConfig), Config._errmsg
-        assert cls.abbr.startswith("cls"), "Expected a classifier model."
-        self._cls = cls
+        assert isinstance(clr, OneModelConfig), Config._errmsg
+        assert clr.abbr.startswith("clr"), "Expected a classifier model."
+        self._clr = clr
 
     @property
     def fex(self) -> OneModelConfig:

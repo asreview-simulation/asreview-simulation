@@ -1,7 +1,7 @@
 import json
 import click
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_bal_msg
-from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_cls_msg
+from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_clr_msg
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_fex_msg
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_ofn_msg
 from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_qry_msg
@@ -19,12 +19,12 @@ def assign_bal(settings):
             raise e
 
 
-def assign_cls(settings):
-    if "cls" in settings.keys():
+def assign_clr(settings):
+    if "clr" in settings.keys():
         try:
-            return OneModelConfig(abbr=settings["cls"]["abbr"], params=settings["cls"]["params"]), True
+            return OneModelConfig(abbr=settings["clr"]["abbr"], params=settings["clr"]["params"]), True
         except KeyError as e:
-            print_keyerror_msg("cls")
+            print_keyerror_msg("clr")
             raise e
 
 
@@ -96,7 +96,7 @@ def load_settings_subcommand(obj, settings_file):
         for key in settings.keys():
             assert key in [
                 "bal",
-                "cls",
+                "clr",
                 "fex",
                 "ofn",
                 "qry",
@@ -106,7 +106,7 @@ def load_settings_subcommand(obj, settings_file):
 
     def assert_none_provided():
         assert obj.provided.bal is False, dont_reassign_bal_msg
-        assert obj.provided.cls is False, dont_reassign_cls_msg
+        assert obj.provided.clr is False, dont_reassign_clr_msg
         assert obj.provided.fex is False, dont_reassign_fex_msg
         assert obj.provided.ofn is False, dont_reassign_ofn_msg
         assert obj.provided.qry is False, dont_reassign_qry_msg
@@ -120,7 +120,7 @@ def load_settings_subcommand(obj, settings_file):
     assert_keys_are_valid()
 
     obj.config.bal, obj.provided.bal = assign_bal(settings)
-    obj.config.cls, obj.provided.cls = assign_cls(settings)
+    obj.config.clr, obj.provided.clr = assign_clr(settings)
     obj.config.fex, obj.provided.fex = assign_fex(settings)
     obj.config.obj, obj.provided.obj = assign_ofn(settings)
     obj.config.qry, obj.provided.qry = assign_qry(settings)

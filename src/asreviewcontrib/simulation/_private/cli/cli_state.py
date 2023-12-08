@@ -6,7 +6,7 @@ class Provided:
 
     def __init__(self):
         self._bal = False
-        self._cls = False
+        self._clr = False
         self._fex = False
         self._ofn = False
         self._qry = False
@@ -23,13 +23,13 @@ class Provided:
         self._bal = bal
 
     @property
-    def cls(self) -> bool:
-        return self._cls
+    def clr(self) -> bool:
+        return self._clr
 
-    @cls.setter
-    def cls(self, cls: bool):
-        assert isinstance(cls, bool), Provided._errmsg
-        self._cls = cls
+    @clr.setter
+    def clr(self, clr: bool):
+        assert isinstance(clr, bool), Provided._errmsg
+        self._clr = clr
 
     @property
     def fex(self) -> bool:

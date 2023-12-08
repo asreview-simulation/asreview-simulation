@@ -5,13 +5,13 @@ from asreviewcontrib.simulation._private.cli.bal_double_subcommand import bal_do
 from asreviewcontrib.simulation._private.cli.bal_simple_subcommand import bal_simple_subcommand
 from asreviewcontrib.simulation._private.cli.bal_undersample_subcommand import bal_undersample_subcommand
 from asreviewcontrib.simulation._private.cli.cli_state import State
-from asreviewcontrib.simulation._private.cli.cls_logistic_subcommand import cls_logistic_subcommand
-from asreviewcontrib.simulation._private.cli.cls_lstm_base_subcommand import cls_lstm_base_subcommand
-from asreviewcontrib.simulation._private.cli.cls_lstm_pool_subcommand import cls_lstm_pool_subcommand
-from asreviewcontrib.simulation._private.cli.cls_nb_subcommand import cls_nb_subcommand
-from asreviewcontrib.simulation._private.cli.cls_nn_2_layer_subcommand import cls_nn_2_layer_subcommand
-from asreviewcontrib.simulation._private.cli.cls_rf_subcommand import cls_rf_subcommand
-from asreviewcontrib.simulation._private.cli.cls_svm_subcommand import cls_svm_subcommand
+from asreviewcontrib.simulation._private.cli.clr_logistic_subcommand import clr_logistic_subcommand
+from asreviewcontrib.simulation._private.cli.clr_lstm_base_subcommand import clr_lstm_base_subcommand
+from asreviewcontrib.simulation._private.cli.clr_lstm_pool_subcommand import clr_lstm_pool_subcommand
+from asreviewcontrib.simulation._private.cli.clr_nb_subcommand import clr_nb_subcommand
+from asreviewcontrib.simulation._private.cli.clr_nn_2_layer_subcommand import clr_nn_2_layer_subcommand
+from asreviewcontrib.simulation._private.cli.clr_rf_subcommand import clr_rf_subcommand
+from asreviewcontrib.simulation._private.cli.clr_svm_subcommand import clr_svm_subcommand
 from asreviewcontrib.simulation._private.cli.fex_doc2vec_subcommand import fex_doc2vec_subcommand
 from asreviewcontrib.simulation._private.cli.fex_embedding_idf_subcommand import fex_embedding_idf_subcommand
 from asreviewcontrib.simulation._private.cli.fex_embedding_lstm_subcommand import fex_embedding_lstm_subcommand
@@ -59,23 +59,23 @@ def add_bal_subcommands():
         cli.add_command(b)
 
 
-def add_cls_subcommands():
-    my_clss = [
-        cls_nb_subcommand,
-        cls_rf_subcommand,
-        cls_logistic_subcommand,
-        cls_lstm_base_subcommand,
-        cls_lstm_pool_subcommand,
-        cls_nn_2_layer_subcommand,
-        cls_svm_subcommand,
+def add_clr_subcommands():
+    my_clrs = [
+        clr_nb_subcommand,
+        clr_rf_subcommand,
+        clr_logistic_subcommand,
+        clr_lstm_base_subcommand,
+        clr_lstm_pool_subcommand,
+        clr_nn_2_layer_subcommand,
+        clr_svm_subcommand,
     ]
-    group = "asreviewcontrib.simulation.cls"
+    group = "asreviewcontrib.simulation.clr"
     try:
-        other_clss = [e.load() for e in entrypoints(group=group)]
+        other_clrs = [e.load() for e in entrypoints(group=group)]
     except Exception as e:
         print(get_error_msg(group, e))
-        other_clss = []
-    for c in sort_commands(my_clss + other_clss):
+        other_clrs = []
+    for c in sort_commands(my_clrs + other_clrs):
         cli.add_command(c)
 
 
@@ -206,7 +206,7 @@ Printing the configuration:
 
 $ {cli_name} print-settings
 
-Starting a simulation using the default combination of models (sam-random, bal-double, cls-nb, fex-tfidf,
+Starting a simulation using the default combination of models (sam-random, bal-double, clr-nb, fex-tfidf,
 qry-max, stp-rel), each using its default parameterization:
 
 \b
@@ -223,11 +223,11 @@ $ {cli_name} start --in .{os.sep}myfile.tsv --out .{os.sep}project.asreview
 
 $ {cli_name} start --in .{os.sep}myfile.xlsx --out .{os.sep}project.asreview
 
-Using a different classifier strategy can be accomplished by using one of the 'cls-*' subcommands
+Using a different classifier strategy can be accomplished by using one of the 'clr-*' subcommands
 before issuing the 'start' subcommand, e.g.:
 
 \b
-$ {cli_name} cls-logistic \\
+$ {cli_name} clr-logistic \\
   {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 \\
   {' ' * len(cli_name)}       --out .{os.sep}project.asreview
 
@@ -235,19 +235,19 @@ Subcommands can be chained together, for example using the logistic classifier w
 the undersample balancer goes like this:
 
 \b
-$ {cli_name} cls-logistic \\
+$ {cli_name} clr-logistic \\
   {' ' * len(cli_name)} bal-undersample \\
   {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 \\
   {' ' * len(cli_name)}       --out .{os.sep}project.asreview
 
 Most subcommands have their own parameterization. Check the help of a subcommand with --help or -h for short, e.g.:
 
-$ {cli_name} cls-logistic --help
+$ {cli_name} clr-logistic --help
 
 Passing parameters to a subcommand goes like this:
 
 \b
-$ {cli_name} cls-logistic --class_weight 1.1 \\
+$ {cli_name} clr-logistic --class_weight 1.1 \\
   {' ' * len(cli_name)} start --benchmark benchmark:van_de_Schoot_2017 \\
   {' ' * len(cli_name)}       --out .{os.sep}project.asreview
 
@@ -256,7 +256,7 @@ By chaining individually parameterized subcommands, we can compose a variety of 
 \b
 $ {cli_name} sam-random --n_included 10 --n_excluded 15 \\
   {' ' * len(cli_name)} fex-tfidf --ngram_max 2 \\
-  {' ' * len(cli_name)} cls-nb --alpha 3.823 \\
+  {' ' * len(cli_name)} clr-nb --alpha 3.823 \\
   {' ' * len(cli_name)} qry-max-random --fraction_max 0.95 --n_instances 10 \\
   {' ' * len(cli_name)} bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \\
   {' ' * len(cli_name)} stp-nq --n_queries 20 \\
@@ -275,7 +275,7 @@ https://github.com/asreview-simulation/asreview-simulation/issues.
 @click.group(
     "cli",
     chain=True,
-    cls=NaturalOrderGroup,
+    clr=NaturalOrderGroup,
     context_settings={"help_option_names": ["-h", "--help"]},
     help=cli_help(),
 )
@@ -289,7 +289,7 @@ add_terminator_subcommands()
 add_starter_subcommands()
 add_sam_subcommands()
 add_fex_subcommands()
-add_cls_subcommands()
+add_clr_subcommands()
 add_qry_subcommands()
 add_bal_subcommands()
 add_stp_subcommands()

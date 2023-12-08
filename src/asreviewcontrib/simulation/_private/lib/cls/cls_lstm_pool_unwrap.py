@@ -1,7 +1,7 @@
 from asreview.models.classifiers.lstm_pool import LSTMPoolClassifier
 
 
-def instantiate_unwrapped_cls_lstm_pool(params, _random_state):
+def instantiate_unwrapped_clr_lstm_pool(params, _random_state):
     mapped_params = {
         "backwards": not params["forward"],
         "batch_size": params["batch_size"],

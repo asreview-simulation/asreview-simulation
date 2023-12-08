@@ -1,4 +1,4 @@
-def get_cls_nn_2_layer_params():
+def get_clr_nn_2_layer_params():
     return {
         "batch_size": 32,
         "class_weight": 30.0,

@@ -1,9 +1,9 @@
 import hyperopt
 
 
-def cls_nb_pyll():
+def clr_nb_pyll():
     return {
-        "abbr": "cls-nb",
+        "abbr": "clr-nb",
         "params": {
             "alpha": hyperopt.hp.lognormal("alpha", 0, 1),
         },

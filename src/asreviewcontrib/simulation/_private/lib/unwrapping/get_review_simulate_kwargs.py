@@ -19,12 +19,12 @@ def get_review_simulate_kwargs(config: Config, as_data: ASReviewData, seed: int 
     random_state = numpy.random.RandomState(seed)
 
     # assign model parameterizations using the configuration from 'models'
-    classifier = instantiate_unwrapped_model(config.cls, random_state=random_state)
+    classifier = instantiate_unwrapped_model(config.clr, random_state=random_state)
     querier = instantiate_unwrapped_model(config.qry, random_state=random_state)
     balancer = instantiate_unwrapped_model(config.bal, random_state=random_state)
     extractor = instantiate_unwrapped_model(config.fex, random_state=random_state)
 
-    if config.cls.abbr in ["cls-lstm-base", "cls-lstm-pool"]:
+    if config.clr.abbr in ["clr-lstm-base", "clr-lstm-pool"]:
         classifier.embedding_matrix = extractor.get_embedding_matrix(as_data.texts, embedding_fp)
 
     n_papers = None

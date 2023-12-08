@@ -1,9 +1,9 @@
 import hyperopt
 
 
-def cls_nn_2_layer_pyll():
+def clr_nn_2_layer_pyll():
     return {
-        "abbr": "cls-nn-2-layer",
+        "abbr": "clr-nn-2-layer",
         "params": {
             "batch_size": hyperopt.hp.choice("batch_size", [32]),  # TODO
             "class_weight": hyperopt.hp.lognormal("class_weight", 3, 1),

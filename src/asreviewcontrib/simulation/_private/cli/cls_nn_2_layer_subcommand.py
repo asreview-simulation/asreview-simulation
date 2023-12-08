@@ -1,13 +1,13 @@
 import click
 from asreview.models.classifiers import NN2LayerClassifier
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
-from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_cls_msg
-from asreviewcontrib.simulation._private.lib.cls.cls_nn_2_layer_params import get_cls_nn_2_layer_params
+from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_clr_msg
+from asreviewcontrib.simulation._private.lib.clr.clr_nn_2_layer_params import get_clr_nn_2_layer_params
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
-default_params = get_cls_nn_2_layer_params()
-name = f"cls-{NN2LayerClassifier.name}"
+default_params = get_clr_nn_2_layer_params()
+name = f"clr-{NN2LayerClassifier.name}"
 
 
 @click.command(
@@ -52,7 +52,7 @@ name = f"cls-{NN2LayerClassifier.name}"
     "-f",
     "--force",
     "force",
-    help="Force setting the 'cls' configuration, even if that means overwriting a previous configuration.",
+    help="Force setting the 'clr' configuration, even if that means overwriting a previous configuration.",
     is_flag=True,
 )
 @click.option(
@@ -87,7 +87,7 @@ name = f"cls-{NN2LayerClassifier.name}"
     is_flag=True,
 )
 @click.pass_obj
-def cls_nn_2_layer_subcommand(
+def clr_nn_2_layer_subcommand(
     obj,
     batch_size,
     class_weight,
@@ -100,7 +100,7 @@ def cls_nn_2_layer_subcommand(
     shuffle,
 ):
     if not force:
-        assert obj.provided.cls is False, dont_reassign_cls_msg
+        assert obj.provided.clr is False, dont_reassign_clr_msg
     params = {
         "batch_size": batch_size,
         "class_weight": class_weight,
@@ -111,5 +111,5 @@ def cls_nn_2_layer_subcommand(
         "regularization": regularization,
         "shuffle": shuffle,
     }
-    obj.config.cls = OneModelConfig(abbr=name, params=params)
-    obj.provided.cls = True
+    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.provided.clr = True

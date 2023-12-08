@@ -2,13 +2,13 @@ import hyperopt
 from asreviewcontrib.simulation._private.lib.bal.bal_double_pyll import bal_double_pyll
 from asreviewcontrib.simulation._private.lib.bal.bal_simple_pyll import bal_simple_pyll
 from asreviewcontrib.simulation._private.lib.bal.bal_undersample_pyll import bal_undersample_pyll
-from asreviewcontrib.simulation._private.lib.cls.cls_logistic_pyll import cls_logistic_pyll
-from asreviewcontrib.simulation._private.lib.cls.cls_lstm_base_pyll import cls_lstm_base_pyll
-from asreviewcontrib.simulation._private.lib.cls.cls_lstm_pool_pyll import cls_lstm_pool_pyll
-from asreviewcontrib.simulation._private.lib.cls.cls_nb_pyll import cls_nb_pyll
-from asreviewcontrib.simulation._private.lib.cls.cls_nn_2_layer_pyll import cls_nn_2_layer_pyll
-from asreviewcontrib.simulation._private.lib.cls.cls_rf_pyll import cls_rf_pyll
-from asreviewcontrib.simulation._private.lib.cls.cls_svm_pyll import cls_svm_pyll
+from asreviewcontrib.simulation._private.lib.clr.clr_logistic_pyll import clr_logistic_pyll
+from asreviewcontrib.simulation._private.lib.clr.clr_lstm_base_pyll import clr_lstm_base_pyll
+from asreviewcontrib.simulation._private.lib.clr.clr_lstm_pool_pyll import clr_lstm_pool_pyll
+from asreviewcontrib.simulation._private.lib.clr.clr_nb_pyll import clr_nb_pyll
+from asreviewcontrib.simulation._private.lib.clr.clr_nn_2_layer_pyll import clr_nn_2_layer_pyll
+from asreviewcontrib.simulation._private.lib.clr.clr_rf_pyll import clr_rf_pyll
+from asreviewcontrib.simulation._private.lib.clr.clr_svm_pyll import clr_svm_pyll
 from asreviewcontrib.simulation._private.lib.fex.fex_doc2vec_pyll import fex_doc2vec_pyll
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_pyll import fex_embedding_idf_pyll
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_pyll import fex_embedding_lstm_pyll
@@ -45,13 +45,13 @@ def get_pyll(abbr: str) -> hyperopt.base.pyll.Apply:
         "bal-double": bal_double_pyll,
         "bal-simple": bal_simple_pyll,
         "bal-undersample": bal_undersample_pyll,
-        "cls-logistic": cls_logistic_pyll,
-        "cls-lstm-base": cls_lstm_base_pyll,
-        "cls-lstm-pool": cls_lstm_pool_pyll,
-        "cls-nb": cls_nb_pyll,
-        "cls-nn-2-layer": cls_nn_2_layer_pyll,
-        "cls-rf": cls_rf_pyll,
-        "cls-svm": cls_svm_pyll,
+        "clr-logistic": clr_logistic_pyll,
+        "clr-lstm-base": clr_lstm_base_pyll,
+        "clr-lstm-pool": clr_lstm_pool_pyll,
+        "clr-nb": clr_nb_pyll,
+        "clr-nn-2-layer": clr_nn_2_layer_pyll,
+        "clr-rf": clr_rf_pyll,
+        "clr-svm": clr_svm_pyll,
         "fex-doc2vec": fex_doc2vec_pyll,
         "fex-embedding-idf": fex_embedding_idf_pyll,
         "fex-embedding-lstm": fex_embedding_lstm_pyll,
