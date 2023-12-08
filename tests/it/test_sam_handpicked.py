@@ -13,7 +13,7 @@ from tests.helpers.unzip_simulate_results import unzip_simulate_results
 
 @pytest.mark.sam_handpicked
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_nq
@@ -72,7 +72,7 @@ def test_with_records():
 
 @pytest.mark.sam_handpicked
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_nq

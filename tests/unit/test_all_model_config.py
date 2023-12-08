@@ -10,7 +10,7 @@ def test_flattened():
         "bal-double/alpha": 0.94,
         "bal-double/b": 0.789,
         "bal-double/beta": 1.0,
-        "cls-nb/alpha": 3.822,
+        "clr-nb/alpha": 3.822,
         "fex-tfidf/ngram_max": 1,
         "fex-tfidf/split_ta": False,
         "fex-tfidf/stop_words": "english",

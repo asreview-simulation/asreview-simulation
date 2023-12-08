@@ -6,19 +6,19 @@ from asreviewcontrib.simulation._private.cli.cli import cli
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nn_2_layer
+@pytest.mark.clr_nn_2_layer
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
 def test_nn_2_layer_classifier_default_parameterization():
     runner = CliRunner()
     args = [
-        "cls-nn-2-layer",
+        "clr-nn-2-layer",
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    classifier = json.loads(result.output)["cls"]
-    assert classifier["abbr"] == "cls-nn-2-layer"
+    classifier = json.loads(result.output)["clr"]
+    assert classifier["abbr"] == "clr-nn-2-layer"
     params = classifier["params"].keys()
     expected_pairs = [
         ("batch_size", 32),

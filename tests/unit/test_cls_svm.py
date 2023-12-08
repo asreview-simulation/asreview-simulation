@@ -6,19 +6,19 @@ from asreviewcontrib.simulation._private.cli.cli import cli
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_svm
+@pytest.mark.clr_svm
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
 def test_svm_classifier_default_parameterization():
     runner = CliRunner()
     args = [
-        "cls-svm",
+        "clr-svm",
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    classifier = json.loads(result.output)["cls"]
-    assert classifier["abbr"] == "cls-svm"
+    classifier = json.loads(result.output)["clr"]
+    assert classifier["abbr"] == "clr-svm"
     params = classifier["params"].keys()
     expected_pairs = [
         ("c", 15.4),

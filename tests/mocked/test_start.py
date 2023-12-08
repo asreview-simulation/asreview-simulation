@@ -15,7 +15,7 @@ from tests.helpers.get_xfails_mocked import get_xfails_mocked
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
@@ -96,7 +96,7 @@ def test_with_model_combinations(parameterization):
             "--state_file",
             str(p1),
             "-m",
-            cls,
+            clr,
             "-q",
             "max",
             "-b",
@@ -136,7 +136,7 @@ def test_with_model_combinations(parameterization):
             "--n_excluded",
             "5",
             "bal-double",
-            f"cls-{cls}",
+            f"clr-{clr}",
             f"fex-{fex}",
             *embedding_pars,
             "qry-max",
@@ -163,7 +163,7 @@ def test_with_model_combinations(parameterization):
         pytest.xfail(reason=reason)
 
     benchmark = "benchmark:van_de_Schoot_2017"
-    fex, cls = parameterization.split(",")
+    fex, clr = parameterization.split(",")
 
     with TemporaryDirectory(prefix="pytest.") as tmpdir:
         # prep

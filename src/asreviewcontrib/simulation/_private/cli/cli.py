@@ -275,7 +275,7 @@ https://github.com/asreview-simulation/asreview-simulation/issues.
 @click.group(
     "cli",
     chain=True,
-    clr=NaturalOrderGroup,
+    cls=NaturalOrderGroup,
     context_settings={"help_option_names": ["-h", "--help"]},
     help=cli_help(),
 )

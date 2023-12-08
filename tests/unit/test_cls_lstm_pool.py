@@ -6,19 +6,19 @@ from asreviewcontrib.simulation._private.cli.cli import cli
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_lstm_pool
+@pytest.mark.clr_lstm_pool
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
 def test_lstm_pool_classifier_default_parameterization(tmp_path):
     runner = CliRunner()
     args = [
-        "cls-lstm-pool",
+        "clr-lstm-pool",
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    classifier = json.loads(result.output)["cls"]
-    assert classifier["abbr"] == "cls-lstm-pool"
+    classifier = json.loads(result.output)["clr"]
+    assert classifier["abbr"] == "clr-lstm-pool"
     params = classifier["params"].keys()
     expected_pairs = [
         ("batch_size", 32),

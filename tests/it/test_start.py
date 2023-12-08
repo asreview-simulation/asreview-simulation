@@ -27,7 +27,7 @@ def get_data_fnames():
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
@@ -77,7 +77,7 @@ def test_with_minimal_args_on_benchmark():
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
@@ -159,7 +159,7 @@ def test_with_model_combinations(parameterization):
             "--state_file",
             str(p1),
             "-m",
-            cls,
+            clr,
             "-q",
             "max",
             "-b",
@@ -196,7 +196,7 @@ def test_with_model_combinations(parameterization):
             "--n_excluded",
             "5",
             "bal-double",
-            f"cls-{cls}",
+            f"clr-{clr}",
             f"fex-{fex}",
             *embedding_pars,
             "qry-max",
@@ -219,7 +219,7 @@ def test_with_model_combinations(parameterization):
         assert result.exit_code == 0, "cli runner did not exit 0"
 
     benchmark = "benchmark:van_de_Schoot_2017"
-    fex, cls = parameterization.split(",")
+    fex, clr = parameterization.split(",")
 
     xfail, reason = get_xfails(parameterization)
     if xfail:
@@ -259,5 +259,5 @@ def test_with_model_combinations(parameterization):
             p2,
             test_metadata=True,
             test_prior_records=True,
-            test_queried_records=cls not in nondeterministic_classifiers,
+            test_queried_records=clr not in nondeterministic_classifiers,
         )

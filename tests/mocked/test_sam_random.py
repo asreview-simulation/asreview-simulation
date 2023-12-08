@@ -12,7 +12,7 @@ from tests.helpers.compare_arguments_mock import compare_arguments_mock
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_nq

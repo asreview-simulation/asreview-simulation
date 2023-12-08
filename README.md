@@ -50,7 +50,7 @@ asreview simulation print-settings --pretty
 ```
 
 Start a simulation using the default combination of models (`sam-random`,
-`bal-double`, `cls-nb`, `fex-tfidf`, `qry-max`, `stp-min`), each using its default
+`bal-double`, `clr-nb`, `fex-tfidf`, `qry-max`, `stp-min`), each using its default
 parameterization:
 
 ```text
@@ -67,11 +67,11 @@ asreview simulation start --in ./myfile.xlsx --out ./project.asreview
 ```
 
 Using a different classifier strategy can be accomplished by using one of
-the `cls-*` subcommands before issuing the `start` subcommand, e.g.:
+the `clr-*` subcommands before issuing the `start` subcommand, e.g.:
 
 ```text
 asreview simulation \
-    cls-logistic \
+    clr-logistic \
     start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
@@ -80,7 +80,7 @@ classifier with the undersample balancer goes like this:
 
 ```text
 asreview simulation \
-    cls-logistic \
+    clr-logistic \
     bal-undersample \
     start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
@@ -89,12 +89,12 @@ Most subcommands have their own parameterization. Check the help of a
 subcommand with `--help` or `-h` for short, e.g.:
 
 ```text
-asreview simulation cls-logistic --help
+asreview simulation clr-logistic --help
 ```
 The above command will print:
 
 ```text
-Usage: asreview simulation cls-logistic [OPTIONS]
+Usage: asreview simulation clr-logistic [OPTIONS]
 
   Configure the simulation to use Logistic Regression classifier.
 
@@ -119,7 +119,7 @@ Passing parameters to a subcommand goes like this:
 
 ```text
 asreview simulation \
-    cls-logistic --class_weight 1.1 \
+    clr-logistic --class_weight 1.1 \
     start --benchmark benchmark:van_de_Schoot_2017 --out ./project.asreview
 ```
 
@@ -130,7 +130,7 @@ variety of configurations, e.g.:
 asreview simulation \
     sam-random --n_included 10 --n_excluded 15            \
     fex-tfidf --ngram_max 2                               \
-    cls-nb --alpha 3.823                                  \
+    clr-nb --alpha 3.823                                  \
     qry-max-random --fraction_max 0.90 --n_instances 10   \
     bal-double --a 2.156 --alpha 0.95 --b 0.79 --beta 1.1 \
     stp-nq --n_queries 20                                 \
@@ -155,13 +155,13 @@ fex-embedding-idf      Embedding IDF extractor
 fex-embedding-lstm     Embedding LSTM extractor
 fex-sbert              SBERT extractor
 fex-tfidf              TF-IDF extractor
-cls-logistic           Logistic Regression classifier
-cls-lstm-base          LSTM Base classifier
-cls-lstm-pool          LSTM Pool classifier
-cls-nb                 Naive Bayes classifier
-cls-nn-2-layer         2-layer Neural Net classifier
-cls-rf                 Random Forest classifier
-cls-svm                Support Vector Machine classifier
+clr-logistic           Logistic Regression classifier
+clr-lstm-base          LSTM Base classifier
+clr-lstm-pool          LSTM Pool classifier
+clr-nb                 Naive Bayes classifier
+clr-nn-2-layer         2-layer Neural Net classifier
+clr-rf                 Random Forest classifier
+clr-svm                Support Vector Machine classifier
 qry-cluster            Cluster query strategy
 qry-max                Max query strategy
 qry-max-random         Mixed query strategy (Max and Random)
@@ -192,7 +192,7 @@ from asreviewcontrib.simulation.api import run
 
 
 # make a classifier model config using default parameter values given the model name
-cls = OneModelConfig("cls-svm")
+clr = OneModelConfig("clr-svm")
 
 # make a query model config using positional arguments, and a partial params dict
 qry = OneModelConfig("qry-max-random", {"fraction_max": 0.90})
@@ -202,7 +202,7 @@ stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
 
 # construct an all model config from one model configs -- implicitly use default model choice
 # and parameterization for models not included as argument (i.e. sam, fex, bal, ofn)
-config = Config(cls=cls, qry=qry, stp=stp)
+config = Config(clr=clr, qry=qry, stp=stp)
 
 # arbitrarily pick a benchmark dataset
 benchmark = "benchmark:Cohen_2006_ADHD"

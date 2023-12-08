@@ -49,27 +49,27 @@ configuration section in `pyproject.toml` or run `pytest --markers`):
 
 | prior sampling   | feature extractor    | classifier       | querier           | balancer          | stopping   | objective function |
 |------------------|----------------------|------------------|-------------------|-------------------|------------|--------------------|
-| `sam_handpicked` | `fex_doc2vec`        | `cls_logistic`   | `qry_cluster`     | `bal_double`      | `stp_none` | `ofn_none`         |
-| `sam_random`     | `fex_embeding_idf`   | `cls_lstm_base`  | `qry_max`         | `bal_simple`      | `stp_nq`   | `ofn_wss`          |
-|                  | `fex_embedding_lstm` | `cls_lstm_pool`  | `qry_max_random`  | `bal_undersample` | `stp_rel`  |                    |
-|                  | `fex_sbert`          | `cls_nb`         | `qry_uncertainty` |                   |            |                    |
-|                  | `fex_tfidf`          | `cls_nn_2_layer` | `qry_random`      |                   |            |                    |
-|                  |                      | `cls_rf`         | `qry_uncertainty` |                   |            |                    |
-|                  |                      | `cls_svm`        |                   |                   |            |                    |
+| `sam_handpicked` | `fex_doc2vec`        | `clr_logistic`   | `qry_cluster`     | `bal_double`      | `stp_none` | `ofn_none`         |
+| `sam_random`     | `fex_embeding_idf`   | `clr_lstm_base`  | `qry_max`         | `bal_simple`      | `stp_nq`   | `ofn_wss`          |
+|                  | `fex_embedding_lstm` | `clr_lstm_pool`  | `qry_max_random`  | `bal_undersample` | `stp_rel`  |                    |
+|                  | `fex_sbert`          | `clr_nb`         | `qry_uncertainty` |                   |            |                    |
+|                  | `fex_tfidf`          | `clr_nn_2_layer` | `qry_random`      |                   |            |                    |
+|                  |                      | `clr_rf`         | `qry_uncertainty` |                   |            |                    |
+|                  |                      | `clr_svm`        |                   |                   |            |                    |
 
 You can instruct `pytest` to run only the tests for one or some of these marked sets. As an example, if you want to run
 only the tests related to Naive Bayes, you should call `pytest` with the `-m` flag as follows:
 
 ```shell
-pytest -m cls_nb -v
+pytest -m clr_nb -v
 ```
 
 Markers can also be combined with `or` and `and` and `not`, e.g.
 
 ```shell
-pytest -m 'cls_nb and fex_tfidf' -v
-pytest -m 'cls_rf and not fex_embedding_idf and not fex_embedding_lstm' -v
-pytest -m 'cls_logistic or cls_rf' -v
+pytest -m 'clr_nb and fex_tfidf' -v
+pytest -m 'clr_rf and not fex_embedding_idf and not fex_embedding_lstm' -v
+pytest -m 'clr_logistic or clr_rf' -v
 # etc
 ```
 
@@ -78,7 +78,7 @@ workflow `testing`. The workflow tests whether the tests pass for all combinatio
 system (Windows, Linux, MacOS), asreview version (1.0.4, 1.1.1, 1.2.1), and python version (3.8, 3.9, 3.10, 3.11).
 
 Currently, the `testing` workflow on GitHub skips any tests that require TensorFlow on Python >= 3.11 (tests marked
-with `cls_lstm_base`, `cls_lstm_pool`, `cls_nn_2_layer`), because `asreview` has a problem installing TensorFlow on
+with `clr_lstm_base`, `clr_lstm_pool`, `clr_nn_2_layer`), because `asreview` has a problem installing TensorFlow on
 Python 3.11 and up.
 
 ### `tests/unit`
@@ -188,7 +188,7 @@ TODO https://blog.pypi.org/posts/2023-05-25-securing-pypi-with-2fa/
 ## Known problems
 
 1. Some models generate `results.sql` non-deterministically, making it difficult to test whether they are (still) doing
-the right thing (`cls-lstm-base`, `cls-lstm-pool`, `cls-nn-2-layer`, `cls-rf`). As a workaround, the tests for these
+the right thing (`clr-lstm-base`, `clr-lstm-pool`, `clr-nn-2-layer`, `clr-rf`). As a workaround, the tests for these
 classifiers do not compare the contents of `reviews/<review_id>/results.sql` at the moment.
 2. Embedding file doesn't seem to get used during `asreview simulate`, so there is nothing to compare to
 for `asreview simulation start`.
@@ -198,7 +198,7 @@ for `asreview simulation start`.
 Command line functionality can be extended by plugins.
 
 1. new balancer subcommands via entry point group `"asreview_simulation.bal"`
-2. new classifier subcommands via entry point group `"asreview_simulation.cls"`
+2. new classifier subcommands via entry point group `"asreview_simulation.clr"`
 3. new extractor subcommands via entry point group `"asreview_simulation.fex"`
 4. new querier subcommands via entry point group `"asreview_simulation.qry"`
 5. new sampler subcommands via entry point group `"asreview_simulation.sam"`

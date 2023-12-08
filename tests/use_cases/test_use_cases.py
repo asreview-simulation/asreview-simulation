@@ -18,7 +18,7 @@ benchmark = "benchmark:Cohen_2006_ADHD"
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
@@ -37,14 +37,14 @@ def test_use_case_all_models_default():
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_svm
+@pytest.mark.clr_svm
 @pytest.mark.qry_max_random
 @pytest.mark.bal_double
 @pytest.mark.stp_nq
 @pytest.mark.ofn_none
 def test_use_case_some_models_nondefault():
     # make classifier model config using default parameter values given the model name
-    cls = OneModelConfig("cls-svm")
+    clr = OneModelConfig("clr-svm")
 
     # make query model config using positional arguments, partial params dict
     qry = OneModelConfig("qry-max-random", {"fraction_max": 0.90})
@@ -54,7 +54,7 @@ def test_use_case_some_models_nondefault():
 
     # construct an all-model config from one-model configs -- implicitly use default model choice
     # and parameterization for models not included as argument (i.e. sam, fex, bal, ofn)
-    config = Config(cls=cls, qry=qry, stp=stp)
+    config = Config(clr=clr, qry=qry, stp=stp)
 
     # create a temporary directory and start the simulation
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
@@ -65,14 +65,14 @@ def test_use_case_some_models_nondefault():
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_svm
+@pytest.mark.clr_svm
 @pytest.mark.qry_max_random
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
 @pytest.mark.ofn_wss
 def test_use_case_some_models_nondefault_some_models_drawn():
     # make classifier model config using default parameter values given the model name
-    cls = OneModelConfig("cls-svm")
+    clr = OneModelConfig("clr-svm")
 
     # make query model config using positional arguments
     qry = OneModelConfig(
@@ -98,7 +98,7 @@ def test_use_case_some_models_nondefault_some_models_drawn():
 
     # construct an all-model config from one-model configs -- implicitly use default model choice
     # and parameterization for models not included as argument (i.e. sam)
-    config = Config(cls=cls, qry=qry, stp=stp, ofn=ofn, **drawn)
+    config = Config(clr=clr, qry=qry, stp=stp, ofn=ofn, **drawn)
 
     # create a temporary directory and start the simulation
     with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
@@ -110,7 +110,7 @@ def test_use_case_some_models_nondefault_some_models_drawn():
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
@@ -167,7 +167,7 @@ def test_use_case_some_models_drawn_100_samples():
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel

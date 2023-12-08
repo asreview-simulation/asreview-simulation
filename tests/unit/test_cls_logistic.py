@@ -6,19 +6,19 @@ from asreviewcontrib.simulation._private.cli.cli import cli
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_logistic
+@pytest.mark.clr_logistic
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
 def test_logistic_classifier_default_parameterization():
     runner = CliRunner()
     args = [
-        "cls-logistic",
+        "clr-logistic",
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    classifier = json.loads(result.output)["cls"]
-    assert classifier["abbr"] == "cls-logistic"
+    classifier = json.loads(result.output)["clr"]
+    assert classifier["abbr"] == "clr-logistic"
     params = classifier["params"].keys()
     expected_pairs = [
         ("c", 1.0),

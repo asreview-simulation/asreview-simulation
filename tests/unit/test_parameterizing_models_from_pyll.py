@@ -15,12 +15,12 @@ def test_parameterizing_bal_models_from_pyll(abbr):
     assert isinstance(model_unwrapped, BaseModel)
 
 
-@pytest.mark.parametrize("abbr", [model for model in get_abbrs() if model.startswith("cls")])
-def test_parameterizing_cls_models_from_pyll(abbr):
-    pyll = {"cls": get_pyll(abbr)}
+@pytest.mark.parametrize("abbr", [model for model in get_abbrs() if model.startswith("clr")])
+def test_parameterizing_clr_models_from_pyll(abbr):
+    pyll = {"clr": get_pyll(abbr)}
     drawn = draw_sample(pyll)
-    cls = drawn["cls"]
-    model_unwrapped = instantiate_unwrapped_model(cls, random_state=12345)
+    clr = drawn["clr"]
+    model_unwrapped = instantiate_unwrapped_model(clr, random_state=12345)
     assert isinstance(model_unwrapped, BaseModel)
 
 

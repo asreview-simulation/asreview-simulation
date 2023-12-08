@@ -6,19 +6,19 @@ from asreviewcontrib.simulation._private.cli.cli import cli
 
 @pytest.mark.sam_random
 @pytest.mark.fex_tfidf
-@pytest.mark.cls_nb
+@pytest.mark.clr_nb
 @pytest.mark.qry_max
 @pytest.mark.bal_double
 @pytest.mark.stp_rel
 def test_naive_bayes_classifier_default_parameterization():
     runner = CliRunner()
     args = [
-        "cls-nb",
+        "clr-nb",
         "print-settings",
     ]
     result = runner.invoke(cli, args)
-    classifier = json.loads(result.output)["cls"]
-    assert classifier["abbr"] == "cls-nb"
+    classifier = json.loads(result.output)["clr"]
+    assert classifier["abbr"] == "clr-nb"
     params = classifier["params"].keys()
     expected_pairs = [
         ("alpha", 3.822),
