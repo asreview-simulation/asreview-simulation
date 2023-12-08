@@ -27,8 +27,10 @@ def prep_project_directory(
         and `as_data` is the `ASReviewData` object, see https://asreview.readthedocs.io
         for more information on these.
 
-    Prepare an `*.asreview.tmp` directory which will contain the log / state / configuration
-    of the ASReview simulation.
+    Synopsis:
+
+        Prepare an `*.asreview.tmp` directory which will contain the log / state / configuration
+        of the ASReview simulation.
     """
     assert (benchmark is None) != (input_file is None), "Need to specify either 'benchmark' or 'input_file'"
     if benchmark is not None:

@@ -1,5 +1,9 @@
 def get_abbrs() -> [str]:
-    """Return a list of recognized model abbreviations."""
+    """
+    Returns:
+
+        A list of recognized model abbreviations.
+    """
     return [
         "bal-double",
         "bal-simple",

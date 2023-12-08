@@ -2,7 +2,11 @@ from asreview.datasets import DatasetManager
 
 
 def get_dataset_names() -> [str]:
-    """Return a list of recognized dataset names."""
+    """
+    Returns:
+
+        A list of recognized dataset names.
+    """
     dataset_names = list()
     for group in DatasetManager().list():
         for dataset in group["datasets"]:

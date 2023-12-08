@@ -6,8 +6,10 @@ from asreviewcontrib.simulation._private.lib.get_default_params import get_defau
 
 
 class OneModelConfig:
-    """Stores the configuration for one model, e.g. the balancer, the stopping model,
-    or the objective function model."""
+    """
+    Stores the configuration for one model, e.g. the balancer, the stopping model,
+    or the objective function model.
+    """
 
     def __init__(self, abbr: str, params: Optional[Dict] = None):
         """
@@ -17,29 +19,33 @@ class OneModelConfig:
             params:
                 The model parameters.
 
-        Constructor method. Some example usages:
+        Synopsis:
 
-        1. Default parameter values given the choice for `bal-simple`.
-            ```python
-            from asreviewcontrib.simulation.api import OneModelConfig
+            Constructor method.
 
+        Example usage:
 
-            bal = OneModelConfig(abbr="bal-simple")
-            ```
-        2. Custom parameter values for the selected model choice `stp-nq`.
-            ```python
-            from asreviewcontrib.simulation.api import OneModelConfig
+            1. Default parameter values given the choice for `bal-simple`.
+                ```python
+                from asreviewcontrib.simulation.api import OneModelConfig
 
 
-            stp = OneModelConfig(abbr="stp-nq", params={"n_queries: 20"})
-            ```
-        3. Partially custom parameter values for the selected model choice `qry-max-random`.
-            ```python
-            from asreviewcontrib.simulation.api import OneModelConfig
+                bal = OneModelConfig(abbr="bal-simple")
+                ```
+            2. Custom parameter values for the selected model choice `stp-nq`.
+                ```python
+                from asreviewcontrib.simulation.api import OneModelConfig
 
 
-            qry = OneModelConfig(abbr="qry-max-random", params={"n_instances: 10"})
-            ```
+                stp = OneModelConfig(abbr="stp-nq", params={"n_queries: 20"})
+                ```
+            3. Partially custom parameter values for the selected model choice `qry-max-random`.
+                ```python
+                from asreviewcontrib.simulation.api import OneModelConfig
+
+
+                qry = OneModelConfig(abbr="qry-max-random", params={"n_instances: 10"})
+                ```
         """
         assert isinstance(abbr, str), "Expected input argument 'abbr' to be of type 'str'"
         default_params = get_default_params(abbr)
@@ -63,15 +69,23 @@ class OneModelConfig:
         return cond1 and cond2 and cond3
 
     def as_dict(self) -> Dict[str, Any]:
-        """Returns the model configuration as a `dict`."""
+        """
+        Returns:
+
+             The model configuration as a `dict`.
+        """
         return {
             "abbr": self._abbr,
             "params": self._params,
         }
 
     def flattened(self) -> Dict[str, Any]:
-        """Returns a flattened version of the model configuration as a `dict` whose keys consist
-        of the name of the model and the name of its parameters."""
+        """
+        Returns:
+
+            A flattened version of the model configuration as a `dict` whose keys consist
+            of the name of the model and the name of its parameters.
+        """
         d = {}
         for param in self.params.keys():
             k = "/".join([self.abbr, param])
@@ -81,12 +95,12 @@ class OneModelConfig:
 
     @property
     def abbr(self) -> str:
-        """Read-only property that returns the model abbreviation."""
+        """The model abbreviation (read-only)."""
         return self._abbr
 
     @property
     def params(self) -> Dict[str, Any]:
-        """Read-only property that returns the model parameterization."""
+        """The model parameterization (read-only)."""
         return self._params
 
 
@@ -108,54 +122,59 @@ class Config:
         """
         Args:
             bal:
-                The balancer model.
+                The configuration for the balancer model.
             cls:
-                The classification model.
+                The configuration for the classification model.
             fex:
-                The feature extraction model.
+                The configuration for the feature extraction model.
             ofn:
-                The objective function model.
+                The configuration for the objective function model.
             qry:
-                The query model.
+                The configuration for the query model.
             sam:
-                The prior sampling model.
+                The configuration for the prior sampling model.
             stp:
-                The stopping model.
+                The configuration for the stopping model.
 
-        Constructor method. Some example usages:
+        Synopsis:
 
-        1. Default choice for each model type, default configuration for each model.
-            ```python
-            from asreviewcontrib.simulation.api import Config
+            Constructor method.
 
+        Example usage:
 
-            config = Config()
-            ```
-        2. Default choice for each model type except balancer, default
-        parameter values for all models.
-            ```python
-            from asreviewcontrib.simulation.api import Config
-            from asreviewcontrib.simulation.api import OneModelConfig
+            1. Default choice for each model type, default configuration for each model.
+                ```python
+                from asreviewcontrib.simulation.api import Config
 
 
-            bal = OneModelConfig(abbr="bal-simple")
-            config = Config(bal=bal)
-            ```
-        3. Custom model choice for sampling model and for stopping model,
-        other model types use their default choice and parameterization.
-            ```python
-            from asreviewcontrib.simulation.api import Config
-            from asreviewcontrib.simulation.api import OneModelConfig
+                config = Config()
+                ```
+            2. Default choice for each model type except balancer, default
+                parameter values for all models.
+                ```python
+                from asreviewcontrib.simulation.api import Config
+                from asreviewcontrib.simulation.api import OneModelConfig
 
 
-            custom = {
-                "sam": OneModelConfig(abbr="sam-random", params={
-                    "n_excluded": 10,
-                    "n_included": 10,
-                }),
-                "stp": OneModelConfig(abbr="stp-nq"),
-            config = Config(*custom)
-            ```
+                bal = OneModelConfig(abbr="bal-simple")
+                config = Config(bal=bal)
+                ```
+            3. Custom model choice for sampling model and for stopping model,
+                other model types use their default choice and parameterization.
+                ```python
+                from asreviewcontrib.simulation.api import Config
+                from asreviewcontrib.simulation.api import OneModelConfig
+
+
+                custom = {
+                    "sam": OneModelConfig(abbr="sam-random", params={
+                        "n_excluded": 10,
+                        "n_included": 10,
+                    }),
+                    "stp": OneModelConfig(abbr="stp-nq"),
+                }
+                config = Config(*custom)
+                ```
         """
 
         # initialize the private attributes:
@@ -191,10 +210,14 @@ class Config:
         }
 
     def as_dict(self, recurse=True) -> Union[Dict[str, OneModelConfig], Dict[str, Dict[str, Any]]]:
-        """Returns a `dict` representation of the 7 different model configurations. When `recurse`
-        is `True` (as is the default), each of the 7 `OneModelConfig`s are themselves also turned
-        into a `dict` using their `.as_dict()` method; if `recurse` is `False`, the returned object
-        is a `dict` whose values are of class `OneModelConfig`."""
+        """
+        Returns:
+
+             A `dict` representation of the 7 different model configurations. When `recurse`
+            is `True` (as is the default), each of the 7 `OneModelConfig`s are themselves also turned
+            into a `dict` using their `.as_dict()` method; if `recurse` is `False`, the returned object
+            is a `dict` whose values are of class `OneModelConfig`.
+        """
         return {
             "bal": self._bal.as_dict() if recurse else self._bal,
             "cls": self._cls.as_dict() if recurse else self._cls,
@@ -206,8 +229,12 @@ class Config:
         }
 
     def flattened(self) -> Dict[str, Any]:
-        """Returns a flattened version of the 7 model configurations as a `dict` whose keys consist
-        of the name of the model and the name of its parameters."""
+        """
+        Returns:
+
+            A flattened version of the 7 model configurations as a `dict` whose keys consist
+            of the name of the model and the name of its parameters.
+        """
         d = {}
         d.update(self.bal.flattened())
         d.update(self.cls.flattened())
@@ -220,77 +247,84 @@ class Config:
 
     @property
     def bal(self) -> OneModelConfig:
-        """Sets/gets the configuration for the balancer model."""
+        """The configuration for the balancer model."""
         return self._bal
 
     @bal.setter
     def bal(self, bal: OneModelConfig):
+        """The configuration for the balancer model."""
         assert isinstance(bal, OneModelConfig), Config._errmsg
         assert bal.abbr.startswith("bal"), "Expected a balancer model."
         self._bal = bal
 
     @property
     def cls(self) -> OneModelConfig:
-        """Sets/gets the configuration for the classifier model."""
+        """The configuration for the classifier model."""
         return self._cls
 
     @cls.setter
     def cls(self, cls: OneModelConfig):
+        """The configuration for the classifier model."""
         assert isinstance(cls, OneModelConfig), Config._errmsg
         assert cls.abbr.startswith("cls"), "Expected a classifier model."
         self._cls = cls
 
     @property
     def fex(self) -> OneModelConfig:
-        """Sets/gets the configuration for the feature extraction model."""
+        """The configuration for the feature extraction model."""
         return self._fex
 
     @fex.setter
     def fex(self, fex: OneModelConfig):
+        """The configuration for the feature extraction model."""
         assert isinstance(fex, OneModelConfig), Config._errmsg
         assert fex.abbr.startswith("fex"), "Expected a feature extraction model."
         self._fex = fex
 
     @property
     def ofn(self) -> OneModelConfig:
-        """Sets/gets the configuration for the objective function model."""
+        """The configuration for the objective function model."""
         return self._ofn
 
     @ofn.setter
     def ofn(self, ofn: OneModelConfig):
+        """The configuration for the objective function model."""
         assert isinstance(ofn, OneModelConfig), Config._errmsg
         assert ofn.abbr.startswith("ofn"), "Expected an objective function model."
         self._ofn = ofn
 
     @property
     def qry(self) -> OneModelConfig:
-        """Sets/gets the configuration for the query model."""
+        """The configuration for the query model."""
         return self._qry
 
     @qry.setter
     def qry(self, qry: OneModelConfig):
+        """The configuration for the query model."""
         assert isinstance(qry, OneModelConfig), Config._errmsg
         assert qry.abbr.startswith("qry"), "Expected a query model."
         self._qry = qry
 
     @property
     def sam(self) -> OneModelConfig:
-        """Sets/gets the configuration for the sampling model."""
+        """The configuration for the sampling model."""
         return self._sam
 
     @sam.setter
     def sam(self, sam: OneModelConfig):
+        """The configuration for the sampling model."""
         assert isinstance(sam, OneModelConfig), Config._errmsg
         assert sam.abbr.startswith("sam"), "Expected a sampler model."
         self._sam = sam
 
     @property
     def stp(self) -> OneModelConfig:
-        """Sets/gets the configuration for the stopping model."""
+        """The configuration for the stopping model."""
         return self._stp
 
     @stp.setter
     def stp(self, stp: OneModelConfig):
+        """The configuration for the stopping model."""
         assert isinstance(stp, OneModelConfig), Config._errmsg
         assert stp.abbr.startswith("stp"), "Expected a stopping model."
         self._stp = stp

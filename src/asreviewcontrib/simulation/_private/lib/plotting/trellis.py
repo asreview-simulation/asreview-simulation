@@ -55,22 +55,59 @@ class TrellisHandles:
         axes_handles: List[List[Optional[plt.Axes]]],
         show_params: List[str],
     ):
+        """
+        Args:
+            axes_handles:
+                TODO
+            show_params:
+                TODO
+
+        Synopsis:
+
+            TODO
+        """
         self._axes = axes_handles
         self._show_params = show_params
 
     def get_axes_by_row_name(self, row_name: str = None) -> List[plt.Axes]:
+        """
+        Args:
+            row_name:
+                TODO
+
+        Returns:
+            TODO
+        """
         assert row_name is not None, "Need a name to identify the row of subaxes"
         assert row_name in self.show_params[:-1], f"{row_name} is not a valid name for a row"
         irow = self.show_params.index(row_name)
         return [col for col in self.axes[irow] if col is not None]
 
     def get_axes_by_col_name(self, col_name: str = None) -> List[plt.Axes]:
+        """
+        Args:
+            col_name:
+                TODO
+
+        Returns:
+            TODO
+        """
         assert col_name is not None, "Need a name to identify the column of subaxes"
         assert col_name in self.show_params[1:], f"{col_name} is not a valid name for a column"
         icol = self.show_params.index(col_name)
         return [row[icol] for row in self.axes if row[icol] is not None]
 
     def get_axes_by_names(self, row_name: str = None, col_name: str = None) -> plt.Axes:
+        """
+        Args:
+            row_name:
+                TODO
+            col_name:
+                TODO
+
+        Returns:
+            TODO
+        """
         assert row_name is not None, "Need a name to identify the row of subaxes"
         assert row_name in self.show_params[:-1], f"{row_name} is not a valid name for a row"
         assert col_name is not None, "Need a name to identify the column of subaxes"
@@ -82,10 +119,16 @@ class TrellisHandles:
 
     @property
     def axes(self):
+        """
+        TODO
+        """
         return self._axes
 
     @property
     def show_params(self):
+        """
+        TODO
+        """
         return self._show_params
 
 
@@ -249,7 +292,73 @@ def plot_trellis(
     show_response_surface=True,
     show_text=True,
 ) -> TrellisHandles:
-    """Visualize each combination of 2 parameters out of a user-provided list of parameters."""
+    """
+    Args:
+        data: A list of tuples, where each tuple consists of an
+            `asreviewcontrib.simulation.api.Config` object and its associated objective score.
+        show_params:
+            The subset of the parameters that you want to plot.
+        outer_padding:
+            The padding around the trellis of axes.
+        inner_padding:
+            The padding around an individual axes.
+        scatter_kwargs:
+            `matplotlib`'s `scatter` keyword arguments, see
+            https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html.
+        show_response_surface:
+            Whether to show an interpolation of objective function scores as a background
+            image in each axes.
+        show_text:
+            Whether to show the metadata for the list of parameterizations.
+
+    Returns:
+        The handles to the axes, to facilitate subsequent customization.
+
+    Synopsis:
+
+        Visualize each combination of 2 parameters out of a user-provided list of parameters using
+        a grid/trellis of axes.
+
+    Example usage:
+
+        ```python
+        from asreviewcontrib.simulation.api import Config
+        from asreviewcontrib.simulation.api import draw_sample
+        from asreviewcontrib.simulation.api import get_pyll
+        from asreviewcontrib.simulation.api import OneModelConfig
+        from asreviewcontrib.simulation.api.plotting import plot_trellis
+        from matplotlib import pyplot as plt
+
+
+        # retrieve the sampling spaces for the double balancer model
+        # and the TF-IDF feature extraction model, respectively.
+        pyll = {
+            "bal": get_pyll("bal-double"),
+            "fex": get_pyll("fex-tfidf"),
+        }
+
+        n_samples = 100
+        results = []
+
+        for _ in range(n_samples):
+
+            # use pyll programs to draw a parameterization for 'bal' and 'fex'
+            drawn = draw_sample(pyll)
+
+            # construct an all-model config from one-model configs -- implicitly use
+            # default model choice and parameterization for models not included as
+            # argument
+            config = Config(**fixed, **drawn)
+
+            # emulate calculating objective scores with random(), naturally the
+            # results are not meaningful
+            results.append((config, random()))
+
+        plt.figure()
+        plot_trellis(results, sorted(drawn.keys()))
+        plt.show()
+        ```
+    """
 
     assert len(data) >= 1, "Need at least one sample"
     expected_params = data[0][0].flattened().keys()

@@ -37,47 +37,51 @@ def run(
     Returns:
         The objective score or `None`.
 
-    Runs the ASReview simulation with the provided choice of models and their
-    parameterization (i.e., input argument `config`).
+    Synopsis:
+
+        Runs the ASReview simulation with the provided choice of models and their
+        parameterization (i.e., input argument `config`).
 
     Example usage:
 
-    ```python
-    import os
-    import tempfile
-    from asreviewcontrib.simulation.api import Config
-    from asreviewcontrib.simulation.api import OneModelConfig
-    from asreviewcontrib.simulation.api import prep_project_directory
-    from asreviewcontrib.simulation.api import run
+        ```python
+        import os
+        import tempfile
+        from asreviewcontrib.simulation.api import Config
+        from asreviewcontrib.simulation.api import OneModelConfig
+        from asreviewcontrib.simulation.api import prep_project_directory
+        from asreviewcontrib.simulation.api import run
 
-    # make a classifier model config using default parameter values given the model name
-    cls = OneModelConfig("cls-svm")
+        # make a classifier model config using default parameter values
+        # given the model name
+        cls = OneModelConfig("cls-svm")
 
-    # make a query model config using positional arguments, and a partial params dict
-    qry = OneModelConfig("qry-max-random", {"fraction_max": 0.90})
+        # make a query model config using positional arguments, and a
+        # partial params dict
+        qry = OneModelConfig("qry-max-random", {"fraction_max": 0.90})
 
-    # make a stopping model config using keyword arguments
-    stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
+        # make a stopping model config using keyword arguments
+        stp = OneModelConfig(abbr="stp-nq", params={"n_queries": 10})
 
-    # construct an all model config from one model configs -- implicitly use default
-    # model choice and parameterization for models not included as argument (i.e. sam,
-    # fex, bal, ofn)
-    config = Config(cls=cls, qry=qry, stp=stp)
+        # construct an all model config from one model configs -- implicitly
+        # use default model choice and parameterization for models not
+        # included as argument (i.e. sam, fex, bal, ofn)
+        config = Config(cls=cls, qry=qry, stp=stp)
 
-    # arbitrarily pick a benchmark dataset
-    benchmark = "benchmark:Cohen_2006_ADHD"
+        # arbitrarily pick a benchmark dataset
+        benchmark = "benchmark:Cohen_2006_ADHD"
 
-    # create a temporary directory
-    tmpdir = tempfile.mkdtemp(prefix="asreview-simulation.", dir=".")
-    output_file = f"{tmpdir}{os.sep}project.asreview"
+        # create a temporary directory
+        tmpdir = tempfile.mkdtemp(prefix="asreview-simulation.", dir=".")
+        output_file = f"{tmpdir}{os.sep}project.asreview"
 
-    # prepare the directory that holds the state of the simulation
-    project, as_data = prep_project_directory(benchmark=benchmark,
-                                              output_file=output_file)
+        # prepare the directory that holds the state of the simulation
+        project, as_data = prep_project_directory(benchmark=benchmark,
+                                                  output_file=output_file)
 
-    # start the simulation
-    run(config, project, as_data)
-    ```
+        # start the simulation
+        run(config, project, as_data)
+        ```
     """
 
     # prep
