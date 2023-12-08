@@ -167,10 +167,13 @@ class Config:
 
 
                 custom = {
-                    "sam": OneModelConfig(abbr="sam-random", params={
-                        "n_excluded": 10,
-                        "n_included": 10,
-                    }),
+                    "sam": OneModelConfig(
+                        abbr="sam-random",
+                        params={
+                            "n_excluded": 10,
+                            "n_included": 10,
+                        }
+                    ),
                     "stp": OneModelConfig(abbr="stp-nq"),
                 }
                 config = Config(*custom)
