@@ -34,6 +34,7 @@ expected = {
     },
     "asreviewcontrib.simulation.api.plotting": {
         "Padding",
+        "TrellisHandles",
         "plot_trellis",
     },
     "asreviewcontrib.simulation.api.unwrapping": {
