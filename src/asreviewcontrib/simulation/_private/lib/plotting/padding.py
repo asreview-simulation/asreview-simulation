@@ -2,6 +2,7 @@ class Padding:
     """
     Class to keep track of padding length in 4 directions: `bottom`, `left`, `right`, `top`.
     """
+
     def __init__(self, bottom: float = 0.1, left: float = 0.1, right: float = 0.1, top: float = 0.1):
         """
         Synopsis:
