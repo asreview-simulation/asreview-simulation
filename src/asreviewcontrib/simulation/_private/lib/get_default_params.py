@@ -1,5 +1,6 @@
-from typing import Dict
 from typing import Any
+from typing import Dict
+from typing import TypeAlias
 from asreviewcontrib.simulation._private.lib.bal.bal_double_params import get_bal_double_params
 from asreviewcontrib.simulation._private.lib.bal.bal_simple_params import get_bal_simple_params
 from asreviewcontrib.simulation._private.lib.bal.bal_undersample_params import get_bal_undersample_params
@@ -30,7 +31,10 @@ from asreviewcontrib.simulation._private.lib.stp.stp_nq_params import get_stp_nq
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_params import get_stp_rel_params
 
 
-def get_default_params(name: str) -> Dict[str, Any]:
+TGenericParams: TypeAlias = Dict[str, Any]
+
+
+def get_default_params(name: str) -> TGenericParams:
     funcmap = {
         "bal-double": get_bal_double_params,
         "bal-simple": get_bal_simple_params,

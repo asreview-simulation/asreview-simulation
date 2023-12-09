@@ -1,7 +1,11 @@
 from typing import List
+from typing import TypeAlias
 
 
-def get_abbrs() -> List[str]:
+TAbbrs: TypeAlias = List[str]
+
+
+def get_abbrs() -> TAbbrs:
     """
     Returns:
 

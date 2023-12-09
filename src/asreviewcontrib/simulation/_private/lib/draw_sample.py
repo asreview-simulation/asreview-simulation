@@ -1,9 +1,14 @@
 from typing import Dict
+from typing import TypeAlias
 import hyperopt
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
-def draw_sample(pyll: Dict[str, hyperopt.base.pyll.Apply]) -> Dict[str, OneModelConfig]:
+TPyllDict: TypeAlias = Dict[str, hyperopt.base.pyll.Apply]
+TSampled: TypeAlias = Dict[str, OneModelConfig]
+
+
+def draw_sample(pyll: TPyllDict) -> TSampled:
     """
     Args:
         pyll:

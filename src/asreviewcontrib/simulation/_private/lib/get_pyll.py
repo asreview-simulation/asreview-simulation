@@ -1,3 +1,4 @@
+from typing import TypeAlias
 import hyperopt
 from asreviewcontrib.simulation._private.lib.bal.bal_double_pyll import bal_double_pyll
 from asreviewcontrib.simulation._private.lib.bal.bal_simple_pyll import bal_simple_pyll
@@ -29,7 +30,10 @@ from asreviewcontrib.simulation._private.lib.stp.stp_nq_pyll import stp_nq_pyll
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_pyll import stp_rel_pyll
 
 
-def get_pyll(abbr: str) -> hyperopt.base.pyll.Apply:
+TPyll: TypeAlias = hyperopt.base.pyll.Apply
+
+
+def get_pyll(abbr: str) -> TPyll:
     """
     Args:
         abbr:
