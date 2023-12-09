@@ -1,12 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    c: float
-    class_weight: float
-
-
-def get_clr_logistic_params() -> ParamsType:
+def get_clr_logistic_params() -> Dict[str, Any]:
     return {
         "c": 1.0,
         "class_weight": 1.0,

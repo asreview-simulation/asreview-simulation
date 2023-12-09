@@ -1,11 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    alpha: float
-
-
-def get_clr_nb_params() -> ParamsType:
+def get_clr_nb_params() -> Dict[str, Any]:
     return {
         "alpha": 3.822,
     }

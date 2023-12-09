@@ -1,14 +1,8 @@
-from typing import Optional
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    embedding: Optional[str]
-    split_ta: bool
-    use_keywords: bool
-
-
-def get_fex_embedding_idf_params() -> ParamsType:
+def get_fex_embedding_idf_params() -> Dict[str, Any]:
     return {
         "embedding": None,
         "split_ta": False,

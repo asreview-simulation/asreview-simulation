@@ -1,20 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    batch_size: int
-    class_weight: float
-    dense_width: int
-    dropout: float
-    epochs: int
-    forward: bool
-    optimizer: str
-    learn_rate: float
-    lstm_out_width: int
-    shuffle: bool
-
-
-def get_clr_lstm_base_params() -> ParamsType:
+def get_clr_lstm_base_params() -> Dict[str, Any]:
     return {
         "batch_size": 32,
         "class_weight": 30.0,

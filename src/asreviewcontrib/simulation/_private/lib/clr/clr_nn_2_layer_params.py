@@ -1,18 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    batch_size: int
-    class_weight: float
-    dense_width: int
-    epochs: int
-    learn_rate: float
-    optimizer: str
-    regularization: float
-    shuffle: bool
-
-
-def get_clr_nn_2_layer_params() -> ParamsType:
+def get_clr_nn_2_layer_params() -> Dict[str, Any]:
     return {
         "batch_size": 32,
         "class_weight": 30.0,

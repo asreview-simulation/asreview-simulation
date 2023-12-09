@@ -1,11 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    at_pct: int
-
-
-def get_ofn_wss_params() -> ParamsType:
+def get_ofn_wss_params() -> Dict[str, Any]:
     return {
         "at_pct": 95,
     }

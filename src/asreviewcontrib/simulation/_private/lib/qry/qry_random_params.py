@@ -1,11 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    n_instances: int
-
-
-def get_qry_random_params() -> ParamsType:
+def get_qry_random_params() -> Dict[str, Any]:
     return {
         "n_instances": 1,
     }

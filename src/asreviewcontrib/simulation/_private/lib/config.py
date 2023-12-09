@@ -1,14 +1,18 @@
 from typing import Any
 from typing import Dict
 from typing import Optional
+from typing import TypeAlias
 from typing import TypedDict
 from typing import Union
 from asreviewcontrib.simulation._private.lib.get_default_params import get_default_params
 
 
+TParams: TypeAlias = Dict[str, Any]
+
+
 class OneModelConfigDict(TypedDict):
     abbr: str
-    params: Dict[str, Any]
+    params: TParams
 
 
 class OneModelConfig:
@@ -17,7 +21,7 @@ class OneModelConfig:
     or the objective function model.
     """
 
-    def __init__(self, abbr: str, params: Optional[Dict[str, Any]] = None):
+    def __init__(self, abbr: str, params: Optional[TParams] = None):
         """
         Args:
             abbr:
@@ -54,7 +58,7 @@ class OneModelConfig:
                 ```
         """
         assert isinstance(abbr, str), "Expected input argument 'abbr' to be of type 'str'"
-        default_params = get_default_params(abbr)
+        default_params: TParams = get_default_params(abbr)
         self._abbr = abbr
         self._params = default_params
         if params is not None:
@@ -105,7 +109,7 @@ class OneModelConfig:
         return self._abbr
 
     @property
-    def params(self) -> Dict[str, Any]:
+    def params(self) -> TParams:
         """The model parameterization (read-only)."""
         return self._params
 

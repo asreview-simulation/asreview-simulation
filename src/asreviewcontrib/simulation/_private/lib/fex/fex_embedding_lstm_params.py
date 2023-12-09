@@ -1,18 +1,8 @@
-from typing import Optional
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    embedding: Optional[str]
-    fill: str
-    max_sequence_length: int
-    num_words: int
-    split_ta: bool
-    truncating: str
-    use_keywords: bool
-
-
-def get_fex_embedding_lstm_params() -> ParamsType:
+def get_fex_embedding_lstm_params() -> Dict[str, Any]:
     return {
         "embedding": None,
         "fill": "loop",

@@ -1,13 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    cluster_size: int
-    n_instances: int
-    update_interval: int
-
-
-def get_qry_cluster_params() -> ParamsType:
+def get_qry_cluster_params() -> Dict[str, Any]:
     return {
         "cluster_size": 350,
         "n_instances": 1,

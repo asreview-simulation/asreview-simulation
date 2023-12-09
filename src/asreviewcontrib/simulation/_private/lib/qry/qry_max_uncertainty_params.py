@@ -1,12 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    fraction_max: float
-    n_instances: int
-
-
-def get_qry_max_uncertainty_params() -> ParamsType:
+def get_qry_max_uncertainty_params() -> Dict[str, Any]:
     return {
         "fraction_max": 0.95,
         "n_instances": 1,

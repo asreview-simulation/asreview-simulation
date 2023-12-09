@@ -1,14 +1,8 @@
-from typing import List
-from typing import Optional
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    records: Optional[List[int]]
-    rows: Optional[List[int]]
-
-
-def get_sam_handpicked_params() -> ParamsType:
+def get_sam_handpicked_params() -> Dict[str, Any]:
     return {
         "records": None,
         "rows": None,

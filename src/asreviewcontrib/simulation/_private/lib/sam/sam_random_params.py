@@ -1,14 +1,8 @@
-from typing import Optional
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    init_seed: Optional[int]
-    n_excluded: int
-    n_included: int
-
-
-def get_sam_random_params() -> ParamsType:
+def get_sam_random_params() -> Dict[str, Any]:
     return {
         "init_seed": None,
         "n_excluded": 1,

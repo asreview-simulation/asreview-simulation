@@ -1,13 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    split_ta: bool
-    transformer_model: str
-    use_keywords: bool
-
-
-def get_fex_sbert_params() -> ParamsType:
+def get_fex_sbert_params() -> Dict[str, Any]:
     return {
         "split_ta": False,
         "transformer_model": "all-mpnet-base-v2",

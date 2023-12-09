@@ -1,14 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    a: float
-    alpha: float
-    b: float
-    beta: float
-
-
-def get_bal_double_params() -> ParamsType:
+def get_bal_double_params() -> Dict[str, Any]:
     return {
         "a": 2.155,
         "alpha": 0.94,

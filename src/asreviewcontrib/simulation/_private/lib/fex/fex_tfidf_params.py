@@ -1,14 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    ngram_max: int
-    split_ta: bool
-    stop_words: str
-    use_keywords: bool
-
-
-def get_fex_tfidf_params() -> ParamsType:
+def get_fex_tfidf_params() -> Dict[str, Any]:
     return {
         "ngram_max": 1,
         "split_ta": False,

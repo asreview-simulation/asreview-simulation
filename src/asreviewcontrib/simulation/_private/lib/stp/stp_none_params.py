@@ -1,9 +1,6 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    pass
-
-
-def get_stp_none_params() -> ParamsType:
+def get_stp_none_params() -> Dict[str, Any]:
     return {}

@@ -1,11 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    ratio: float
-
-
-def get_bal_undersample_params() -> ParamsType:
+def get_bal_undersample_params() -> Dict[str, Any]:
     return {
         "ratio": 1.0,
     }

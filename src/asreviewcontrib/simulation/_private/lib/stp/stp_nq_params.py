@@ -1,12 +1,8 @@
-from typing import Optional
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    n_queries: Optional[int]
-
-
-def get_stp_nq_params():
+def get_stp_nq_params() -> Dict[str, Any]:
     return {
         "n_queries": None,
     }

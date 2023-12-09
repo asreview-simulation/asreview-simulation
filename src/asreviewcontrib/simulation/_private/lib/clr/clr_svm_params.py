@@ -1,14 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    c: float
-    class_weight: float
-    gamma: str
-    kernel: str
-
-
-def get_clr_svm_params() -> ParamsType:
+def get_clr_svm_params() -> Dict[str, Any]:
     return {
         "c": 15.4,
         "class_weight": 0.249,

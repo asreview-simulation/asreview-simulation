@@ -1,13 +1,8 @@
-from typing import TypedDict
+from typing import Any
+from typing import Dict
 
 
-class ParamsType(TypedDict):
-    class_weight: float
-    max_features: int
-    n_estimators: int
-
-
-def get_clr_rf_params() -> ParamsType:
+def get_clr_rf_params() -> Dict[str, Any]:
     return {
         "class_weight": 1.0,
         "max_features": 10,
