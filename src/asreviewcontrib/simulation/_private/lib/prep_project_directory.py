@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import Optional
+from typing import Tuple
 from asreview.data import ASReviewData
 from asreview.data import load_data
 from asreview.project import ASReviewProject
@@ -7,7 +8,7 @@ from asreview.project import ASReviewProject
 
 def prep_project_directory(
     benchmark: Optional[str] = None, input_file: Optional[str] = None, output_file: Optional[str] = None
-) -> (ASReviewProject, ASReviewData):
+) -> Tuple[ASReviewProject, ASReviewData]:
     """
     Args:
         benchmark:

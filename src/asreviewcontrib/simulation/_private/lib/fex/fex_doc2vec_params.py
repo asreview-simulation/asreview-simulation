@@ -1,4 +1,8 @@
-def get_fex_doc2vec_params():
+from typing import Any
+from typing import Dict
+
+
+def get_fex_doc2vec_params() -> Dict[str, Any]:
     return {
         "dbow_words": False,
         "dm": "both",

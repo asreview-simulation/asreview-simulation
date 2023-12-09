@@ -1,12 +1,12 @@
+from typing import List
 from typing import Optional
+from typing import Tuple
 from asreview.compat import convert_id_to_idx
 from asreview.data import ASReviewData
 from asreviewcontrib.simulation._private.lib.config import Config
 
 
-def unwrap_prior_sampling_vars(
-    config: Config, as_data: ASReviewData
-) -> (Optional[int], Optional[int], Optional[int], Optional[int]):
+def unwrap_prior_sampling_vars(config: Config, as_data: ASReviewData) -> Tuple[List[int], int, int, Optional[int]]:
     if config.sam.abbr == "sam-handpicked":
         prior_rows = config.sam.params.get("rows", None)
         prior_records = config.sam.params.get("records", None)

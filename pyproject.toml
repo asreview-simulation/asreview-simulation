@@ -86,3 +86,24 @@ markers = [
     "ofn_none: tests pertaining to no objective function",
     "ofn_wss: tests pertaining to wss objective function",
 ]
+
+[tool.mypy]
+# Run with:  mypy --config-file pyproject.toml --verbose src/
+incremental = false
+mypy_path = "src"
+ignore_missing_imports = true
+explicit_package_bases = true
+
+
+[[tool.mypy.overrides]]
+module = [
+    "asreviewcontrib.simulation",
+    "asreviewcontrib.simulation.api",
+    "asreviewcontrib.simulation.api.plotting",
+    "asreviewcontrib.simulation.api.unwrapping"
+]
+follow_imports = "normal"
+
+[[tool.mypy.overrides]]
+module = "asreviewcontrib.simulation._private.*"
+follow_imports = "skip"

@@ -69,7 +69,7 @@ class TrellisHandles:
         self._axes = axes_handles
         self._show_params = show_params
 
-    def get_axes_by_row_name(self, row_name: str = None) -> List[plt.Axes]:
+    def get_axes_by_row_name(self, row_name: str) -> List[plt.Axes]:
         """
         Args:
             row_name:
@@ -83,7 +83,7 @@ class TrellisHandles:
         irow = self.show_params.index(row_name)
         return [col for col in self.axes[irow] if col is not None]
 
-    def get_axes_by_col_name(self, col_name: str = None) -> List[plt.Axes]:
+    def get_axes_by_col_name(self, col_name: str) -> List[plt.Axes]:
         """
         Args:
             col_name:
@@ -97,7 +97,7 @@ class TrellisHandles:
         icol = self.show_params.index(col_name)
         return [row[icol] for row in self.axes if row[icol] is not None]
 
-    def get_axes_by_names(self, row_name: str = None, col_name: str = None) -> plt.Axes:
+    def get_axes_by_names(self, row_name: Optional[str] = None, col_name: Optional[str] = None) -> plt.Axes:
         """
         Args:
             row_name:
@@ -147,11 +147,11 @@ def _calc_data_dict(
 
 
 def _calc_rect(
-    inner_padding: Padding = None,
-    outer_padding: Padding = None,
-    icol: int = None,
-    irow: int = None,
-    n: int = None,
+    icol: int,
+    irow: int,
+    n: int,
+    inner_padding: Optional[Padding] = None,
+    outer_padding: Optional[Padding] = None,
 ) -> Tuple[float, float, float, float]:
     """Given some information about padding, calculate the coordinates that a given
     axes would occupy given its row index, column index, and the number of axes on
@@ -199,8 +199,10 @@ def _plot_response_surface(
         # manipulate xv, yv and scores to fit the function signature of griddata
         points = np.array([[xi, yi] for xi, yi in zip(xv, yv)])
         values = np.array(scores)
-        xv_target = np.linspace(*ax.get_xlim(), nbins)
-        yv_target = np.linspace(*ax.get_ylim(), nbins)
+        xlims: Tuple[float, float] = ax.get_xlim()
+        ylims: Tuple[float, float] = ax.get_ylim()
+        xv_target = np.linspace(*xlims, nbins)
+        yv_target = np.linspace(*ylims, nbins)
         estimation_points = [[[xi, yi] for xi in xv_target] for yi in yv_target]
         estimated_scores = griddata(points, values, estimation_points, method="linear")
         ax.imshow(estimated_scores, aspect="auto", extent=(*ax.get_xlim(), *ax.get_ylim()), origin="lower")
@@ -254,7 +256,7 @@ def _prep_axes(
     n = len(data_dict.shown_params)
     handles = [[None] * n for _ in range(n)]
     for irow, row_name, icol, col_name in _get_row_col_quads(data_dict):
-        rect = _calc_rect(inner, outer, icol=icol, irow=irow, n=n)
+        rect = _calc_rect(icol, irow, n, inner, outer)
         kwargs = {}
         if irow == 0:
             kwargs.update({"xlabel": col_name})
@@ -285,12 +287,12 @@ def _prep_axes(
 
 def plot_trellis(
     data: List[Tuple[Config, float]],
-    show_params: List[str] = None,
-    outer_padding: Padding = None,
-    inner_padding: Padding = None,
-    scatter_kwargs: dict = None,
-    show_response_surface=True,
-    show_text=True,
+    show_params: Optional[List[str]] = None,
+    outer_padding: Optional[Padding] = None,
+    inner_padding: Optional[Padding] = None,
+    scatter_kwargs: Optional[Dict[str, Any]] = None,
+    show_response_surface: bool = True,
+    show_text: bool = True,
 ) -> TrellisHandles:
     """
     Args:

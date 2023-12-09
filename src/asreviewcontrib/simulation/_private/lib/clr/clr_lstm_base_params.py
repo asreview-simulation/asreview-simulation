@@ -1,4 +1,8 @@
-def get_clr_lstm_base_params():
+from typing import Any
+from typing import Dict
+
+
+def get_clr_lstm_base_params() -> Dict[str, Any]:
     return {
         "batch_size": 32,
         "class_weight": 30.0,

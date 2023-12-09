@@ -1,4 +1,8 @@
-def get_fex_embedding_lstm_params():
+from typing import Any
+from typing import Dict
+
+
+def get_fex_embedding_lstm_params() -> Dict[str, Any]:
     return {
         "embedding": None,
         "fill": "loop",
