@@ -1,4 +1,20 @@
-def get_clr_lstm_pool_params():
+from typing import TypedDict
+
+
+class ParamsType(TypedDict):
+    batch_size: int
+    class_weight: float
+    dropout: float
+    epochs: int
+    forward: bool
+    learn_rate: float
+    lstm_out_width: int
+    lstm_pool_size: int
+    optimizer: str
+    shuffle: bool
+
+
+def get_clr_lstm_pool_params() -> ParamsType:
     return {
         "batch_size": 32,
         "class_weight": 30.0,

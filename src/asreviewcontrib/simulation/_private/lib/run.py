@@ -13,8 +13,8 @@ def run(
     config: Config,
     project: ASReviewProject,
     as_data: ASReviewData,
-    write_interval: int = None,
-    seed: int = None,
+    write_interval: Optional[int] = None,
+    seed: Optional[int] = None,
     no_zip: bool = False,
 ) -> Optional[float]:
     """

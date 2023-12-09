@@ -17,6 +17,8 @@ def unwrap_stopping_vars(config: Config, as_data: ASReviewData, n_instances: int
         elif config.sam.abbr == "sam-random":
             n_excluded = config.sam.params.get("n_excluded")
             n_included = config.sam.params.get("n_included")
+            assert isinstance(n_excluded, int), "Expected n_excluded to be of type int"
+            assert isinstance(n_included, int), "Expected n_included to be of type int"
             return int(ceil((len(as_data) - n_excluded - n_included) / n_instances))
         else:
             raise ValueError("Unknown sampler.")

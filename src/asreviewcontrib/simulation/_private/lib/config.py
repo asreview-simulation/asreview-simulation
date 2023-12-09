@@ -1,8 +1,14 @@
 from typing import Any
 from typing import Dict
 from typing import Optional
+from typing import TypedDict
 from typing import Union
 from asreviewcontrib.simulation._private.lib.get_default_params import get_default_params
+
+
+class OneModelConfigDict(TypedDict):
+    abbr: str
+    params: Dict[str, Any]
 
 
 class OneModelConfig:
@@ -11,7 +17,7 @@ class OneModelConfig:
     or the objective function model.
     """
 
-    def __init__(self, abbr: str, params: Optional[Dict] = None):
+    def __init__(self, abbr: str, params: Optional[Dict[str, Any]] = None):
         """
         Args:
             abbr:
@@ -68,7 +74,7 @@ class OneModelConfig:
         cond3 = False not in {self._params[k] == other._params[k] for k in self._params.keys()}
         return cond1 and cond2 and cond3
 
-    def as_dict(self) -> Dict[str, Any]:
+    def as_dict(self) -> OneModelConfigDict:
         """
         Returns:
 
@@ -102,6 +108,16 @@ class OneModelConfig:
     def params(self) -> Dict[str, Any]:
         """The model parameterization (read-only)."""
         return self._params
+
+
+class ConfigDict(TypedDict):
+    bal: Union[OneModelConfig, OneModelConfigDict]
+    clr: Union[OneModelConfig, OneModelConfigDict]
+    fex: Union[OneModelConfig, OneModelConfigDict]
+    ofn: Union[OneModelConfig, OneModelConfigDict]
+    qry: Union[OneModelConfig, OneModelConfigDict]
+    sam: Union[OneModelConfig, OneModelConfigDict]
+    stp: Union[OneModelConfig, OneModelConfigDict]
 
 
 class Config:
@@ -180,15 +196,6 @@ class Config:
                 ```
         """
 
-        # initialize the private attributes:
-        self._bal = None
-        self._clr = None
-        self._fex = None
-        self._ofn = None
-        self._qry = None
-        self._sam = None
-        self._stp = None
-
         # use the setter methods to assign constructor arguments to private attributes
         self.bal = bal or OneModelConfig("bal-double")
         self.clr = clr or OneModelConfig("clr-nb")
@@ -212,7 +219,7 @@ class Config:
             self._stp == other._stp,
         }
 
-    def as_dict(self, recurse=True) -> Union[Dict[str, OneModelConfig], Dict[str, Dict[str, Any]]]:
+    def as_dict(self, recurse=True) -> ConfigDict:
         """
         Returns:
 

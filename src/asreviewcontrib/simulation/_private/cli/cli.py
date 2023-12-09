@@ -55,8 +55,8 @@ def add_bal_subcommands():
     except Exception as e:
         print(get_error_msg(group, e))
         other_bals = []
-    for b in sort_commands(my_bals + other_bals):
-        cli.add_command(b)
+    for bal in sort_commands(my_bals + other_bals):
+        cli.add_command(bal)
 
 
 def add_clr_subcommands():
@@ -75,8 +75,8 @@ def add_clr_subcommands():
     except Exception as e:
         print(get_error_msg(group, e))
         other_clrs = []
-    for c in sort_commands(my_clrs + other_clrs):
-        cli.add_command(c)
+    for clr in sort_commands(my_clrs + other_clrs):
+        cli.add_command(clr)
 
 
 def add_fex_subcommands():
@@ -93,8 +93,8 @@ def add_fex_subcommands():
     except Exception as e:
         print(get_error_msg(group, e))
         other_fexs = []
-    for e in sort_commands(my_fexs + other_fexs):
-        cli.add_command(e)
+    for fex in sort_commands(my_fexs + other_fexs):
+        cli.add_command(fex)
 
 
 def add_ofn_subcommands():
@@ -108,8 +108,8 @@ def add_ofn_subcommands():
     except Exception as e:
         print(get_error_msg(group, e))
         other_ofns = []
-    for o in sort_commands(my_ofns + other_ofns):
-        cli.add_command(o)
+    for ofn in sort_commands(my_ofns + other_ofns):
+        cli.add_command(ofn)
 
 
 def add_qry_subcommands():
@@ -127,8 +127,8 @@ def add_qry_subcommands():
     except Exception as e:
         print(get_error_msg(group, e))
         other_qrys = []
-    for q in sort_commands(my_qrys + other_qrys):
-        cli.add_command(q)
+    for qry in sort_commands(my_qrys + other_qrys):
+        cli.add_command(qry)
 
 
 def add_sam_subcommands():
@@ -142,8 +142,8 @@ def add_sam_subcommands():
     except Exception as e:
         print(get_error_msg(group, e))
         other_sams = []
-    for s in sort_commands(my_sams + other_sams):
-        cli.add_command(s)
+    for sam in sort_commands(my_sams + other_sams):
+        cli.add_command(sam)
 
 
 def add_starter_subcommands():
@@ -166,8 +166,8 @@ def add_stp_subcommands():
     except Exception as e:
         print(get_error_msg(group, e))
         other_stps = []
-    for s in sort_commands(my_stps + other_stps):
-        cli.add_command(s)
+    for stp in sort_commands(my_stps + other_stps):
+        cli.add_command(stp)
 
 
 def add_terminator_subcommands():

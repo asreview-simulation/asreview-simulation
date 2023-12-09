@@ -1,4 +1,7 @@
-def get_abbrs() -> [str]:
+from typing import List
+
+
+def get_abbrs() -> List[str]:
     """
     Returns:
 

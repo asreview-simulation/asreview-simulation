@@ -1,7 +1,8 @@
+from typing import List
 from asreview.datasets import DatasetManager
 
 
-def get_dataset_names() -> [str]:
+def get_dataset_names() -> List[str]:
     """
     Returns:
 
