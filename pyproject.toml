@@ -21,11 +21,11 @@ doc2vec = ["gensim"]
 sbert = ["sentence_transformers"]
 tensorflow = ["tensorflow >= 2.0.0, < 2.10"]   # tensorflow.keras.wrappers disappeared in 2.10
 dev = [
+    "build",
     "coverage",
     "pdoc",
     "pytest",
     "pre-commit",
-    "twine",
 ]
 
 [project.scripts]
