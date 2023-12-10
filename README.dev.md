@@ -181,6 +181,18 @@ pdoc --docformat google -o docs asreviewcontrib.simulation.api
 A GitHub Action named `apidocs` has been configured to generate the API documentation and host it
 on GitHub Pages https://asreview-simulation.github.io/asreview-simulation.
 
+## Packaging for distribution
+
+```shell
+pip install --editable .[dev]
+
+# build a source distribution and put it in ./dist
+python3 -m build --sdist .
+
+# build a built distribution (a.k.a. a "wheel") and put it in ./dist
+python3 -m build --wheel .
+```
+
 ## Publishing: Preparation
 
 ```shell
