@@ -181,7 +181,7 @@ ofn-wss                WSS objective function
 
 ## Application Programming Interface (API)
 
-For a full overview of the API, see `tests/api/test_api.py`. Here is an example:
+For a full overview of the API, see `tests/api/test_api.py` and https://asreview-simulation.github.io/asreview-simulation. Here is an example:
 
 ```python
 import os
