@@ -56,12 +56,23 @@ pre-commit install
 
 ## Testing
 
-There are various types of test: unit tests, tests that use mocking, and integration tests. Each has its own
-subdirectory. The tests can be run locally with:
+There are various types of test:
+1. api tests
+2. unit tests
+3. tests that use mocking
+4. integration tests
+5. use case tests
+
+Each has its own subdirectory. The tests can be run locally with:
 
 ```shell
 pip install --editable .[dev]
-pytest -v
+
+# run all types of test
+pytest
+
+# run tests from specific directories only, e.g.
+pytest tests/api tests/unit
 ```
 
 Tests pertaining to a specific model have been marked accordingly with the following markers (see also `pytest`
@@ -81,15 +92,15 @@ You can instruct `pytest` to run only the tests for one or some of these marked 
 only the tests related to Naive Bayes, you should call `pytest` with the `-m` flag as follows:
 
 ```shell
-pytest -m clr_nb -v
+pytest -m clr_nb
 ```
 
 Markers can also be combined with `or` and `and` and `not`, e.g.
 
 ```shell
-pytest -m 'clr_nb and fex_tfidf' -v
-pytest -m 'clr_rf and not fex_embedding_idf and not fex_embedding_lstm' -v
-pytest -m 'clr_logistic or clr_rf' -v
+pytest -m 'clr_nb and fex_tfidf'
+pytest -m 'clr_rf and not fex_embedding_idf and not fex_embedding_lstm'
+pytest -m 'clr_logistic or clr_rf'
 # etc
 ```
 
@@ -231,7 +242,7 @@ Command line functionality can be extended by plugins.
 3. ~~construct null distribution with pyll programs~~
 4. ~~updating default configuration with distribution sampled from pyll programs~~
 5. ~~starting ReviewSimulate with sampled distribution from pyll + default~~
-6. rating each result with an objective function, e.g. from datatools or homemade
+6. ~~rating each result with an objective function, e.g. from datatools or homemade~~
 7. closing the feedback loop by drawing new parameterizations based on the result from previous parameterizations,
 e.g. using one of hyperopt's optimization methods
 
