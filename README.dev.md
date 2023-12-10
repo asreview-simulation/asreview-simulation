@@ -27,11 +27,31 @@ pip install --editable .[sbert,doc2vec]
 
 ## Linting
 
-Running pre-commit on unstaged files
+Linting is set up to run the following tools, all via [`pre-commit`](https://pre-commit.com/):
+
+1. `isort`: Verify the import statements are formatted consistently throughout the code base. https://pypi.org/project/isort/
+2. `black`: Format the code base in accordance to `black`'s preferences. https://pypi.org/project/black/
+3. `ruff`: Format and lint the code base in accordance to `ruff`'s preferences. https://pypi.org/project/ruff/
+4. `mypy`: Perform static type checking. https://pypi.org/project/mypy/
+5. `cffconvert`: Verify that the citation information in CITATION.cff  is valid according to the Citation File Format schema. https://pypi.org/project/cffconvert/
+
+Here's how to run pre-commit on unstaged files:
 
 ```
 pip install --editable .[dev]
+
+# all checks
 pre-commit run --all-files
+
+# run check by id, see .pre-commit-config.yaml
+pre-commit run --all-files isort
+```
+
+You can set up pre-commit to run as a git hook. In typical usage, `pre-commit` is then triggered whenever
+you do a `git commit`. Enable this behavior as follows:
+
+```shell
+pre-commit install
 ```
 
 ## Testing
