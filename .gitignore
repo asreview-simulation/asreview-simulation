@@ -1,16 +1,25 @@
-.idea
-*.egg-info
-**/__pycache__
+# IDE-related
+/.idea
 
-build
-venv
+# caches
+**/__pycache__
+/.mypy_cache
+/.pytest_cache
+/.ruff_cache
+
+# virtual environment
+/venv
 
 # coverage-related
-.coverage-reports
-.coverage
-coverage.xml
-
+/.coverage-reports
+/.coverage
+/coverage.xml
 
 # generated documentation
-docs
-.docs
+/docs
+/.docs
+
+# distribution-related
+/build
+/dist
+*.egg-info
