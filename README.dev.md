@@ -141,7 +141,7 @@ simulation using `asreview simulation [subcommands with options] start`, then co
 generated inside the `.asreview` file (`project.json`, `data/<dataset>.csv`, `reviews/<id>/results.sql`, and
 `reviews/<id>/settings_metadata.json`, but not `feature_matrices/<extractor-method>_feature_matrix.npz` at the moment).
 
-### Static analysis and coverage calculation
+## Static analysis and coverage calculation
 
 The project has been set up to use [SonarCloud](https://sonarcloud.io) to perform static analysis on the code base via
 a GitHub Action named `sonarcloud`. The analysis runs on a weekly schedule but can also be triggered manually.
@@ -162,7 +162,7 @@ coverage report
 coverage html --directory=./html
 ```
 
-### Generating API documentation
+## Generating API documentation
 
 The project uses code comments compliant with Google Docstrings
 (https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings) to document its API.
