@@ -30,7 +30,7 @@ from asreviewcontrib.simulation._private.lib.stp.stp_nq_params import get_stp_nq
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_params import get_stp_rel_params
 
 
-def get_default_params(name: str) -> Dict[str, Any]:
+def get_default_params(abbr: str) -> Dict[str, Any]:
     funcmap = {
         "bal-double": get_bal_double_params,
         "bal-simple": get_bal_simple_params,
@@ -62,9 +62,9 @@ def get_default_params(name: str) -> Dict[str, Any]:
         "stp-rel": get_stp_rel_params,
     }
     try:
-        func = funcmap[name]
+        func = funcmap[abbr]
     except KeyError as e:
-        names = "\n".join(list(funcmap.keys()))
-        print(f"'{name}' is not a valid name for a model. Valid names are:\n{names}")
+        abbrs = "\n".join(list(funcmap.keys()))
+        print(f"'{abbr}' is not a valid name for a model. Valid names are:\n{abbrs}")
         raise e
     return func()
