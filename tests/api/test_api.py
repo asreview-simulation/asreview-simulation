@@ -6,6 +6,7 @@ def get_modules():
     return [
         asreviewcontrib.simulation,
         asreviewcontrib.simulation.api,
+        asreviewcontrib.simulation.api.extending,
         asreviewcontrib.simulation.api.plotting,
         asreviewcontrib.simulation.api.unwrapping,
     ]
@@ -24,6 +25,7 @@ expected = {
         "Config",
         "OneModelConfig",
         "draw_sample",
+        "extending",
         "get_abbrs",
         "get_dataset_names",
         "get_pyll",
@@ -31,6 +33,16 @@ expected = {
         "prep_project_directory",
         "run",
         "unwrapping",
+    },
+    "asreviewcontrib.simulation.api.extending": {
+        "dont_reassign_bal_msg",
+        "dont_reassign_clr_msg",
+        "dont_reassign_fex_msg",
+        "dont_reassign_ofn_msg",
+        "dont_reassign_qry_msg",
+        "dont_reassign_sam_msg",
+        "dont_reassign_stp_msg",
+        "epilog",
     },
     "asreviewcontrib.simulation.api.plotting": {
         "Padding",
