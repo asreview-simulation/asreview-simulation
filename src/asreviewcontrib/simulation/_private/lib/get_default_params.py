@@ -1,3 +1,8 @@
+import sys
+if sys.version_info < (3, 10):
+    from importlib_metadata import entry_points
+else:
+    from importlib.metadata import entry_points
 from typing import Any
 from typing import Dict
 from asreviewcontrib.simulation._private.lib.bal.bal_double_params import get_bal_double_params
@@ -31,7 +36,7 @@ from asreviewcontrib.simulation._private.lib.stp.stp_rel_params import get_stp_r
 
 
 def get_default_params(abbr: str) -> Dict[str, Any]:
-    funcmap = {
+    my_funcmap = {
         "bal-double": get_bal_double_params,
         "bal-simple": get_bal_simple_params,
         "bal-undersample": get_bal_undersample_params,
@@ -61,6 +66,22 @@ def get_default_params(abbr: str) -> Dict[str, Any]:
         "stp-nq": get_stp_nq_params,
         "stp-rel": get_stp_rel_params,
     }
+
+    group = "asreview_simulationcontrib.funcmaps.get_default_params"
+
+    try:
+        other_funcmaps = {e.load() for e in entry_points(group=group)}
+    except Exception as e:
+        print(
+            f"Something went wrong loading a module from entrypoint group '{group}'. Th"
+            + f"e error message was: {e}\nContinuing..."
+        )
+        other_funcmaps = set()
+
+    funcmap = my_funcmap.update(other_funcmaps)
+    for other_funcmap in other_funcmaps:
+        funcmap.update(other_funcmap)
+
     try:
         func = funcmap[abbr]
     except KeyError as e:

@@ -1,4 +1,8 @@
-from importlib.metadata import entry_points as entrypoints
+import sys
+if sys.version_info < (3, 10):
+    from importlib_metadata import entry_points
+else:
+    from importlib.metadata import entry_points
 from typing import List
 from typing import TypeAlias
 
@@ -44,8 +48,12 @@ def get_abbrs() -> TAbbrs:
     }
     group = "asreview_simulationcontrib.subcommands"
     try:
-        other_subcommands = {e.load() for e in entrypoints(group=group)}
-    except Exception:
+        other_subcommands = {e.load() for e in entry_points(group=group)}
+    except Exception as e:
+        print(
+            f"Something went wrong loading a module from entrypoint group '{group}'. Th"
+            + f"e error message was: {e}\nContinuing..."
+        )
         other_subcommands = set()
 
     other_abbrs = {o.name for o in other_subcommands}

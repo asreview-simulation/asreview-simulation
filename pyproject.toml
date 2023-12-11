@@ -13,6 +13,7 @@ dependencies = [
     "hyperopt >= 0.2.7, < 0.3",
     "asreview-insights >= 1.0.0, <2.0",
     "matplotlib >= 3.3.0, <4.0",
+    "importlib_metadata >= 3.6, < 4.0; python_version < '3.10'"
 ]
 description = "Simulate a manual ASReview analysis"
 
