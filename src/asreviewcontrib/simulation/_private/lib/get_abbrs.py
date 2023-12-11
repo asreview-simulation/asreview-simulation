@@ -1,3 +1,4 @@
+from importlib.metadata import entry_points as entrypoints
 from typing import List
 from typing import TypeAlias
 
@@ -11,7 +12,7 @@ def get_abbrs() -> TAbbrs:
 
         A list of recognized model abbreviations.
     """
-    return [
+    my_abbrs = {
         "bal-double",
         "bal-simple",
         "bal-undersample",
@@ -40,4 +41,12 @@ def get_abbrs() -> TAbbrs:
         "stp-none",
         "stp-nq",
         "stp-rel",
-    ]
+    }
+    group = "asreview_simulationcontrib.subcommands"
+    try:
+        other_subcommands = {e.load() for e in entrypoints(group=group)}
+    except Exception:
+        other_subcommands = set()
+
+    other_abbrs = {o.name for o in other_subcommands}
+    return sorted(my_abbrs.union(other_abbrs))
