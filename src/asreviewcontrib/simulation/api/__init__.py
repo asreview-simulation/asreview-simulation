@@ -20,6 +20,7 @@ from asreviewcontrib.simulation._private.lib.get_dataset_names import get_datase
 from asreviewcontrib.simulation._private.lib.get_pyll import get_pyll
 from asreviewcontrib.simulation._private.lib.prep_project_directory import prep_project_directory
 from asreviewcontrib.simulation._private.lib.run import run
+from asreviewcontrib.simulation.api import extending
 from asreviewcontrib.simulation.api import plotting
 from asreviewcontrib.simulation.api import unwrapping
 
@@ -27,6 +28,7 @@ from asreviewcontrib.simulation.api import unwrapping
 __all__ = [
     "Config",
     "OneModelConfig",
+    "extending",
     "draw_sample",
     "get_abbrs",
     "get_dataset_names",
