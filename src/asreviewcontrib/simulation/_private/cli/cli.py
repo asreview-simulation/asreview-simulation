@@ -261,9 +261,9 @@ def cli(ctx):
         ctx.obj = State()
 
 
-group = "asreview_simulationcontrib.subcommands"
+group = "asreview_simulationcontrib.quads"
 try:
-    other_subcommands = {e.load() for e in entry_points(group=group)}
+    other_subcommands = {e.load().subcommand for e in entry_points(group=group)}
 except Exception as e:
     print(
         f"Something went wrong loading a module from entrypoint group '{group}'. Th"

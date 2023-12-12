@@ -1,10 +1,6 @@
-import sys
-if sys.version_info < (3, 10):
-    from importlib_metadata import entry_points
-else:
-    from importlib.metadata import entry_points
 from typing import List
 from typing import TypeAlias
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 TAbbrs: TypeAlias = List[str]
@@ -46,15 +42,5 @@ def get_abbrs() -> TAbbrs:
         "stp-nq",
         "stp-rel",
     }
-    group = "asreview_simulationcontrib.subcommands"
-    try:
-        other_subcommands = {e.load() for e in entry_points(group=group)}
-    except Exception as e:
-        print(
-            f"Something went wrong loading a module from entrypoint group '{group}'. Th"
-            + f"e error message was: {e}\nContinuing..."
-        )
-        other_subcommands = set()
-
-    other_abbrs = {o.name for o in other_subcommands}
+    other_abbrs = set([abbr for abbr, _ in get_quads()])
     return sorted(my_abbrs.union(other_abbrs))

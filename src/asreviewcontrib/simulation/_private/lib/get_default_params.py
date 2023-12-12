@@ -1,8 +1,3 @@
-import sys
-if sys.version_info < (3, 10):
-    from importlib_metadata import entry_points
-else:
-    from importlib.metadata import entry_points
 from typing import Any
 from typing import Dict
 from asreviewcontrib.simulation._private.lib.bal.bal_double_params import get_bal_double_params
@@ -33,10 +28,11 @@ from asreviewcontrib.simulation._private.lib.sam.sam_random_params import get_sa
 from asreviewcontrib.simulation._private.lib.stp.stp_none_params import get_stp_none_params
 from asreviewcontrib.simulation._private.lib.stp.stp_nq_params import get_stp_nq_params
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_params import get_stp_rel_params
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 def get_default_params(abbr: str) -> Dict[str, Any]:
-    my_funcmap = {
+    my_default_params_getters = {
         "bal-double": get_bal_double_params,
         "bal-simple": get_bal_simple_params,
         "bal-undersample": get_bal_undersample_params,
@@ -66,26 +62,16 @@ def get_default_params(abbr: str) -> Dict[str, Any]:
         "stp-nq": get_stp_nq_params,
         "stp-rel": get_stp_rel_params,
     }
+    other_default_params_getters = [{abbr: q.default_params} for abbr, q in get_quads()]
 
-    group = "asreview_simulationcontrib.funcmaps.get_default_params"
-
-    try:
-        other_funcmaps = {e.load() for e in entry_points(group=group)}
-    except Exception as e:
-        print(
-            f"Something went wrong loading a module from entrypoint group '{group}'. Th"
-            + f"e error message was: {e}\nContinuing..."
-        )
-        other_funcmaps = set()
-
-    funcmap = my_funcmap.update(other_funcmaps)
-    for other_funcmap in other_funcmaps:
-        funcmap.update(other_funcmap)
+    default_params_getters = my_default_params_getters
+    for other_default_params_getter in other_default_params_getters:
+        default_params_getters.update(other_default_params_getter)
 
     try:
-        func = funcmap[abbr]
+        func = default_params_getters[abbr]
     except KeyError as e:
-        abbrs = "\n".join(list(funcmap.keys()))
+        abbrs = "\n".join(list(default_params_getters.keys()))
         print(f"'{abbr}' is not a valid name for a model. Valid names are:\n{abbrs}")
         raise e
     return func()

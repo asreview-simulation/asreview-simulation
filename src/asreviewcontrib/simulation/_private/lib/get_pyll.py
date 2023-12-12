@@ -28,6 +28,7 @@ from asreviewcontrib.simulation._private.lib.sam.sam_random_pyll import sam_rand
 from asreviewcontrib.simulation._private.lib.stp.stp_none_pyll import stp_none_pyll
 from asreviewcontrib.simulation._private.lib.stp.stp_nq_pyll import stp_nq_pyll
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_pyll import stp_rel_pyll
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 TPyll: TypeAlias = hyperopt.base.pyll.Apply
@@ -45,7 +46,7 @@ def get_pyll(abbr: str) -> TPyll:
         models. They are a concept from the `hyperopt` library, refer to
         https://hyperopt.github.io/hyperopt/ for more details.
     """
-    funcmap = {
+    my_pyll_getters = {
         "bal-double": bal_double_pyll,
         "bal-simple": bal_simple_pyll,
         "bal-undersample": bal_undersample_pyll,
@@ -75,10 +76,16 @@ def get_pyll(abbr: str) -> TPyll:
         "stp-nq": stp_nq_pyll,
         "stp-rel": stp_rel_pyll,
     }
+    other_pyll_getters = [{abbr: q.pyll} for abbr, q in get_quads()]
+
+    pyll_getters = my_pyll_getters
+    for other_pyll_getter in other_pyll_getters:
+        pyll_getters.update(other_pyll_getter)
+
     try:
-        func = funcmap[abbr]
+        func = pyll_getters[abbr]
     except KeyError as e:
-        abbrs = "\n".join(list(funcmap.keys()))
+        abbrs = "\n".join(list(pyll_getters.keys()))
         print(f"'{abbr}' is not a valid name for a model. Valid names are:\n{abbrs}")
         raise e
     return func()
