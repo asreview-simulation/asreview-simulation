@@ -20,11 +20,12 @@ from asreviewcontrib.simulation._private.lib.qry.qry_max_uncertainty_unwrap impo
 from asreviewcontrib.simulation._private.lib.qry.qry_max_unwrap import instantiate_unwrapped_qry_max
 from asreviewcontrib.simulation._private.lib.qry.qry_random_unwrap import instantiate_unwrapped_qry_random
 from asreviewcontrib.simulation._private.lib.qry.qry_uncertainty_unwrap import instantiate_unwrapped_qry_uncertainty
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 def instantiate_unwrapped_model(model: OneModelConfig, random_state):
     assert isinstance(model, OneModelConfig), "Input argument 'model' needs to be an instance of OneModelConfig"
-    mapping = {
+    my_instantiators = {
         "bal-double": instantiate_unwrapped_bal_double,
         "bal-simple": instantiate_unwrapped_bal_simple,
         "bal-undersample": instantiate_unwrapped_bal_undersample,
@@ -47,9 +48,17 @@ def instantiate_unwrapped_model(model: OneModelConfig, random_state):
         "qry-random": instantiate_unwrapped_qry_random,
         "qry-uncertainty": instantiate_unwrapped_qry_uncertainty,
     }
+
+    recognized_model_flavors = {"bal", "clr", "fex", "qry"}
+    other_instantiators = [{abbr: q.impl} for abbr, q in get_quads() if abbr[:3] in recognized_model_flavors]
+
+    instantiators = my_instantiators
+    for other_instantiator in other_instantiators:
+        instantiators.update(other_instantiator)
+
     try:
-        return mapping[model.abbr](model.params, random_state)
+        return instantiators[model.abbr](model.params, random_state)
     except KeyError:
-        abbrs = "\n".join([key for key in mapping.keys()])
+        abbrs = "\n".join([key for key in instantiators.keys()])
         msg = f"Undefined behavior for model name f{model.abbr}. Valid model names are: f{abbrs}"
         raise KeyError(msg)
