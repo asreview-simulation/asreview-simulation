@@ -28,6 +28,7 @@ expected = {
         "extending",
         "get_abbrs",
         "get_dataset_names",
+        "get_default_params",
         "get_pyll",
         "plotting",
         "prep_project_directory",
@@ -35,6 +36,7 @@ expected = {
         "unwrapping",
     },
     "asreviewcontrib.simulation.api.extending": {
+        "PluginQuad",
         "dont_reassign_bal_msg",
         "dont_reassign_clr_msg",
         "dont_reassign_fex_msg",
