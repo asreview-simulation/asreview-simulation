@@ -131,6 +131,7 @@ class Config:
 
     def __init__(
         self,
+        *,
         bal: Optional[OneModelConfig] = None,
         clr: Optional[OneModelConfig] = None,
         fex: Optional[OneModelConfig] = None,
