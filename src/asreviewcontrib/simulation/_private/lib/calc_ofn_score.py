@@ -8,7 +8,7 @@ def calc_ofn_score(ofn, project_path):
         "ofn-none": ofn_none_fun,
         "ofn-wss": ofn_wss_fun,
     }
-    other_ofns = [{name: q.impl} for name, q in get_quads() if name.startswith("ofn")]
+    other_ofns = [{abbr: q.impl} for abbr, q in get_quads() if abbr.startswith("ofn")]
 
     ofns = my_ofns
     for other_ofn in other_ofns:
