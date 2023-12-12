@@ -1,6 +1,6 @@
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 from asreviewcontrib.simulation._private.lib.ofn.ofn_none_fun import ofn_none_fun
 from asreviewcontrib.simulation._private.lib.ofn.ofn_wss_fun import ofn_wss_fun
-from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 def calc_ofn_score(ofn, project_path):

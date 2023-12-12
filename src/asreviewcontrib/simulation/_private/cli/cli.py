@@ -1,9 +1,12 @@
 import os
 import sys
+
+
 if sys.version_info < (3, 10):
     from importlib_metadata import entry_points
 else:
     from importlib.metadata import entry_points
+
 import click
 from asreviewcontrib.simulation._private.cli.bal_double_subcommand import bal_double_subcommand
 from asreviewcontrib.simulation._private.cli.bal_simple_subcommand import bal_simple_subcommand
@@ -266,8 +269,7 @@ try:
     other_subcommands = {e.load().subcommand for e in entry_points(group=group)}
 except Exception as e:
     print(
-        f"Something went wrong loading a module from entrypoint group '{group}'. Th"
-        + f"e error message was: {e}\nContinuing..."
+        f"Something went wrong loading a module from entrypoint group '{group}'. Th" + f"e error message was: {e}\nContinuing..."
     )
     other_subcommands = set()
 

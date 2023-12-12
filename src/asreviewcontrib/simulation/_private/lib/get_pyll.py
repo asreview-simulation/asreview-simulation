@@ -15,6 +15,7 @@ from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_pyll import f
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_pyll import fex_embedding_lstm_pyll
 from asreviewcontrib.simulation._private.lib.fex.fex_sbert_pyll import fex_sbert_pyll
 from asreviewcontrib.simulation._private.lib.fex.fex_tfidf_pyll import fex_tfidf_pyll
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 from asreviewcontrib.simulation._private.lib.ofn.ofn_none_pyll import ofn_none_pyll
 from asreviewcontrib.simulation._private.lib.ofn.ofn_wss_pyll import ofn_wss_pyll
 from asreviewcontrib.simulation._private.lib.qry.qry_cluster_pyll import qry_cluster_pyll
@@ -28,7 +29,6 @@ from asreviewcontrib.simulation._private.lib.sam.sam_random_pyll import sam_rand
 from asreviewcontrib.simulation._private.lib.stp.stp_none_pyll import stp_none_pyll
 from asreviewcontrib.simulation._private.lib.stp.stp_nq_pyll import stp_nq_pyll
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_pyll import stp_rel_pyll
-from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 TPyll: TypeAlias = hyperopt.base.pyll.Apply

@@ -15,6 +15,7 @@ from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_params import
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_params import get_fex_embedding_lstm_params
 from asreviewcontrib.simulation._private.lib.fex.fex_sbert_params import get_fex_sbert_params
 from asreviewcontrib.simulation._private.lib.fex.fex_tfidf_params import get_fex_tfidf_params
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 from asreviewcontrib.simulation._private.lib.ofn.ofn_none_params import get_ofn_none_params
 from asreviewcontrib.simulation._private.lib.ofn.ofn_wss_params import get_ofn_wss_params
 from asreviewcontrib.simulation._private.lib.qry.qry_cluster_params import get_qry_cluster_params
@@ -28,7 +29,6 @@ from asreviewcontrib.simulation._private.lib.sam.sam_random_params import get_sa
 from asreviewcontrib.simulation._private.lib.stp.stp_none_params import get_stp_none_params
 from asreviewcontrib.simulation._private.lib.stp.stp_nq_params import get_stp_nq_params
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_params import get_stp_rel_params
-from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 def get_default_params(abbr: str) -> Dict[str, Any]:

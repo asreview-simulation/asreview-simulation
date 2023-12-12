@@ -14,13 +14,13 @@ from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_unwrap import
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_unwrap import instantiate_unwrapped_fex_embedding_lstm
 from asreviewcontrib.simulation._private.lib.fex.fex_sbert_unwrap import instantiate_unwrapped_fex_sbert
 from asreviewcontrib.simulation._private.lib.fex.fex_tfidf_unwrap import instantiate_unwrapped_fex_tfidf
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 from asreviewcontrib.simulation._private.lib.qry.qry_cluster_unwrap import instantiate_unwrapped_qry_cluster
 from asreviewcontrib.simulation._private.lib.qry.qry_max_random_unwrap import instantiate_unwrapped_qry_max_random
 from asreviewcontrib.simulation._private.lib.qry.qry_max_uncertainty_unwrap import instantiate_unwrapped_qry_max_uncertainty
 from asreviewcontrib.simulation._private.lib.qry.qry_max_unwrap import instantiate_unwrapped_qry_max
 from asreviewcontrib.simulation._private.lib.qry.qry_random_unwrap import instantiate_unwrapped_qry_random
 from asreviewcontrib.simulation._private.lib.qry.qry_uncertainty_unwrap import instantiate_unwrapped_qry_uncertainty
-from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 def instantiate_unwrapped_model(model: OneModelConfig, random_state):

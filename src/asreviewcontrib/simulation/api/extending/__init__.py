@@ -18,5 +18,5 @@ __all__ = [
     "dont_reassign_qry_msg",
     "dont_reassign_sam_msg",
     "dont_reassign_stp_msg",
-    "epilog"
+    "epilog",
 ]
