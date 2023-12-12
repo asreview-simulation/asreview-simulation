@@ -1,9 +1,8 @@
 from typing import List
-from typing import TypeAlias
 from asreview.datasets import DatasetManager
 
 
-TDatasetNames: TypeAlias = List[str]
+TDatasetNames = List[str]
 
 
 def get_dataset_names() -> TDatasetNames:

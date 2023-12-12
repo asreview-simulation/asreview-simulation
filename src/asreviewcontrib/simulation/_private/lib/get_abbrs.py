@@ -1,9 +1,8 @@
 from typing import List
-from typing import TypeAlias
 from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
-TAbbrs: TypeAlias = List[str]
+TAbbrs = List[str]
 
 
 def get_abbrs() -> TAbbrs:
