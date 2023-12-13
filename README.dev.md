@@ -239,7 +239,7 @@ for `asreview simulation start`.
 ## Plugins
 
 `asreview-simulation`'s functionality can be extended by plugins, via entry point group
-`"asreview_simulationcontrib.quads"`. Items from this entrypoint point group are expected to
+`"asreview_simulationcontrib.quads"`. Items from this entry point group are expected to
 be instances of
 [`asreviewcontrib.simulation.api.extending.PluginQuad`](https://asreview-simulation.github.io/asreview-simulation/asreviewcontrib/simulation/api/extending.html#PluginQuad).
 The sibling repository https://github.com/asreview-simulation/asreview-simulation-my-plugin provides
