@@ -42,6 +42,7 @@ from asreviewcontrib.simulation._private.cli.start_subcommand import start_subco
 from asreviewcontrib.simulation._private.cli.stp_none_subcommand import stp_none_subcommand
 from asreviewcontrib.simulation._private.cli.stp_nq_subcommand import stp_nq_subcommand
 from asreviewcontrib.simulation._private.cli.stp_rel_subcommand import stp_rel_subcommand
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 class NaturalOrderGroup(click.Group):
@@ -264,14 +265,7 @@ def cli(ctx):
         ctx.obj = State()
 
 
-group = "asreview_simulationcontrib.quads"
-try:
-    other_subcommands = {e.load().subcommand for e in entry_points(group=group)}
-except Exception as e:
-    print(
-        f"Something went wrong loading a module from entrypoint group '{group}'. Th" + f"e error message was: {e}\nContinuing..."
-    )
-    other_subcommands = set()
+other_subcommands = [q.subcommand for _, q in get_quads()]
 
 add_terminator_subcommands()
 add_starter_subcommands()

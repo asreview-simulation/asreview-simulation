@@ -6,13 +6,13 @@ from asreviewcontrib.simulation._private.lib.sam.sam_random_params import get_sa
 
 
 default_params = get_sam_random_params()
-name = "sam-random"
+abbr = "sam-random"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Random prior sampler",
-    name=name,
+    name=abbr,
     short_help="Random prior sampler",
 )
 @click.option(
@@ -55,5 +55,5 @@ def sam_random_subcommand(obj, force, init_seed, n_excluded, n_included):
         "n_excluded": n_excluded,
         "n_included": n_included,
     }
-    obj.config.sam = OneModelConfig(abbr=name, params=params)
+    obj.config.sam = OneModelConfig(abbr=abbr, params=params)
     obj.provided.sam = True

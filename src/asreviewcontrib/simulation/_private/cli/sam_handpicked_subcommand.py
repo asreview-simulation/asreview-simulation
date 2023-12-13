@@ -6,13 +6,13 @@ from asreviewcontrib.simulation._private.lib.sam.sam_handpicked_params import ge
 
 
 default_params = get_sam_handpicked_params()
-name = "sam-handpicked"
+abbr = "sam-handpicked"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Handpicked prior sampler. IDS: a comma separated string",
-    name=name,
+    name=abbr,
     short_help="Handpicked prior sampler",
 )
 @click.option(
@@ -54,7 +54,7 @@ def sam_handpicked_subcommand(obj, force, records, rows):
             "records": None,
             "rows": ids,
         }
-        obj.config.sam = OneModelConfig(abbr=name, params=params)
+        obj.config.sam = OneModelConfig(abbr=abbr, params=params)
         obj.provided.sam = True
 
     if records is not None:
@@ -67,5 +67,5 @@ def sam_handpicked_subcommand(obj, force, records, rows):
             "records": ids,
             "rows": None,
         }
-        obj.config.sam = OneModelConfig(abbr=name, params=params)
+        obj.config.sam = OneModelConfig(abbr=abbr, params=params)
         obj.provided.sam = True

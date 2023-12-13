@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.fex.fex_sbert_params import get_fex
 
 
 default_params = get_fex_sbert_params()
-name = f"fex-{SBERT.name}"
+abbr = f"fex-{SBERT.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use SBERT extractor.",
-    name=name,
+    name=abbr,
     short_help="SBERT extractor",
 )
 @click.option(
@@ -54,5 +54,5 @@ def fex_sbert_subcommand(obj, force, split_ta, transformer_model, use_keywords):
         "transformer_model": transformer_model,
         "use_keywords": use_keywords,
     }
-    obj.config.fex = OneModelConfig(abbr=name, params=params)
+    obj.config.fex = OneModelConfig(abbr=abbr, params=params)
     obj.provided.fex = True

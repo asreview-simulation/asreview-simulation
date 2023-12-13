@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_clr_lstm_pool_params()
-name = f"clr-{LSTMPoolClassifier.name}"
+abbr = f"clr-{LSTMPoolClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use LSTM Pool classifier",
-    name=name,
+    name=abbr,
     short_help="LSTM Pool classifier",
 )
 @click.option(
@@ -130,5 +130,5 @@ def clr_lstm_pool_subcommand(
         "optimizer": optimizer,
         "shuffle": shuffle,
     }
-    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.config.clr = OneModelConfig(abbr=abbr, params=params)
     obj.provided.clr = True

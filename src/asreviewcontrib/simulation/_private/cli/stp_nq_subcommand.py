@@ -6,13 +6,13 @@ from asreviewcontrib.simulation._private.lib.stp.stp_nq_params import get_stp_nq
 
 
 default_params = get_stp_nq_params()
-name = "stp-nq"
+abbr = "stp-nq"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to stop after evaluating N_QUERIES queries, regardless of the relevance of evaluated records.",
-    name=name,
+    name=abbr,
     short_help="Stop after a predefined number of queries",
 )
 @click.option(
@@ -37,5 +37,5 @@ def stp_nq_subcommand(obj, force, n_queries):
     params = {
         "n_queries": n_queries,
     }
-    obj.config.stp = OneModelConfig(abbr=name, params=params)
+    obj.config.stp = OneModelConfig(abbr=abbr, params=params)
     obj.provided.stp = True

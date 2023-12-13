@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_clr_logistic_params()
-name = f"clr-{LogisticClassifier.name}"
+abbr = f"clr-{LogisticClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Logistic Regression classifier.",
-    name=name,
+    name=abbr,
     short_help="Logistic Regression classifier",
 )
 @click.option(
@@ -47,5 +47,5 @@ def clr_logistic_subcommand(obj, c, class_weight, force):
         "c": c,
         "class_weight": class_weight,
     }
-    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.config.clr = OneModelConfig(abbr=abbr, params=params)
     obj.provided.clr = True

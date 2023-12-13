@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_clr_svm_params()
-name = f"clr-{SVMClassifier.name}"
+abbr = f"clr-{SVMClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Support Vector Machine classifier.",
-    name=name,
+    name=abbr,
     short_help="Support Vector Machine classifier",
 )
 @click.option(
@@ -65,5 +65,5 @@ def clr_svm_subcommand(obj, c, class_weight, gamma, force, kernel):
         "gamma": gamma,
         "kernel": kernel,
     }
-    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.config.clr = OneModelConfig(abbr=abbr, params=params)
     obj.provided.clr = True

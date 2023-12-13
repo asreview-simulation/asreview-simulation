@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_clr_rf_params()
-name = f"clr-{RandomForestClassifier.name}"
+abbr = f"clr-{RandomForestClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Random Forest classifier.",
-    name=name,
+    name=abbr,
     short_help="Random Forest classifier",
 )
 @click.option(
@@ -56,5 +56,5 @@ def clr_rf_subcommand(obj, class_weight, force, max_features, n_estimators):
         "max_features": max_features,
         "n_estimators": n_estimators,
     }
-    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.config.clr = OneModelConfig(abbr=abbr, params=params)
     obj.provided.clr = True

@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_clr_nb_params()
-name = f"clr-{NaiveBayesClassifier.name}"
+abbr = f"clr-{NaiveBayesClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Naive Bayes classifier",
-    name=name,
+    name=abbr,
     short_help="Naive Bayes classifier",
 )
 @click.option(
@@ -38,5 +38,5 @@ def clr_nb_subcommand(obj, alpha, force):
     params = {
         "alpha": alpha,
     }
-    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.config.clr = OneModelConfig(abbr=abbr, params=params)
     obj.provided.clr = True

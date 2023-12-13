@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_clr_lstm_base_params()
-name = f"clr-{LSTMBaseClassifier.name}"
+abbr = f"clr-{LSTMBaseClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use LSTM Base classifier",
-    name=name,
+    name=abbr,
     short_help="LSTM Base classifier",
 )
 @click.option(
@@ -130,5 +130,5 @@ def clr_lstm_base_subcommand(
         "lstm_out_width": lstm_out_width,
         "shuffle": shuffle,
     }
-    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.config.clr = OneModelConfig(abbr=abbr, params=params)
     obj.provided.clr = True

@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.qry.qry_uncertainty_params import g
 
 
 default_params = get_qry_uncertainty_params()
-name = f"qry-{UncertaintyQuery.name}"
+abbr = f"qry-{UncertaintyQuery.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Uncertainty query strategy",
-    name=name,
+    name=abbr,
     short_help="Uncertainty query strategy",
 )
 @click.option(
@@ -38,5 +38,5 @@ def qry_uncertainty_subcommand(obj, force, n_instances):
     params = {
         "n_instances": n_instances,
     }
-    obj.config.qry = OneModelConfig(abbr=name, params=params)
+    obj.config.qry = OneModelConfig(abbr=abbr, params=params)
     obj.provided.qry = True

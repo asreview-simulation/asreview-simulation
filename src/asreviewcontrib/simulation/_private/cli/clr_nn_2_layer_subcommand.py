@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_clr_nn_2_layer_params()
-name = f"clr-{NN2LayerClassifier.name}"
+abbr = f"clr-{NN2LayerClassifier.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use 2-layer Neural Net classifier",
-    name=name,
+    name=abbr,
     short_help="2-layer Neural Net classifier",
 )
 @click.option(
@@ -111,5 +111,5 @@ def clr_nn_2_layer_subcommand(
         "regularization": regularization,
         "shuffle": shuffle,
     }
-    obj.config.clr = OneModelConfig(abbr=name, params=params)
+    obj.config.clr = OneModelConfig(abbr=abbr, params=params)
     obj.provided.clr = True

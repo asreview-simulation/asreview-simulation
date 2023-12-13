@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.qry.qry_cluster_params import get_q
 
 
 default_params = get_qry_cluster_params()
-name = f"qry-{ClusterQuery.name}"
+abbr = f"qry-{ClusterQuery.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Cluster query strategy",
-    name=name,
+    name=abbr,
     short_help="Cluster query strategy",
 )
 @click.option(
@@ -57,5 +57,5 @@ def qry_cluster_subcommand(obj, force, cluster_size, n_instances, update_interva
         "n_instances": n_instances,
         "update_interval": update_interval,
     }
-    obj.config.qry = OneModelConfig(abbr=name, params=params)
+    obj.config.qry = OneModelConfig(abbr=abbr, params=params)
     obj.provided.qry = True

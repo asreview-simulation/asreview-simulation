@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.qry.qry_max_random_params import ge
 
 
 default_params = get_qry_max_random_params()
-name = f"qry-{RandomQuery.name}"
+abbr = f"qry-{RandomQuery.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Random query strategy",
-    name=name,
+    name=abbr,
     short_help="Random query strategy",
 )
 @click.option(
@@ -38,5 +38,5 @@ def qry_random_subcommand(obj, force, n_instances):
     params = {
         "n_instances": n_instances,
     }
-    obj.config.qry = OneModelConfig(abbr=name, params=params)
+    obj.config.qry = OneModelConfig(abbr=abbr, params=params)
     obj.provided.qry = True

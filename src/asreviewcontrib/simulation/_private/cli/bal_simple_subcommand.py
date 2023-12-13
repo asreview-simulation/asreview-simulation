@@ -5,13 +5,13 @@ from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_bal_m
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
-name = f"bal-{SimpleBalance.name}"
+abbr = f"bal-{SimpleBalance.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use no balancer",
-    name=name,
+    name=abbr,
     short_help="No balancer",
 )
 @click.option(
@@ -26,5 +26,5 @@ def bal_simple_subcommand(obj, force):
     if not force:
         assert obj.provided.bal is False, dont_reassign_bal_msg
     params = {}
-    obj.config.bal = OneModelConfig(abbr=name, params=params)
+    obj.config.bal = OneModelConfig(abbr=abbr, params=params)
     obj.provided.bal = True

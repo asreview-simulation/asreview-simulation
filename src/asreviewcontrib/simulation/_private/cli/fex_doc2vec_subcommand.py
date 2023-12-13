@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.fex.fex_doc2vec_params import get_f
 
 
 default_params = get_fex_doc2vec_params()
-name = f"fex-{Doc2Vec.name}"
+abbr = f"fex-{Doc2Vec.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Doc2Vec extractor.",
-    name=name,
+    name=abbr,
     short_help="Doc2Vec extractor",
 )
 @click.option(
@@ -119,5 +119,5 @@ def fex_doc2vec_subcommand(
         "vector_size": vector_size,
         "window": window,
     }
-    obj.config.fex = OneModelConfig(abbr=name, params=params)
+    obj.config.fex = OneModelConfig(abbr=abbr, params=params)
     obj.provided.fex = True

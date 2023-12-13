@@ -4,13 +4,13 @@ from asreviewcontrib.simulation._private.cli.cli_msgs import dont_reassign_stp_m
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
-name = "stp-none"
+abbr = "stp-none"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to stop after evaluating all records, regardless of the relevance of evaluated records.",
-    name=name,
+    name=abbr,
     short_help="No stopping rule",
 )
 @click.option(
@@ -25,5 +25,5 @@ def stp_none_subcommand(obj, force):
     if not force:
         assert obj.provided.stp is False, dont_reassign_stp_msg
     params = {}
-    obj.config.stp = OneModelConfig(abbr=name, params=params)
+    obj.config.stp = OneModelConfig(abbr=abbr, params=params)
     obj.provided.stp = True

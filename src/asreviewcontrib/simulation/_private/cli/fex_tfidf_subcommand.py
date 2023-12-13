@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.fex.fex_tfidf_params import get_fex
 
 
 default_params = get_fex_tfidf_params()
-name = f"fex-{Tfidf.name}"
+abbr = f"fex-{Tfidf.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use TF-IDF extractor",
-    name=name,
+    name=abbr,
     short_help="TF-IDF extractor",
 )
 @click.option(
@@ -63,5 +63,5 @@ def fex_tfidf_subcommand(obj, force, ngram_max, split_ta, stop_words, use_keywor
         "stop_words": stop_words,
         "use_keywords": use_keywords,
     }
-    obj.config.fex = OneModelConfig(abbr=name, params=params)
+    obj.config.fex = OneModelConfig(abbr=abbr, params=params)
     obj.provided.fex = True

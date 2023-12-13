@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
 default_params = get_bal_double_params()
-name = f"bal-{DoubleBalance.name}"
+abbr = f"bal-{DoubleBalance.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Double balancer",
-    name=name,
+    name=abbr,
     short_help="Double balancer",
 )
 @click.option(
@@ -70,5 +70,5 @@ def bal_double_subcommand(obj, a, alpha, b, beta, force):
         "b": b,
         "beta": beta,
     }
-    obj.config.bal = OneModelConfig(abbr=name, params=params)
+    obj.config.bal = OneModelConfig(abbr=abbr, params=params)
     obj.provided.bal = True

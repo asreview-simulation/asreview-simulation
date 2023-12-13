@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.qry.qry_max_random_params import ge
 
 
 default_params = get_qry_max_random_params()
-name = f"qry-{MaxRandomQuery.name}".replace("_", "-")
+abbr = f"qry-{MaxRandomQuery.name}".replace("_", "-")
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use a Mixed query strategy (Max and Random)",
-    name=name,
+    name=abbr,
     short_help="Mixed query strategy (Max and Random)",
 )
 @click.option(
@@ -47,5 +47,5 @@ def qry_max_random_subcommand(obj, force, fraction_max, n_instances):
         "fraction_max": fraction_max,
         "n_instances": n_instances,
     }
-    obj.config.qry = OneModelConfig(abbr=name, params=params)
+    obj.config.qry = OneModelConfig(abbr=abbr, params=params)
     obj.provided.qry = True

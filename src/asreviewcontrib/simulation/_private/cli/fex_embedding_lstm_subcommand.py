@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_params impor
 
 
 default_params = get_fex_embedding_lstm_params()
-name = f"fex-{EmbeddingLSTM.name}"
+abbr = f"fex-{EmbeddingLSTM.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Embedding LSTM extractor",
-    name=name,
+    name=abbr,
     short_help="Embedding LSTM extractor",
 )
 @click.option(
@@ -101,5 +101,5 @@ def fex_embedding_lstm_subcommand(
         "truncating": truncating,
         "use_keywords": use_keywords,
     }
-    obj.config.fex = OneModelConfig(abbr=name, params=params)
+    obj.config.fex = OneModelConfig(abbr=abbr, params=params)
     obj.provided.fex = True

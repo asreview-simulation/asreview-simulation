@@ -6,13 +6,13 @@ from asreviewcontrib.simulation._private.lib.ofn.ofn_wss_params import get_ofn_w
 
 
 default_params = get_ofn_wss_params()
-name = "ofn-wss"
+abbr = "ofn-wss"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use work saved over sampling objective function.",
-    name=name,
+    name=abbr,
     short_help="WSS objective function",
 )
 @click.option(
@@ -38,5 +38,5 @@ def ofn_wss_subcommand(obj, at_pct, force):
     params = {
         "at_pct": at_pct,
     }
-    obj.config.ofn = OneModelConfig(abbr=name, params=params)
+    obj.config.ofn = OneModelConfig(abbr=abbr, params=params)
     obj.provided.ofn = True

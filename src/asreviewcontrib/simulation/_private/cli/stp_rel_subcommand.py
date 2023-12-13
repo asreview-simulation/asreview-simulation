@@ -3,13 +3,13 @@ from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
 from asreviewcontrib.simulation._private.lib.config import OneModelConfig
 
 
-name = "stp-rel"
+abbr = "stp-rel"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to stop once all relevant records have been found.",
-    name=name,
+    name=abbr,
     short_help="Stop once all the relevant records have been found",
 )
 @click.option(
@@ -27,5 +27,5 @@ def stp_rel_subcommand(obj, force):
             + "if you mean to overwrite the configuration from previous steps. "
         )
     params = {}
-    obj.config.stp = OneModelConfig(abbr=name, params=params)
+    obj.config.stp = OneModelConfig(abbr=abbr, params=params)
     obj.provided.stp = True

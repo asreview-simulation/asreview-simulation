@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.qry.qry_max_params import get_qry_m
 
 
 default_params = get_qry_max_params()
-name = f"qry-{MaxQuery.name}"
+abbr = f"qry-{MaxQuery.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Max query strategy",
-    name=name,
+    name=abbr,
     short_help="Max query strategy",
 )
 @click.option(
@@ -38,5 +38,5 @@ def qry_max_subcommand(obj, force, n_instances):
     params = {
         "n_instances": n_instances,
     }
-    obj.config.qry = OneModelConfig(abbr=name, params=params)
+    obj.config.qry = OneModelConfig(abbr=abbr, params=params)
     obj.provided.qry = True

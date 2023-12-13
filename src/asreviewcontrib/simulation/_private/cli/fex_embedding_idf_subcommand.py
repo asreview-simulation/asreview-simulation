@@ -7,13 +7,13 @@ from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_params import
 
 
 default_params = get_fex_embedding_idf_params()
-name = f"fex-{EmbeddingIdf.name}"
+abbr = f"fex-{EmbeddingIdf.name}"
 
 
 @click.command(
     epilog=epilog,
     help="Configure the simulation to use Embedding IDF extractor",
-    name=name,
+    name=abbr,
     short_help="Embedding IDF extractor",
 )
 @click.option(
@@ -53,5 +53,5 @@ def fex_embedding_idf_subcommand(obj, embedding, force, split_ta, use_keywords):
         "split_ta": split_ta,
         "use_keywords": use_keywords,
     }
-    obj.config.fex = OneModelConfig(abbr=name, params=params)
+    obj.config.fex = OneModelConfig(abbr=abbr, params=params)
     obj.provided.fex = True
