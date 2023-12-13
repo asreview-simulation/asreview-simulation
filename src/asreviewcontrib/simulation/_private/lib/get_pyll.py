@@ -1,4 +1,3 @@
-from typing import TypeAlias
 import hyperopt
 from asreviewcontrib.simulation._private.lib.bal.bal_double_pyll import bal_double_pyll
 from asreviewcontrib.simulation._private.lib.bal.bal_simple_pyll import bal_simple_pyll
@@ -15,6 +14,7 @@ from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_pyll import f
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_pyll import fex_embedding_lstm_pyll
 from asreviewcontrib.simulation._private.lib.fex.fex_sbert_pyll import fex_sbert_pyll
 from asreviewcontrib.simulation._private.lib.fex.fex_tfidf_pyll import fex_tfidf_pyll
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 from asreviewcontrib.simulation._private.lib.ofn.ofn_none_pyll import ofn_none_pyll
 from asreviewcontrib.simulation._private.lib.ofn.ofn_wss_pyll import ofn_wss_pyll
 from asreviewcontrib.simulation._private.lib.qry.qry_cluster_pyll import qry_cluster_pyll
@@ -30,10 +30,7 @@ from asreviewcontrib.simulation._private.lib.stp.stp_nq_pyll import stp_nq_pyll
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_pyll import stp_rel_pyll
 
 
-TPyll: TypeAlias = hyperopt.base.pyll.Apply
-
-
-def get_pyll(abbr: str) -> TPyll:
+def get_pyll(abbr: str) -> hyperopt.base.pyll.Apply:
     """
     Args:
         abbr:
@@ -45,7 +42,7 @@ def get_pyll(abbr: str) -> TPyll:
         models. They are a concept from the `hyperopt` library, refer to
         https://hyperopt.github.io/hyperopt/ for more details.
     """
-    funcmap = {
+    my_pyll_getters = {
         "bal-double": bal_double_pyll,
         "bal-simple": bal_simple_pyll,
         "bal-undersample": bal_undersample_pyll,
@@ -75,10 +72,16 @@ def get_pyll(abbr: str) -> TPyll:
         "stp-nq": stp_nq_pyll,
         "stp-rel": stp_rel_pyll,
     }
+    other_pyll_getters = [{abbr: q.pyll} for abbr, q in get_quads()]
+
+    pyll_getters = my_pyll_getters
+    for other_pyll_getter in other_pyll_getters:
+        pyll_getters.update(other_pyll_getter)
+
     try:
-        func = funcmap[abbr]
+        func = pyll_getters[abbr]
     except KeyError as e:
-        abbrs = "\n".join(list(funcmap.keys()))
+        abbrs = "\n".join(list(pyll_getters.keys()))
         print(f"'{abbr}' is not a valid name for a model. Valid names are:\n{abbrs}")
         raise e
     return func()

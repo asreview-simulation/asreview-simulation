@@ -1,8 +1,8 @@
 from typing import List
-from typing import TypeAlias
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
-TAbbrs: TypeAlias = List[str]
+TAbbrs = List[str]
 
 
 def get_abbrs() -> TAbbrs:
@@ -11,7 +11,7 @@ def get_abbrs() -> TAbbrs:
 
         A list of recognized model abbreviations.
     """
-    return [
+    my_abbrs = {
         "bal-double",
         "bal-simple",
         "bal-undersample",
@@ -40,4 +40,6 @@ def get_abbrs() -> TAbbrs:
         "stp-none",
         "stp-nq",
         "stp-rel",
-    ]
+    }
+    other_abbrs = set([abbr for abbr, _ in get_quads()])
+    return sorted(my_abbrs.union(other_abbrs))

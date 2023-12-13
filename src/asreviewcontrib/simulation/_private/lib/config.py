@@ -1,13 +1,12 @@
 from typing import Any
 from typing import Dict
 from typing import Optional
-from typing import TypeAlias
 from typing import TypedDict
 from typing import Union
 from asreviewcontrib.simulation._private.lib.get_default_params import get_default_params
 
 
-TParams: TypeAlias = Dict[str, Any]
+TParams = Dict[str, Any]
 
 
 class OneModelConfigDict(TypedDict):
@@ -131,6 +130,7 @@ class Config:
 
     def __init__(
         self,
+        *,
         bal: Optional[OneModelConfig] = None,
         clr: Optional[OneModelConfig] = None,
         fex: Optional[OneModelConfig] = None,

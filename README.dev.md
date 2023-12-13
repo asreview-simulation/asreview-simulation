@@ -222,7 +222,7 @@ deposition before making it final by pressing the "Publish" button on Zenodo.
 
 Click the "Draft a new release" button on the releases page
 [https://github.com/asreview-simulation/asreview-simulation/releases](https://github.com/asreview-simulation/asreview-simulation/releases).
-Making a release is not set up to also trigger the zenodraft workflow.
+Making a release is not set up to also trigger the `zenodraft` workflow.
 
 ## Publishing: PyPI
 
@@ -238,18 +238,16 @@ for `asreview simulation start`.
 
 ## Plugins
 
-Command line functionality can be extended by plugins.
-
-1. new balancer subcommands via entry point group `"asreview_simulation.bal"`
-2. new classifier subcommands via entry point group `"asreview_simulation.clr"`
-3. new extractor subcommands via entry point group `"asreview_simulation.fex"`
-4. new querier subcommands via entry point group `"asreview_simulation.qry"`
-5. new sampler subcommands via entry point group `"asreview_simulation.sam"`
-6. new stopping subcommands via entry point group `"asreview_simulation.stp"`
+`asreview-simulation`'s functionality can be extended by plugins, via entry point group
+`"asreview_simulationcontrib.quads"`. Items from this entrypoint point group are expected to
+be instances of
+[`asreviewcontrib.simulation.api.extending.PluginQuad`](https://asreview-simulation.github.io/asreview-simulation/asreviewcontrib/simulation/api/extending.html#PluginQuad).
+The sibling repository https://github.com/asreview-simulation/asreview-simulation-my-plugin provides
+example plugin implementations of each model flavor.
 
 ## Plan
 
-1. review / verify / update each model's pyll program with respect to number, name, and type of parameters
+1. ~~review / verify / update each model's pyll program with respect to number, name, and type of parameters~~
 2. add visualization for each pyll program so users can see what distribution a parameter is drawn from
 3. ~~construct null distribution with pyll programs~~
 4. ~~updating default configuration with distribution sampled from pyll programs~~

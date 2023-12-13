@@ -1,40 +1,40 @@
 import os
-from importlib.metadata import entry_points as entrypoints
 import click
-from asreviewcontrib.simulation._private.cli.bal_double_subcommand import bal_double_subcommand
-from asreviewcontrib.simulation._private.cli.bal_simple_subcommand import bal_simple_subcommand
-from asreviewcontrib.simulation._private.cli.bal_undersample_subcommand import bal_undersample_subcommand
+from asreviewcontrib.simulation._private.cli.bal.bal_double_subcommand import bal_double_subcommand
+from asreviewcontrib.simulation._private.cli.bal.bal_simple_subcommand import bal_simple_subcommand
+from asreviewcontrib.simulation._private.cli.bal.bal_undersample_subcommand import bal_undersample_subcommand
 from asreviewcontrib.simulation._private.cli.cli_state import State
-from asreviewcontrib.simulation._private.cli.clr_logistic_subcommand import clr_logistic_subcommand
-from asreviewcontrib.simulation._private.cli.clr_lstm_base_subcommand import clr_lstm_base_subcommand
-from asreviewcontrib.simulation._private.cli.clr_lstm_pool_subcommand import clr_lstm_pool_subcommand
-from asreviewcontrib.simulation._private.cli.clr_nb_subcommand import clr_nb_subcommand
-from asreviewcontrib.simulation._private.cli.clr_nn_2_layer_subcommand import clr_nn_2_layer_subcommand
-from asreviewcontrib.simulation._private.cli.clr_rf_subcommand import clr_rf_subcommand
-from asreviewcontrib.simulation._private.cli.clr_svm_subcommand import clr_svm_subcommand
-from asreviewcontrib.simulation._private.cli.fex_doc2vec_subcommand import fex_doc2vec_subcommand
-from asreviewcontrib.simulation._private.cli.fex_embedding_idf_subcommand import fex_embedding_idf_subcommand
-from asreviewcontrib.simulation._private.cli.fex_embedding_lstm_subcommand import fex_embedding_lstm_subcommand
-from asreviewcontrib.simulation._private.cli.fex_sbert_subcommand import fex_sbert_subcommand
-from asreviewcontrib.simulation._private.cli.fex_tfidf_subcommand import fex_tfidf_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_logistic_subcommand import clr_logistic_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_lstm_base_subcommand import clr_lstm_base_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_lstm_pool_subcommand import clr_lstm_pool_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_nb_subcommand import clr_nb_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_nn_2_layer_subcommand import clr_nn_2_layer_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_rf_subcommand import clr_rf_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_svm_subcommand import clr_svm_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_doc2vec_subcommand import fex_doc2vec_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_embedding_idf_subcommand import fex_embedding_idf_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_embedding_lstm_subcommand import fex_embedding_lstm_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_sbert_subcommand import fex_sbert_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_tfidf_subcommand import fex_tfidf_subcommand
 from asreviewcontrib.simulation._private.cli.load_settings_subcommand import load_settings_subcommand
-from asreviewcontrib.simulation._private.cli.ofn_none_subcommand import ofn_none_subcommand
-from asreviewcontrib.simulation._private.cli.ofn_wss_subcommand import ofn_wss_subcommand
+from asreviewcontrib.simulation._private.cli.ofn.ofn_none_subcommand import ofn_none_subcommand
+from asreviewcontrib.simulation._private.cli.ofn.ofn_wss_subcommand import ofn_wss_subcommand
 from asreviewcontrib.simulation._private.cli.print_benchmark_names_subcommand import print_benchmark_names_subcommand
 from asreviewcontrib.simulation._private.cli.print_settings_subcommand import print_settings_subcommand
-from asreviewcontrib.simulation._private.cli.qry_cluster_subcommand import qry_cluster_subcommand
-from asreviewcontrib.simulation._private.cli.qry_max_random_subcommand import qry_max_random_subcommand
-from asreviewcontrib.simulation._private.cli.qry_max_subcommand import qry_max_subcommand
-from asreviewcontrib.simulation._private.cli.qry_max_uncertainty_subcommand import qry_max_uncertainty_subcommand
-from asreviewcontrib.simulation._private.cli.qry_random_subcommand import qry_random_subcommand
-from asreviewcontrib.simulation._private.cli.qry_uncertainty_subcommand import qry_uncertainty_subcommand
-from asreviewcontrib.simulation._private.cli.sam_handpicked_subcommand import sam_handpicked_subcommand
-from asreviewcontrib.simulation._private.cli.sam_random_subcommand import sam_random_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_cluster_subcommand import qry_cluster_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_max_random_subcommand import qry_max_random_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_max_subcommand import qry_max_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_max_uncertainty_subcommand import qry_max_uncertainty_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_random_subcommand import qry_random_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_uncertainty_subcommand import qry_uncertainty_subcommand
+from asreviewcontrib.simulation._private.cli.sam.sam_handpicked_subcommand import sam_handpicked_subcommand
+from asreviewcontrib.simulation._private.cli.sam.sam_random_subcommand import sam_random_subcommand
 from asreviewcontrib.simulation._private.cli.save_settings_subcommand import save_settings_subcommand
 from asreviewcontrib.simulation._private.cli.start_subcommand import start_subcommand
-from asreviewcontrib.simulation._private.cli.stp_none_subcommand import stp_none_subcommand
-from asreviewcontrib.simulation._private.cli.stp_nq_subcommand import stp_nq_subcommand
-from asreviewcontrib.simulation._private.cli.stp_rel_subcommand import stp_rel_subcommand
+from asreviewcontrib.simulation._private.cli.stp.stp_none_subcommand import stp_none_subcommand
+from asreviewcontrib.simulation._private.cli.stp.stp_nq_subcommand import stp_nq_subcommand
+from asreviewcontrib.simulation._private.cli.stp.stp_rel_subcommand import stp_rel_subcommand
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 class NaturalOrderGroup(click.Group):
@@ -44,23 +44,19 @@ class NaturalOrderGroup(click.Group):
 
 
 def add_bal_subcommands():
-    my_bals = [
+    my_bals = {
         bal_double_subcommand,
         bal_simple_subcommand,
         bal_undersample_subcommand,
-    ]
-    group = "asreviewcontrib.simulation.bal"
-    try:
-        other_bals = [e.load() for e in entrypoints(group=group)]
-    except Exception as e:
-        print(get_error_msg(group, e))
-        other_bals = []
-    for bal in sort_commands(my_bals + other_bals):
+    }
+    other_bals = {o for o in other_subcommands if o.name.startswith("bal")}
+    bals = list(my_bals.union(other_bals))
+    for bal in sort_commands(bals):
         cli.add_command(bal)
 
 
 def add_clr_subcommands():
-    my_clrs = [
+    my_clrs = {
         clr_nb_subcommand,
         clr_rf_subcommand,
         clr_logistic_subcommand,
@@ -68,81 +64,61 @@ def add_clr_subcommands():
         clr_lstm_pool_subcommand,
         clr_nn_2_layer_subcommand,
         clr_svm_subcommand,
-    ]
-    group = "asreviewcontrib.simulation.clr"
-    try:
-        other_clrs = [e.load() for e in entrypoints(group=group)]
-    except Exception as e:
-        print(get_error_msg(group, e))
-        other_clrs = []
-    for clr in sort_commands(my_clrs + other_clrs):
+    }
+    other_clrs = {o for o in other_subcommands if o.name.startswith("clr")}
+    clrs = list(my_clrs.union(other_clrs))
+    for clr in sort_commands(clrs):
         cli.add_command(clr)
 
 
 def add_fex_subcommands():
-    my_fexs = [
+    my_fexs = {
         fex_doc2vec_subcommand,
         fex_tfidf_subcommand,
         fex_embedding_idf_subcommand,
         fex_embedding_lstm_subcommand,
         fex_sbert_subcommand,
-    ]
-    group = "asreviewcontrib.simulation.fex"
-    try:
-        other_fexs = [e.load() for e in entrypoints(group=group)]
-    except Exception as e:
-        print(get_error_msg(group, e))
-        other_fexs = []
-    for fex in sort_commands(my_fexs + other_fexs):
+    }
+    other_fexs = {o for o in other_subcommands if o.name.startswith("fex")}
+    fexs = list(my_fexs.union(other_fexs))
+    for fex in sort_commands(fexs):
         cli.add_command(fex)
 
 
 def add_ofn_subcommands():
-    my_ofns = [
+    my_ofns = {
         ofn_none_subcommand,
         ofn_wss_subcommand,
-    ]
-    group = "asreviewcontrib.simulation.ofn"
-    try:
-        other_ofns = [e.load() for e in entrypoints(group=group)]
-    except Exception as e:
-        print(get_error_msg(group, e))
-        other_ofns = []
-    for ofn in sort_commands(my_ofns + other_ofns):
+    }
+    other_ofns = {o for o in other_subcommands if o.name.startswith("ofn")}
+    ofns = list(my_ofns.union(other_ofns))
+    for ofn in sort_commands(ofns):
         cli.add_command(ofn)
 
 
 def add_qry_subcommands():
-    my_qrys = [
+    my_qrys = {
         qry_cluster_subcommand,
         qry_max_subcommand,
         qry_max_random_subcommand,
         qry_max_uncertainty_subcommand,
         qry_random_subcommand,
         qry_uncertainty_subcommand,
-    ]
-    group = "asreviewcontrib.simulation.qry"
-    try:
-        other_qrys = [e.load() for e in entrypoints(group=group)]
-    except Exception as e:
-        print(get_error_msg(group, e))
-        other_qrys = []
-    for qry in sort_commands(my_qrys + other_qrys):
+    }
+    other_qrys = {o for o in other_subcommands if o.name.startswith("qry")}
+    qrys = list(my_qrys.union(other_qrys))
+    for qry in sort_commands(qrys):
         cli.add_command(qry)
 
 
 def add_sam_subcommands():
-    my_sams = [
+    my_sams = {
         sam_random_subcommand,
         sam_handpicked_subcommand,
-    ]
-    group = "asreviewcontrib.simulation.sam"
-    try:
-        other_sams = [e.load() for e in entrypoints(group=group)]
-    except Exception as e:
-        print(get_error_msg(group, e))
-        other_sams = []
-    for sam in sort_commands(my_sams + other_sams):
+    }
+    other_sams = {o for o in other_subcommands if o.name.startswith("sam")}
+    sams = list(my_sams.union(other_sams))
+    for sam in sort_commands(sams):
         cli.add_command(sam)
 
 
@@ -155,18 +131,14 @@ def add_starter_subcommands():
 
 
 def add_stp_subcommands():
-    my_stps = [
+    my_stps = {
         stp_nq_subcommand,
         stp_none_subcommand,
         stp_rel_subcommand,
-    ]
-    group = "asreviewcontrib.simulation.stp"
-    try:
-        other_stps = [e.load() for e in entrypoints(group=group)]
-    except Exception as e:
-        print(get_error_msg(group, e))
-        other_stps = []
-    for stp in sort_commands(my_stps + other_stps):
+    }
+    other_stps = {o for o in other_subcommands if o.name.startswith("stp")}
+    stps = list(my_stps.union(other_stps))
+    for stp in sort_commands(stps):
         cli.add_command(stp)
 
 
@@ -284,6 +256,8 @@ def cli(ctx):
     if ctx.obj is None:
         ctx.obj = State()
 
+
+other_subcommands = [q.subcommand for _, q in get_quads()]
 
 add_terminator_subcommands()
 add_starter_subcommands()

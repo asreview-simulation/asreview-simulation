@@ -15,6 +15,7 @@ from asreviewcontrib.simulation._private.lib.fex.fex_embedding_idf_params import
 from asreviewcontrib.simulation._private.lib.fex.fex_embedding_lstm_params import get_fex_embedding_lstm_params
 from asreviewcontrib.simulation._private.lib.fex.fex_sbert_params import get_fex_sbert_params
 from asreviewcontrib.simulation._private.lib.fex.fex_tfidf_params import get_fex_tfidf_params
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 from asreviewcontrib.simulation._private.lib.ofn.ofn_none_params import get_ofn_none_params
 from asreviewcontrib.simulation._private.lib.ofn.ofn_wss_params import get_ofn_wss_params
 from asreviewcontrib.simulation._private.lib.qry.qry_cluster_params import get_qry_cluster_params
@@ -31,7 +32,7 @@ from asreviewcontrib.simulation._private.lib.stp.stp_rel_params import get_stp_r
 
 
 def get_default_params(abbr: str) -> Dict[str, Any]:
-    funcmap = {
+    my_default_params_getters = {
         "bal-double": get_bal_double_params,
         "bal-simple": get_bal_simple_params,
         "bal-undersample": get_bal_undersample_params,
@@ -61,10 +62,16 @@ def get_default_params(abbr: str) -> Dict[str, Any]:
         "stp-nq": get_stp_nq_params,
         "stp-rel": get_stp_rel_params,
     }
+    other_default_params_getters = [{abbr: q.default_params} for abbr, q in get_quads()]
+
+    default_params_getters = my_default_params_getters
+    for other_default_params_getter in other_default_params_getters:
+        default_params_getters.update(other_default_params_getter)
+
     try:
-        func = funcmap[abbr]
+        func = default_params_getters[abbr]
     except KeyError as e:
-        abbrs = "\n".join(list(funcmap.keys()))
+        abbrs = "\n".join(list(default_params_getters.keys()))
         print(f"'{abbr}' is not a valid name for a model. Valid names are:\n{abbrs}")
         raise e
     return func()
