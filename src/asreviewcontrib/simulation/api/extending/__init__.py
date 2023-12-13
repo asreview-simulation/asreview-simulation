@@ -1,5 +1,5 @@
 """
-Functionality to help extend asreview-simulation through plugins. For example implementations,
+Functionality to help extend `asreview-simulation` through plugins. For example implementations,
 see https://github.com/asreview-simulation/asreview-simulation-my-plugin
 """
 from asreviewcontrib.simulation._private.cli.cli_epilog import epilog
