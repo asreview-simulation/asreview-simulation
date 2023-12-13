@@ -4,7 +4,6 @@ from asreviewcontrib.simulation._private.lib.config import Config
 
 
 def stp_none_unwrap(config: Config, as_data: ASReviewData) -> int:
-    n_instances = config.qry.params.get("n_instances")
     if config.sam.abbr == "sam-handpicked":
         records = config.sam.params.get("records", None)
         rows = config.sam.params.get("rows", None)
@@ -22,4 +21,7 @@ def stp_none_unwrap(config: Config, as_data: ASReviewData) -> int:
         n_remaining = len(as_data) - n_excluded - n_included
     else:
         raise ValueError("Unknown sampler.")
+
+    n_instances = config.qry.params.get("n_instances")
+    assert isinstance(n_instances, int), "Expected n_instances to be of type int"
     return int(ceil(n_remaining / n_instances))

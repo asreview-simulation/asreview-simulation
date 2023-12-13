@@ -1,5 +1,24 @@
+from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import Optional
+
+
+DefaultParams = Callable[[str], Dict[str, Any]]
+
+
 class PluginQuad:
-    def __init__(self, *, default_params=None, impl=None, pyll=None, subcommand=None):
+    def __init__(self, *, default_params: Optional[DefaultParams] = None, impl=None, pyll=None, subcommand=None):
+        """
+        Args:
+            default_params: TODO
+            impl: TODO
+            pyll: TODO
+            subcommand: TODO
+
+        Synopsis:
+            TODO
+        """
         self.default_params = default_params
         self.impl = impl
         self.pyll = pyll

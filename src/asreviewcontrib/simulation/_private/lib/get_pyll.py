@@ -30,10 +30,7 @@ from asreviewcontrib.simulation._private.lib.stp.stp_nq_pyll import stp_nq_pyll
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_pyll import stp_rel_pyll
 
 
-TPyll = hyperopt.base.pyll.Apply
-
-
-def get_pyll(abbr: str) -> TPyll:
+def get_pyll(abbr: str) -> hyperopt.base.pyll.Apply:
     """
     Args:
         abbr:
