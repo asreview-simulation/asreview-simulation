@@ -1,47 +1,39 @@
 import os
-import sys
-
-
-if sys.version_info < (3, 10):
-    from importlib_metadata import entry_points
-else:
-    from importlib.metadata import entry_points
-
 import click
-from asreviewcontrib.simulation._private.cli.bal_double_subcommand import bal_double_subcommand
-from asreviewcontrib.simulation._private.cli.bal_simple_subcommand import bal_simple_subcommand
-from asreviewcontrib.simulation._private.cli.bal_undersample_subcommand import bal_undersample_subcommand
+from asreviewcontrib.simulation._private.cli.bal.bal_double_subcommand import bal_double_subcommand
+from asreviewcontrib.simulation._private.cli.bal.bal_simple_subcommand import bal_simple_subcommand
+from asreviewcontrib.simulation._private.cli.bal.bal_undersample_subcommand import bal_undersample_subcommand
 from asreviewcontrib.simulation._private.cli.cli_state import State
-from asreviewcontrib.simulation._private.cli.clr_logistic_subcommand import clr_logistic_subcommand
-from asreviewcontrib.simulation._private.cli.clr_lstm_base_subcommand import clr_lstm_base_subcommand
-from asreviewcontrib.simulation._private.cli.clr_lstm_pool_subcommand import clr_lstm_pool_subcommand
-from asreviewcontrib.simulation._private.cli.clr_nb_subcommand import clr_nb_subcommand
-from asreviewcontrib.simulation._private.cli.clr_nn_2_layer_subcommand import clr_nn_2_layer_subcommand
-from asreviewcontrib.simulation._private.cli.clr_rf_subcommand import clr_rf_subcommand
-from asreviewcontrib.simulation._private.cli.clr_svm_subcommand import clr_svm_subcommand
-from asreviewcontrib.simulation._private.cli.fex_doc2vec_subcommand import fex_doc2vec_subcommand
-from asreviewcontrib.simulation._private.cli.fex_embedding_idf_subcommand import fex_embedding_idf_subcommand
-from asreviewcontrib.simulation._private.cli.fex_embedding_lstm_subcommand import fex_embedding_lstm_subcommand
-from asreviewcontrib.simulation._private.cli.fex_sbert_subcommand import fex_sbert_subcommand
-from asreviewcontrib.simulation._private.cli.fex_tfidf_subcommand import fex_tfidf_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_logistic_subcommand import clr_logistic_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_lstm_base_subcommand import clr_lstm_base_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_lstm_pool_subcommand import clr_lstm_pool_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_nb_subcommand import clr_nb_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_nn_2_layer_subcommand import clr_nn_2_layer_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_rf_subcommand import clr_rf_subcommand
+from asreviewcontrib.simulation._private.cli.clr.clr_svm_subcommand import clr_svm_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_doc2vec_subcommand import fex_doc2vec_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_embedding_idf_subcommand import fex_embedding_idf_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_embedding_lstm_subcommand import fex_embedding_lstm_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_sbert_subcommand import fex_sbert_subcommand
+from asreviewcontrib.simulation._private.cli.fex.fex_tfidf_subcommand import fex_tfidf_subcommand
 from asreviewcontrib.simulation._private.cli.load_settings_subcommand import load_settings_subcommand
-from asreviewcontrib.simulation._private.cli.ofn_none_subcommand import ofn_none_subcommand
-from asreviewcontrib.simulation._private.cli.ofn_wss_subcommand import ofn_wss_subcommand
+from asreviewcontrib.simulation._private.cli.ofn.ofn_none_subcommand import ofn_none_subcommand
+from asreviewcontrib.simulation._private.cli.ofn.ofn_wss_subcommand import ofn_wss_subcommand
 from asreviewcontrib.simulation._private.cli.print_benchmark_names_subcommand import print_benchmark_names_subcommand
 from asreviewcontrib.simulation._private.cli.print_settings_subcommand import print_settings_subcommand
-from asreviewcontrib.simulation._private.cli.qry_cluster_subcommand import qry_cluster_subcommand
-from asreviewcontrib.simulation._private.cli.qry_max_random_subcommand import qry_max_random_subcommand
-from asreviewcontrib.simulation._private.cli.qry_max_subcommand import qry_max_subcommand
-from asreviewcontrib.simulation._private.cli.qry_max_uncertainty_subcommand import qry_max_uncertainty_subcommand
-from asreviewcontrib.simulation._private.cli.qry_random_subcommand import qry_random_subcommand
-from asreviewcontrib.simulation._private.cli.qry_uncertainty_subcommand import qry_uncertainty_subcommand
-from asreviewcontrib.simulation._private.cli.sam_handpicked_subcommand import sam_handpicked_subcommand
-from asreviewcontrib.simulation._private.cli.sam_random_subcommand import sam_random_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_cluster_subcommand import qry_cluster_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_max_random_subcommand import qry_max_random_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_max_subcommand import qry_max_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_max_uncertainty_subcommand import qry_max_uncertainty_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_random_subcommand import qry_random_subcommand
+from asreviewcontrib.simulation._private.cli.qry.qry_uncertainty_subcommand import qry_uncertainty_subcommand
+from asreviewcontrib.simulation._private.cli.sam.sam_handpicked_subcommand import sam_handpicked_subcommand
+from asreviewcontrib.simulation._private.cli.sam.sam_random_subcommand import sam_random_subcommand
 from asreviewcontrib.simulation._private.cli.save_settings_subcommand import save_settings_subcommand
 from asreviewcontrib.simulation._private.cli.start_subcommand import start_subcommand
-from asreviewcontrib.simulation._private.cli.stp_none_subcommand import stp_none_subcommand
-from asreviewcontrib.simulation._private.cli.stp_nq_subcommand import stp_nq_subcommand
-from asreviewcontrib.simulation._private.cli.stp_rel_subcommand import stp_rel_subcommand
+from asreviewcontrib.simulation._private.cli.stp.stp_none_subcommand import stp_none_subcommand
+from asreviewcontrib.simulation._private.cli.stp.stp_nq_subcommand import stp_nq_subcommand
+from asreviewcontrib.simulation._private.cli.stp.stp_rel_subcommand import stp_rel_subcommand
 from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
