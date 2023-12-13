@@ -14,8 +14,8 @@ be configured to run with custom parameterizations.
 | [![apidocs](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/apidocs.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/apidocs.yml)                                              | API docs https://asreview-simulation.github.io/asreview-simulation                                                        |
 | [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-simulation)                                                                         | Static code analysis report                                                                                               |
 | [![Code coverage](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=coverage)](https://sonarcloud.io/summary/overall?id=asreview-simulation)                                                                          | Code coverage report                                                                                                      |
+| [![GitHub release (with filter)](https://img.shields.io/github/v/release/asreview-simulation/asreview-simulation)](https://github.com/asreview-simulation/asreview-simulation/tree/0.2.0)                                                               | Link to repository state at latest GitHub release                                                                         |
 | [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/asreview-simulation/asreview-simulation/0.2.0)](https://github.com/asreview-simulation/asreview-simulation/compare/0.2.0...HEAD) | How many commits there have been since the latest GitHub release                                                          |
-
 
 ## Install
 
@@ -181,7 +181,7 @@ ofn-wss                WSS objective function
 
 ## Application Programming Interface (API)
 
-For a full overview of the API, see `tests/api/test_api.py`. Here is an example:
+For a full overview of the API, see `tests/api/test_api.py` and https://asreview-simulation.github.io/asreview-simulation. Here is an example:
 
 ```python
 import os
