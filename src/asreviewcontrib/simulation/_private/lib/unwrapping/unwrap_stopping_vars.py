@@ -2,14 +2,13 @@ from typing import Literal
 from typing import Union
 from asreview.data import ASReviewData
 from asreviewcontrib.simulation._private.lib.config import Config
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 from asreviewcontrib.simulation._private.lib.stp.stp_none_unwrap import stp_none_unwrap
 from asreviewcontrib.simulation._private.lib.stp.stp_nq_unwrap import stp_nq_unwrap
 from asreviewcontrib.simulation._private.lib.stp.stp_rel_unwrap import stp_rel_unwrap
-from asreviewcontrib.simulation._private.lib.get_quads import get_quads
 
 
 def unwrap_stopping_vars(config: Config, as_data: ASReviewData) -> Union[int, Literal["min"]]:
-
     my_stps = {
         "stp-none": stp_none_unwrap,
         "stp-nq": stp_nq_unwrap,

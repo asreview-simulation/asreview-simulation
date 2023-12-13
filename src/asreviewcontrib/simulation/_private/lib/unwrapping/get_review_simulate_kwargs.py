@@ -8,7 +8,6 @@ from asreviewcontrib.simulation._private.lib.unwrapping.unwrap_stopping_vars imp
 
 
 def get_review_simulate_kwargs(config: Config, as_data: ASReviewData, seed: Optional[int] = None) -> dict:
-
     # Initialize the random state
     random_state = numpy.random.RandomState(seed)
 
