@@ -1,29 +1,36 @@
+from typing import cast
+from typing import Callable
 from typing import List
 from typing import Optional
 from typing import Tuple
-from asreview.compat import convert_id_to_idx
 from asreview.data import ASReviewData
 from asreviewcontrib.simulation._private.lib.config import Config
+from asreviewcontrib.simulation._private.lib.get_quads import get_quads
+from asreviewcontrib.simulation._private.lib.sam.sam_handpicked_unwrap import sam_handpicked_unwrap
+from asreviewcontrib.simulation._private.lib.sam.sam_random_unwrap import sam_random_unwrap
 
 
-def unwrap_prior_sampling_vars(config: Config, as_data: ASReviewData) -> Tuple[List[int], int, int, Optional[int]]:
-    if config.sam.abbr == "sam-handpicked":
-        prior_rows = config.sam.params.get("rows", None)
-        prior_records = config.sam.params.get("records", None)
-        n_prior_included = 1
-        n_prior_excluded = 1
-        init_seed = None
-        if prior_records is not None:
-            prior_indices = convert_id_to_idx(as_data, prior_records)
-        elif prior_rows is not None:
-            prior_indices = prior_rows
-        else:
-            raise ValueError("prior_records and prior_rows should not both be not None.")
-    elif config.sam.abbr == "sam-random":
-        prior_indices = list()
-        n_prior_included = config.sam.params["n_included"]
-        n_prior_excluded = config.sam.params["n_excluded"]
-        init_seed = config.sam.params["init_seed"]
-    else:
-        raise ValueError("Unexpected sampler model abbreviation.")
-    return prior_indices, n_prior_included, n_prior_excluded, init_seed
+TSamResult = Tuple[List[int], int, int, Optional[int]]
+TFunc = Callable[[Config, ASReviewData], TSamResult]
+
+
+def unwrap_prior_sampling_vars(config: Config, as_data: ASReviewData) -> TSamResult:
+    my_sams = {
+        "sam-handpicked": sam_handpicked_unwrap,
+        "sam-random": sam_random_unwrap,
+    }
+
+    other_sams = [{abbr: q.impl} for abbr, q in get_quads()]
+
+    sams = my_sams
+    for other_sam in other_sams:
+        sams.update(other_sam)
+
+    try:
+        func: TFunc = cast(TFunc, sams[config.sam.abbr])
+    except KeyError as e:
+        abbrs = "\n".join(list(sams.keys()))
+        print(f"'{config.sam.abbr}' is not a valid name for a sam model. Valid names are:\n{abbrs}")
+        raise e
+
+    return func(config, as_data)
