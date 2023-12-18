@@ -131,13 +131,13 @@ class Config:
     def __init__(
         self,
         *,
-        bal: Optional[Union[OneModelConfig, OneModelConfigDict]] = None,
-        clr: Optional[Union[OneModelConfig, OneModelConfigDict]] = None,
-        fex: Optional[Union[OneModelConfig, OneModelConfigDict]] = None,
-        ofn: Optional[Union[OneModelConfig, OneModelConfigDict]] = None,
-        qry: Optional[Union[OneModelConfig, OneModelConfigDict]] = None,
-        sam: Optional[Union[OneModelConfig, OneModelConfigDict]] = None,
-        stp: Optional[Union[OneModelConfig, OneModelConfigDict]] = None,
+        bal: Optional[OneModelConfig] = None,
+        clr: Optional[OneModelConfig] = None,
+        fex: Optional[OneModelConfig] = None,
+        ofn: Optional[OneModelConfig] = None,
+        qry: Optional[OneModelConfig] = None,
+        sam: Optional[OneModelConfig] = None,
+        stp: Optional[OneModelConfig] = None,
     ):
         """
         Args:
@@ -201,13 +201,13 @@ class Config:
         """
 
         # use the setter methods to assign constructor arguments to private attributes
-        self.bal = _narrow_type(bal, "bal-double")
-        self.clr = _narrow_type(clr, "clr-nb")
-        self.fex = _narrow_type(fex, "fex-tfidf")
-        self.ofn = _narrow_type(ofn, "ofn-none")
-        self.qry = _narrow_type(qry, "qry-max")
-        self.sam = _narrow_type(sam, "sam-random")
-        self.stp = _narrow_type(stp, "stp-rel")
+        self.bal = bal or OneModelConfig("bal-double")
+        self.clr = clr or OneModelConfig("clr-nb")
+        self.fex = fex or OneModelConfig("fex-tfidf")
+        self.ofn = ofn or OneModelConfig("ofn-none")
+        self.qry = qry or OneModelConfig("qry-max")
+        self.sam = sam or OneModelConfig("sam-random")
+        self.stp = stp or OneModelConfig("stp-rel")
 
     def __eq__(self, other) -> bool:
         """Tests whether all of `self`'s 7 model configurations are equal to those
@@ -342,17 +342,3 @@ class Config:
         assert isinstance(stp, OneModelConfig), Config._errmsg
         assert stp.abbr.startswith("stp"), "Expected a stopping model."
         self._stp = stp
-
-
-def _narrow_type(model: Optional[Union[OneModelConfig, OneModelConfigDict]], default: str) -> OneModelConfig:
-    if model is None:
-        return OneModelConfig(default)
-    elif isinstance(model, dict):
-        assert "abbr" in model, "Expected key 'abbr' in model dict"
-        assert "params" in model, "Expected key 'params' in model dict"
-        assert len(model) == 2, "Didn't expect any other keys in model dict besides 'abbr' and 'params'"
-        return OneModelConfig(**model)
-    elif isinstance(model, OneModelConfig):
-        return model
-    else:
-        raise ValueError("Input argument 'model' is of unexpected type.")

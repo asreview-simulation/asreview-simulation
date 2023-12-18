@@ -222,12 +222,15 @@ def test_trellis():
 @pytest.mark.stp_rel
 @pytest.mark.ofn_wss
 def test_use_case_some_models_drawn_optimize():
-    def objective(drawn):
+    def objective(drawn_dict):
         # use wss @ 90% recall as objective function
         fixed = {
             "ofn": OneModelConfig(abbr="ofn-wss", params={"at_pct": 90}),
             "qry": OneModelConfig(abbr="qry-max", params={"n_instances": 10}),
         }
+
+        # convert drawn_dict values to instances of OneModelConfig:
+        drawn = {k: OneModelConfig(**v) for k, v in drawn_dict.items()}
 
         # construct an all-model config from one-model configs -- implicitly use default model choice
         # and parameterization for models not included as argument
