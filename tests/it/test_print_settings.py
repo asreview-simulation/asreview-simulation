@@ -58,9 +58,9 @@ def test_with_default_settings():
     "sam": {
         "abbr": "sam-random",
         "params": {
-            "init_seed": null,
             "n_excluded": 1,
-            "n_included": 1
+            "n_included": 1,
+            "seed": null
         }
     },
     "stp": {

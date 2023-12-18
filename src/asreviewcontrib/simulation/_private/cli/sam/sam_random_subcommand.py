@@ -23,14 +23,6 @@ abbr = "sam-random"
     is_flag=True,
 )
 @click.option(
-    "--init_seed",
-    "init_seed",
-    default=default_params["init_seed"],
-    help="Random seed",
-    show_default=True,
-    type=click.INT,
-)
-@click.option(
     "--n_excluded",
     "n_excluded",
     default=default_params["n_excluded"],
@@ -46,14 +38,22 @@ abbr = "sam-random"
     show_default=True,
     type=click.INT,
 )
+@click.option(
+    "--seed",
+    "seed",
+    default=default_params["seed"],
+    help="Random seed",
+    show_default=True,
+    type=click.INT,
+)
 @click.pass_obj
-def sam_random_subcommand(obj, force, init_seed, n_excluded, n_included):
+def sam_random_subcommand(obj, force, n_excluded, n_included, seed):
     if not force:
         assert obj.provided.sam is False, dont_reassign_sam_msg
     params = {
-        "init_seed": init_seed,
         "n_excluded": n_excluded,
         "n_included": n_included,
+        "seed": seed,
     }
     obj.config.sam = OneModelConfig(abbr=abbr, params=params)
     obj.provided.sam = True

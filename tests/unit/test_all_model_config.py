@@ -16,8 +16,8 @@ def test_flattened():
         "fex-tfidf/stop_words": "english",
         "fex-tfidf/use_keywords": False,
         "qry-max/n_instances": 1,
-        "sam-random/init_seed": None,
         "sam-random/n_excluded": 1,
         "sam-random/n_included": 1,
+        "sam-random/seed": None,
     }
     assert actual == expected

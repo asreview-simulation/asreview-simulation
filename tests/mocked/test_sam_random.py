@@ -41,12 +41,12 @@ def test_with_init_seed():
         runner = CliRunner()
         args = [
             "sam-random",
-            "--init_seed",
-            "420",
             "--n_included",
             "5",
             "--n_excluded",
             "5",
+            "--seed",
+            "420",
             "stp-nq",
             "--n_queries",
             "0",
