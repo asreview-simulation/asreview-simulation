@@ -1,6 +1,7 @@
 import os
 from random import random
 from tempfile import TemporaryDirectory
+import hyperopt
 import pytest
 from matplotlib import pyplot as plt
 from asreviewcontrib.simulation.api import Config
@@ -211,3 +212,37 @@ def test_trellis():
             ],
         )
         plt.show()
+
+
+@pytest.mark.sam_random
+@pytest.mark.fex_tfidf
+@pytest.mark.clr_nb
+@pytest.mark.qry_max
+@pytest.mark.bal_double
+@pytest.mark.stp_rel
+@pytest.mark.ofn_wss
+def test_use_case_some_models_drawn_optimize():
+    def objective(drawn):
+        # use wss @ 90% recall as objective function
+        fixed = {
+            "ofn": OneModelConfig(abbr="ofn-wss", params={"at_pct": 90}),
+            "qry": OneModelConfig(abbr="qry-max", params={"n_instances": 10}),
+        }
+
+        # construct an all-model config from one-model configs -- implicitly use default model choice
+        # and parameterization for models not included as argument
+        config = Config(**fixed, **drawn)
+
+        # create a temporary directory and start the simulation
+        with TemporaryDirectory(prefix="asreview-simulation.") as tmpdir:
+            output_file = f"{tmpdir}{os.sep}project.asreview"
+            project, as_data = prep_project_directory(benchmark=benchmark, output_file=output_file)
+            return run(config, project, as_data)
+
+    pyll = {
+        "bal": get_pyll("bal-double"),
+        "fex": get_pyll("fex-tfidf"),
+    }
+
+    best = hyperopt.fmin(objective, pyll, algo=hyperopt.tpe.suggest, max_evals=100)
+    print(best)
