@@ -27,6 +27,7 @@ dev = [
     "pdoc",
     "pytest",
     "pre-commit",
+    "tomli",
 ]
 
 [project.scripts]
