@@ -3,6 +3,10 @@ on:
   # Trigger manually
   workflow_dispatch
 
+# security: restrict permissions for CI jobs.
+permissions:
+  contents: read
+
 jobs:
   publish:
       runs-on: ubuntu-latest

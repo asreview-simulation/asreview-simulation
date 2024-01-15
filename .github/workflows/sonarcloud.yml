@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: 42 4 * * 2     #  04:42 on Tuesdays
 
+# security: restrict permissions for CI jobs.
+permissions:
+  contents: read
+
 jobs:
   setup:
     name: download
