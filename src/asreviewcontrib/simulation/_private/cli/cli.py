@@ -166,9 +166,9 @@ def sort_commands(commands):
 
 def cli_help(cli_name="asreview-simulation"):
     return f"""
-Command line interface to simulate an ASReview analysis using a variety of prior sampling strategies,
-classifiers, feature extractors, queriers, balancers, and stopping rules -- all of which can be configured
-to run with custom parameterizations.
+Command line interface to simulate an ASReview analysis using a variety of prior sampling
+strategies, classifiers, feature extractors, queriers, balancers, stopping rules, and objective
+functions, all of which can be configured to run with custom parameterizations.
 
 Printing this help:
 
