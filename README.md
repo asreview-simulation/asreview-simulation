@@ -28,6 +28,9 @@ source venv/bin/activate
 
 # install asreview-simulation and its dependencies
 pip install git+https://github.com/asreview-simulation/asreview-simulation.git@0.2.0
+
+# or, if you need optional dependencies as well, e.g. 'doc2vec'
+pip install asreview-simulation[doc2vec]@git+https://github.com/asreview-simulation/asreview-simulation.git@0.2.0
 ```
 
 ## Command line interface (CLI)
