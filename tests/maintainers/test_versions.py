@@ -1,6 +1,6 @@
 import re
-import pytest
 from pathlib import Path
+import pytest
 import tomli
 import yaml
 
@@ -39,8 +39,10 @@ def test_version_readme_md_badge_commits(expected_version, project_root):
     fname = project_root / "README.md"
     with open(fname, "rt") as f:
         txt = f.read()
-    rexp = r"^.*GitHub commits since latest release.*/commits-since/asre" +\
-           r"view-simulation/asreview-simulation/(?P<version>[^\)]+).*$"
+    rexp = (
+        r"^.*GitHub commits since latest release.*/commits-since/asre"
+        + r"view-simulation/asreview-simulation/(?P<version>[^\)]+).*$"
+    )
     actual_version = re.search(rexp, txt, re.MULTILINE).group("version")
     assert actual_version == expected_version
 
@@ -67,7 +69,9 @@ def test_version_readme_md_install_with_optionals(expected_version, project_root
     fname = project_root / "README.md"
     with open(fname, "rt") as f:
         txt = f.read()
-    rexp = r"^pip install asreview-simulation\[doc2vec\]@git\+https://gith" +\
-           r"ub\.com/asreview-simulation/asreview-simulation\.git@(?P<version>.*)$"
+    rexp = (
+        r"^pip install asreview-simulation\[doc2vec\]@git\+https://gith"
+        + r"ub\.com/asreview-simulation/asreview-simulation\.git@(?P<version>.*)$"
+    )
     actual_version = re.search(rexp, txt, re.MULTILINE).group("version")
     assert actual_version == expected_version

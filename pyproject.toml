@@ -27,6 +27,7 @@ dev = [
     "pdoc",
     "pytest",
     "pre-commit",
+    "ruamel.yaml >=0.16.0, <1.0",
     "tomli",
 ]
 
@@ -90,7 +91,6 @@ markers = [
 ]
 
 [tool.mypy]
-# Run with:  mypy --config-file pyproject.toml --verbose src/
 incremental = false
 mypy_path = "src"
 ignore_missing_imports = true
