@@ -1,11 +1,9 @@
 name: zenodraft
 on:
-  # Trigger manually
-  workflow_dispatch
+  workflow_dispatch: null     # This workflow is triggered manually
 
-# security: restrict permissions for CI jobs.
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   publish:
@@ -31,7 +29,7 @@ jobs:
             ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
           uses: zenodraft/action@0.13.3
           with:
-            collection: 8042547
+            concept: 8042547
             metadata: ${{ runner.temp }}/.zenodo.json
             publish: false
             sandbox: false
