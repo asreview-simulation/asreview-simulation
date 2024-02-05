@@ -14,6 +14,16 @@ jobs:
         - name: Checkout the contents of your repository
           uses: actions/checkout@v4
 
+        - name: Convert CITATION.cff to .zenodo.citation.json
+          uses: citation-file-format/cffconvert-github-action@2.0.0
+          with:
+            args: "--infile ./CITATION.cff --format zenodo --outfile .zenodo.citation.json"
+
+        - name: Combine .zenodo.citation.json with .zenodo.extras.json
+          run: |
+            cat .zenodo.citation.json .zenodo.extras.json | jq -s add > ${{ runner.temp }}/.zenodo.json
+            rm .zenodo.citation.json
+
         - name: Create a draft snapshot of the repository contents as a new
                 version in collection 8042547 on Zenodo
           env:
@@ -22,7 +32,8 @@ jobs:
           uses: zenodraft/action@0.13.3
           with:
             collection: 8042547
-            upsert-doi: true
-            upsert-location: identifiers[3]
+            metadata: ${{ runner.temp }}/.zenodo.json
             publish: false
             sandbox: false
+            upsert-doi: true
+            upsert-location: identifiers[3]
