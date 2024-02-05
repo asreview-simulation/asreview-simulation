@@ -2,6 +2,9 @@ name: zenodraft
 on:
   workflow_dispatch: null     # This workflow is triggered manually
 
+permissions:
+  contents: write
+
 jobs:
   publish:
       runs-on: ubuntu-latest
