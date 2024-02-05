@@ -1,11 +1,6 @@
 name: zenodraft
 on:
-  # Trigger manually
-  workflow_dispatch
-
-# security: restrict permissions for CI jobs.
-permissions:
-  contents: read
+  workflow_dispatch: null     # This workflow is triggered manually
 
 jobs:
   publish:
@@ -21,7 +16,7 @@ jobs:
             ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
           uses: zenodraft/action@0.13.3
           with:
-            collection: 8042547
+            concept: 8042547
             upsert-doi: true
             upsert-location: identifiers[3]
             publish: false
