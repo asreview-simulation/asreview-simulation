@@ -14,8 +14,8 @@ be configured to run with custom parameterizations.
 | [![apidocs](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/apidocs.yml/badge.svg)](https://github.com/asreview-simulation/asreview-simulation/actions/workflows/apidocs.yml)                                               | API docs https://asreview-simulation.github.io/asreview-simulation                                                        |
 | [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=code_smells)](https://sonarcloud.io/summary/overall?id=asreview-simulation)                                                                          | Static code analysis report                                                                                               |
 | [![Code coverage](https://sonarcloud.io/api/project_badges/measure?project=asreview-simulation&metric=coverage)](https://sonarcloud.io/summary/overall?id=asreview-simulation)                                                                           | Code coverage report                                                                                                      |
-| [![GitHub release (with filter)](https://img.shields.io/github/v/release/asreview-simulation/asreview-simulation)](https://github.com/asreview-simulation/asreview-simulation/tree/0.3.0)                                                                | Link to repository state at latest GitHub release                                                                         |
-| [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/asreview-simulation/asreview-simulation/0.3.0)](https://github.com/asreview-simulation/asreview-simulation/compare/0.3.0...HEAD)  | How many commits there have been since the latest GitHub release                                                          |
+| [![GitHub release (with filter)](https://img.shields.io/github/v/release/asreview-simulation/asreview-simulation)](https://github.com/asreview-simulation/asreview-simulation/tree/0.4.0)                                                                | Link to repository state at latest GitHub release                                                                         |
+| [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/asreview-simulation/asreview-simulation/0.4.0)](https://github.com/asreview-simulation/asreview-simulation/compare/0.4.0...HEAD)  | How many commits there have been since the latest GitHub release                                                          |
 
 ## Install
 
@@ -27,10 +27,10 @@ python3 -m venv venv
 source venv/bin/activate
 
 # install asreview-simulation and its dependencies
-pip install git+https://github.com/asreview-simulation/asreview-simulation.git@0.3.0
+pip install git+https://github.com/asreview-simulation/asreview-simulation.git@0.4.0
 
 # or, if you need optional dependencies as well, e.g. 'doc2vec'
-pip install asreview-simulation[doc2vec]@git+https://github.com/asreview-simulation/asreview-simulation.git@0.3.0
+pip install asreview-simulation[doc2vec]@git+https://github.com/asreview-simulation/asreview-simulation.git@0.4.0
 ```
 
 ## Command line interface (CLI)
