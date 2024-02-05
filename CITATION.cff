@@ -23,7 +23,7 @@ identifiers:
     value: 10.5281/zenodo.8042547
     description: Collection of archived snapshots on Zenodo
   - description: Version doi for this work.
-    value: 10.5281/zenodo.10619760
+    value: 10.5281/zenodo.10619935
     type: doi
 repository-code: https://github.com/asreview-simulation/asreview-simulation
 abstract: >-
