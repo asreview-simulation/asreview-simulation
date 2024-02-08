@@ -210,6 +210,7 @@ TODO
 - version is consistent across the repository
 - source dist can be built
 - wheel dist can be built
+- software works as expected when installing from distributable 
 
 ## Publishing: Zenodo
 
@@ -244,18 +245,3 @@ be instances of
 [`asreviewcontrib.simulation.api.extending.PluginQuad`](https://asreview-simulation.github.io/asreview-simulation/asreviewcontrib/simulation/api/extending.html#PluginQuad).
 The sibling repository https://github.com/asreview-simulation/asreview-simulation-my-plugin provides
 example plugin implementations of each model flavor.
-
-## Plan
-
-1. ~~review / verify / update each model's pyll program with respect to number, name, and type of parameters~~
-2. add visualization for each pyll program so users can see what distribution a parameter is drawn from
-3. ~~construct null distribution with pyll programs~~
-4. ~~updating default configuration with distribution sampled from pyll programs~~
-5. ~~starting ReviewSimulate with sampled distribution from pyll + default~~
-6. ~~rating each result with an objective function, e.g. from datatools or homemade~~
-7. closing the feedback loop by drawing new parameterizations based on the result from previous parameterizations,
-e.g. using one of hyperopt's optimization methods
-
-## notes
-
-- https://stackoverflow.com/questions/70984166/why-naive-bayes-gives-results-and-on-training-and-test-but-gives-error-of-negati
