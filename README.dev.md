@@ -205,18 +205,18 @@ python3 -m build --wheel .
 pip install --editable .[dev]
 ```
 
-TODO
+Verify that
 
-- unit tests pass
-- api tests pass
-- use cases tests pass
-- mocked tests pass
-- integration tests pass
-- citation metadata is up to date
-- version is consistent across the repository
-- source dist can be built
-- wheel dist can be built
-- software works as expected when installing from distributable 
+1. unit tests pass
+2. api tests pass
+3. use cases tests pass
+4. mocked tests pass
+5. integration tests pass
+6. citation metadata is up to date
+7. version is consistent across the repository
+8. source dist can be built
+9. wheel dist can be built
+10. software works as expected when installing from distributable 
 
 ## Publishing: Zenodo
 
@@ -230,10 +230,6 @@ deposition before making it final by pressing the "Publish" button on Zenodo.
 Click the "Draft a new release" button on the releases page
 [https://github.com/asreview-simulation/asreview-simulation/releases](https://github.com/asreview-simulation/asreview-simulation/releases).
 Making a release is not set up to also trigger the `zenodraft` workflow.
-
-## Publishing: PyPI
-
-TODO https://blog.pypi.org/posts/2023-05-25-securing-pypi-with-2fa/
 
 ## Known problems
 
