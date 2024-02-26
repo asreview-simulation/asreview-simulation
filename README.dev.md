@@ -62,6 +62,7 @@ There are various types of test:
 3. tests that use mocking
 4. integration tests
 5. use case tests
+6. tests for maintainers
 
 Each has its own subdirectory. The tests can be run locally with:
 
@@ -125,6 +126,11 @@ These tests help safeguard against accidentally changing the api.
 ### `tests/use_cases`
 
 These tests are used to automate running some use cases.
+
+### `tests/maintainers`
+
+These tests are to help maintain the project. At the moment, there is just one test file that safeguards the
+consistency of the version string used throughout the repository.
 
 ### `tests/mocked`
 
